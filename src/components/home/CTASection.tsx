@@ -1,10 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import Autoplay from 'embla-carousel-autoplay';
+import { useState, useEffect } from 'react';
 import developerClientMeeting from '@/assets/developer-client-meeting.png';
 import developerPresenting from '@/assets/developer-presenting.png';
 import teamBrainstorming from '@/assets/team-brainstorming.png';
@@ -23,32 +22,31 @@ export const CTASection = () => {
     triggerOnce: true
   });
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section ref={ref} className="section-padding bg-foreground text-background relative overflow-hidden">
-      {/* Background Image Carousel */}
+      {/* Background Image with Crossfade */}
       <div className="absolute inset-0 z-0">
-        <Carousel
-          opts={{ loop: true, duration: 40 }}
-          plugins={[
-            Autoplay({ delay: 4000, stopOnInteraction: false })
-          ]}
-          className="w-full h-full"
-        >
-          <CarouselContent className="h-full -ml-0">
-            {backgroundImages.map((image, index) => (
-              <CarouselItem key={index} className="h-full pl-0">
-                <motion.img 
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover opacity-30"
-                  initial={{ scale: 1.1 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 4, ease: "easeOut" }}
-                />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={currentIndex}
+            src={backgroundImages[currentIndex].src}
+            alt={backgroundImages[currentIndex].alt}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 0.3, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+          />
+        </AnimatePresence>
       </div>
       
       {/* Dark overlay for text readability */}

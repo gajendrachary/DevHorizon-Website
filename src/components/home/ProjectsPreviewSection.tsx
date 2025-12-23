@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useState, useEffect } from 'react';
 
 const projects = [
   {
@@ -41,6 +42,8 @@ export const ProjectsPreviewSection = () => {
     triggerOnce: true
   });
 
+  const [activeProject, setActiveProject] = useState<number | null>(null);
+
   return (
     <section ref={ref} className="section-padding bg-background">
       <div className="container-swiss">
@@ -48,14 +51,14 @@ export const ProjectsPreviewSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <motion.span 
             className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           >
             Our Work
           </motion.span>
@@ -63,7 +66,7 @@ export const ProjectsPreviewSection = () => {
             className="text-3xl md:text-4xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
           >
             Featured Projects
           </motion.h2>
@@ -71,64 +74,94 @@ export const ProjectsPreviewSection = () => {
             className="text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
           >
             Explore some of our recent work that showcases our expertise in creating impactful digital solutions.
           </motion.p>
         </motion.div>
 
-        {/* Projects Grid */}
+        {/* Projects Grid with Crossfade Effect */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {projects.map((project, index) => (
-            <motion.a
-              key={project.title}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="group block border border-border bg-card overflow-hidden hover:shadow-glow hover:border-primary/30 transition-all duration-300"
-            >
-              {/* Project Preview */}
+          <AnimatePresence>
+            {projects.map((project, index) => (
+              <motion.a
+                key={project.title}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 40 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.2 + index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                onMouseEnter={() => setActiveProject(index)}
+                onMouseLeave={() => setActiveProject(null)}
+                className="group block border border-border bg-card overflow-hidden hover:shadow-glow hover:border-primary/30 transition-all duration-500"
+              >
+              {/* Project Preview with Crossfade Overlay */}
               <div className={`${project.color} h-48 flex items-center justify-center relative overflow-hidden`}>
                 <motion.div 
                   className="text-4xl font-bold text-foreground/10"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ scale: 1 }}
+                  animate={{ 
+                    scale: activeProject === index ? 1.2 : 1,
+                    rotate: activeProject === index ? 5 : 0
+                  }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                 >
                   {project.title.charAt(0)}
                 </motion.div>
+                
+                {/* Crossfade overlay on hover */}
+                <motion.div
+                  className="absolute inset-0 bg-primary/10"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: activeProject === index ? 1 : 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                />
+                
                 <motion.div 
                   className="absolute top-4 right-4 w-10 h-10 bg-background flex items-center justify-center"
                   initial={{ opacity: 0, y: 10 }}
-                  whileHover={{ scale: 1.1 }}
-                  animate={{ opacity: 0 }}
-                  whileInView={{ opacity: 0 }}
-                  style={{ opacity: 0 }}
+                  animate={{ 
+                    opacity: activeProject === index ? 1 : 0,
+                    y: activeProject === index ? 0 : 10
+                  }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                 >
                   <ExternalLink className="w-5 h-5" />
                 </motion.div>
-                <div className="absolute top-4 right-4 w-10 h-10 bg-background flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                  <ExternalLink className="w-5 h-5" />
-                </div>
               </div>
 
-              {/* Project Info */}
-              <div className="p-6">
-                <div className="text-xs font-medium text-primary uppercase tracking-wider mb-2">
+              {/* Project Info with enhanced transitions */}
+              <motion.div 
+                className="p-6"
+                initial={{ opacity: 0.8 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div 
+                  className="text-xs font-medium text-primary uppercase tracking-wider mb-2"
+                  animate={{ 
+                    x: activeProject === index ? 4 : 0 
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
                   {project.category}
-                </div>
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-200">
+                </motion.div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
                   {project.title}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {project.description}
                 </p>
-              </div>
+              </motion.div>
             </motion.a>
-          ))}
+            ))}
+          </AnimatePresence>
         </div>
 
         {/* View All Button */}
