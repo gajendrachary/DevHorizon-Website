@@ -64,15 +64,14 @@ const Services = () => {
   return (
     <Layout>
       {/* CTA Section - Now at the top */}
-      <section className="py-20 lg:py-32 bg-foreground text-background relative overflow-hidden">
+      <section className="py-20 lg:py-32 bg-secondary text-foreground relative overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
             src={developerClientMeeting} 
             alt="Developer meeting with client" 
-            className="w-full h-full object-cover opacity-15"
+            className="w-full h-full object-cover opacity-10"
           />
-          <div className="absolute inset-0 bg-foreground/60" />
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
@@ -85,7 +84,7 @@ const Services = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Ready to Start Your Project?
             </h2>
-            <p className="text-background/70 max-w-2xl mx-auto mb-8">
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
               Get a free consultation and detailed quote for your project. 
               Our team is ready to help you achieve your digital goals.
             </p>
@@ -96,7 +95,7 @@ const Services = () => {
                 </Button>
               </Link>
               <Link to="/projects">
-                <Button variant="outline" size="lg" className="border-background/30 text-background hover:bg-background/10">
+                <Button variant="outline" size="lg">
                   View Our Work
                 </Button>
               </Link>
