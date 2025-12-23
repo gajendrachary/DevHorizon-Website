@@ -70,7 +70,7 @@ const Services = () => {
           <img 
             src={developerClientMeeting} 
             alt="Developer meeting with client" 
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover opacity-25"
           />
         </div>
         
