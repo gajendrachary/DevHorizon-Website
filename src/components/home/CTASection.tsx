@@ -3,6 +3,19 @@ import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import developerClientMeeting from '@/assets/developer-client-meeting.png';
+import developerPresenting from '@/assets/developer-presenting.png';
+import teamBrainstorming from '@/assets/team-brainstorming.png';
+import codeReview from '@/assets/code-review.png';
+
+const backgroundImages = [
+  { src: developerClientMeeting, alt: 'Developer meeting with client' },
+  { src: developerPresenting, alt: 'Developer presenting work' },
+  { src: teamBrainstorming, alt: 'Team brainstorming session' },
+  { src: codeReview, alt: 'Code review meeting' },
+];
 
 export const CTASection = () => {
   const { ref, inView } = useInView({
@@ -12,9 +25,38 @@ export const CTASection = () => {
 
   return (
     <section ref={ref} className="section-padding bg-foreground text-background relative overflow-hidden">
+      {/* Background Image Carousel */}
+      <div className="absolute inset-0 z-0">
+        <Carousel
+          opts={{ loop: true, duration: 40 }}
+          plugins={[
+            Autoplay({ delay: 4000, stopOnInteraction: false })
+          ]}
+          className="w-full h-full"
+        >
+          <CarouselContent className="h-full -ml-0">
+            {backgroundImages.map((image, index) => (
+              <CarouselItem key={index} className="h-full pl-0">
+                <motion.img 
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover opacity-30"
+                  initial={{ scale: 1.1 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 4, ease: "easeOut" }}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
+      
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-foreground/70 z-[1]" />
+
       {/* Animated background elements */}
       <motion.div 
-        className="absolute top-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
+        className="absolute top-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl z-[2]"
         animate={{ 
           x: [0, 50, 0],
           y: [0, 30, 0],
@@ -22,7 +64,7 @@ export const CTASection = () => {
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
-        className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+        className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl z-[2]"
         animate={{ 
           x: [0, -30, 0],
           y: [0, -50, 0],
