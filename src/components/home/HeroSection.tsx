@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Globe, Smartphone, BarChart3, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useRef } from 'react';
 
 const serviceIcons = [
   { icon: Globe, label: 'Web Development' },
@@ -33,10 +34,29 @@ const itemVariants = {
 };
 
 export const HeroSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Parallax transforms for different layers
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const gridY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const orb1Y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const orb2Y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const illustrationY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.3]);
+
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-secondary/30">
-      {/* Animated Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
+    <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden bg-secondary/30">
+      {/* Animated Background Pattern with Parallax */}
+      <motion.div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{ y: gridY }}
+      >
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -48,11 +68,12 @@ export const HeroSection = () => {
             backgroundSize: '60px 60px'
           }} 
         />
-      </div>
+      </motion.div>
 
-      {/* Animated gradient orbs */}
+      {/* Animated gradient orbs with Parallax */}
       <motion.div 
         className="absolute top-20 right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+        style={{ y: orb1Y }}
         animate={{ 
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -61,16 +82,29 @@ export const HeroSection = () => {
       />
       <motion.div 
         className="absolute bottom-20 left-20 w-64 h-64 bg-accent/20 rounded-full blur-3xl"
+        style={{ y: orb2Y }}
         animate={{ 
           scale: [1.2, 1, 1.2],
           opacity: [0.2, 0.4, 0.2],
         }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
+      
+      {/* Additional parallax decorative elements */}
+      <motion.div 
+        className="absolute top-1/3 left-10 w-20 h-20 border border-primary/20 rotate-45"
+        style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "80%"]) }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 right-1/4 w-16 h-16 bg-primary/5 rounded-full"
+        style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "60%"]) }}
+      />
 
-      <div className="container-swiss relative z-10">
+      <motion.div 
+        className="container-swiss relative z-10"
+        style={{ y: contentY, opacity }}
+      >
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          {/* Content */}
           <motion.div 
             className="max-w-2xl"
             variants={containerVariants}
@@ -177,12 +211,13 @@ export const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Hero Image/Illustration */}
+          {/* Hero Image/Illustration with Parallax */}
           <motion.div
             initial={{ opacity: 0, x: 50, rotateY: -10 }}
             animate={{ opacity: 1, x: 0, rotateY: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative hidden lg:block"
+            style={{ y: illustrationY }}
           >
             <motion.div 
               className="relative"
@@ -282,7 +317,7 @@ export const HeroSection = () => {
             </motion.div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
