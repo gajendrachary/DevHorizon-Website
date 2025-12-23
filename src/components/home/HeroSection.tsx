@@ -1,8 +1,20 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Globe, Smartphone, BarChart3, ArrowRight } from 'lucide-react';
+import { Globe, Smartphone, BarChart3, ArrowRight, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
+
+import developerMeeting from '@/assets/developer-client-meeting.png';
+import developerPresenting from '@/assets/developer-presenting.png';
+import teamBrainstorming from '@/assets/team-brainstorming.png';
+import codeReview from '@/assets/code-review.png';
+
+const backgroundImages = [
+  { src: developerMeeting, alt: 'Developer client meeting' },
+  { src: developerPresenting, alt: 'Developer presenting' },
+  { src: teamBrainstorming, alt: 'Team brainstorming' },
+  { src: codeReview, alt: 'Code review session' },
+];
 
 const serviceIcons = [
   { icon: Globe, label: 'Web Development' },
@@ -33,8 +45,27 @@ const itemVariants = {
   },
 };
 
+// Floating particles configuration
+const floatingParticles = [
+  { size: 'w-3 h-3', left: '10%', top: '20%', duration: 5, delay: 0 },
+  { size: 'w-2 h-2', left: '25%', top: '60%', duration: 6, delay: 0.5 },
+  { size: 'w-4 h-4', left: '75%', top: '25%', duration: 7, delay: 1 },
+  { size: 'w-2 h-2', left: '85%', top: '70%', duration: 5.5, delay: 1.5 },
+  { size: 'w-3 h-3', left: '60%', top: '80%', duration: 6.5, delay: 2 },
+  { size: 'w-2 h-2', left: '40%', top: '15%', duration: 5, delay: 0.8 },
+];
+
 export const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Background image carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -42,19 +73,58 @@ export const HeroSection = () => {
   });
 
   // Parallax transforms for different layers
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const gridY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const orb1Y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const orb2Y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const illustrationY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.3]);
+  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden bg-secondary/30">
+    <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
+      {/* Background Image Carousel with Crossfade */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={currentImageIndex}
+            src={backgroundImages[currentImageIndex].src}
+            alt={backgroundImages[currentImageIndex].alt}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.15 }}
+            animate={{ opacity: 0.15, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          />
+        </AnimatePresence>
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-secondary/85" />
+      </div>
+
+      {/* Floating Particles */}
+      {floatingParticles.map((particle, i) => (
+        <motion.div
+          key={i}
+          className={`absolute ${particle.size} bg-primary/10 rounded-full pointer-events-none z-[1]`}
+          style={{ left: particle.left, top: particle.top }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 15, -15, 0],
+            opacity: [0.1, 0.25, 0.1],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            delay: particle.delay,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+
       {/* Animated Background Pattern with Parallax */}
       <motion.div 
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.03] z-[1]"
         style={{ y: gridY }}
       >
         <motion.div 
@@ -72,7 +142,7 @@ export const HeroSection = () => {
 
       {/* Animated gradient orbs with Parallax */}
       <motion.div 
-        className="absolute top-20 right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+        className="absolute top-20 right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl z-[1]"
         style={{ y: orb1Y }}
         animate={{ 
           scale: [1, 1.2, 1],
@@ -81,7 +151,7 @@ export const HeroSection = () => {
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
-        className="absolute bottom-20 left-20 w-64 h-64 bg-accent/20 rounded-full blur-3xl"
+        className="absolute bottom-20 left-20 w-64 h-64 bg-accent/20 rounded-full blur-3xl z-[1]"
         style={{ y: orb2Y }}
         animate={{ 
           scale: [1.2, 1, 1.2],
@@ -92,11 +162,11 @@ export const HeroSection = () => {
       
       {/* Additional parallax decorative elements */}
       <motion.div 
-        className="absolute top-1/3 left-10 w-20 h-20 border border-primary/20 rotate-45"
+        className="absolute top-1/3 left-10 w-20 h-20 border border-primary/20 rotate-45 z-[1]"
         style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "80%"]) }}
       />
       <motion.div 
-        className="absolute bottom-1/4 right-1/4 w-16 h-16 bg-primary/5 rounded-full"
+        className="absolute bottom-1/4 right-1/4 w-16 h-16 bg-primary/5 rounded-full z-[1]"
         style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "60%"]) }}
       />
 
@@ -118,22 +188,37 @@ export const HeroSection = () => {
             >
               <motion.span 
                 className="w-2 h-2 bg-primary rounded-full"
-                animate={{ scale: [1, 1.3, 1] }}
+                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.7, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
               Est. June 2025 • Bengaluru, India
             </motion.div>
 
-            {/* Headline */}
+            {/* Headline with blur-to-focus effect */}
             <motion.h1
               variants={itemVariants}
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
             >
-              Transforming Ideas Into{' '}
+              <motion.span
+                initial={{ filter: "blur(8px)", opacity: 0 }}
+                animate={{ filter: "blur(0px)", opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                Transforming Ideas Into{' '}
+              </motion.span>
               <motion.span 
                 className="gradient-text inline-block"
-                animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                initial={{ filter: "blur(10px)", opacity: 0 }}
+                animate={{ 
+                  filter: "blur(0px)", 
+                  opacity: 1,
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] 
+                }}
+                transition={{ 
+                  filter: { duration: 0.8, delay: 0.5 },
+                  opacity: { duration: 0.8, delay: 0.5 },
+                  backgroundPosition: { duration: 5, repeat: Infinity, ease: "linear" }
+                }}
                 style={{ backgroundSize: '200% 200%' }}
               >
                 Digital Excellence
@@ -158,26 +243,43 @@ export const HeroSection = () => {
               innovative technology solutions.
             </motion.p>
 
-            {/* CTAs */}
+            {/* CTAs with shine effect */}
             <motion.div
               variants={itemVariants}
               className="flex flex-wrap gap-4 mb-12"
             >
-              <Button asChild variant="hero" size="lg" className="group">
-                <Link to="/get-quote" className="flex items-center gap-2">
-                  Start Your Project
-                  <motion.span
-                    className="inline-block"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.span>
-                </Link>
-              </Button>
-              <Button asChild variant="heroOutline" size="lg">
-                <Link to="/projects">View Our Work</Link>
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="relative overflow-hidden group"
+              >
+                <Button asChild variant="hero" size="lg" className="relative overflow-hidden">
+                  <Link to="/get-quote" className="flex items-center gap-2">
+                    {/* Shine sweep effect */}
+                    <motion.span
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
+                      animate={{ x: ['-100%', '200%'] }}
+                      transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                    />
+                    Start Your Project
+                    <motion.span
+                      className="inline-block"
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.span>
+                  </Link>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button asChild variant="heroOutline" size="lg">
+                  <Link to="/projects">View Our Work</Link>
+                </Button>
+              </motion.div>
             </motion.div>
 
             {/* Service Icons */}
@@ -317,6 +419,23 @@ export const HeroSection = () => {
             </motion.div>
           </motion.div>
         </div>
+      </motion.div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5 }}
+        style={{ opacity: scrollIndicatorOpacity }}
+      >
+        <span className="text-xs text-muted-foreground tracking-wider uppercase">Scroll to explore</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="w-5 h-5 text-muted-foreground" />
+        </motion.div>
       </motion.div>
     </section>
   );
