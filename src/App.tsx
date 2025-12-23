@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Reviews from "./pages/Reviews";
 import Blog from "./pages/Blog";
 import GetQuote from "./pages/GetQuote";
+import Services from "./pages/Services";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,14 +22,15 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/get-quote" element={<GetQuote />} />
-          <Route path="/services/web-development" element={<Projects />} />
-          <Route path="/services/mobile-apps" element={<Projects />} />
-          <Route path="/services/meta-ads" element={<Projects />} />
+          <Route path="/services/web-development" element={<Services />} />
+          <Route path="/services/mobile-apps" element={<Services />} />
+          <Route path="/services/meta-ads" element={<Services />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
