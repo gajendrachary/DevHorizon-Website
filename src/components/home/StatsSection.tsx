@@ -9,7 +9,7 @@ const stats = [
   { value: 15, suffix: '+', label: 'Team Members' },
 ];
 
-const StatItem = ({ value, suffix, label, delay }: { value: number; suffix: string; label: string; delay: number }) => {
+const StatItem = ({ value, suffix, label, delay, index }: { value: number; suffix: string; label: string; delay: number; index: number }) => {
   const { ref, displayValue } = useAnimatedCounter({
     end: value,
     suffix,
@@ -19,16 +19,46 @@ const StatItem = ({ value, suffix, label, delay }: { value: number; suffix: stri
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      className="text-center"
+      transition={{ 
+        duration: 0.5, 
+        delay,
+        type: "spring",
+        stiffness: 100
+      }}
+      whileHover={{ scale: 1.05, y: -5 }}
+      className="text-center group cursor-pointer"
     >
-      <div className="text-4xl md:text-5xl font-bold text-primary mb-2 counter-animate">
-        {displayValue}
-      </div>
-      <div className="text-muted-foreground font-medium">{label}</div>
+      <motion.div 
+        className="relative"
+        whileHover={{ scale: 1.1 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Glow effect */}
+        <motion.div 
+          className="absolute -inset-4 bg-primary/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        />
+        <motion.div 
+          className="text-4xl md:text-5xl font-bold text-primary mb-2 counter-animate relative"
+          initial={{ scale: 0.5 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: delay + 0.2, type: "spring", stiffness: 200 }}
+        >
+          {displayValue}
+        </motion.div>
+      </motion.div>
+      <motion.div 
+        className="text-muted-foreground font-medium"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: delay + 0.3 }}
+      >
+        {label}
+      </motion.div>
     </motion.div>
   );
 };
@@ -40,21 +70,31 @@ export const StatsSection = () => {
   });
 
   return (
-    <section ref={ref} className="section-padding bg-secondary/50">
+    <section ref={ref} className="section-padding bg-secondary/50 overflow-hidden">
       <div className="container-swiss">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+          <motion.span 
+            className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
             Why Choose DevHub
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold">
+          </motion.span>
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             Our Track Record Speaks
-          </h2>
+          </motion.h2>
         </motion.div>
 
         {/* Stats Grid */}
@@ -66,6 +106,7 @@ export const StatsSection = () => {
               suffix={stat.suffix}
               label={stat.label}
               delay={index * 0.1}
+              index={index}
             />
           ))}
         </div>

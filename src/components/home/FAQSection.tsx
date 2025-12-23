@@ -46,42 +46,63 @@ export const FAQSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Column - Header */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+            <motion.span 
+              className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.1 }}
+            >
               FAQ
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            </motion.span>
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               Frequently Asked Questions
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
+            </motion.h2>
+            <motion.p 
+              className="text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
               Have questions? We've got answers. If you don't find what you're looking for, 
               feel free to reach out to us directly.
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* Right Column - Accordion */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Accordion type="single" collapsible className="space-y-4">
               {faqs.map((faq, index) => (
-                <AccordionItem
+                <motion.div
                   key={index}
-                  value={`item-${index}`}
-                  className="border border-border bg-background px-6 data-[state=open]:shadow-soft"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
                 >
-                  <AccordionTrigger className="text-left font-semibold hover:text-primary hover:no-underline py-5">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
+                  <AccordionItem
+                    value={`item-${index}`}
+                    className="border border-border bg-background px-6 data-[state=open]:shadow-soft data-[state=open]:border-primary/30 transition-all duration-300"
+                  >
+                    <AccordionTrigger className="text-left font-semibold hover:text-primary hover:no-underline py-5 transition-colors duration-200">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
               ))}
             </Accordion>
           </motion.div>

@@ -17,11 +17,11 @@ export const ClientLogosSection = () => {
   });
 
   return (
-    <section ref={ref} className="py-12 bg-secondary/30 border-y border-border">
+    <section ref={ref} className="py-12 bg-secondary/30 border-y border-border overflow-hidden">
       <div className="container-swiss">
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
           className="text-center text-sm text-muted-foreground mb-8"
         >
@@ -32,14 +32,27 @@ export const ClientLogosSection = () => {
           {clientLogos.map((client, index) => (
             <motion.div
               key={client.name}
-              initial={{ opacity: 0, y: 10 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-200"
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ 
+                duration: 0.4, 
+                delay: index * 0.08,
+                type: "spring",
+                stiffness: 150
+              }}
+              whileHover={{ 
+                scale: 1.1, 
+                y: -5,
+                transition: { duration: 0.2 }
+              }}
+              className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
             >
-              <div className="w-10 h-10 bg-muted flex items-center justify-center text-sm font-bold group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-200">
+              <motion.div 
+                className="w-10 h-10 bg-muted flex items-center justify-center text-sm font-bold group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:shadow-glow"
+                whileHover={{ rotate: 5 }}
+              >
                 {client.initial}
-              </div>
+              </motion.div>
               <span className="text-sm font-medium hidden sm:block">{client.name}</span>
             </motion.div>
           ))}
