@@ -46,20 +46,35 @@ export const ProjectsPreviewSection = () => {
       <div className="container-swiss">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+          <motion.span 
+            className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
+            initial={{ opacity: 0, y: 10 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
             Our Work
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          </motion.span>
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             Featured Projects
-          </h2>
-          <p className="text-muted-foreground">
+          </motion.h2>
+          <motion.p 
+            className="text-muted-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             Explore some of our recent work that showcases our expertise in creating impactful digital solutions.
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Projects Grid */}
@@ -70,17 +85,32 @@ export const ProjectsPreviewSection = () => {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group block border border-border bg-card overflow-hidden card-hover"
+              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="group block border border-border bg-card overflow-hidden hover:shadow-glow hover:border-primary/30 transition-all duration-300"
             >
               {/* Project Preview */}
               <div className={`${project.color} h-48 flex items-center justify-center relative overflow-hidden`}>
-                <div className="text-4xl font-bold text-foreground/10 group-hover:scale-110 transition-transform duration-300">
+                <motion.div 
+                  className="text-4xl font-bold text-foreground/10"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                >
                   {project.title.charAt(0)}
-                </div>
-                <div className="absolute top-4 right-4 w-10 h-10 bg-background flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-2 group-hover:translate-y-0">
+                </motion.div>
+                <motion.div 
+                  className="absolute top-4 right-4 w-10 h-10 bg-background flex items-center justify-center"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileHover={{ scale: 1.1 }}
+                  animate={{ opacity: 0 }}
+                  whileInView={{ opacity: 0 }}
+                  style={{ opacity: 0 }}
+                >
+                  <ExternalLink className="w-5 h-5" />
+                </motion.div>
+                <div className="absolute top-4 right-4 w-10 h-10 bg-background flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                   <ExternalLink className="w-5 h-5" />
                 </div>
               </div>
@@ -105,15 +135,22 @@ export const ProjectsPreviewSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center"
         >
-          <Button asChild variant="outline" size="lg">
-            <Link to="/projects" className="flex items-center gap-2">
-              View All Projects
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+            <Button asChild variant="outline" size="lg">
+              <Link to="/projects" className="flex items-center gap-2">
+                View All Projects
+                <motion.span
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </motion.span>
+              </Link>
+            </Button>
+          </motion.div>
         </motion.div>
       </div>
     </section>

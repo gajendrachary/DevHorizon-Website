@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import devhubLogo from '@/assets/devhub-logo.png';
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -55,11 +56,15 @@ export const Header = () => {
     >
       <div className="container-swiss flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-primary flex items-center justify-center transition-transform duration-200 group-hover:scale-105">
-            <span className="text-primary-foreground font-logo font-bold text-lg">D</span>
-          </div>
-          <span className="font-logo font-bold text-xl tracking-tight">DevHub</span>
+        <Link to="/" className="flex items-center gap-3 group">
+          <motion.img 
+            src={devhubLogo} 
+            alt="DevHub Logo" 
+            className="h-10 w-auto transition-all duration-300 group-hover:scale-110"
+            whileHover={{ rotate: [0, -5, 5, 0] }}
+            transition={{ duration: 0.4 }}
+          />
+          <span className="font-logo font-bold text-xl tracking-tight group-hover:text-primary transition-colors duration-200">DevHub</span>
         </Link>
 
         {/* Desktop Navigation */}
