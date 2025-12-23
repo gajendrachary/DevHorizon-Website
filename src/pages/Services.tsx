@@ -4,6 +4,7 @@ import { Globe, Smartphone, Target, Check, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
+import developerClientMeeting from '@/assets/developer-client-meeting.png';
 
 const services = [
   {
@@ -63,8 +64,18 @@ const Services = () => {
   return (
     <Layout>
       {/* CTA Section - Now at the top */}
-      <section className="py-20 lg:py-32 bg-foreground text-background">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-20 lg:py-32 bg-foreground text-background relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={developerClientMeeting} 
+            alt="Developer meeting with client" 
+            className="w-full h-full object-cover opacity-15"
+          />
+          <div className="absolute inset-0 bg-foreground/60" />
+        </div>
+        
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
