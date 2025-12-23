@@ -1,10 +1,23 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Globe, Smartphone, Target, Check, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import { useEffect, useState, useRef } from 'react';
 import developerClientMeeting from '@/assets/developer-client-meeting.png';
+import developerPresenting from '@/assets/developer-presenting.png';
+import teamBrainstorming from '@/assets/team-brainstorming.png';
+import codeReview from '@/assets/code-review.png';
+
+const backgroundImages = [
+  { src: developerClientMeeting, alt: 'Developer meeting with client' },
+  { src: developerPresenting, alt: 'Developer presenting work' },
+  { src: teamBrainstorming, alt: 'Team brainstorming session' },
+  { src: codeReview, alt: 'Code review meeting' },
+];
 
 const services = [
   {
@@ -65,13 +78,30 @@ const Services = () => {
     <Layout>
       {/* CTA Section - Now at the top */}
       <section className="py-20 lg:py-32 bg-secondary text-foreground relative overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image Carousel */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src={developerClientMeeting} 
-            alt="Developer meeting with client" 
-            className="w-full h-full object-cover opacity-40"
-          />
+          <Carousel
+            opts={{ loop: true, duration: 40 }}
+            plugins={[
+              Autoplay({ delay: 4000, stopOnInteraction: false })
+            ]}
+            className="w-full h-full"
+          >
+            <CarouselContent className="h-full -ml-0">
+              {backgroundImages.map((image, index) => (
+                <CarouselItem key={index} className="h-full pl-0">
+                  <motion.img 
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover opacity-40"
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 4, ease: "easeOut" }}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
