@@ -32,7 +32,7 @@ export const CTASection = () => {
   }, []);
 
   return (
-    <section ref={ref} className="section-padding bg-foreground text-background relative overflow-hidden">
+    <section ref={ref} className="section-padding relative overflow-hidden">
       {/* Background Image with Crossfade */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="sync">
@@ -42,15 +42,15 @@ export const CTASection = () => {
             alt={backgroundImages[currentIndex].alt}
             className="absolute inset-0 w-full h-full object-cover"
             initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 0.3, scale: 1 }}
+            animate={{ opacity: 0.6, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
           />
         </AnimatePresence>
       </div>
       
-      {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-foreground/70 z-[1]" />
+      {/* Light overlay for text readability */}
+      <div className="absolute inset-0 bg-black/40 z-[1]" />
 
       {/* Animated background elements */}
       <motion.div 
@@ -78,7 +78,7 @@ export const CTASection = () => {
           className="max-w-3xl mx-auto text-center"
         >
           <motion.h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white drop-shadow-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -86,7 +86,7 @@ export const CTASection = () => {
             Ready to Transform Your Digital Presence?
           </motion.h2>
           <motion.p 
-            className="text-lg opacity-80 mb-10 leading-relaxed"
+            className="text-lg text-white/90 mb-10 leading-relaxed drop-shadow-md"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}

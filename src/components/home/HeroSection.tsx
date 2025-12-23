@@ -59,12 +59,50 @@ export const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
+  // Typewriter effect states
+  const fullText = "Transforming Ideas Into ";
+  const highlightText = "Digital Excellence";
+  const [displayedText, setDisplayedText] = useState("");
+  const [displayedHighlight, setDisplayedHighlight] = useState("");
+  const [isTypingMain, setIsTypingMain] = useState(true);
+  const [showCursor, setShowCursor] = useState(true);
+  
   // Background image carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % backgroundImages.length);
     }, 5000);
     return () => clearInterval(interval);
+  }, []);
+  
+  // Typewriter effect for main text
+  useEffect(() => {
+    if (isTypingMain && displayedText.length < fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(fullText.slice(0, displayedText.length + 1));
+      }, 50);
+      return () => clearTimeout(timeout);
+    } else if (isTypingMain && displayedText.length === fullText.length) {
+      setIsTypingMain(false);
+    }
+  }, [displayedText, isTypingMain, fullText]);
+  
+  // Typewriter effect for highlight text
+  useEffect(() => {
+    if (!isTypingMain && displayedHighlight.length < highlightText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedHighlight(highlightText.slice(0, displayedHighlight.length + 1));
+      }, 60);
+      return () => clearTimeout(timeout);
+    }
+  }, [displayedHighlight, isTypingMain, highlightText]);
+  
+  // Blinking cursor effect
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 530);
+    return () => clearInterval(cursorInterval);
   }, []);
   
   const { scrollYProgress } = useScroll({
@@ -194,35 +232,29 @@ export const HeroSection = () => {
               Est. June 2025 • Bengaluru, India
             </motion.div>
 
-            {/* Headline with blur-to-focus effect */}
+            {/* Headline with typewriter effect */}
             <motion.h1
               variants={itemVariants}
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
             >
-              <motion.span
-                initial={{ filter: "blur(8px)", opacity: 0 }}
-                animate={{ filter: "blur(0px)", opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              >
-                Transforming Ideas Into{' '}
-              </motion.span>
+              <span>{displayedText}</span>
               <motion.span 
                 className="gradient-text inline-block"
-                initial={{ filter: "blur(10px)", opacity: 0 }}
                 animate={{ 
-                  filter: "blur(0px)", 
-                  opacity: 1,
                   backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] 
                 }}
                 transition={{ 
-                  filter: { duration: 0.8, delay: 0.5 },
-                  opacity: { duration: 0.8, delay: 0.5 },
                   backgroundPosition: { duration: 5, repeat: Infinity, ease: "linear" }
                 }}
                 style={{ backgroundSize: '200% 200%' }}
               >
-                Digital Excellence
+                {displayedHighlight}
               </motion.span>
+              <motion.span 
+                className="inline-block w-[3px] h-[0.85em] bg-primary ml-1 align-middle"
+                animate={{ opacity: showCursor ? 1 : 0 }}
+                transition={{ duration: 0.1 }}
+              />
             </motion.h1>
 
             {/* Subheading */}
