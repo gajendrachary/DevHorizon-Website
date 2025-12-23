@@ -62,6 +62,38 @@ const Services = () => {
 
   return (
     <Layout>
+      {/* CTA Section - Now at the top */}
+      <section className="py-20 lg:py-32 bg-foreground text-background">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to Start Your Project?
+            </h2>
+            <p className="text-background/70 max-w-2xl mx-auto mb-8">
+              Get a free consultation and detailed quote for your project. 
+              Our team is ready to help you achieve your digital goals.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/get-quote">
+                <Button variant="cta" size="lg">
+                  Get Free Quote
+                </Button>
+              </Link>
+              <Link to="/projects">
+                <Button variant="outline" size="lg" className="border-background/30 text-background hover:bg-background/10">
+                  View Our Work
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="py-20 lg:py-32 bg-secondary">
         <div className="container mx-auto px-4">
@@ -135,38 +167,6 @@ const Services = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 lg:py-32 bg-foreground text-background">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Start Your Project?
-            </h2>
-            <p className="text-background/70 max-w-2xl mx-auto mb-8">
-              Get a free consultation and detailed quote for your project. 
-              Our team is ready to help you achieve your digital goals.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/get-quote">
-                <Button variant="cta" size="lg">
-                  Get Free Quote
-                </Button>
-              </Link>
-              <Link to="/projects">
-                <Button variant="outline" size="lg" className="border-background/30 text-background hover:bg-background/10">
-                  View Our Work
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
     </Layout>
