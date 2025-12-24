@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Globe, Smartphone, BarChart3, Check, Sparkles, Zap, Target } from 'lucide-react';
+import { Globe, Smartphone, BarChart3, Check, Sparkles, Zap, Target, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Link } from 'react-router-dom';
 
 const services = [
   {
@@ -8,6 +13,16 @@ const services = [
     title: 'Web Development',
     description: 'Modern, responsive websites that drive conversions and establish your digital presence.',
     features: ['SEO-optimized', 'Mobile-responsive', 'Fast loading', 'Modern tech stack'],
+    extendedDescription: 'We build cutting-edge websites using React, Next.js, and modern frameworks. Our development process includes thorough testing, performance optimization, and SEO best practices to ensure your site ranks well and converts visitors.',
+    extendedFeatures: [
+      'Custom design tailored to your brand',
+      'Content Management System (CMS) integration',
+      'E-commerce functionality',
+      'Analytics and tracking setup',
+      'Ongoing maintenance & support',
+      'Security hardening & SSL setup'
+    ],
+    timeline: '1-3 weeks',
     color: 'bg-primary/10 text-primary',
     accentIcon: Sparkles
   },
@@ -16,6 +31,16 @@ const services = [
     title: 'Mobile App Development',
     description: 'Native and cross-platform mobile applications that deliver exceptional user experiences.',
     features: ['iOS & Android', 'Cloud integration', 'Real-time', 'Scalable'],
+    extendedDescription: 'We create powerful mobile applications for iOS and Android using React Native and Flutter. Our apps are built for performance, scalability, and exceptional user experience with seamless cloud integration.',
+    extendedFeatures: [
+      'Push notifications setup',
+      'Offline mode capabilities',
+      'App Store & Play Store submission',
+      'In-app purchases integration',
+      'Real-time sync & updates',
+      'Analytics & crash reporting'
+    ],
+    timeline: '2-4 weeks',
     color: 'bg-accent text-accent-foreground',
     accentIcon: Zap
   },
@@ -24,6 +49,16 @@ const services = [
     title: 'Meta Ads Management',
     description: 'Strategic Meta advertising campaigns that maximize ROI and reach your target audience.',
     features: ['Campaign strategy', 'Audience targeting', 'Performance optimization', 'Monthly reporting'],
+    extendedDescription: 'Our Meta advertising experts create and manage high-performing Facebook and Instagram campaigns. We focus on data-driven strategies to maximize your return on ad spend and reach your ideal customers.',
+    extendedFeatures: [
+      'A/B testing & optimization',
+      'Retargeting campaigns',
+      'Creative design & copywriting',
+      'Weekly performance reports',
+      'Audience research & segmentation',
+      'Budget management & scaling'
+    ],
+    timeline: 'Ongoing',
     color: 'bg-primary/10 text-primary',
     accentIcon: Target
   },
@@ -88,6 +123,8 @@ export const ServicesSection = () => {
     threshold: 0.1,
     triggerOnce: true
   });
+
+  const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
 
   return (
     <section ref={ref} className="section-padding bg-background relative overflow-hidden">
@@ -205,7 +242,8 @@ export const ServicesSection = () => {
                 y: -12,
                 transition: { duration: 0.3 }
               }}
-              className="group relative bg-card border border-border p-8 lg:p-10 rounded-2xl overflow-hidden"
+              onClick={() => setSelectedService(service)}
+              className="group relative bg-card border border-border p-8 lg:p-10 rounded-2xl overflow-hidden cursor-pointer"
               style={{ perspective: "1000px" }}
             >
               {/* Card Glow Effect */}
@@ -276,6 +314,11 @@ export const ServicesSection = () => {
                 ))}
               </ul>
 
+              {/* Click Hint */}
+              <div className="absolute bottom-4 right-4 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Click for details →
+              </div>
+
               {/* Bottom Border Animation */}
               <motion.div
                 className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary via-accent to-primary"
@@ -287,6 +330,61 @@ export const ServicesSection = () => {
           ))}
         </motion.div>
       </div>
+
+      {/* Service Details Popup */}
+      <Dialog open={!!selectedService} onOpenChange={() => setSelectedService(null)}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          {selectedService && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-4">
+                  <div className={`w-16 h-16 ${selectedService.color} rounded-xl flex items-center justify-center`}>
+                    <selectedService.icon className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <DialogTitle className="text-2xl">{selectedService.title}</DialogTitle>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Badge variant="secondary" className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {selectedService.timeline}
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              </DialogHeader>
+              
+              <div className="space-y-6 py-4">
+                <p className="text-muted-foreground leading-relaxed">
+                  {selectedService.extendedDescription}
+                </p>
+                
+                <div>
+                  <h4 className="font-semibold mb-4">What's Included:</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {selectedService.extendedFeatures.map((feature) => (
+                      <div key={feature} className="flex items-start gap-2">
+                        <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check className="w-3 h-3 text-primary" />
+                        </div>
+                        <span className="text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setSelectedService(null)}>
+                  Close
+                </Button>
+                <Button asChild>
+                  <Link to="/get-quote">Get a Quote</Link>
+                </Button>
+              </DialogFooter>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
