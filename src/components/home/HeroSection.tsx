@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Globe, Smartphone, BarChart3, ArrowRight, ChevronDown } from 'lucide-react';
+import { Globe, Smartphone, BarChart3, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import developerMeeting from '@/assets/developer-client-meeting.png';
@@ -174,34 +174,28 @@ export const HeroSection = () => {
       {/* Background Image Carousel with Horizontal Scrolling */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <AnimatePresence mode="wait">
-          <motion.img 
-            key={currentImageIndex} 
-            src={backgroundImages[currentImageIndex].src} 
-            alt={backgroundImages[currentImageIndex].alt} 
-            className="absolute inset-0 w-full h-full object-cover" 
-            initial={{ x: "100%", opacity: 0 }} 
-            animate={{ x: "0%", opacity: 0.5 }} 
-            exit={{ x: "-100%", opacity: 0 }} 
-            transition={{
-              x: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
-              opacity: { duration: 0.5 }
-            }} 
-          />
+          <motion.img key={currentImageIndex} src={backgroundImages[currentImageIndex].src} alt={backgroundImages[currentImageIndex].alt} className="absolute inset-0 w-full h-full object-cover" initial={{
+          x: "100%",
+          opacity: 0
+        }} animate={{
+          x: "0%",
+          opacity: 0.5
+        }} exit={{
+          x: "-100%",
+          opacity: 0
+        }} transition={{
+          x: {
+            duration: 0.8,
+            ease: [0.25, 0.1, 0.25, 1]
+          },
+          opacity: {
+            duration: 0.5
+          }
+        }} />
         </AnimatePresence>
         {/* Carousel indicators */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-          {backgroundImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentImageIndex(index)}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                index === currentImageIndex 
-                  ? 'bg-primary w-8' 
-                  : 'bg-foreground/30 hover:bg-foreground/50'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+          {backgroundImages.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'bg-primary w-8' : 'bg-foreground/30 hover:bg-foreground/50'}`} aria-label={`Go to slide ${index + 1}`} />)}
         </div>
         {/* Lighter overlay for better image visibility */}
         <div className="absolute inset-0 bg-secondary/60" />
@@ -526,7 +520,7 @@ export const HeroSection = () => {
     }} style={{
       opacity: scrollIndicatorOpacity
     }}>
-        <span className="text-xs text-muted-foreground tracking-wider uppercase">Scroll to explore</span>
+        
         <motion.div animate={{
         y: [0, 8, 0]
       }} transition={{
@@ -534,7 +528,7 @@ export const HeroSection = () => {
         repeat: Infinity,
         ease: "easeInOut"
       }}>
-          <ChevronDown className="w-5 h-5 text-muted-foreground" />
+          
         </motion.div>
       </motion.div>
     </section>;
