@@ -171,37 +171,38 @@ export const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.3]);
   const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   return <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background Image Carousel with Ken Burns Effect */}
+      {/* Background Image Carousel with Horizontal Scrolling */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <AnimatePresence mode="wait">
-          <motion.img key={currentImageIndex} src={backgroundImages[currentImageIndex].src} alt={backgroundImages[currentImageIndex].alt} className="absolute inset-0 w-full h-full object-cover" initial={{
-          opacity: 0,
-          scale: 1.2
-        }} animate={{
-          opacity: 0.5,
-          scale: 1,
-          x: currentImageIndex % 2 === 0 ? ["0%", "3%"] : ["3%", "0%"],
-          y: currentImageIndex % 2 === 0 ? ["0%", "2%"] : ["2%", "0%"]
-        }} exit={{
-          opacity: 0
-        }} transition={{
-          opacity: {
-            duration: 1.2
-          },
-          scale: {
-            duration: 5,
-            ease: "linear"
-          },
-          x: {
-            duration: 5,
-            ease: "linear"
-          },
-          y: {
-            duration: 5,
-            ease: "linear"
-          }
-        }} />
+          <motion.img 
+            key={currentImageIndex} 
+            src={backgroundImages[currentImageIndex].src} 
+            alt={backgroundImages[currentImageIndex].alt} 
+            className="absolute inset-0 w-full h-full object-cover" 
+            initial={{ x: "100%", opacity: 0 }} 
+            animate={{ x: "0%", opacity: 0.5 }} 
+            exit={{ x: "-100%", opacity: 0 }} 
+            transition={{
+              x: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+              opacity: { duration: 0.5 }
+            }} 
+          />
         </AnimatePresence>
+        {/* Carousel indicators */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+          {backgroundImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                index === currentImageIndex 
+                  ? 'bg-primary w-8' 
+                  : 'bg-foreground/30 hover:bg-foreground/50'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
         {/* Lighter overlay for better image visibility */}
         <div className="absolute inset-0 bg-secondary/60" />
       </div>

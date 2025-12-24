@@ -15,8 +15,8 @@ const Index = () => {
       <meta name="description" content="DevHub is a full-service digital agency in Bengaluru offering custom web development, mobile apps, and Meta ads management. Transform your business with our innovative solutions." />
       
       <HeroSection />
-      <CTASection />
       <ClientLogosSection />
+      <CTASection />
       <ServicesSection />
       <StatsSection />
       <ProjectsPreviewSection />
