@@ -214,8 +214,14 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section ref={teamRef} className="section-padding bg-background">
-        <div className="container-swiss">
+      <section ref={teamRef} className="section-padding bg-background relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary rounded-full blur-3xl" />
+        </div>
+        
+        <div className="container-swiss relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={teamInView ? { opacity: 1, y: 0 } : {}}
@@ -225,23 +231,41 @@ const About = () => {
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
               Meet the Team
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold">The People Behind DevHub</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">The People Behind DevHub</h2>
+            <p className="text-muted-foreground">
+              A passionate team dedicated to delivering exceptional digital solutions
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {team.map((member, index) => (
               <motion.div
                 key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={teamInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card border border-border p-8 text-center card-hover"
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={teamInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                className="group relative bg-card border border-border p-8 text-center overflow-hidden"
               >
-                <div className="w-24 h-24 bg-primary/10 text-primary flex items-center justify-center mx-auto mb-6 text-3xl font-bold">
-                  {member.name.charAt(0)}
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Avatar with ring */}
+                <div className="relative mx-auto mb-6">
+                  <div className="w-28 h-28 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
+                    <span className="text-4xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
+                      {member.name.charAt(0)}
+                    </span>
+                  </div>
+                  {/* Status indicator */}
+                  <div className="absolute bottom-1 right-1/2 translate-x-8 w-4 h-4 bg-green-500 rounded-full border-2 border-card" />
                 </div>
-                <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                <p className="text-muted-foreground mb-4">{member.role}</p>
+                
+                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
+                  {member.name}
+                </h3>
+                <p className="text-muted-foreground mb-6 text-sm">{member.role}</p>
+                
                 {member.links.length > 0 && (
                   <div className="flex items-center justify-center gap-3">
                     {member.links.map((link) => (
@@ -250,12 +274,16 @@ const About = () => {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 border border-border flex items-center justify-center transition-all duration-200 hover:bg-primary hover:border-primary hover:text-primary-foreground"
+                        className="w-11 h-11 rounded-full border border-border flex items-center justify-center transition-all duration-300 hover:bg-primary hover:border-primary hover:text-primary-foreground hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
                       >
-                        <link.icon className="w-4 h-4" />
+                        <link.icon className="w-5 h-5" />
                       </a>
                     ))}
                   </div>
+                )}
+                
+                {member.links.length === 0 && (
+                  <div className="h-11" /> 
                 )}
               </motion.div>
             ))}
