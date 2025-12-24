@@ -69,7 +69,7 @@ export const HeroSection = () => {
   const [scrambledHighlight, setScrambledHighlight] = useState("");
   const [revealedCount, setRevealedCount] = useState(0);
   const [highlightRevealedCount, setHighlightRevealedCount] = useState(0);
-  const [showCursor, setShowCursor] = useState(true);
+  
   
   // Background image carousel with longer interval
   useEffect(() => {
@@ -125,13 +125,6 @@ export const HeroSection = () => {
     }
   }, [revealedCount, highlightRevealedCount]);
   
-  // Blinking cursor effect
-  useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 530);
-    return () => clearInterval(cursorInterval);
-  }, []);
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -139,7 +132,7 @@ export const HeroSection = () => {
   });
 
   // Parallax transforms for different layers
-  const gridY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  
   const orb1Y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const orb2Y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
@@ -149,7 +142,7 @@ export const HeroSection = () => {
 
   return (
     <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background Image Carousel with Vertical Scroll Animation */}
+      {/* Background Image Carousel with Ken Burns Effect */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.img
@@ -157,10 +150,20 @@ export const HeroSection = () => {
             src={backgroundImages[currentImageIndex].src}
             alt={backgroundImages[currentImageIndex].alt}
             className="absolute inset-0 w-full h-full object-cover"
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: "0%", opacity: 0.5 }}
-            exit={{ y: "-100%", opacity: 0 }}
-            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+            initial={{ opacity: 0, scale: 1.2 }}
+            animate={{ 
+              opacity: 0.5, 
+              scale: 1,
+              x: currentImageIndex % 2 === 0 ? ["0%", "3%"] : ["3%", "0%"],
+              y: currentImageIndex % 2 === 0 ? ["0%", "2%"] : ["2%", "0%"],
+            }}
+            exit={{ opacity: 0 }}
+            transition={{ 
+              opacity: { duration: 1.2 },
+              scale: { duration: 5, ease: "linear" },
+              x: { duration: 5, ease: "linear" },
+              y: { duration: 5, ease: "linear" }
+            }}
           />
         </AnimatePresence>
         {/* Lighter overlay for better image visibility */}
@@ -188,23 +191,6 @@ export const HeroSection = () => {
         />
       ))}
 
-      {/* Animated Background Pattern with Parallax */}
-      <motion.div 
-        className="absolute inset-0 opacity-[0.03] z-[1]"
-        style={{ y: gridY }}
-      >
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0" 
-          style={{
-            backgroundImage: `linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px),
-                             linear-gradient(hsl(var(--foreground)) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px'
-          }} 
-        />
-      </motion.div>
 
       {/* Animated gradient orbs with Parallax */}
       <motion.div 
@@ -278,11 +264,6 @@ export const HeroSection = () => {
               >
                 {scrambledHighlight}
               </motion.span>
-              <motion.span 
-                className="inline-block w-[3px] h-[0.85em] bg-primary ml-1 align-middle"
-                animate={{ opacity: showCursor ? 1 : 0 }}
-                transition={{ duration: 0.1 }}
-              />
             </motion.h1>
 
             {/* Subheading */}
