@@ -156,9 +156,9 @@ const GetQuote = () => {
                   </div>
                   <div>
                     <h3 className="font-medium mb-4">Budget Range: ₹{budget.toLocaleString()}</h3>
-                    <input type="range" min="25000" max="500000" step="5000" value={budget} onChange={e => setBudget(Number(e.target.value))} className="w-full" />
+                    <input type="range" min="30000" max="500000" step="5000" value={budget} onChange={e => setBudget(Number(e.target.value))} className="w-full" />
                     <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                      <span>₹25,000</span>
+                      <span>₹30,000</span>
                       <span>₹1,00,000+</span>
                     </div>
                   </div>
