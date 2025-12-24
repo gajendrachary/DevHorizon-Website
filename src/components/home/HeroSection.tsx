@@ -55,19 +55,23 @@ const floatingParticles = [
   { size: 'w-2 h-2', left: '40%', top: '15%', duration: 5, delay: 0.8 },
 ];
 
+// Characters for scramble effect
+const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*<>[]{}";
+
 export const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-  // Typewriter effect states
+  // Text scramble effect states
   const fullText = "Transforming Ideas Into ";
   const highlightText = "Digital Excellence";
-  const [displayedText, setDisplayedText] = useState("");
-  const [displayedHighlight, setDisplayedHighlight] = useState("");
-  const [isTypingMain, setIsTypingMain] = useState(true);
+  const [scrambledText, setScrambledText] = useState("");
+  const [scrambledHighlight, setScrambledHighlight] = useState("");
+  const [revealedCount, setRevealedCount] = useState(0);
+  const [highlightRevealedCount, setHighlightRevealedCount] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
   
-  // Background image carousel
+  // Background image carousel with longer interval
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % backgroundImages.length);
@@ -75,27 +79,51 @@ export const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
   
-  // Typewriter effect for main text
+  // Text scramble effect for main text
   useEffect(() => {
-    if (isTypingMain && displayedText.length < fullText.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(fullText.slice(0, displayedText.length + 1));
-      }, 50);
-      return () => clearTimeout(timeout);
-    } else if (isTypingMain && displayedText.length === fullText.length) {
-      setIsTypingMain(false);
-    }
-  }, [displayedText, isTypingMain, fullText]);
-  
-  // Typewriter effect for highlight text
-  useEffect(() => {
-    if (!isTypingMain && displayedHighlight.length < highlightText.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedHighlight(highlightText.slice(0, displayedHighlight.length + 1));
+    if (revealedCount <= fullText.length) {
+      const scrambleInterval = setInterval(() => {
+        const revealed = fullText.slice(0, revealedCount);
+        const remaining = fullText.slice(revealedCount);
+        const scrambled = remaining.split('').map(char => 
+          char === ' ' ? ' ' : scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
+        ).join('');
+        setScrambledText(revealed + scrambled);
+      }, 30);
+      
+      const revealTimeout = setTimeout(() => {
+        setRevealedCount(prev => prev + 1);
       }, 60);
-      return () => clearTimeout(timeout);
+      
+      return () => {
+        clearInterval(scrambleInterval);
+        clearTimeout(revealTimeout);
+      };
     }
-  }, [displayedHighlight, isTypingMain, highlightText]);
+  }, [revealedCount]);
+  
+  // Text scramble effect for highlight text
+  useEffect(() => {
+    if (revealedCount > fullText.length && highlightRevealedCount <= highlightText.length) {
+      const scrambleInterval = setInterval(() => {
+        const revealed = highlightText.slice(0, highlightRevealedCount);
+        const remaining = highlightText.slice(highlightRevealedCount);
+        const scrambled = remaining.split('').map(char => 
+          char === ' ' ? ' ' : scrambleChars[Math.floor(Math.random() * scrambleChars.length)]
+        ).join('');
+        setScrambledHighlight(revealed + scrambled);
+      }, 30);
+      
+      const revealTimeout = setTimeout(() => {
+        setHighlightRevealedCount(prev => prev + 1);
+      }, 70);
+      
+      return () => {
+        clearInterval(scrambleInterval);
+        clearTimeout(revealTimeout);
+      };
+    }
+  }, [revealedCount, highlightRevealedCount]);
   
   // Blinking cursor effect
   useEffect(() => {
@@ -121,22 +149,22 @@ export const HeroSection = () => {
 
   return (
     <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background Image Carousel with Crossfade */}
-      <div className="absolute inset-0 z-0">
-        <AnimatePresence mode="sync">
+      {/* Background Image Carousel with Vertical Scroll Animation */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <AnimatePresence mode="wait">
           <motion.img
             key={currentImageIndex}
             src={backgroundImages[currentImageIndex].src}
             alt={backgroundImages[currentImageIndex].alt}
             className="absolute inset-0 w-full h-full object-cover"
-            initial={{ opacity: 0, scale: 1.15 }}
-            animate={{ opacity: 0.15, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: "0%", opacity: 0.5 }}
+            exit={{ y: "-100%", opacity: 0 }}
+            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
           />
         </AnimatePresence>
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-secondary/85" />
+        {/* Lighter overlay for better image visibility */}
+        <div className="absolute inset-0 bg-secondary/60" />
       </div>
 
       {/* Floating Particles */}
@@ -232,14 +260,14 @@ export const HeroSection = () => {
               Est. June 2025 • Bengaluru, India
             </motion.div>
 
-            {/* Headline with typewriter effect */}
+            {/* Headline with text scramble effect */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-mono"
             >
-              <span>{displayedText}</span>
+              <span className="tracking-tight">{scrambledText}</span>
               <motion.span 
-                className="gradient-text inline-block"
+                className="gradient-text inline-block tracking-tight"
                 animate={{ 
                   backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] 
                 }}
@@ -248,7 +276,7 @@ export const HeroSection = () => {
                 }}
                 style={{ backgroundSize: '200% 200%' }}
               >
-                {displayedHighlight}
+                {scrambledHighlight}
               </motion.span>
               <motion.span 
                 className="inline-block w-[3px] h-[0.85em] bg-primary ml-1 align-middle"
