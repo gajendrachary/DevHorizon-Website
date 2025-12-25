@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Globe, Smartphone, BarChart3, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import developerMeeting from '@/assets/developer-client-meeting.png';
@@ -21,13 +21,13 @@ const backgroundImages = [{
   alt: 'Code review session'
 }];
 const serviceIcons = [{
-  icon: Globe,
+  emoji: '🌐',
   label: 'Web Development'
 }, {
-  icon: Smartphone,
+  emoji: '📱',
   label: 'Mobile Apps'
 }, {
-  icon: BarChart3,
+  emoji: '📊',
   label: 'Meta Ads'
 }];
 const containerVariants = {
@@ -380,9 +380,9 @@ export const HeroSection = () => {
                       delay: index * 0.3
                     }}
                   >
-                    <service.icon className="w-6 h-6" />
+                    <span className="text-2xl" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>{service.emoji}</span>
                   </motion.div>
-                  <span className="hidden sm:block font-bold">{service.label}</span>
+                  <span className="hidden sm:block">{service.label}</span>
                 </motion.div>)}
             </motion.div>
           </motion.div>
