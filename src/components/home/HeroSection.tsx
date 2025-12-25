@@ -287,7 +287,7 @@ export const HeroSection = () => {
               }
             }} style={{
               backgroundSize: '200% 200%'
-            }} className="gradient-text inline-block tracking-tight text-primary">
+            }} className="inline-block tracking-tight text-white">
                 {scrambledHighlight}
               </motion.span>
             </motion.h1>
