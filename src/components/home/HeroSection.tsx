@@ -127,6 +127,10 @@ export const HeroSection = () => {
   const [revealedCount, setRevealedCount] = useState(0);
   const [highlightRevealedCount, setHighlightRevealedCount] = useState(0);
 
+  // Ensure currentImageIndex is always valid for the current array
+  const safeImageIndex = currentImageIndex >= backgroundImages.length ? 0 : currentImageIndex;
+  const currentImage = backgroundImages[safeImageIndex];
+
   // Reset image index when switching between mobile/desktop
   useEffect(() => {
     setCurrentImageIndex(0);
@@ -196,7 +200,7 @@ export const HeroSection = () => {
       {/* Background Image Carousel with Horizontal Scrolling */}
       <div className="absolute inset-0 z-0 overflow-hidden" style={{backgroundColor: "#1a1a1a"}}>
         <AnimatePresence mode="wait">
-          <motion.img key={currentImageIndex} src={backgroundImages[currentImageIndex].src} alt={backgroundImages[currentImageIndex].alt} className="absolute inset-0 w-full h-full object-cover object-top sm:object-center" initial={{
+          <motion.img key={safeImageIndex} src={currentImage.src} alt={currentImage.alt} className="absolute inset-0 w-full h-full object-cover object-top sm:object-center" initial={{
           x: "100%",
           opacity: 0
         }} animate={{
