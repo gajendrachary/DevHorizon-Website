@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Layout } from '@/components/layout/Layout';
-import { ExternalLink, Smartphone, Globe } from 'lucide-react';
-import { useState } from 'react';
+import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
 
 // Animation config - matches ServiceCard
 const ANIMATION_CONFIG = {
   entrance: {
     duration: 0.8,
-    stagger: 0.15,
+    stagger: 0.3,
     ease: [0.25, 0.46, 0.45, 0.94] as const,
   },
   hover: {
@@ -86,27 +86,37 @@ const mobileApps = [
   },
 ];
 
-const ProjectCard = ({ project, index, type }: { project: any; index: number; type: 'web' | 'app' }) => {
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true
-  });
+interface ProjectCardProps {
+  project: any;
+  index: number;
+  type: 'web' | 'app';
+  isInView: boolean;
+  parallaxOffset?: number;
+}
+
+const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
 
   const entranceDelay = index * ANIMATION_CONFIG.entrance.stagger;
 
+  // Parallax transformations
+  const parallaxRotateY = parallaxOffset * 8;
+  const parallaxRotateX = Math.abs(parallaxOffset) * -3;
+  const parallaxScale = 1 - Math.abs(parallaxOffset) * 0.05;
+  const parallaxTranslateY = Math.abs(parallaxOffset) * 10;
+
   return (
     <motion.div
-      ref={ref}
+      className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[400px] snap-center"
       initial={{ 
+        x: '100vw',
         opacity: 0, 
-        y: 50,
         rotateY: 15,
       }}
-      animate={inView ? { 
+      animate={isInView ? { 
+        x: 0,
         opacity: 1, 
-        y: 0,
         rotateY: 0,
       } : {}}
       transition={{
@@ -115,7 +125,6 @@ const ProjectCard = ({ project, index, type }: { project: any; index: number; ty
         ease: ANIMATION_CONFIG.entrance.ease,
       }}
       style={{ perspective: '1200px' }}
-      className="group"
     >
       <motion.div
         className="relative border border-border bg-card overflow-hidden cursor-pointer h-full rounded-2xl"
@@ -133,23 +142,25 @@ const ProjectCard = ({ project, index, type }: { project: any; index: number; ty
             ? ANIMATION_CONFIG.tap.rotateY
             : isHovered
               ? ANIMATION_CONFIG.hover.rotateY
-              : 0,
+              : parallaxRotateY,
           rotateX: isTapped
             ? ANIMATION_CONFIG.tap.rotateX
             : isHovered
               ? ANIMATION_CONFIG.hover.rotateX
-              : 0,
+              : parallaxRotateX,
           scale: isTapped
             ? ANIMATION_CONFIG.tap.scale
             : isHovered
               ? ANIMATION_CONFIG.hover.scale
-              : 1,
-          y: isHovered ? -8 : 0,
+              : parallaxScale,
+          y: isHovered ? -5 : parallaxTranslateY,
           boxShadow: isHovered
             ? `${ANIMATION_CONFIG.hover.shadowIntensity} hsl(var(--primary) / 0.25)`
-            : '0 4px 6px -1px hsl(var(--foreground) / 0.1)',
+            : Math.abs(parallaxOffset) < 0.3
+              ? '0 20px 40px -10px hsl(var(--primary) / 0.15)'
+              : '0 4px 6px -1px hsl(var(--foreground) / 0.1)',
         }}
-        transition={{ duration: 0.2, ease: 'easeOut' }}
+        transition={{ duration: 0.15, ease: 'easeOut' }}
       >
         {/* Card Glow Effect */}
         <motion.div
@@ -208,7 +219,7 @@ const ProjectCard = ({ project, index, type }: { project: any; index: number; ty
                   key={platform} 
                   className="bg-background/90 backdrop-blur-sm px-3 py-1 text-xs font-medium rounded-full"
                   initial={{ opacity: 0, scale: 0.8 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ delay: entranceDelay + 0.4 }}
                 >
                   {platform}
@@ -221,7 +232,7 @@ const ProjectCard = ({ project, index, type }: { project: any; index: number; ty
           <motion.div
             className="absolute bottom-4 left-4 px-3 py-1 bg-background/90 backdrop-blur-sm rounded-full text-xs font-medium text-primary"
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: entranceDelay + 0.4 }}
           >
             {project.category}
@@ -250,7 +261,7 @@ const ProjectCard = ({ project, index, type }: { project: any; index: number; ty
                 key={tech} 
                 className="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-md"
                 initial={{ opacity: 0, x: -10 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: entranceDelay + 0.3 + techIndex * 0.08 }}
               >
                 {tech}
@@ -280,6 +291,221 @@ const ProjectCard = ({ project, index, type }: { project: any; index: number; ty
   );
 };
 
+interface ProjectCarouselProps {
+  projects: any[];
+  type: 'web' | 'app';
+  title: string;
+  subtitle: string;
+  icon: React.ReactNode;
+}
+
+const ProjectCarousel = ({ projects, type, title, subtitle, icon }: ProjectCarouselProps) => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [cardOffsets, setCardOffsets] = useState<number[]>(projects.map(() => 0));
+
+  const { ref: sectionRef, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+
+  // Track active card and calculate parallax offsets based on scroll position
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft;
+      const containerWidth = container.clientWidth;
+      const cards = container.querySelectorAll('[data-card]');
+      
+      const newOffsets: number[] = [];
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+      
+      cards.forEach((card, index) => {
+        const cardElement = card as HTMLElement;
+        const cardCenter = cardElement.offsetLeft + cardElement.offsetWidth / 2;
+        const containerCenter = scrollLeft + containerWidth / 2;
+        const distance = cardCenter - containerCenter;
+        const normalizedOffset = Math.max(-1, Math.min(1, distance / (containerWidth * 0.5)));
+        newOffsets.push(normalizedOffset);
+        
+        if (Math.abs(distance) < closestDistance) {
+          closestDistance = Math.abs(distance);
+          closestIndex = index;
+        }
+      });
+      
+      setCardOffsets(newOffsets);
+      setActiveIndex(closestIndex);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToCard = (index: number) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    
+    const cards = container.querySelectorAll('[data-card]');
+    if (cards[index]) {
+      cards[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  };
+
+  const scrollPrev = () => {
+    if (activeIndex > 0) {
+      scrollToCard(activeIndex - 1);
+    }
+  };
+
+  const scrollNext = () => {
+    if (activeIndex < projects.length - 1) {
+      scrollToCard(activeIndex + 1);
+    }
+  };
+
+  return (
+    <section ref={sectionRef} className="section-padding relative overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-20 left-[10%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-[10%] w-80 h-80 bg-accent/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.2, 0.4],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+
+      <div className="container-swiss relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="text-center max-w-2xl mx-auto mb-12 md:mb-16"
+        >
+          <motion.div 
+            className="flex items-center justify-center gap-4 mb-6"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="w-12 h-12 bg-primary/10 text-primary flex items-center justify-center rounded-xl">
+              {icon}
+            </div>
+          </motion.div>
+          <motion.h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            {title}{' '}
+            <span className="text-primary relative">
+              {subtitle}
+              <motion.span
+                className="absolute -bottom-2 left-0 w-full h-1 bg-primary/30 rounded-full"
+                initial={{ scaleX: 0 }}
+                animate={inView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              />
+            </span>
+          </motion.h2>
+          <motion.p
+            className="text-muted-foreground text-lg"
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            Swipe to explore our {type === 'web' ? 'web' : 'mobile'} projects
+          </motion.p>
+        </motion.div>
+
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Navigation Arrows - Desktop only */}
+          <button
+            onClick={scrollPrev}
+            className="hidden md:flex absolute -left-4 lg:-left-12 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-card border border-border rounded-full shadow-lg hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
+            disabled={activeIndex === 0}
+            aria-label="Previous project"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          
+          <button
+            onClick={scrollNext}
+            className="hidden md:flex absolute -right-4 lg:-right-12 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-card border border-border rounded-full shadow-lg hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
+            disabled={activeIndex === projects.length - 1}
+            aria-label="Next project"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Scrollable Carousel */}
+          <div
+            ref={scrollContainerRef}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch',
+            }}
+          >
+            {/* Left spacer for centering first card */}
+            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
+            
+            {projects.map((project, index) => (
+              <div key={project.title} data-card>
+                <ProjectCard
+                  project={project}
+                  index={index}
+                  type={type}
+                  isInView={inView}
+                  parallaxOffset={cardOffsets[index] || 0}
+                />
+              </div>
+            ))}
+            
+            {/* Right spacer for centering last card */}
+            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
+          </div>
+
+          {/* Carousel Indicators */}
+          <div className="flex justify-center gap-2 mt-6">
+            {projects.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollToCard(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === activeIndex 
+                    ? 'w-8 bg-primary' 
+                    : 'w-2 bg-primary/30 hover:bg-primary/50'
+                }`}
+                aria-label={`Go to project ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Projects = () => {
   const { ref: headerRef, inView: headerInView } = useInView({
     threshold: 0.1,
@@ -289,70 +515,86 @@ const Projects = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="section-padding bg-secondary/30">
-        <div className="container-swiss">
+      <section className="section-padding bg-secondary/30 relative overflow-hidden">
+        {/* Decorative Background */}
+        <div className="absolute inset-0 pointer-events-none">
+          <motion.div
+            className="absolute top-10 right-[20%] w-72 h-72 bg-primary/5 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </div>
+
+        <div className="container-swiss relative z-10">
           <motion.div
             ref={headerRef}
             initial={{ opacity: 0, y: 20 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl"
+            className="text-center max-w-3xl mx-auto"
           >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+            <motion.span 
+              className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={headerInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               Our Portfolio
-            </span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Projects That Define Excellence
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            </motion.span>
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={headerInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              Projects That Define{' '}
+              <span className="text-primary relative">
+                Excellence
+                <motion.span
+                  className="absolute -bottom-2 left-0 w-full h-1 bg-primary/30 rounded-full"
+                  initial={{ scaleX: 0 }}
+                  animate={headerInView ? { scaleX: 1 } : {}}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                />
+              </span>
+            </motion.h1>
+            <motion.p 
+              className="text-lg text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0 }}
+              animate={headerInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               Explore our portfolio of successful projects spanning web development, 
               mobile applications, and digital marketing solutions.
-            </p>
+            </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* Websites Section */}
-      <section className="section-padding bg-background">
-        <div className="container-swiss">
-          <div className="flex items-center gap-4 mb-12">
-            <div className="w-12 h-12 bg-primary/10 text-primary flex items-center justify-center">
-              <Globe className="w-6 h-6" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold">Websites</h2>
-              <p className="text-muted-foreground">Custom web solutions for diverse industries</p>
-            </div>
-          </div>
+      {/* Websites Carousel */}
+      <div className="bg-background">
+        <ProjectCarousel
+          projects={websites}
+          type="web"
+          title="Custom"
+          subtitle="Websites"
+          icon={<Globe className="w-6 h-6" />}
+        />
+      </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {websites.map((project, index) => (
-              <ProjectCard key={project.title} project={project} index={index} type="web" />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Mobile Apps Section */}
-      <section className="section-padding bg-secondary/30">
-        <div className="container-swiss">
-          <div className="flex items-center gap-4 mb-12">
-            <div className="w-12 h-12 bg-primary/10 text-primary flex items-center justify-center">
-              <Smartphone className="w-6 h-6" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold">Mobile Applications</h2>
-              <p className="text-muted-foreground">Native and cross-platform mobile solutions</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {mobileApps.map((project, index) => (
-              <ProjectCard key={project.title} project={project} index={index} type="app" />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Mobile Apps Carousel */}
+      <div className="bg-secondary/30">
+        <ProjectCarousel
+          projects={mobileApps}
+          type="app"
+          title="Mobile"
+          subtitle="Applications"
+          icon={<Smartphone className="w-6 h-6" />}
+        />
+      </div>
     </Layout>
   );
 };
