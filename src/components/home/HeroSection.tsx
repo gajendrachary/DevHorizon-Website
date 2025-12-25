@@ -283,12 +283,12 @@ export const HeroSection = () => {
             </motion.h1>
 
             {/* Subheading */}
-            <motion.p variants={itemVariants} className="text-lg text-muted-foreground mb-4 font-medium">
+            <motion.p variants={itemVariants} className="text-lg mb-4 font-medium text-secondary-foreground">
               Custom Websites • Mobile Apps • Meta Ads Management • Strategic Growth Solutions
             </motion.p>
 
             {/* Description */}
-            <motion.p variants={itemVariants} className="text-muted-foreground mb-8 leading-relaxed">
+            <motion.p variants={itemVariants} className="mb-8 leading-relaxed text-secondary-foreground">
               DevHub is a full-service digital agency specializing in crafting exceptional digital experiences. 
               We help businesses establish a powerful online presence and drive measurable growth through 
               innovative technology solutions.
