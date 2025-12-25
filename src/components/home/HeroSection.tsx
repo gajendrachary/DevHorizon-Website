@@ -189,27 +189,19 @@ export const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.3]);
   const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   return <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background Image Carousel with Horizontal Scrolling */}
+      {/* Background Image Carousel with Crossfade */}
       <div className="absolute inset-0 z-0 overflow-hidden" style={{backgroundColor: "#1a1a1a"}}>
-        <AnimatePresence mode="wait">
-          <motion.img key={safeImageIndex} src={currentImage.src} alt={currentImage.alt} className="absolute inset-0 w-full h-full object-cover object-top sm:object-center" initial={{
-          x: "100%",
-          opacity: 0
-        }} animate={{
-          x: "0%",
-          opacity: 0.75
-        }} exit={{
-          x: "-100%",
-          opacity: 0
-        }} transition={{
-          x: {
-            duration: 0.8,
-            ease: [0.25, 0.1, 0.25, 1]
-          },
-          opacity: {
-            duration: 0.5
-          }
-        }} />
+        <AnimatePresence mode="sync">
+          <motion.img 
+            key={safeImageIndex} 
+            src={currentImage.src} 
+            alt={currentImage.alt} 
+            className="absolute inset-0 w-full h-full object-cover object-top sm:object-center" 
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 0.75, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+          />
         </AnimatePresence>
         {/* Carousel indicators */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
