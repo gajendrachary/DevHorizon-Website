@@ -10,6 +10,9 @@ const clientLogos = [
   { name: 'Saarathi', initial: 'SA' },
 ];
 
+// Duplicate logos for seamless infinite scroll
+const duplicatedLogos = [...clientLogos, ...clientLogos];
+
 export const ClientLogosSection = () => {
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -17,7 +20,11 @@ export const ClientLogosSection = () => {
   });
 
   return (
-    <section ref={ref} className="py-12 bg-secondary/30 border-y border-border overflow-hidden">
+    <section 
+      ref={ref} 
+      className="py-12 overflow-hidden"
+      style={{ backgroundColor: '#f5f5f5', borderTop: '1px solid #e0e0e0', borderBottom: '1px solid #e0e0e0' }}
+    >
       <div className="container-swiss">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -27,34 +34,30 @@ export const ClientLogosSection = () => {
         >
           Trusted by businesses across industries
         </motion.p>
-        
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-          {clientLogos.map((client, index) => (
-            <motion.div
-              key={client.name}
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ 
-                duration: 0.4, 
-                delay: index * 0.08,
-                type: "spring",
-                stiffness: 150
-              }}
-              whileHover={{ 
-                scale: 1.1, 
-                y: -5,
-                transition: { duration: 0.2 }
-              }}
-              className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
+      </div>
+      
+      {/* Infinite Scroll Container */}
+      <div className="relative group">
+        <div 
+          className="flex items-center animate-scroll-left hover:[animation-play-state:paused]"
+          style={{ gap: '30px', width: 'max-content' }}
+        >
+          {duplicatedLogos.map((client, index) => (
+            <div
+              key={`${client.name}-${index}`}
+              className="flex items-center gap-3 text-muted-foreground shrink-0 cursor-pointer hover:text-foreground transition-colors duration-200"
             >
-              <motion.div 
-                className="w-10 h-10 bg-muted flex items-center justify-center text-sm font-bold group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:shadow-glow"
-                whileHover={{ rotate: 5 }}
+              <div 
+                className="flex items-center justify-center font-bold bg-white shadow-sm hover:shadow-md hover:bg-primary hover:text-primary-foreground transition-all duration-300
+                  h-[50px] w-[50px] text-xs
+                  sm:h-[70px] sm:w-[70px] sm:text-sm
+                  lg:h-[100px] lg:w-[100px] lg:text-base
+                  rounded-lg"
               >
                 {client.initial}
-              </motion.div>
-              <span className="text-sm font-medium hidden sm:block">{client.name}</span>
-            </motion.div>
+              </div>
+              <span className="text-sm font-medium hidden md:block whitespace-nowrap">{client.name}</span>
+            </div>
           ))}
         </div>
       </div>
