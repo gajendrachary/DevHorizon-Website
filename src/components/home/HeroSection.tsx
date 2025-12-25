@@ -357,29 +357,26 @@ export const HeroSection = () => {
               rotateY: 15,
               rotateX: -10,
               z: 50
-            }} className="flex items-center gap-2 text-sm text-foreground cursor-pointer" style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}>
-                  <motion.span 
-                    className="text-3xl"
-                    style={{ 
-                      transformStyle: 'preserve-3d',
-                      filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
-                    }}
-                    whileHover={{
-                      rotateY: 20,
-                      rotateX: -15,
-                      scale: 1.2
-                    }}
-                    animate={{
-                      rotateY: [0, 5, -5, 0],
-                      rotateX: [0, -3, 3, 0]
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: index * 0.3
-                    }}
-                  >
+            }} className="flex items-center gap-2 text-sm text-foreground cursor-pointer" style={{
+              perspective: '1000px',
+              transformStyle: 'preserve-3d'
+            }}>
+                  <motion.span className="text-3xl" style={{
+                transformStyle: 'preserve-3d',
+                filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
+              }} whileHover={{
+                rotateY: 20,
+                rotateX: -15,
+                scale: 1.2
+              }} animate={{
+                rotateY: [0, 5, -5, 0],
+                rotateX: [0, -3, 3, 0]
+              }} transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: index * 0.3
+              }}>
                     {service.emoji}
                   </motion.span>
                   <span className="hidden sm:block">{service.label}</span>
@@ -388,147 +385,7 @@ export const HeroSection = () => {
           </motion.div>
 
           {/* Hero Image/Illustration with Parallax */}
-          <motion.div initial={{
-          opacity: 0,
-          x: 50,
-          rotateY: -10
-        }} animate={{
-          opacity: 1,
-          x: 0,
-          rotateY: 0
-        }} transition={{
-          duration: 0.8,
-          delay: 0.4,
-          ease: [0.25, 0.1, 0.25, 1]
-        }} className="relative hidden lg:block" style={{
-          y: illustrationY
-        }}>
-            <motion.div className="relative" animate={{
-            y: [0, -12, 0]
-          }} transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}>
-              {/* Main illustration container */}
-              <div className="aspect-square max-w-lg mx-auto relative">
-                {/* Abstract tech elements with animations */}
-                <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent" animate={{
-                opacity: [0.5, 0.8, 0.5]
-              }} transition={{
-                duration: 4,
-                repeat: Infinity
-              }} />
-                <motion.div className="absolute top-8 left-8 w-32 h-32 border-4 border-primary" animate={{
-                rotate: [0, 2, -2, 0]
-              }} transition={{
-                duration: 8,
-                repeat: Infinity
-              }} />
-                <motion.div className="absolute top-16 left-16 w-32 h-32 bg-primary/20" animate={{
-                scale: [1, 1.05, 1]
-              }} transition={{
-                duration: 4,
-                repeat: Infinity
-              }} />
-                <motion.div className="absolute bottom-12 right-8 w-48 h-48 border-2 border-foreground/20" animate={{
-                rotate: [0, -2, 2, 0]
-              }} transition={{
-                duration: 10,
-                repeat: Infinity
-              }} />
-                <motion.div className="absolute bottom-20 right-16 w-48 h-48 bg-primary" whileHover={{
-                scale: 1.05
-              }} animate={{
-                opacity: [0.8, 1, 0.8]
-              }} transition={{
-                duration: 3,
-                repeat: Infinity
-              }} />
-                
-                {/* Code-like elements */}
-                <motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background p-6 shadow-medium" initial={{
-                scale: 0.9,
-                opacity: 0
-              }} animate={{
-                scale: 1,
-                opacity: 1
-              }} transition={{
-                delay: 0.6,
-                duration: 0.5
-              }} whileHover={{
-                scale: 1.05,
-                boxShadow: "0 20px 40px -12px hsl(210 100% 40% / 0.3)"
-              }}>
-                  <div className="space-y-2">
-                    <div className="flex gap-2">
-                      <motion.div className="w-2 h-2 bg-destructive rounded-full" animate={{
-                      scale: [1, 1.2, 1]
-                    }} transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      delay: 0
-                    }} />
-                      <motion.div className="w-2 h-2 bg-yellow-500 rounded-full" animate={{
-                      scale: [1, 1.2, 1]
-                    }} transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      delay: 0.2
-                    }} />
-                      <motion.div className="w-2 h-2 bg-green-500 rounded-full" animate={{
-                      scale: [1, 1.2, 1]
-                    }} transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      delay: 0.4
-                    }} />
-                    </div>
-                    <motion.div className="space-y-1.5 mt-4" initial={{
-                    opacity: 0
-                  }} animate={{
-                    opacity: 1
-                  }} transition={{
-                    delay: 0.8
-                  }}>
-                      <motion.div className="h-2 w-24 bg-primary/60" initial={{
-                      width: 0
-                    }} animate={{
-                      width: 96
-                    }} transition={{
-                      delay: 1,
-                      duration: 0.5
-                    }} />
-                      <motion.div className="h-2 w-32 bg-muted" initial={{
-                      width: 0
-                    }} animate={{
-                      width: 128
-                    }} transition={{
-                      delay: 1.2,
-                      duration: 0.5
-                    }} />
-                      <motion.div className="h-2 w-20 bg-primary/40" initial={{
-                      width: 0
-                    }} animate={{
-                      width: 80
-                    }} transition={{
-                      delay: 1.4,
-                      duration: 0.5
-                    }} />
-                      <motion.div className="h-2 w-28 bg-muted" initial={{
-                      width: 0
-                    }} animate={{
-                      width: 112
-                    }} transition={{
-                      delay: 1.6,
-                      duration: 0.5
-                    }} />
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </motion.div>
+          
         </div>
       </motion.div>
 
