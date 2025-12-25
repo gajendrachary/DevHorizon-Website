@@ -9,6 +9,8 @@ import developerClientMeeting from '@/assets/developer-client-meeting.png';
 import developerPresenting from '@/assets/developer-presenting.png';
 import teamBrainstorming from '@/assets/team-brainstorming.png';
 import codeReview from '@/assets/code-review.png';
+import mobileCodeReview from '@/assets/mobile-code-review.png';
+import mobileDeveloperPresenting from '@/assets/mobile-developer-presenting.png';
 
 // Desktop images - all 4 landscape images
 const desktopImages = [
@@ -18,10 +20,10 @@ const desktopImages = [
   { src: developerClientMeeting, alt: 'Developer meeting with client' },
 ];
 
-// Mobile images - best suited for portrait view
+// Mobile images - portrait optimized (9:16 ratio)
 const mobileImages = [
-  { src: codeReview, alt: 'Code review meeting' },
-  { src: developerPresenting, alt: 'Developer presenting work' },
+  { src: mobileCodeReview, alt: 'Code review session' },
+  { src: mobileDeveloperPresenting, alt: 'Developer presenting' },
 ];
 
 export const CTASection = () => {
