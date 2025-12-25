@@ -5,35 +5,34 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import developerMeeting from '@/assets/developer-client-meeting.png';
-import developerPresenting from '@/assets/developer-presenting.png';
-import teamBrainstorming from '@/assets/team-brainstorming.png';
-import codeReview from '@/assets/code-review.png';
-import mobileCodeReview from '@/assets/mobile-code-review.png';
-import mobileDeveloperPresenting from '@/assets/mobile-developer-presenting.png';
 
-// Desktop images - all 4 landscape images
-const desktopImages = [{
-  src: developerMeeting,
-  alt: 'Developer client meeting'
-}, {
-  src: developerPresenting,
-  alt: 'Developer presenting'
-}, {
-  src: teamBrainstorming,
-  alt: 'Team brainstorming'
-}, {
-  src: codeReview,
-  alt: 'Code review session'
-}];
+// Hero Section Images - SET 1
+import heroWebDev1 from '@/assets/hero-web-dev-1.png';
+import heroWebDev2 from '@/assets/hero-web-dev-2.png';
+import heroAppDev1 from '@/assets/hero-app-dev-1.png';
+import heroAppDev2 from '@/assets/hero-app-dev-2.png';
+import heroMetaAds1 from '@/assets/hero-meta-ads-1.png';
+import heroMetaAds2 from '@/assets/hero-meta-ads-2.png';
 
-// Mobile images - portrait optimized (9:16 ratio)
-const mobileImages = [{
-  src: mobileCodeReview,
-  alt: 'Code review session'
+// All 6 hero images - optimized for both mobile (9:16) and desktop
+const backgroundImages = [{
+  src: heroWebDev1,
+  alt: 'Web development workspace with multiple monitors'
 }, {
-  src: mobileDeveloperPresenting,
-  alt: 'Developer presenting'
+  src: heroWebDev2,
+  alt: 'Developer coding with syntax highlighting'
+}, {
+  src: heroAppDev1,
+  alt: 'Mobile app development with device testing'
+}, {
+  src: heroAppDev2,
+  alt: 'Cross-platform app development workflow'
+}, {
+  src: heroMetaAds1,
+  alt: 'Analytics dashboard with marketing metrics'
+}, {
+  src: heroMetaAds2,
+  alt: 'Digital marketing analytics and campaigns'
 }];
 const serviceIcons = [{
   emoji: '🌐',
@@ -115,8 +114,6 @@ const floatingParticles = [{
 const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*<>[]{}";
 export const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const isMobile = useIsMobile();
-  const backgroundImages = isMobile ? mobileImages : desktopImages;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Text scramble effect states
@@ -131,18 +128,13 @@ export const HeroSection = () => {
   const safeImageIndex = currentImageIndex >= backgroundImages.length ? 0 : currentImageIndex;
   const currentImage = backgroundImages[safeImageIndex];
 
-  // Reset image index when switching between mobile/desktop
-  useEffect(() => {
-    setCurrentImageIndex(0);
-  }, [isMobile]);
-
   // Background image carousel with longer interval
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex(prev => (prev + 1) % backgroundImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [backgroundImages.length]);
+  }, []);
 
   // Text scramble effect for main text
   useEffect(() => {

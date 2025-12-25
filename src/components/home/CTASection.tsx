@@ -4,26 +4,23 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
-import { useIsMobile } from '@/hooks/use-mobile';
-import developerClientMeeting from '@/assets/developer-client-meeting.png';
-import developerPresenting from '@/assets/developer-presenting.png';
-import teamBrainstorming from '@/assets/team-brainstorming.png';
-import codeReview from '@/assets/code-review.png';
-import mobileCodeReview from '@/assets/mobile-code-review.png';
-import mobileDeveloperPresenting from '@/assets/mobile-developer-presenting.png';
 
-// Desktop images - all 4 landscape images
-const desktopImages = [
-  { src: codeReview, alt: 'Code review meeting' },
-  { src: teamBrainstorming, alt: 'Team brainstorming session' },
-  { src: developerPresenting, alt: 'Developer presenting work' },
-  { src: developerClientMeeting, alt: 'Developer meeting with client' },
-];
+// CTA Section Images - SET 2
+import ctaWebDev1 from '@/assets/cta-web-dev-1.png';
+import ctaWebDev2 from '@/assets/cta-web-dev-2.png';
+import ctaAppDev1 from '@/assets/cta-app-dev-1.png';
+import ctaAppDev2 from '@/assets/cta-app-dev-2.png';
+import ctaMetaAds1 from '@/assets/cta-meta-ads-1.png';
+import ctaMetaAds2 from '@/assets/cta-meta-ads-2.png';
 
-// Mobile images - portrait optimized (9:16 ratio)
-const mobileImages = [
-  { src: mobileCodeReview, alt: 'Code review session' },
-  { src: mobileDeveloperPresenting, alt: 'Developer presenting' },
+// All 6 CTA images - optimized for both mobile (9:16) and desktop
+const backgroundImages = [
+  { src: ctaWebDev1, alt: 'Team collaborating on website design' },
+  { src: ctaWebDev2, alt: 'Portfolio of web projects on devices' },
+  { src: ctaAppDev1, alt: 'Mobile app UI development workspace' },
+  { src: ctaAppDev2, alt: 'Development team working on apps' },
+  { src: ctaMetaAds1, alt: 'Social media marketing campaign' },
+  { src: ctaMetaAds2, alt: 'Digital marketing funnel visualization' },
 ];
 
 export const CTASection = () => {
@@ -32,21 +29,18 @@ export const CTASection = () => {
     triggerOnce: true
   });
 
-  const isMobile = useIsMobile();
-  const backgroundImages = isMobile ? mobileImages : desktopImages;
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Reset index when switching between mobile/desktop
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [isMobile]);
+  // Ensure safe index access
+  const safeIndex = currentIndex >= backgroundImages.length ? 0 : currentIndex;
+  const currentImage = backgroundImages[safeIndex];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [backgroundImages.length]);
+  }, []);
 
   return (
     <section ref={ref} className="section-padding relative overflow-hidden">
@@ -54,9 +48,9 @@ export const CTASection = () => {
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="sync">
           <motion.img
-            key={currentIndex}
-            src={backgroundImages[currentIndex].src}
-            alt={backgroundImages[currentIndex].alt}
+            key={safeIndex}
+            src={currentImage.src}
+            alt={currentImage.alt}
             className="absolute inset-0 w-full h-full object-cover object-top sm:object-center"
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 0.8, scale: 1 }}
