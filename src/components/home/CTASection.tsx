@@ -10,10 +10,10 @@ import teamBrainstorming from '@/assets/team-brainstorming.png';
 import codeReview from '@/assets/code-review.png';
 
 const backgroundImages = [
-  { src: developerClientMeeting, alt: 'Developer meeting with client' },
-  { src: developerPresenting, alt: 'Developer presenting work' },
-  { src: teamBrainstorming, alt: 'Team brainstorming session' },
   { src: codeReview, alt: 'Code review meeting' },
+  { src: teamBrainstorming, alt: 'Team brainstorming session' },
+  { src: developerPresenting, alt: 'Developer presenting work' },
+  { src: developerClientMeeting, alt: 'Developer meeting with client' },
 ];
 
 export const CTASection = () => {
@@ -42,7 +42,7 @@ export const CTASection = () => {
             alt={backgroundImages[currentIndex].alt}
             className="absolute inset-0 w-full h-full object-cover"
             initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 0.6, scale: 1 }}
+            animate={{ opacity: 0.8, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
           />

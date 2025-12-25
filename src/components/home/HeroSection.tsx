@@ -179,7 +179,7 @@ export const HeroSection = () => {
           opacity: 0
         }} animate={{
           x: "0%",
-          opacity: 0.5
+          opacity: 0.75
         }} exit={{
           x: "-100%",
           opacity: 0
@@ -357,6 +357,9 @@ export const HeroSection = () => {
               rotateY: 15,
               rotateX: -10,
               z: 50
+            }} whileTap={{
+              scale: 1.1,
+              y: -4
             }} className="flex items-center gap-2 text-sm text-foreground cursor-pointer" style={{
               perspective: '1000px',
               transformStyle: 'preserve-3d'
@@ -367,7 +370,11 @@ export const HeroSection = () => {
               }} whileHover={{
                 rotateY: 20,
                 rotateX: -15,
-                scale: 1.2
+                scale: 1.2,
+                filter: 'drop-shadow(0 0 20px hsl(var(--primary) / 0.7)) drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
+              }} whileTap={{
+                scale: 1.15,
+                filter: 'drop-shadow(0 0 15px hsl(var(--primary) / 0.6)) drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
               }} animate={{
                 rotateY: [0, 5, -5, 0],
                 rotateX: [0, -3, 3, 0]
