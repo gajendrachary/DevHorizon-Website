@@ -334,31 +334,55 @@ export const HeroSection = () => {
               </motion.div>
             </motion.div>
 
-            {/* Service Icons */}
+            {/* Service Icons - 3D Animated */}
             <motion.div variants={itemVariants} className="flex items-center gap-6">
               {serviceIcons.map((service, index) => <motion.div key={service.label} initial={{
               opacity: 0,
               scale: 0.5,
-              y: 20
+              y: 20,
+              rotateX: -30
             }} animate={{
               opacity: 1,
               scale: 1,
-              y: 0
+              y: 0,
+              rotateX: 0
             }} transition={{
-              duration: 0.4,
+              duration: 0.5,
               delay: 0.8 + index * 0.1,
               type: "spring",
               stiffness: 200
             }} whileHover={{
-              scale: 1.1,
-              y: -4
-            }} className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
-                  <motion.div className="w-10 h-10 bg-background border border-border flex items-center justify-center transition-all duration-200 hover:border-primary hover:text-primary hover:shadow-glow" whileHover={{
-                rotate: 5
-              }}>
-                    <service.icon className="w-5 h-5" />
+              scale: 1.15,
+              y: -6,
+              rotateY: 15,
+              rotateX: -10,
+              z: 50
+            }} className="flex items-center gap-2 text-sm text-foreground cursor-pointer" style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}>
+                  <motion.div 
+                    className="w-12 h-12 bg-background border-2 border-foreground flex items-center justify-center transition-all duration-300 shadow-lg"
+                    style={{ 
+                      transformStyle: 'preserve-3d',
+                      boxShadow: '4px 4px 0px hsl(var(--foreground))'
+                    }}
+                    whileHover={{
+                      rotateY: 20,
+                      rotateX: -15,
+                      boxShadow: '8px 8px 0px hsl(var(--foreground))'
+                    }}
+                    animate={{
+                      rotateY: [0, 5, -5, 0],
+                      rotateX: [0, -3, 3, 0]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.3
+                    }}
+                  >
+                    <service.icon className="w-6 h-6" />
                   </motion.div>
-                  <span className="hidden sm:block">{service.label}</span>
+                  <span className="hidden sm:block font-bold">{service.label}</span>
                 </motion.div>)}
             </motion.div>
           </motion.div>
