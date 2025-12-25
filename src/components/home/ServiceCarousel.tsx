@@ -70,25 +70,47 @@ export const ServiceCarousel = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [cardOffsets, setCardOffsets] = useState<number[]>(services.map(() => 0));
   
   const { ref: sectionRef, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
 
-  // Track active card based on scroll position
+  // Track active card and calculate parallax offsets based on scroll position
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
     const handleScroll = () => {
       const scrollLeft = container.scrollLeft;
-      const cardWidth = container.scrollWidth / services.length;
-      const newIndex = Math.round(scrollLeft / cardWidth);
-      setActiveIndex(Math.min(Math.max(newIndex, 0), services.length - 1));
+      const containerWidth = container.clientWidth;
+      const cards = container.querySelectorAll('[data-card]');
+      
+      const newOffsets: number[] = [];
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+      
+      cards.forEach((card, index) => {
+        const cardElement = card as HTMLElement;
+        const cardCenter = cardElement.offsetLeft + cardElement.offsetWidth / 2;
+        const containerCenter = scrollLeft + containerWidth / 2;
+        const distance = cardCenter - containerCenter;
+        const normalizedOffset = Math.max(-1, Math.min(1, distance / (containerWidth * 0.5)));
+        newOffsets.push(normalizedOffset);
+        
+        if (Math.abs(distance) < closestDistance) {
+          closestDistance = Math.abs(distance);
+          closestIndex = index;
+        }
+      });
+      
+      setCardOffsets(newOffsets);
+      setActiveIndex(closestIndex);
     };
 
     container.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial calculation
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -227,6 +249,7 @@ export const ServiceCarousel = () => {
                   index={index}
                   isInView={inView}
                   onClick={() => setSelectedService(service)}
+                  parallaxOffset={cardOffsets[index] || 0}
                 />
               </div>
             ))}

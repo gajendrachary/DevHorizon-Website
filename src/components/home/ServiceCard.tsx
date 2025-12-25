@@ -33,6 +33,7 @@ interface ServiceCardProps {
   index: number;
   isInView: boolean;
   onClick: () => void;
+  parallaxOffset?: number; // -1 to 1, 0 = centered
 }
 
 export const ServiceCard = ({
@@ -46,12 +47,19 @@ export const ServiceCard = ({
   index,
   isInView,
   onClick,
+  parallaxOffset = 0,
 }: ServiceCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
 
   // Calculate entrance animation delay based on index
   const entranceDelay = index * ANIMATION_CONFIG.entrance.stagger;
+
+  // Parallax transformations based on scroll offset
+  const parallaxRotateY = parallaxOffset * 8; // Subtle Y rotation
+  const parallaxRotateX = Math.abs(parallaxOffset) * -3; // Tilt away from center
+  const parallaxScale = 1 - Math.abs(parallaxOffset) * 0.05; // Slightly smaller when off-center
+  const parallaxTranslateY = Math.abs(parallaxOffset) * 10; // Rise up when centered
 
   return (
     <motion.div
@@ -88,14 +96,29 @@ export const ServiceCard = ({
         }}
         onTapCancel={() => setIsTapped(false)}
         animate={{
-          rotateY: isTapped ? ANIMATION_CONFIG.tap.rotateY : isHovered ? ANIMATION_CONFIG.hover.rotateY : 0,
-          rotateX: isTapped ? ANIMATION_CONFIG.tap.rotateX : isHovered ? ANIMATION_CONFIG.hover.rotateX : 0,
-          scale: isTapped ? ANIMATION_CONFIG.tap.scale : isHovered ? ANIMATION_CONFIG.hover.scale : 1,
+          rotateY: isTapped 
+            ? ANIMATION_CONFIG.tap.rotateY 
+            : isHovered 
+              ? ANIMATION_CONFIG.hover.rotateY 
+              : parallaxRotateY,
+          rotateX: isTapped 
+            ? ANIMATION_CONFIG.tap.rotateX 
+            : isHovered 
+              ? ANIMATION_CONFIG.hover.rotateX 
+              : parallaxRotateX,
+          scale: isTapped 
+            ? ANIMATION_CONFIG.tap.scale 
+            : isHovered 
+              ? ANIMATION_CONFIG.hover.scale 
+              : parallaxScale,
+          y: isHovered ? -5 : parallaxTranslateY,
           boxShadow: isHovered 
             ? `${ANIMATION_CONFIG.hover.shadowIntensity} hsl(var(--primary) / 0.25)` 
-            : '0 4px 6px -1px hsl(var(--foreground) / 0.1)',
+            : Math.abs(parallaxOffset) < 0.3
+              ? '0 20px 40px -10px hsl(var(--primary) / 0.15)'
+              : '0 4px 6px -1px hsl(var(--foreground) / 0.1)',
         }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
+        transition={{ duration: 0.15, ease: 'easeOut' }}
       >
         {/* Card Glow Effect */}
         <motion.div
