@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import developerMeeting from '@/assets/developer-client-meeting.png';
 import developerPresenting from '@/assets/developer-presenting.png';
 import teamBrainstorming from '@/assets/team-brainstorming.png';
 import codeReview from '@/assets/code-review.png';
-const backgroundImages = [{
+
+// Desktop images - all 4 landscape images
+const desktopImages = [{
   src: developerMeeting,
   alt: 'Developer client meeting'
 }, {
@@ -20,6 +23,15 @@ const backgroundImages = [{
 }, {
   src: codeReview,
   alt: 'Code review session'
+}];
+
+// Mobile images - best suited for portrait view
+const mobileImages = [{
+  src: codeReview,
+  alt: 'Code review session'
+}, {
+  src: developerPresenting,
+  alt: 'Developer presenting'
 }];
 const serviceIcons = [{
   emoji: '🌐',
@@ -101,6 +113,8 @@ const floatingParticles = [{
 const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*<>[]{}";
 export const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
+  const backgroundImages = isMobile ? mobileImages : desktopImages;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Text scramble effect states
@@ -111,13 +125,18 @@ export const HeroSection = () => {
   const [revealedCount, setRevealedCount] = useState(0);
   const [highlightRevealedCount, setHighlightRevealedCount] = useState(0);
 
+  // Reset image index when switching between mobile/desktop
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [isMobile]);
+
   // Background image carousel with longer interval
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex(prev => (prev + 1) % backgroundImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [backgroundImages.length]);
 
   // Text scramble effect for main text
   useEffect(() => {
