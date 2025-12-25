@@ -175,7 +175,7 @@ export const HeroSection = () => {
       {/* Background Image Carousel with Horizontal Scrolling */}
       <div className="absolute inset-0 z-0 overflow-hidden" style={{backgroundColor: "#1a1a1a"}}>
         <AnimatePresence mode="wait">
-          <motion.img key={currentImageIndex} src={backgroundImages[currentImageIndex].src} alt={backgroundImages[currentImageIndex].alt} className="absolute inset-0 w-full h-full object-cover" initial={{
+          <motion.img key={currentImageIndex} src={backgroundImages[currentImageIndex].src} alt={backgroundImages[currentImageIndex].alt} className="absolute inset-0 w-full h-full object-cover object-top sm:object-center" initial={{
           x: "100%",
           opacity: 0
         }} animate={{
