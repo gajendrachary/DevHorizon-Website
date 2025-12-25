@@ -358,16 +358,16 @@ export const HeroSection = () => {
               rotateX: -10,
               z: 50
             }} className="flex items-center gap-2 text-sm text-foreground cursor-pointer" style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}>
-                  <motion.div 
-                    className="w-12 h-12 bg-background border-2 border-foreground flex items-center justify-center transition-all duration-300 shadow-lg"
+                  <motion.span 
+                    className="text-3xl"
                     style={{ 
                       transformStyle: 'preserve-3d',
-                      boxShadow: '4px 4px 0px hsl(var(--foreground))'
+                      filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
                     }}
                     whileHover={{
                       rotateY: 20,
                       rotateX: -15,
-                      boxShadow: '8px 8px 0px hsl(var(--foreground))'
+                      scale: 1.2
                     }}
                     animate={{
                       rotateY: [0, 5, -5, 0],
@@ -380,8 +380,8 @@ export const HeroSection = () => {
                       delay: index * 0.3
                     }}
                   >
-                    <span className="text-2xl" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>{service.emoji}</span>
-                  </motion.div>
+                    {service.emoji}
+                  </motion.span>
                   <span className="hidden sm:block">{service.label}</span>
                 </motion.div>)}
             </motion.div>
