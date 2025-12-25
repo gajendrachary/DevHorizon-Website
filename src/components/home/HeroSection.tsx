@@ -267,7 +267,7 @@ export const HeroSection = () => {
             {/* Headline with text scramble effect */}
             <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-mono">
               <span className="tracking-tight">{scrambledText}</span>
-              <motion.span className="gradient-text inline-block tracking-tight" animate={{
+              <motion.span animate={{
               backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
             }} transition={{
               backgroundPosition: {
@@ -277,7 +277,7 @@ export const HeroSection = () => {
               }
             }} style={{
               backgroundSize: '200% 200%'
-            }}>
+            }} className="gradient-text inline-block tracking-tight text-primary">
                 {scrambledHighlight}
               </motion.span>
             </motion.h1>
