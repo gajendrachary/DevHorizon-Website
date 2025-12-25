@@ -40,7 +40,7 @@ export const CTASection = () => {
             key={currentIndex}
             src={backgroundImages[currentIndex].src}
             alt={backgroundImages[currentIndex].alt}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-top sm:object-center"
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 0.8, scale: 1 }}
             exit={{ opacity: 0 }}
