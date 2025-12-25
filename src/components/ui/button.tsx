@@ -16,8 +16,8 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         // Hero button variants
-        hero: "bg-transparent text-foreground border border-foreground hover:bg-foreground hover:text-background hover:scale-[1.03] shadow-soft hover:shadow-medium font-bold",
-        heroOutline: "border-2 border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background hover:scale-[1.02]",
+        hero: "bg-transparent text-white border border-white hover:bg-white hover:text-background hover:scale-[1.03] shadow-soft hover:shadow-medium font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]",
+        heroOutline: "border-2 border-white bg-transparent text-white hover:bg-white hover:text-background hover:scale-[1.02] drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]",
         // CTA buttons
         cta: "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.03] pulse-glow",
         ctaOutline: "border-2 border-primary-foreground bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary hover:scale-[1.02]",
