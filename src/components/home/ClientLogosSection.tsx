@@ -38,6 +38,18 @@ export const ClientLogosSection = () => {
       
       {/* Infinite Scroll Container */}
       <div className="relative group">
+        {/* Left fade gradient */}
+        <div 
+          className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 lg:w-32 z-10 pointer-events-none"
+          style={{ background: 'linear-gradient(to right, #f5f5f5, transparent)' }}
+        />
+        
+        {/* Right fade gradient */}
+        <div 
+          className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 lg:w-32 z-10 pointer-events-none"
+          style={{ background: 'linear-gradient(to left, #f5f5f5, transparent)' }}
+        />
+        
         <div 
           className="flex items-center animate-scroll-left hover:[animation-play-state:paused]"
           style={{ gap: '30px', width: 'max-content' }}
