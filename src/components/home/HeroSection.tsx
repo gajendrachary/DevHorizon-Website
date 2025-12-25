@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
@@ -172,8 +173,7 @@ export const HeroSection = () => {
   const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   return <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Background Image Carousel with Horizontal Scrolling */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <AnimatePresence mode="wait">
+      <div className="absolute inset-0 z-0 overflow-idden" style={{backgroundColor: "#1a1a1a"}}      <AnimatePresence mode="wait">
           <motion.img key={currentImageIndex} src={backgroundImages[currentImageIndex].src} alt={backgroundImages[currentImageIndex].alt} className="absolute inset-0 w-full h-full object-cover" initial={{
           x: "100%",
           opacity: 0
