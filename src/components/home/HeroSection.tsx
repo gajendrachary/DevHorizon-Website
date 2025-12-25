@@ -266,7 +266,7 @@ export const HeroSection = () => {
             </motion.div>
 
             {/* Headline with text scramble effect */}
-            <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-mono">
+            <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-mono text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
               <span className="tracking-tight">{scrambledText}</span>
               <motion.span animate={{
               backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
@@ -284,12 +284,12 @@ export const HeroSection = () => {
             </motion.h1>
 
             {/* Subheading */}
-            <motion.p variants={itemVariants} className="text-lg mb-4 font-medium text-secondary-foreground">
+            <motion.p variants={itemVariants} className="text-lg mb-4 font-medium text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
               Custom Websites • Mobile Apps • Meta Ads Management • Strategic Growth Solutions
             </motion.p>
 
             {/* Description */}
-            <motion.p variants={itemVariants} className="mb-8 leading-relaxed text-secondary-foreground">
+            <motion.p variants={itemVariants} className="mb-8 leading-relaxed text-white/90 drop-shadow-[0_0_6px_rgba(255,255,255,0.3)]">
               DevHub is a full-service digital agency specializing in crafting exceptional digital experiences. 
               We help businesses establish a powerful online presence and drive measurable growth through 
               innovative technology solutions.
