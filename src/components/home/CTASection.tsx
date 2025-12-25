@@ -4,16 +4,24 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import developerClientMeeting from '@/assets/developer-client-meeting.png';
 import developerPresenting from '@/assets/developer-presenting.png';
 import teamBrainstorming from '@/assets/team-brainstorming.png';
 import codeReview from '@/assets/code-review.png';
 
-const backgroundImages = [
+// Desktop images - all 4 landscape images
+const desktopImages = [
   { src: codeReview, alt: 'Code review meeting' },
   { src: teamBrainstorming, alt: 'Team brainstorming session' },
   { src: developerPresenting, alt: 'Developer presenting work' },
   { src: developerClientMeeting, alt: 'Developer meeting with client' },
+];
+
+// Mobile images - best suited for portrait view
+const mobileImages = [
+  { src: codeReview, alt: 'Code review meeting' },
+  { src: developerPresenting, alt: 'Developer presenting work' },
 ];
 
 export const CTASection = () => {
@@ -22,14 +30,21 @@ export const CTASection = () => {
     triggerOnce: true
   });
 
+  const isMobile = useIsMobile();
+  const backgroundImages = isMobile ? mobileImages : desktopImages;
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Reset index when switching between mobile/desktop
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [isMobile]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [backgroundImages.length]);
 
   return (
     <section ref={ref} className="section-padding relative overflow-hidden">
