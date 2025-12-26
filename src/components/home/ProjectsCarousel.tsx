@@ -6,11 +6,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ProjectCard } from './ProjectCard';
 
-// Project Images
-import projectJaggeryTeaPoint from '@/assets/project-jaggery-tea-point.png';
-import projectSriKenchambaCeramics from '@/assets/project-sri-kenchamba-ceramics.png';
-import projectLikithaHandcrafts from '@/assets/project-likitha-handcrafts.png';
-import projectHavenSalad from '@/assets/project-haven-salad.png';
+// Project images will be added when uploaded
 
 const projects = [
   {
@@ -22,7 +18,6 @@ const projects = [
     bgColor: '#B45309',
     technologies: ['React', 'E-commerce', 'Responsive'],
     accentIcon: Coffee,
-    image: projectJaggeryTeaPoint,
   },
   {
     title: 'Sri Kenchamba Ceramics',
@@ -33,7 +28,6 @@ const projects = [
     bgColor: '#44403C',
     technologies: ['Next.js', 'CMS', 'SEO'],
     accentIcon: Store,
-    image: projectSriKenchambaCeramics,
   },
   {
     title: 'Likitha Handcrafts',
@@ -44,7 +38,6 @@ const projects = [
     bgColor: '#BE185D',
     technologies: ['React', 'Payments', 'Inventory'],
     accentIcon: Palette,
-    image: projectLikithaHandcrafts,
   },
   {
     title: 'Haven Salad',
@@ -55,7 +48,6 @@ const projects = [
     bgColor: '#15803D',
     technologies: ['React', 'Subscriptions', 'Mobile-first'],
     accentIcon: Salad,
-    image: projectHavenSalad,
   },
 ];
 
@@ -313,7 +305,6 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
                   index={index}
                   isInView={inView}
                   parallaxOffset={cardOffsets[index] || 0}
-                  image={project.image}
                 />
               </div>
             ))}
