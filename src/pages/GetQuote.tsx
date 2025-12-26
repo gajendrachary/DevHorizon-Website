@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Check, Globe, Smartphone, BarChart3, Palette, Cloud, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 const services = [{
   id: 'web',
   icon: Globe,
@@ -91,7 +92,30 @@ const GetQuote = () => {
       message: ''
     });
   };
+  const contactSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Get a Quote',
+    description: 'Request a custom quote for web development, mobile apps, or Meta ads services.',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'DevHub',
+      telephone: '+91-8688097373',
+      email: 'contact@devhub.tech',
+    },
+  };
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://devhub.tech/' },
+    { name: 'Get Quote', url: 'https://devhub.tech/get-quote' },
+  ]);
+
   return <Layout>
+      <SEO
+        title="Get a Free Quote | DevHub - Web & App Development Services"
+        description="Request a custom quote for your web development, mobile app, or Meta ads project. Free consultation available. Transparent pricing starting from ₹15,000. Response within 24 hours."
+        schema={{ '@context': 'https://schema.org', '@graph': [contactSchema, breadcrumbSchema] }}
+      />
       <section className="section-padding bg-secondary/30">
         <div className="container-swiss">
           <motion.div initial={{

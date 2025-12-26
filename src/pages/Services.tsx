@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
+import { SEO, getServiceSchema, getBreadcrumbSchema } from '@/components/common/SEO';
 import developerClientMeeting from '@/assets/developer-client-meeting.png';
 import developerPresenting from '@/assets/developer-presenting.png';
 import teamBrainstorming from '@/assets/team-brainstorming.png';
@@ -80,8 +81,22 @@ const Services = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const serviceSchemaData = getServiceSchema(
+    services.map((s) => ({ name: s.title, description: s.description, price: s.price }))
+  );
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://devhub.tech/' },
+    { name: 'Services', url: 'https://devhub.tech/services' },
+  ]);
+
   return (
     <Layout>
+      <SEO
+        title="Our Services - Web Development, Mobile Apps & Meta Ads | DevHub Bengaluru"
+        description="Explore DevHub's digital services: Custom web development starting ₹30,000, Mobile app development from ₹40,000, and Meta Ads management from ₹15,000/month. Get a free quote today."
+        schema={{ '@context': 'https://schema.org', '@graph': [serviceSchemaData, breadcrumbSchema] }}
+      />
       {/* CTA Section - Now at the top */}
       <section className="py-20 lg:py-32 bg-secondary text-foreground relative overflow-hidden">
         {/* Background Image with Crossfade */}
