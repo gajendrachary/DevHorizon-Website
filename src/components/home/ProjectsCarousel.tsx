@@ -73,11 +73,43 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
   const viewedIndicesRef = useRef<Set<number>>(new Set([0]));
   const resetTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isScrollingRef = useRef(false);
+  
+  // Touch gesture refs
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const isTouching = useRef(false);
 
   const { ref: sectionRef, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
+
+  // Touch gesture handlers for smoother mobile swiping
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    isTouching.current = true;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isTouching.current) return;
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!isTouching.current) return;
+    isTouching.current = false;
+    
+    const diff = touchStartX.current - touchEndX.current;
+    const threshold = 50;
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0 && activeIndex < projects.length - 1) {
+        scrollToCard(activeIndex + 1);
+      } else if (diff < 0 && activeIndex > 0) {
+        scrollToCard(activeIndex - 1);
+      }
+    }
+  };
 
   // Update background color when active index changes
   useEffect(() => {
@@ -292,7 +324,10 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
           {/* Scrollable Carousel */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 touch-pan-x"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',

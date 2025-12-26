@@ -111,6 +111,38 @@ const Services = () => {
   const [cardOffsets, setCardOffsets] = useState<number[]>(services.map(() => 0));
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isScrollingRef = useRef(false);
+  
+  // Touch gesture refs
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const isTouching = useRef(false);
+
+  // Touch gesture handlers for smoother mobile swiping
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    isTouching.current = true;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isTouching.current) return;
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!isTouching.current) return;
+    isTouching.current = false;
+    
+    const diff = touchStartX.current - touchEndX.current;
+    const threshold = 50;
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0 && activeIndex < services.length - 1) {
+        scrollToCard(activeIndex + 1);
+      } else if (diff < 0 && activeIndex > 0) {
+        scrollToCard(activeIndex - 1);
+      }
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -321,8 +353,11 @@ const Services = () => {
           {/* Carousel Container */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 px-4"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 px-4 touch-pan-x"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
           >
             {/* Left spacer for centering first card */}
             <div className="flex-shrink-0 w-[calc(50vw-42.5vw)] sm:w-[calc(50vw-200px)] md:w-[calc(50vw-210px)] lg:w-[calc(50vw-200px)]" />
