@@ -34,6 +34,7 @@ interface ServiceCardProps {
   isInView: boolean;
   onClick: () => void;
   parallaxOffset?: number; // -1 to 1, 0 = centered
+  backgroundImage?: string;
 }
 
 export const ServiceCard = ({
@@ -48,6 +49,7 @@ export const ServiceCard = ({
   isInView,
   onClick,
   parallaxOffset = 0,
+  backgroundImage,
 }: ServiceCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
@@ -120,6 +122,18 @@ export const ServiceCard = ({
         }}
         transition={{ duration: 0.15, ease: 'easeOut' }}
       >
+        {/* Background Image */}
+        {backgroundImage && (
+          <div className="absolute inset-0 overflow-hidden rounded-2xl">
+            <img 
+              src={backgroundImage} 
+              alt="" 
+              className="absolute right-0 top-0 h-full w-3/5 object-cover object-left opacity-[0.08]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-card via-card/95 to-transparent" />
+          </div>
+        )}
+
         {/* Card Glow Effect */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 rounded-2xl"

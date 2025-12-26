@@ -9,6 +9,11 @@ import { Link } from 'react-router-dom';
 import { ServiceCard, ANIMATION_CONFIG } from './ServiceCard';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+// Background images for services
+import serviceWebDevelopment from '@/assets/service-web-development.png';
+import serviceMetaAds from '@/assets/service-meta-ads.png';
+import serviceAppDevelopment from '@/assets/service-app-development.png';
+
 const services = [
   {
     icon: Globe,
@@ -26,7 +31,8 @@ const services = [
     ],
     timeline: '1-3 weeks',
     color: 'bg-primary/10 text-primary',
-    accentIcon: Sparkles
+    accentIcon: Sparkles,
+    backgroundImage: serviceWebDevelopment
   },
   {
     icon: Smartphone,
@@ -44,7 +50,8 @@ const services = [
     ],
     timeline: '2-4 weeks',
     color: 'bg-accent text-accent-foreground',
-    accentIcon: Zap
+    accentIcon: Zap,
+    backgroundImage: serviceAppDevelopment
   },
   {
     icon: BarChart3,
@@ -62,7 +69,8 @@ const services = [
     ],
     timeline: 'Ongoing',
     color: 'bg-primary/10 text-primary',
-    accentIcon: Target
+    accentIcon: Target,
+    backgroundImage: serviceMetaAds
   },
 ];
 
@@ -250,6 +258,7 @@ export const ServiceCarousel = () => {
                   isInView={inView}
                   onClick={() => setSelectedService(service)}
                   parallaxOffset={cardOffsets[index] || 0}
+                  backgroundImage={service.backgroundImage}
                 />
               </div>
             ))}
