@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Layout } from '@/components/layout/Layout';
 import { Star, Quote } from 'lucide-react';
+import { SEO, getAggregateRatingSchema, getBreadcrumbSchema } from '@/components/common/SEO';
 
 const reviews = [
   {
@@ -55,8 +56,31 @@ const Reviews = () => {
     triggerOnce: true
   });
 
+  const reviewSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Client Reviews',
+    ...getAggregateRatingSchema(),
+    review: reviews.map((r) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.name },
+      reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5 },
+      reviewBody: r.review,
+    })),
+  };
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://devhub.tech/' },
+    { name: 'Reviews', url: 'https://devhub.tech/reviews' },
+  ]);
+
   return (
     <Layout>
+      <SEO
+        title="Client Testimonials & Reviews | DevHub - 95% Client Satisfaction"
+        description="Read what our clients say about DevHub. With 95% client satisfaction and 40+ successful projects delivered, see why businesses choose us for web and mobile development."
+        schema={{ '@context': 'https://schema.org', '@graph': [reviewSchema, breadcrumbSchema] }}
+      />
       {/* Hero Section */}
       <section className="section-padding bg-secondary/30">
         <div className="container-swiss">

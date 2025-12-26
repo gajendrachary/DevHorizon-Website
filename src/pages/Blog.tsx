@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Search, Calendar, ArrowRight, Clock, User } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 
 const categories = ['All', 'Technology', 'Mobile', 'Marketing', 'Design'];
 
@@ -96,8 +97,36 @@ const Blog = () => {
     triggerOnce: true
   });
 
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'DevHub Blog',
+    description: 'Insights on web development, mobile apps, Meta ads, and UI/UX design.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'DevHub',
+    },
+    blogPost: blogPosts.map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      author: { '@type': 'Person', name: post.author },
+    })),
+  };
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://devhub.tech/' },
+    { name: 'Blog', url: 'https://devhub.tech/blog' },
+  ]);
+
   return (
     <Layout>
+      <SEO
+        title="DevHub Blog - Web Development, Mobile & Marketing Insights"
+        description="Stay updated with DevHub's blog on web development trends, mobile app best practices, Meta ads optimization tips, and UI/UX design principles. Expert insights from Bengaluru's top digital agency."
+        schema={{ '@context': 'https://schema.org', '@graph': [blogSchema, breadcrumbSchema] }}
+      />
       {/* Hero Section */}
       <section className="section-padding bg-secondary/30">
         <div className="container-swiss">

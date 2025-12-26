@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { Layout } from '@/components/layout/Layout';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 import { 
   Linkedin, 
   Github, 
@@ -99,8 +100,32 @@ const About = () => {
     triggerOnce: true
   });
 
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About DevHub',
+    description: 'Learn about DevHub, a Bengaluru-based digital agency founded in 2025.',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'DevHub',
+      foundingDate: '2025-06',
+      numberOfEmployees: '15+',
+      areaServed: ['India', 'UAE', 'UK', 'USA', 'Canada'],
+    },
+  };
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://devhub.tech/' },
+    { name: 'About', url: 'https://devhub.tech/about' },
+  ]);
+
   return (
     <Layout>
+      <SEO
+        title="About DevHub - Our Story & Team | Digital Agency Bengaluru"
+        description="Learn about DevHub, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
+        schema={{ '@context': 'https://schema.org', '@graph': [aboutSchema, breadcrumbSchema] }}
+      />
       {/* Hero Section */}
       <section className="section-padding bg-secondary/30">
         <div className="container-swiss">

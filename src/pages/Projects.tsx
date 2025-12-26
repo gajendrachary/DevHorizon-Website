@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { Layout } from '@/components/layout/Layout';
 import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 
 // Project Images
 import projectJaggeryTeaPoint from '@/assets/project-jaggery-tea-point.jpg';
@@ -629,8 +630,41 @@ const Projects = () => {
   const [websitesBgColor, setWebsitesBgColor] = useState('transparent');
   const [mobileAppsBgColor, setMobileAppsBgColor] = useState('transparent');
 
+  const projectsSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'DevHub Portfolio',
+    description: 'Our portfolio of web and mobile development projects.',
+    itemListElement: [
+      ...websites.map((p, i) => ({
+        '@type': 'CreativeWork',
+        position: i + 1,
+        name: p.title,
+        description: p.description,
+        url: p.url,
+      })),
+      ...mobileApps.map((p, i) => ({
+        '@type': 'SoftwareApplication',
+        position: websites.length + i + 1,
+        name: p.title,
+        description: p.description,
+        applicationCategory: 'MobileApplication',
+      })),
+    ],
+  };
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://devhub.tech/' },
+    { name: 'Projects', url: 'https://devhub.tech/projects' },
+  ]);
+
   return (
     <Layout>
+      <SEO
+        title="Our Portfolio - Web & Mobile Projects | DevHub Bengaluru"
+        description="View DevHub's portfolio of 40+ successful projects including Jaggery Tea Point, Haven Salad, BLR360 taxi app, and more. See how we've helped businesses grow with custom web and mobile solutions."
+        schema={{ '@context': 'https://schema.org', '@graph': [projectsSchema, breadcrumbSchema] }}
+      />
       {/* Dynamic Background Layer */}
       <div 
         className="fixed inset-0 pointer-events-none z-0 transition-colors duration-300 ease-out"
