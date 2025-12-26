@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
@@ -190,18 +189,22 @@ export const HeroSection = () => {
   const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   return <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Background Image Carousel with Crossfade */}
-      <div className="absolute inset-0 z-0 overflow-hidden" style={{backgroundColor: "#1a1a1a"}}>
+      <div className="absolute inset-0 z-0 overflow-hidden" style={{
+      backgroundColor: "#1a1a1a"
+    }}>
         <AnimatePresence mode="sync">
-          <motion.img 
-            key={safeImageIndex} 
-            src={currentImage.src} 
-            alt={currentImage.alt} 
-            className="absolute inset-0 w-full h-full object-cover object-top sm:object-center" 
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 0.75, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-          />
+          <motion.img key={safeImageIndex} src={currentImage.src} alt={currentImage.alt} className="absolute inset-0 w-full h-full object-cover object-top sm:object-center" initial={{
+          opacity: 0,
+          scale: 1.1
+        }} animate={{
+          opacity: 0.75,
+          scale: 1
+        }} exit={{
+          opacity: 0
+        }} transition={{
+          duration: 1.2,
+          ease: "easeInOut"
+        }} />
         </AnimatePresence>
         {/* Carousel indicators */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
@@ -263,7 +266,7 @@ export const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           <motion.div className="max-w-2xl" variants={containerVariants} initial="hidden" animate="visible">
             {/* Badge */}
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-sm font-medium mb-6 text-secondary-foreground">
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-sm font-medium mb-6 text-primary-foreground">
               <motion.span className="w-2 h-2 bg-primary rounded-full" animate={{
               scale: [1, 1.5, 1],
               opacity: [1, 0.7, 1]
