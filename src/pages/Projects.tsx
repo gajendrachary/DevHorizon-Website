@@ -4,7 +4,11 @@ import { Layout } from '@/components/layout/Layout';
 import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-// Project images will be added when uploaded
+// Project Images
+import projectJaggeryTeaPoint from '@/assets/project-jaggery-tea-point.jpg';
+import projectSriKenchambaCeramics from '@/assets/project-sri-kenchamba-ceramics.png';
+import projectLikithaHandcrafts from '@/assets/project-likitha-handcrafts.png';
+import projectHavenSalad from '@/assets/project-haven-salad.jpg';
 
 // Animation config - matches ServiceCard
 const ANIMATION_CONFIG = {
@@ -35,6 +39,7 @@ const websites = [
     color: 'bg-amber-100',
     bgColor: '#B45309',
     tech: ['React', 'Node.js', 'Tailwind CSS'],
+    image: projectJaggeryTeaPoint,
   },
   {
     title: 'Sri Kenchamba Ceramics',
@@ -44,6 +49,7 @@ const websites = [
     color: 'bg-stone-100',
     bgColor: '#44403C',
     tech: ['Next.js', 'MongoDB', 'Stripe'],
+    image: projectSriKenchambaCeramics,
   },
   {
     title: 'Likitha Handcrafts',
@@ -53,6 +59,7 @@ const websites = [
     color: 'bg-rose-100',
     bgColor: '#BE185D',
     tech: ['React', 'Firebase', 'Razorpay'],
+    image: projectLikithaHandcrafts,
   },
   {
     title: 'Haven Salad',
@@ -62,6 +69,7 @@ const websites = [
     color: 'bg-green-100',
     bgColor: '#15803D',
     tech: ['Vue.js', 'Supabase', 'Tailwind CSS'],
+    image: projectHavenSalad,
   },
 ];
 
