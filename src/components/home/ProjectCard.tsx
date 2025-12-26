@@ -135,6 +135,8 @@ export const ProjectCard = ({
             <motion.img 
               src={image}
               alt={title}
+              loading="lazy"
+              decoding="async"
               className={isLogo 
                 ? "w-24 h-24 object-contain" 
                 : "absolute inset-0 w-full h-full object-cover object-top"

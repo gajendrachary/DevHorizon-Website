@@ -128,6 +128,8 @@ export const ServiceCard = ({
             <img 
               src={backgroundImage} 
               alt="" 
+              loading="lazy"
+              decoding="async"
               className="absolute right-0 top-0 h-full w-3/5 object-cover object-left opacity-70"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-card via-card/80 to-card/40" />
