@@ -7,9 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Check, ArrowRight, ArrowLeft, Clock, Sparkles, Zap, Target, Palette as PaletteIcon, Cloud as CloudIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
-import serviceWebDev from '@/assets/service-web-development.png';
-import serviceAppDev from '@/assets/service-app-development.png';
-import serviceMetaAds from '@/assets/service-meta-ads.png';
 
 const ANIMATION_CONFIG = {
   hover: {
@@ -29,8 +26,7 @@ const services = [{
   name: 'Web Development',
   price: '₹30,000',
   description: 'Custom websites & web apps',
-  timeline: '2-4 weeks',
-  backgroundImage: serviceWebDev
+  timeline: '1-2 weeks'
 }, {
   id: 'mobile',
   emoji: '📱',
@@ -38,8 +34,7 @@ const services = [{
   name: 'Mobile App Development',
   price: '₹40,000',
   description: 'iOS & Android apps',
-  timeline: '4-8 weeks',
-  backgroundImage: serviceAppDev
+  timeline: '2-4 weeks'
 }, {
   id: 'ads',
   emoji: '📊',
@@ -47,8 +42,7 @@ const services = [{
   name: 'Meta Ads Management',
   price: '₹15,000',
   description: 'Facebook & Instagram ads',
-  timeline: 'Monthly',
-  backgroundImage: serviceMetaAds
+  timeline: 'Monthly'
 }, {
   id: 'design',
   emoji: '🎨',
@@ -56,8 +50,7 @@ const services = [{
   name: 'UI/UX Design',
   price: '₹20,000',
   description: 'User interface design',
-  timeline: '1-2 weeks',
-  backgroundImage: null
+  timeline: '1-2 weeks'
 }, {
   id: 'cloud',
   emoji: '☁️',
@@ -65,26 +58,33 @@ const services = [{
   name: 'Cloud Solutions',
   price: '₹25,000',
   description: 'Cloud infrastructure',
-  timeline: '2-3 weeks',
-  backgroundImage: null
+  timeline: '2-3 weeks'
 }];
 const timelines = [{
   id: 'urgent',
+  emoji: '⚡',
+  accentIcon: Zap,
   label: 'Urgent',
   description: '< 1 week',
   multiplier: 1.5
 }, {
   id: 'fast',
+  emoji: '🚀',
+  accentIcon: Sparkles,
   label: 'Fast',
   description: '1-2 weeks',
   multiplier: 1.25
 }, {
   id: 'standard',
+  emoji: '⏰',
+  accentIcon: Clock,
   label: 'Standard',
   description: '2-3 weeks',
   multiplier: 1
 }, {
   id: 'flexible',
+  emoji: '🌿',
+  accentIcon: CloudIcon,
   label: 'Flexible',
   description: '4+ weeks',
   multiplier: 0.9
@@ -204,17 +204,6 @@ const GetQuote = () => {
                           }}
                           whileTap={{ scale: ANIMATION_CONFIG.tap.scale }}
                         >
-                          {/* Background Image */}
-                          {service.backgroundImage && (
-                            <div className="absolute inset-0 overflow-hidden rounded-xl">
-                              <img 
-                                src={service.backgroundImage} 
-                                alt="" 
-                                className="absolute right-0 top-0 h-full w-2/5 object-cover object-left opacity-60"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-r from-card via-card/90 to-card/50" />
-                            </div>
-                          )}
 
                           {/* Glow Effect on Selection */}
                           {isSelected && (
@@ -306,24 +295,142 @@ const GetQuote = () => {
             }} animate={{
               opacity: 1
             }}>
-                  <h2 className="text-xl font-bold mb-6">Timeline & Budget</h2>
+                  <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                    <span className="text-2xl">📅</span> Timeline & Budget
+                  </h2>
                   <div className="mb-8">
-                    <h3 className="font-medium mb-4">Project Timeline</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                      {timelines.map(t => <button key={t.id} onClick={() => setTimeline(t.id)} className={`p-4 border text-center transition-all ${timeline === t.id ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'}`}>
-                          <div className="font-semibold">{t.label}</div>
-                          <div className="text-xs text-muted-foreground">{t.description}</div>
-                        </button>)}
+                    <h3 className="font-medium mb-4 flex items-center gap-2">
+                      <span className="text-lg">⏱️</span> Project Timeline
+                    </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      {timelines.map((t, index) => {
+                        const isSelected = timeline === t.id;
+                        const AccentIcon = t.accentIcon;
+                        
+                        return (
+                          <motion.button
+                            key={t.id}
+                            onClick={() => setTimeline(t.id)}
+                            className={`relative p-5 border text-center transition-all rounded-xl overflow-hidden ${
+                              isSelected 
+                                ? 'border-primary bg-primary/5' 
+                                : 'border-border hover:border-primary/50'
+                            }`}
+                            style={{ perspective: '1000px' }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            whileHover={{ 
+                              scale: ANIMATION_CONFIG.hover.scale,
+                              rotateY: ANIMATION_CONFIG.hover.rotateY,
+                              rotateX: ANIMATION_CONFIG.hover.rotateX,
+                              boxShadow: '0 15px 30px -10px hsl(var(--primary) / 0.2)'
+                            }}
+                            whileTap={{ scale: ANIMATION_CONFIG.tap.scale }}
+                          >
+                            {/* Glow Effect on Selection */}
+                            {isSelected && (
+                              <motion.div
+                                className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 rounded-xl"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.3 }}
+                              />
+                            )}
+
+                            {/* Accent Corner */}
+                            <div className="absolute top-0 right-0 w-12 h-12 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[40px] opacity-50" />
+
+                            {/* Floating Accent Icon */}
+                            <motion.div
+                              className="absolute top-2 right-2 text-primary/20 z-10"
+                              animate={{
+                                y: [0, -3, 0],
+                                rotate: [0, 5, -5, 0],
+                              }}
+                              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                            >
+                              <AccentIcon className="w-4 h-4" />
+                            </motion.div>
+
+                            {/* 3D Emoji */}
+                            <motion.div 
+                              className="relative mb-2"
+                              whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <span className="text-3xl">{t.emoji}</span>
+                              {isSelected && (
+                                <motion.div
+                                  className="absolute inset-0 rounded-full bg-primary/20"
+                                  initial={{ scale: 0.8, opacity: 0 }}
+                                  animate={{ scale: 1.5, opacity: 0 }}
+                                  transition={{ duration: 0.6, repeat: Infinity }}
+                                />
+                              )}
+                            </motion.div>
+
+                            {/* Content */}
+                            <div className="font-bold text-foreground relative z-10">{t.label}</div>
+                            <div className="text-xs text-muted-foreground relative z-10">{t.description}</div>
+
+                            {/* Selection Checkmark */}
+                            {isSelected && (
+                              <motion.div
+                                className="absolute bottom-2 left-2 w-5 h-5 bg-primary rounded-full flex items-center justify-center z-10"
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                              >
+                                <Check className="w-3 h-3 text-primary-foreground" />
+                              </motion.div>
+                            )}
+
+                            {/* Bottom Border Animation */}
+                            <motion.div
+                              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary via-accent to-primary rounded-b-xl"
+                              initial={{ width: '0%' }}
+                              animate={{ width: isSelected ? '100%' : '0%' }}
+                              transition={{ duration: 0.4 }}
+                            />
+                          </motion.button>
+                        );
+                      })}
                     </div>
                   </div>
-                  <div>
-                    <h3 className="font-medium mb-4">Budget Range: ₹{budget.toLocaleString()}</h3>
-                    <input type="range" min="30000" max="500000" step="5000" value={budget} onChange={e => setBudget(Number(e.target.value))} className="w-full" />
-                    <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                      <span>₹30,000</span>
-                      <span>₹1,00,000+</span>
+
+                  {/* Budget Section */}
+                  <motion.div
+                    className="relative p-6 border border-border rounded-xl overflow-hidden"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    whileHover={{ 
+                      boxShadow: '0 10px 25px -10px hsl(var(--primary) / 0.15)'
+                    }}
+                  >
+                    {/* Accent Corner */}
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[60px] opacity-50" />
+                    
+                    <h3 className="font-medium mb-4 flex items-center gap-2">
+                      <span className="text-2xl">💰</span> 
+                      <span>Budget Range:</span>
+                      <span className="text-primary font-bold">₹{budget.toLocaleString()}</span>
+                    </h3>
+                    <input 
+                      type="range" 
+                      min="30000" 
+                      max="500000" 
+                      step="5000" 
+                      value={budget} 
+                      onChange={e => setBudget(Number(e.target.value))} 
+                      className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
+                    />
+                    <div className="flex justify-between text-sm text-muted-foreground mt-3">
+                      <span className="flex items-center gap-1">💵 ₹30,000</span>
+                      <span className="flex items-center gap-1">💎 ₹5,00,000+</span>
                     </div>
-                  </div>
+                  </motion.div>
                 </motion.div>}
 
               {/* Step 3: Contact Details */}
@@ -332,32 +439,138 @@ const GetQuote = () => {
             }} animate={{
               opacity: 1
             }}>
-                  <h2 className="text-xl font-bold mb-6">Contact Details</h2>
+                  <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                    <span className="text-2xl">📋</span> Contact Details
+                  </h2>
                   <div className="grid gap-4">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <Input placeholder="Your Name *" value={formData.name} onChange={e => setFormData({
-                    ...formData,
-                    name: e.target.value
-                  })} />
-                      <Input placeholder="Email Address *" type="email" value={formData.email} onChange={e => setFormData({
-                    ...formData,
-                    email: e.target.value
-                  })} />
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <Input placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({
-                    ...formData,
-                    phone: e.target.value
-                  })} />
-                      <Input placeholder="Company Name" value={formData.company} onChange={e => setFormData({
-                    ...formData,
-                    company: e.target.value
-                  })} />
-                    </div>
-                    <Textarea placeholder="Tell us about your project..." rows={4} value={formData.message} onChange={e => setFormData({
-                  ...formData,
-                  message: e.target.value
-                })} />
+                    {/* Personal Info Section */}
+                    <motion.div
+                      className="relative p-5 border border-border rounded-xl overflow-hidden"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      whileHover={{ 
+                        boxShadow: '0 10px 25px -10px hsl(var(--primary) / 0.15)'
+                      }}
+                      style={{ perspective: '1000px' }}
+                    >
+                      {/* Accent Corner */}
+                      <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[50px] opacity-50" />
+                      
+                      <h3 className="font-medium mb-4 flex items-center gap-2 text-sm text-muted-foreground">
+                        <span className="text-lg">👤</span> Personal Information
+                      </h3>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <motion.div
+                          whileHover={{ scale: 1.01 }}
+                          whileFocus={{ scale: 1.01 }}
+                        >
+                          <Input 
+                            placeholder="Your Name *" 
+                            value={formData.name} 
+                            onChange={e => setFormData({
+                              ...formData,
+                              name: e.target.value
+                            })}
+                            className="transition-all focus:ring-2 focus:ring-primary/20"
+                          />
+                        </motion.div>
+                        <motion.div
+                          whileHover={{ scale: 1.01 }}
+                        >
+                          <Input 
+                            placeholder="Company Name" 
+                            value={formData.company} 
+                            onChange={e => setFormData({
+                              ...formData,
+                              company: e.target.value
+                            })}
+                            className="transition-all focus:ring-2 focus:ring-primary/20"
+                          />
+                        </motion.div>
+                      </div>
+                    </motion.div>
+
+                    {/* Contact Info Section */}
+                    <motion.div
+                      className="relative p-5 border border-border rounded-xl overflow-hidden"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      whileHover={{ 
+                        boxShadow: '0 10px 25px -10px hsl(var(--primary) / 0.15)'
+                      }}
+                      style={{ perspective: '1000px' }}
+                    >
+                      {/* Accent Corner */}
+                      <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-accent/10 to-transparent rounded-bl-[50px] opacity-50" />
+                      
+                      <h3 className="font-medium mb-4 flex items-center gap-2 text-sm text-muted-foreground">
+                        <span className="text-lg">📧</span> Contact Information
+                      </h3>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <motion.div
+                          whileHover={{ scale: 1.01 }}
+                        >
+                          <Input 
+                            placeholder="Email Address *" 
+                            type="email" 
+                            value={formData.email} 
+                            onChange={e => setFormData({
+                              ...formData,
+                              email: e.target.value
+                            })}
+                            className="transition-all focus:ring-2 focus:ring-primary/20"
+                          />
+                        </motion.div>
+                        <motion.div
+                          whileHover={{ scale: 1.01 }}
+                        >
+                          <Input 
+                            placeholder="Phone Number" 
+                            value={formData.phone} 
+                            onChange={e => setFormData({
+                              ...formData,
+                              phone: e.target.value
+                            })}
+                            className="transition-all focus:ring-2 focus:ring-primary/20"
+                          />
+                        </motion.div>
+                      </div>
+                    </motion.div>
+
+                    {/* Message Section */}
+                    <motion.div
+                      className="relative p-5 border border-border rounded-xl overflow-hidden"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      whileHover={{ 
+                        boxShadow: '0 10px 25px -10px hsl(var(--primary) / 0.15)'
+                      }}
+                      style={{ perspective: '1000px' }}
+                    >
+                      {/* Accent Corner */}
+                      <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[50px] opacity-50" />
+                      
+                      <h3 className="font-medium mb-4 flex items-center gap-2 text-sm text-muted-foreground">
+                        <span className="text-lg">💬</span> Project Details
+                      </h3>
+                      <motion.div
+                        whileHover={{ scale: 1.005 }}
+                      >
+                        <Textarea 
+                          placeholder="Tell us about your project, goals, and any specific requirements..." 
+                          rows={4} 
+                          value={formData.message} 
+                          onChange={e => setFormData({
+                            ...formData,
+                            message: e.target.value
+                          })}
+                          className="transition-all focus:ring-2 focus:ring-primary/20"
+                        />
+                      </motion.div>
+                    </motion.div>
                   </div>
                 </motion.div>}
 
