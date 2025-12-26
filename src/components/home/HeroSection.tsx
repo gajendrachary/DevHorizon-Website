@@ -373,7 +373,7 @@ export const HeroSection = () => {
             }} whileTap={{
               scale: 1.1,
               y: -4
-            }} className="flex items-center gap-2 text-sm text-foreground cursor-pointer" style={{
+            }} className="flex items-center gap-2 text-sm text-white cursor-pointer" style={{
               perspective: '1000px',
               transformStyle: 'preserve-3d'
             }}>
