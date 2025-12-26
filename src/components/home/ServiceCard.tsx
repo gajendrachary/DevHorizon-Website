@@ -147,7 +147,7 @@ export const ServiceCard = ({
 
         {/* Timeline Badge */}
         <motion.div
-          className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-primary/10 rounded-full text-xs text-primary font-bold"
+          className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-primary/10 rounded-full text-xs text-foreground font-bold"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: entranceDelay + 0.4 }}
@@ -192,7 +192,7 @@ export const ServiceCard = ({
           {title}
         </motion.h3>
         <motion.p 
-          className="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base font-bold"
+          className="text-foreground mb-6 leading-relaxed text-sm sm:text-base font-bold"
           style={{ transformStyle: 'preserve-3d', translateZ: 15 }}
         >
           {description}
