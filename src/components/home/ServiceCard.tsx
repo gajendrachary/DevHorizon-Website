@@ -128,9 +128,9 @@ export const ServiceCard = ({
             <img 
               src={backgroundImage} 
               alt="" 
-              className="absolute right-0 top-0 h-full w-3/5 object-cover object-left opacity-[0.08]"
+              className="absolute right-0 top-0 h-full w-3/5 object-cover object-left opacity-100"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-card via-card/95 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-card via-card/80 to-card/40" />
           </div>
         )}
 
