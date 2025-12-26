@@ -34,6 +34,7 @@ interface ProjectCardProps {
   isInView: boolean;
   parallaxOffset?: number;
   image?: string;
+  isLogo?: boolean;
 }
 
 export const ProjectCard = ({
@@ -48,6 +49,7 @@ export const ProjectCard = ({
   isInView,
   parallaxOffset = 0,
   image,
+  isLogo = false,
 }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
@@ -133,7 +135,10 @@ export const ProjectCard = ({
             <motion.img 
               src={image}
               alt={title}
-              className="absolute inset-0 w-full h-full object-cover object-top"
+              className={isLogo 
+                ? "w-24 h-24 object-contain" 
+                : "absolute inset-0 w-full h-full object-cover object-top"
+              }
               initial={{ scale: 1 }}
               animate={{
                 scale: isHovered ? 1.05 : 1,

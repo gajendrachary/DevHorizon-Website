@@ -50,6 +50,7 @@ const websites = [
     bgColor: '#44403C',
     tech: ['Next.js', 'MongoDB', 'Stripe'],
     image: projectSriKenchambaCeramics,
+    isLogo: true,
   },
   {
     title: 'Likitha Handcrafts',
@@ -60,6 +61,7 @@ const websites = [
     bgColor: '#BE185D',
     tech: ['React', 'Firebase', 'Razorpay'],
     image: projectLikithaHandcrafts,
+    isLogo: true,
   },
   {
     title: 'Haven Salad',
@@ -196,7 +198,10 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
             <motion.img 
               src={project.image}
               alt={project.title}
-              className="absolute inset-0 w-full h-full object-cover object-top"
+              className={project.isLogo 
+                ? "w-24 h-24 object-contain" 
+                : "absolute inset-0 w-full h-full object-cover object-top"
+              }
               initial={{ scale: 1 }}
               animate={{
                 scale: isHovered ? 1.05 : 1,

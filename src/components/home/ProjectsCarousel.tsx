@@ -34,6 +34,7 @@ const projects = [
     technologies: ['Next.js', 'CMS', 'SEO'],
     accentIcon: Store,
     image: projectSriKenchambaCeramics,
+    isLogo: true,
   },
   {
     title: 'Likitha Handcrafts',
@@ -45,6 +46,7 @@ const projects = [
     technologies: ['React', 'Payments', 'Inventory'],
     accentIcon: Palette,
     image: projectLikithaHandcrafts,
+    isLogo: true,
   },
   {
     title: 'Haven Salad',
@@ -314,6 +316,7 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
                   isInView={inView}
                   parallaxOffset={cardOffsets[index] || 0}
                   image={project.image}
+                  isLogo={project.isLogo}
                 />
               </div>
             ))}
