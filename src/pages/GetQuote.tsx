@@ -4,39 +4,69 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Check, Globe, Smartphone, BarChart3, Palette, Cloud, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Check, ArrowRight, ArrowLeft, Clock, Sparkles, Zap, Target, Palette as PaletteIcon, Cloud as CloudIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
+import serviceWebDev from '@/assets/service-web-development.png';
+import serviceAppDev from '@/assets/service-app-development.png';
+import serviceMetaAds from '@/assets/service-meta-ads.png';
+
+const ANIMATION_CONFIG = {
+  hover: {
+    scale: 1.02,
+    rotateY: 3,
+    rotateX: -2,
+  },
+  tap: {
+    scale: 0.98,
+  },
+};
+
 const services = [{
   id: 'web',
-  icon: Globe,
+  emoji: '🌐',
+  accentIcon: Sparkles,
   name: 'Web Development',
   price: '₹30,000',
-  description: 'Custom websites & web apps'
+  description: 'Custom websites & web apps',
+  timeline: '2-4 weeks',
+  backgroundImage: serviceWebDev
 }, {
   id: 'mobile',
-  icon: Smartphone,
+  emoji: '📱',
+  accentIcon: Zap,
   name: 'Mobile App Development',
   price: '₹40,000',
-  description: 'iOS & Android apps'
+  description: 'iOS & Android apps',
+  timeline: '4-8 weeks',
+  backgroundImage: serviceAppDev
 }, {
   id: 'ads',
-  icon: BarChart3,
+  emoji: '📊',
+  accentIcon: Target,
   name: 'Meta Ads Management',
   price: '₹15,000',
-  description: 'Facebook & Instagram ads'
+  description: 'Facebook & Instagram ads',
+  timeline: 'Monthly',
+  backgroundImage: serviceMetaAds
 }, {
   id: 'design',
-  icon: Palette,
+  emoji: '🎨',
+  accentIcon: PaletteIcon,
   name: 'UI/UX Design',
   price: '₹20,000',
-  description: 'User interface design'
+  description: 'User interface design',
+  timeline: '1-2 weeks',
+  backgroundImage: null
 }, {
   id: 'cloud',
-  icon: Cloud,
+  emoji: '☁️',
+  accentIcon: CloudIcon,
   name: 'Cloud Solutions',
   price: '₹25,000',
-  description: 'Cloud infrastructure'
+  description: 'Cloud infrastructure',
+  timeline: '2-3 weeks',
+  backgroundImage: null
 }];
 const timelines = [{
   id: 'urgent',
@@ -149,16 +179,124 @@ const GetQuote = () => {
             }}>
                   <h2 className="text-xl font-bold mb-6">Select Services</h2>
                   <div className="grid gap-4">
-                    {services.map(service => <button key={service.id} onClick={() => toggleService(service.id)} className={`flex items-center gap-4 p-4 border text-left transition-all ${selectedServices.includes(service.id) ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'}`}>
-                        <div className={`w-12 h-12 flex items-center justify-center ${selectedServices.includes(service.id) ? 'bg-primary text-primary-foreground' : 'bg-secondary'}`}>
-                          <service.icon className="w-6 h-6" />
-                        </div>
-                        <div className="flex-1">
-                          <div className="font-semibold">{service.name}</div>
-                          <div className="text-sm text-muted-foreground">{service.description}</div>
-                        </div>
-                        <div className="text-sm font-medium">From {service.price}</div>
-                      </button>)}
+                    {services.map((service, index) => {
+                      const isSelected = selectedServices.includes(service.id);
+                      const AccentIcon = service.accentIcon;
+                      
+                      return (
+                        <motion.button
+                          key={service.id}
+                          onClick={() => toggleService(service.id)}
+                          className={`relative flex items-center gap-4 p-5 border text-left transition-all rounded-xl overflow-hidden ${
+                            isSelected 
+                              ? 'border-primary bg-primary/5' 
+                              : 'border-border hover:border-primary/50'
+                          }`}
+                          style={{ perspective: '1000px' }}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          whileHover={{ 
+                            scale: ANIMATION_CONFIG.hover.scale,
+                            rotateY: ANIMATION_CONFIG.hover.rotateY,
+                            rotateX: ANIMATION_CONFIG.hover.rotateX,
+                            boxShadow: '0 15px 30px -10px hsl(var(--primary) / 0.2)'
+                          }}
+                          whileTap={{ scale: ANIMATION_CONFIG.tap.scale }}
+                        >
+                          {/* Background Image */}
+                          {service.backgroundImage && (
+                            <div className="absolute inset-0 overflow-hidden rounded-xl">
+                              <img 
+                                src={service.backgroundImage} 
+                                alt="" 
+                                className="absolute right-0 top-0 h-full w-2/5 object-cover object-left opacity-60"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-r from-card via-card/90 to-card/50" />
+                            </div>
+                          )}
+
+                          {/* Glow Effect on Selection */}
+                          {isSelected && (
+                            <motion.div
+                              className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 rounded-xl"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.3 }}
+                            />
+                          )}
+
+                          {/* Accent Corner */}
+                          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[60px] opacity-50" />
+
+                          {/* Timeline Badge */}
+                          <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 bg-primary/10 rounded-full text-xs text-foreground font-bold z-10">
+                            <Clock className="w-3 h-3" />
+                            {service.timeline}
+                          </div>
+
+                          {/* Floating Accent Icon */}
+                          <motion.div
+                            className="absolute top-10 right-3 text-primary/10 z-10"
+                            animate={{
+                              y: [0, -5, 0],
+                              rotate: [0, 8, -8, 0],
+                            }}
+                            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                          >
+                            <AccentIcon className="w-6 h-6" />
+                          </motion.div>
+
+                          {/* 3D Emoji Icon */}
+                          <motion.div 
+                            className={`relative w-14 h-14 flex items-center justify-center rounded-xl z-10 ${
+                              isSelected ? 'bg-primary text-primary-foreground' : 'bg-secondary'
+                            }`}
+                            whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <span className="text-3xl">{service.emoji}</span>
+                            {isSelected && (
+                              <motion.div
+                                className="absolute inset-0 rounded-xl bg-primary/30"
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                animate={{ scale: 1.3, opacity: 0 }}
+                                transition={{ duration: 0.6, repeat: Infinity }}
+                              />
+                            )}
+                          </motion.div>
+
+                          {/* Content */}
+                          <div className="flex-1 relative z-10">
+                            <div className="font-bold text-foreground">{service.name}</div>
+                            <div className="text-sm text-muted-foreground">{service.description}</div>
+                          </div>
+
+                          {/* Price */}
+                          <div className="text-sm font-bold text-primary relative z-10">From {service.price}</div>
+
+                          {/* Selection Checkmark */}
+                          {isSelected && (
+                            <motion.div
+                              className="absolute bottom-2 left-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center z-10"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                            >
+                              <Check className="w-4 h-4 text-primary-foreground" />
+                            </motion.div>
+                          )}
+
+                          {/* Bottom Border Animation */}
+                          <motion.div
+                            className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary via-accent to-primary rounded-b-xl"
+                            initial={{ width: '0%' }}
+                            animate={{ width: isSelected ? '100%' : '0%' }}
+                            transition={{ duration: 0.4 }}
+                          />
+                        </motion.button>
+                      );
+                    })}
                   </div>
                 </motion.div>}
 
