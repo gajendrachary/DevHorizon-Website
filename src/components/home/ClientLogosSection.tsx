@@ -1,17 +1,19 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import logoLikithaHandcrafts from '@/assets/logo-likitha-handcrafts.png';
+import logoHavenSalad from '@/assets/logo-haven-salad.png';
+import logoJaggeryTeaPoint from '@/assets/logo-jaggery-tea-point.png';
+import logoSriKenchambaCeramics from '@/assets/logo-sri-kenchamba-ceramics.png';
 
 const clientLogos = [
-  { name: 'Jaggery Tea Point', initial: 'JTP' },
-  { name: 'Sri Kenchamba Ceramics', initial: 'SKC' },
-  { name: 'Likitha Handcrafts', initial: 'LH' },
-  { name: 'Haven Salad', initial: 'HS' },
-  { name: 'BLR360', initial: 'BLR' },
-  { name: 'Saarathi', initial: 'SA' },
+  { name: 'Likitha Handcrafts', logo: logoLikithaHandcrafts },
+  { name: 'Haven Salad', logo: logoHavenSalad },
+  { name: 'Jaggery Tea Point', logo: logoJaggeryTeaPoint },
+  { name: 'Sri Kenchamba Ceramics', logo: logoSriKenchambaCeramics },
 ];
 
 // Duplicate logos for seamless infinite scroll
-const duplicatedLogos = [...clientLogos, ...clientLogos];
+const duplicatedLogos = [...clientLogos, ...clientLogos, ...clientLogos];
 
 export const ClientLogosSection = () => {
   const { ref, inView } = useInView({
@@ -52,23 +54,27 @@ export const ClientLogosSection = () => {
         
         <div 
           className="flex items-center animate-scroll-left hover:[animation-play-state:paused]"
-          style={{ gap: '30px', width: 'max-content' }}
+          style={{ gap: '40px', width: 'max-content' }}
         >
           {duplicatedLogos.map((client, index) => (
             <div
               key={`${client.name}-${index}`}
-              className="flex items-center gap-3 text-muted-foreground shrink-0 cursor-pointer hover:text-foreground transition-colors duration-200"
+              className="shrink-0 cursor-pointer transition-transform duration-300 hover:scale-110"
             >
               <div 
-                className="flex items-center justify-center font-bold bg-white shadow-sm hover:shadow-md hover:bg-primary hover:text-primary-foreground transition-all duration-300
-                  h-[50px] w-[50px] text-xs
-                  sm:h-[70px] sm:w-[70px] sm:text-sm
-                  lg:h-[100px] lg:w-[100px] lg:text-base
-                  rounded-lg"
+                className="flex items-center justify-center overflow-hidden rounded-full bg-white shadow-md hover:shadow-xl transition-all duration-300
+                  h-[60px] w-[60px]
+                  sm:h-[80px] sm:w-[80px]
+                  lg:h-[100px] lg:w-[100px]"
               >
-                {client.initial}
+                <img 
+                  src={client.logo} 
+                  alt={client.name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
-              <span className="text-sm font-medium hidden md:block whitespace-nowrap">{client.name}</span>
             </div>
           ))}
         </div>
