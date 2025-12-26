@@ -33,6 +33,7 @@ interface ProjectCardProps {
   index: number;
   isInView: boolean;
   parallaxOffset?: number;
+  image?: string;
 }
 
 export const ProjectCard = ({
@@ -46,6 +47,7 @@ export const ProjectCard = ({
   index,
   isInView,
   parallaxOffset = 0,
+  image,
 }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
@@ -127,30 +129,45 @@ export const ProjectCard = ({
 
         {/* Project Preview Area */}
         <div className={`${color} h-48 flex items-center justify-center relative overflow-hidden`}>
-          {/* Large Letter Background */}
-          <motion.div
-            className="text-6xl font-bold text-foreground/10"
-            initial={{ scale: 1 }}
-            animate={{
-              scale: isHovered ? 1.2 : 1,
-              rotate: isHovered ? 5 : 0,
-            }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-          >
-            {title.charAt(0)}
-          </motion.div>
+          {image ? (
+            <motion.img 
+              src={image}
+              alt={title}
+              className="absolute inset-0 w-full h-full object-cover object-top"
+              initial={{ scale: 1 }}
+              animate={{
+                scale: isHovered ? 1.05 : 1,
+              }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+            />
+          ) : (
+            <>
+              {/* Large Letter Background */}
+              <motion.div
+                className="text-6xl font-bold text-foreground/10"
+                initial={{ scale: 1 }}
+                animate={{
+                  scale: isHovered ? 1.2 : 1,
+                  rotate: isHovered ? 5 : 0,
+                }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+              >
+                {title.charAt(0)}
+              </motion.div>
 
-          {/* Floating Accent Icon */}
-          <motion.div
-            className="absolute top-4 left-4 text-foreground/20"
-            animate={{
-              y: [0, -8, 0],
-              rotate: [0, 10, -10, 0],
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <AccentIcon className="w-8 h-8" />
-          </motion.div>
+              {/* Floating Accent Icon */}
+              <motion.div
+                className="absolute top-4 left-4 text-foreground/20"
+                animate={{
+                  y: [0, -8, 0],
+                  rotate: [0, 10, -10, 0],
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <AccentIcon className="w-8 h-8" />
+              </motion.div>
+            </>
+          )}
 
           {/* Crossfade overlay on hover */}
           <motion.div
