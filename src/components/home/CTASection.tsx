@@ -52,6 +52,8 @@ export const CTASection = () => {
             src={currentImage.src}
             alt={currentImage.alt}
             className="absolute inset-0 w-full h-full object-cover object-top sm:object-center"
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 0.8, scale: 1 }}
             exit={{ opacity: 0 }}

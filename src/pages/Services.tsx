@@ -1,10 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Check, ArrowRight, Clock, Sparkles, Zap, Target as TargetIcon } from 'lucide-react';
+import { Check, ArrowRight, Clock, Sparkles, Zap, Target as TargetIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { SEO, getServiceSchema, getBreadcrumbSchema } from '@/components/common/SEO';
 import developerClientMeeting from '@/assets/developer-client-meeting.png';
 import developerPresenting from '@/assets/developer-presenting.png';
@@ -104,6 +104,13 @@ const Services = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [servicesRef, servicesInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Carousel state
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [cardOffsets, setCardOffsets] = useState<number[]>(services.map(() => 0));
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRef = useRef(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -111,6 +118,87 @@ const Services = () => {
     }, 4000);
     return () => clearInterval(interval);
   }, []);
+
+  // Handle scroll for carousel
+  const handleScroll = useCallback(() => {
+    if (!scrollContainerRef.current) return;
+
+    const container = scrollContainerRef.current;
+    const cards = container.querySelectorAll('[data-card]');
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+    const newOffsets: number[] = [];
+
+    cards.forEach((card, index) => {
+      const cardElement = card as HTMLElement;
+      const cardCenter = cardElement.offsetLeft + cardElement.offsetWidth / 2;
+      const distance = cardCenter - containerCenter;
+      const normalizedOffset = Math.max(-1, Math.min(1, distance / (container.clientWidth / 2)));
+
+      newOffsets[index] = normalizedOffset;
+
+      if (Math.abs(distance) < closestDistance) {
+        closestDistance = Math.abs(distance);
+        closestIndex = index;
+      }
+    });
+
+    setCardOffsets(newOffsets);
+    setActiveIndex(closestIndex);
+  }, []);
+
+  const handleScrollEnd = useCallback(() => {
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+    scrollTimeoutRef.current = setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 150);
+  }, []);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const onScroll = () => {
+      isScrollingRef.current = true;
+      handleScroll();
+      handleScrollEnd();
+    };
+
+    container.addEventListener('scroll', onScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      container.removeEventListener('scroll', onScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, [handleScroll, handleScrollEnd]);
+
+  const scrollToCard = useCallback((index: number) => {
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current;
+    const cards = container.querySelectorAll('[data-card]');
+    const card = cards[index] as HTMLElement;
+    if (!card) return;
+
+    const scrollPosition = card.offsetLeft - (container.clientWidth - card.offsetWidth) / 2;
+    container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+  }, []);
+
+  const scrollPrev = useCallback(() => {
+    const newIndex = Math.max(0, activeIndex - 1);
+    scrollToCard(newIndex);
+  }, [activeIndex, scrollToCard]);
+
+  const scrollNext = useCallback(() => {
+    const newIndex = Math.min(services.length - 1, activeIndex + 1);
+    scrollToCard(newIndex);
+  }, [activeIndex, scrollToCard]);
 
   const serviceSchemaData = getServiceSchema(
     services.map((s) => ({ name: s.title, description: s.description, price: s.price }))
@@ -138,6 +226,8 @@ const Services = () => {
               src={backgroundImages[currentIndex].src}
               alt={backgroundImages[currentIndex].alt}
               className="absolute inset-0 w-full h-full object-cover opacity-40"
+              loading="lazy"
+              decoding="async"
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 0.4, scale: 1 }}
               exit={{ opacity: 0 }}
@@ -200,28 +290,79 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-20 lg:py-32">
-        <div className="container mx-auto px-4">
-          <div
-            ref={servicesRef}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+      {/* Services Carousel */}
+      <section className="py-20 lg:py-32 relative overflow-hidden">
+        <div ref={servicesRef} className="relative">
+          {/* Navigation Arrows */}
+          <motion.button
+            onClick={scrollPrev}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-background/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors hidden md:flex"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={servicesInView ? { opacity: activeIndex > 0 ? 1 : 0.3, x: 0 } : {}}
+            aria-label="Previous service"
           >
+            <ChevronLeft className="w-6 h-6" />
+          </motion.button>
+          
+          <motion.button
+            onClick={scrollNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-background/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors hidden md:flex"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={servicesInView ? { opacity: activeIndex < services.length - 1 ? 1 : 0.3, x: 0 } : {}}
+            aria-label="Next service"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </motion.button>
+
+          {/* Carousel Container */}
+          <div
+            ref={scrollContainerRef}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 px-4"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {/* Left spacer for centering first card */}
+            <div className="flex-shrink-0 w-[calc(50vw-42.5vw)] sm:w-[calc(50vw-200px)] md:w-[calc(50vw-210px)] lg:w-[calc(50vw-200px)]" />
+            
             {services.map((service, index) => {
               const AccentIcon = service.accentIcon;
               const entranceDelay = index * ANIMATION_CONFIG.entrance.stagger;
               
               return (
-                <ServicePageCard
-                  key={service.title}
-                  service={service}
-                  index={index}
-                  isInView={servicesInView}
-                  entranceDelay={entranceDelay}
-                  AccentIcon={AccentIcon}
-                />
+                <div key={service.title} data-card>
+                  <ServicePageCard
+                    service={service}
+                    index={index}
+                    isInView={servicesInView}
+                    entranceDelay={entranceDelay}
+                    AccentIcon={AccentIcon}
+                    parallaxOffset={cardOffsets[index] || 0}
+                  />
+                </div>
               );
             })}
+            
+            {/* Right spacer for centering last card */}
+            <div className="flex-shrink-0 w-[calc(50vw-42.5vw)] sm:w-[calc(50vw-200px)] md:w-[calc(50vw-210px)] lg:w-[calc(50vw-200px)]" />
+          </div>
+
+          {/* Carousel Indicators */}
+          <div className="flex justify-center gap-2 mt-6">
+            {services.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollToCard(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === activeIndex
+                    ? 'w-8 bg-primary'
+                    : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                }`}
+                aria-label={`Go to service ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -236,14 +377,22 @@ interface ServicePageCardProps {
   isInView: boolean;
   entranceDelay: number;
   AccentIcon: typeof Sparkles;
+  parallaxOffset?: number;
 }
 
-const ServicePageCard = ({ service, index, isInView, entranceDelay, AccentIcon }: ServicePageCardProps) => {
+const ServicePageCard = ({ service, index, isInView, entranceDelay, AccentIcon, parallaxOffset = 0 }: ServicePageCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
 
+  // Parallax transformations
+  const parallaxRotateY = parallaxOffset * 8;
+  const parallaxRotateX = Math.abs(parallaxOffset) * -3;
+  const parallaxScale = 1 - Math.abs(parallaxOffset) * 0.05;
+  const parallaxTranslateY = Math.abs(parallaxOffset) * 10;
+
   return (
     <motion.div
+      className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[400px] snap-center"
       initial={{ opacity: 0, y: 50, rotateY: 15 }}
       animate={isInView ? { opacity: 1, y: 0, rotateY: 0 } : {}}
       transition={{
@@ -269,21 +418,23 @@ const ServicePageCard = ({ service, index, isInView, entranceDelay, AccentIcon }
             ? ANIMATION_CONFIG.tap.rotateY 
             : isHovered 
               ? ANIMATION_CONFIG.hover.rotateY 
-              : 0,
+              : parallaxRotateY,
           rotateX: isTapped 
             ? ANIMATION_CONFIG.tap.rotateX 
             : isHovered 
               ? ANIMATION_CONFIG.hover.rotateX 
-              : 0,
+              : parallaxRotateX,
           scale: isTapped 
             ? ANIMATION_CONFIG.tap.scale 
             : isHovered 
               ? ANIMATION_CONFIG.hover.scale 
-              : 1,
-          y: isHovered ? -8 : 0,
+              : parallaxScale,
+          y: isHovered ? -8 : parallaxTranslateY,
           boxShadow: isHovered 
             ? `${ANIMATION_CONFIG.hover.shadowIntensity} hsl(var(--primary) / 0.25)` 
-            : '0 4px 6px -1px hsl(var(--foreground) / 0.1)',
+            : Math.abs(parallaxOffset) < 0.3
+              ? '0 20px 40px -10px hsl(var(--primary) / 0.15)'
+              : '0 4px 6px -1px hsl(var(--foreground) / 0.1)',
         }}
         transition={{ duration: 0.15, ease: 'easeOut' }}
       >
@@ -293,6 +444,8 @@ const ServicePageCard = ({ service, index, isInView, entranceDelay, AccentIcon }
             <img 
               src={service.backgroundImage} 
               alt="" 
+              loading="lazy"
+              decoding="async"
               className="absolute right-0 top-0 h-full w-3/5 object-cover object-left opacity-100"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-card via-card/80 to-card/40" />
