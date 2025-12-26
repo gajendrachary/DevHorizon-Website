@@ -79,10 +79,42 @@ export const ServiceCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardOffsets, setCardOffsets] = useState<number[]>(services.map(() => 0));
   
+  // Touch gesture refs
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const isTouching = useRef(false);
+  
   const { ref: sectionRef, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
+
+  // Touch gesture handlers for smoother mobile swiping
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    isTouching.current = true;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isTouching.current) return;
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!isTouching.current) return;
+    isTouching.current = false;
+    
+    const diff = touchStartX.current - touchEndX.current;
+    const threshold = 50;
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0 && activeIndex < services.length - 1) {
+        scrollToCard(activeIndex + 1);
+      } else if (diff < 0 && activeIndex > 0) {
+        scrollToCard(activeIndex - 1);
+      }
+    }
+  };
 
   // Track active card and calculate parallax offsets based on scroll position
   useEffect(() => {
@@ -233,7 +265,10 @@ export const ServiceCarousel = () => {
           {/* Scrollable Carousel */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 touch-pan-x"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
