@@ -1,10 +1,16 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ProjectCard } from './ProjectCard';
+
+// Project Images
+import projectJaggeryTeaPoint from '@/assets/project-jaggery-tea-point.png';
+import projectSriKenchambaCeramics from '@/assets/project-sri-kenchamba-ceramics.png';
+import projectLikithaHandcrafts from '@/assets/project-likitha-handcrafts.png';
+import projectHavenSalad from '@/assets/project-haven-salad.png';
 
 const projects = [
   {
@@ -13,8 +19,10 @@ const projects = [
     url: 'https://jaggeryteapoint.site',
     description: 'A modern website for an artisanal tea shop featuring online ordering and brand storytelling.',
     color: 'bg-amber-100',
+    bgColor: '#B45309',
     technologies: ['React', 'E-commerce', 'Responsive'],
     accentIcon: Coffee,
+    image: projectJaggeryTeaPoint,
   },
   {
     title: 'Sri Kenchamba Ceramics',
@@ -22,8 +30,10 @@ const projects = [
     url: 'https://srikenchambaceramics.com',
     description: 'E-commerce platform for premium ceramics and tiles with product catalog and inquiry system.',
     color: 'bg-stone-100',
+    bgColor: '#44403C',
     technologies: ['Next.js', 'CMS', 'SEO'],
     accentIcon: Store,
+    image: projectSriKenchambaCeramics,
   },
   {
     title: 'Likitha Handcrafts',
@@ -31,8 +41,10 @@ const projects = [
     url: 'https://likithahandcrafts.online',
     description: 'Online store for handcrafted products with secure payments and inventory management.',
     color: 'bg-rose-100',
+    bgColor: '#BE185D',
     technologies: ['React', 'Payments', 'Inventory'],
     accentIcon: Palette,
+    image: projectLikithaHandcrafts,
   },
   {
     title: 'Haven Salad',
@@ -40,27 +52,73 @@ const projects = [
     url: 'https://havensalad.in',
     description: 'Health-focused food delivery website with menu customization and subscription options.',
     color: 'bg-green-100',
+    bgColor: '#15803D',
     technologies: ['React', 'Subscriptions', 'Mobile-first'],
     accentIcon: Salad,
+    image: projectHavenSalad,
   },
 ];
 
-export const ProjectsCarousel = () => {
+interface ProjectsCarouselProps {
+  onActiveColorChange?: (color: string) => void;
+}
+
+export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardOffsets, setCardOffsets] = useState<number[]>(projects.map(() => 0));
+  const [hasViewedAll, setHasViewedAll] = useState(false);
+  const viewedIndicesRef = useRef<Set<number>>(new Set([0]));
+  const resetTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRef = useRef(false);
 
   const { ref: sectionRef, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
 
+  // Update background color when active index changes
+  useEffect(() => {
+    if (onActiveColorChange && projects[activeIndex]?.bgColor) {
+      onActiveColorChange(projects[activeIndex].bgColor);
+    }
+    
+    // Track viewed cards
+    viewedIndicesRef.current.add(activeIndex);
+    if (viewedIndicesRef.current.size === projects.length) {
+      setHasViewedAll(true);
+    }
+  }, [activeIndex, onActiveColorChange]);
+
+  // Handle scroll end detection and reset logic
+  const handleScrollEnd = useCallback(() => {
+    isScrollingRef.current = false;
+    
+    // Schedule reset if all cards viewed and on last card
+    if (hasViewedAll && activeIndex === projects.length - 1) {
+      resetTimeoutRef.current = setTimeout(() => {
+        if (!isScrollingRef.current && onActiveColorChange) {
+          onActiveColorChange('transparent');
+        }
+      }, 700);
+    }
+  }, [hasViewedAll, activeIndex, onActiveColorChange]);
+
   // Track active card and calculate parallax offsets
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    let scrollEndTimeout: NodeJS.Timeout;
+
     const handleScroll = () => {
+      isScrollingRef.current = true;
+      
+      // Clear any pending reset
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
+      }
+
       const scrollLeft = container.scrollLeft;
       const containerWidth = container.clientWidth;
       const cards = container.querySelectorAll('[data-project-card]');
@@ -85,12 +143,23 @@ export const ProjectsCarousel = () => {
 
       setCardOffsets(newOffsets);
       setActiveIndex(closestIndex);
+
+      // Debounce scroll end detection
+      clearTimeout(scrollEndTimeout);
+      scrollEndTimeout = setTimeout(handleScrollEnd, 150);
     };
 
-    container.addEventListener('scroll', handleScroll);
+    container.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, []);
+    
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollEndTimeout);
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
+      }
+    };
+  }, [handleScrollEnd]);
 
   const scrollToCard = (index: number) => {
     const container = scrollContainerRef.current;
@@ -114,8 +183,26 @@ export const ProjectsCarousel = () => {
     }
   };
 
+  // Keyboard navigation
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      scrollPrev();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      scrollNext();
+    }
+  }, [activeIndex]);
+
   return (
-    <section ref={sectionRef} className="section-padding bg-background relative overflow-hidden">
+    <section 
+      ref={sectionRef} 
+      className="section-padding bg-background relative overflow-hidden"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="region"
+      aria-label="Recent projects carousel"
+    >
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -226,6 +313,7 @@ export const ProjectsCarousel = () => {
                   index={index}
                   isInView={inView}
                   parallaxOffset={cardOffsets[index] || 0}
+                  image={project.image}
                 />
               </div>
             ))}

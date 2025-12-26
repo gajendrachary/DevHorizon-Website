@@ -399,7 +399,7 @@ export const HeroSection = () => {
               }}>
                     {service.emoji}
                   </motion.span>
-                  <span className="hidden sm:block">{service.label}</span>
+                  <span className="hidden sm:block font-bold">{service.label}</span>
                 </motion.div>)}
             </motion.div>
           </motion.div>

@@ -1,8 +1,14 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Layout } from '@/components/layout/Layout';
 import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+
+// Project Images
+import projectJaggeryTeaPoint from '@/assets/project-jaggery-tea-point.png';
+import projectSriKenchambaCeramics from '@/assets/project-sri-kenchamba-ceramics.png';
+import projectLikithaHandcrafts from '@/assets/project-likitha-handcrafts.png';
+import projectHavenSalad from '@/assets/project-haven-salad.png';
 
 // Animation config - matches ServiceCard
 const ANIMATION_CONFIG = {
@@ -31,7 +37,9 @@ const websites = [
     url: 'https://jaggeryteapoint.site',
     description: 'A modern website for an artisanal tea shop featuring online ordering and brand storytelling.',
     color: 'bg-amber-100',
-    tech: ['React', 'Node.js', 'Tailwind CSS']
+    bgColor: '#B45309',
+    tech: ['React', 'Node.js', 'Tailwind CSS'],
+    image: projectJaggeryTeaPoint,
   },
   {
     title: 'Sri Kenchamba Ceramics',
@@ -39,7 +47,9 @@ const websites = [
     url: 'https://srikenchambaceramics.com',
     description: 'E-commerce platform for premium ceramics and tiles with product catalog and inquiry system.',
     color: 'bg-stone-100',
-    tech: ['Next.js', 'MongoDB', 'Stripe']
+    bgColor: '#44403C',
+    tech: ['Next.js', 'MongoDB', 'Stripe'],
+    image: projectSriKenchambaCeramics,
   },
   {
     title: 'Likitha Handcrafts',
@@ -47,7 +57,9 @@ const websites = [
     url: 'https://likithahandcrafts.online',
     description: 'Online store for handcrafted products with secure payments and inventory management.',
     color: 'bg-rose-100',
-    tech: ['React', 'Firebase', 'Razorpay']
+    bgColor: '#BE185D',
+    tech: ['React', 'Firebase', 'Razorpay'],
+    image: projectLikithaHandcrafts,
   },
   {
     title: 'Haven Salad',
@@ -55,7 +67,9 @@ const websites = [
     url: 'https://havensalad.in',
     description: 'Health-focused food delivery website with menu customization and subscription options.',
     color: 'bg-green-100',
-    tech: ['Vue.js', 'Supabase', 'Tailwind CSS']
+    bgColor: '#15803D',
+    tech: ['Vue.js', 'Supabase', 'Tailwind CSS'],
+    image: projectHavenSalad,
   },
 ];
 
@@ -66,7 +80,8 @@ const mobileApps = [
     platforms: ['iOS', 'Android'],
     description: 'A comprehensive taxi booking app for Bengaluru with real-time tracking, fare estimation, and multiple payment options.',
     color: 'bg-blue-100',
-    tech: ['React Native', 'Node.js', 'Google Maps API']
+    bgColor: '#1D4ED8',
+    tech: ['React Native', 'Node.js', 'Google Maps API'],
   },
   {
     title: 'Trading Automation Bot',
@@ -74,7 +89,8 @@ const mobileApps = [
     platforms: ['iOS', 'Android'],
     description: 'Advanced trading automation platform with algorithmic strategies, real-time market data, and portfolio management.',
     color: 'bg-purple-100',
-    tech: ['Flutter', 'Python', 'AWS']
+    bgColor: '#7C3AED',
+    tech: ['Flutter', 'Python', 'AWS'],
   },
   {
     title: 'Saarathi',
@@ -82,7 +98,8 @@ const mobileApps = [
     platforms: ['iOS', 'Android'],
     description: 'Premium airport transfer service app with flight tracking, pre-booking, and corporate accounts.',
     color: 'bg-sky-100',
-    tech: ['React Native', 'Firebase', 'Stripe']
+    bgColor: '#0369A1',
+    tech: ['React Native', 'Firebase', 'Stripe'],
   },
 ];
 
@@ -175,17 +192,30 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
 
         {/* Project Preview */}
         <div className={`${project.color} h-48 flex items-center justify-center relative overflow-hidden`}>
-          <motion.div 
-            className="text-6xl font-bold text-foreground/10"
-            initial={{ scale: 1 }}
-            animate={{
-              scale: isHovered ? 1.2 : 1,
-              rotate: isHovered ? 5 : 0,
-            }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-          >
-            {project.title.charAt(0)}
-          </motion.div>
+          {project.image ? (
+            <motion.img 
+              src={project.image}
+              alt={project.title}
+              className="absolute inset-0 w-full h-full object-cover object-top"
+              initial={{ scale: 1 }}
+              animate={{
+                scale: isHovered ? 1.05 : 1,
+              }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+            />
+          ) : (
+            <motion.div 
+              className="text-6xl font-bold text-foreground/10"
+              initial={{ scale: 1 }}
+              animate={{
+                scale: isHovered ? 1.2 : 1,
+                rotate: isHovered ? 5 : 0,
+              }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+            >
+              {project.title.charAt(0)}
+            </motion.div>
+          )}
 
           {/* Crossfade overlay on hover */}
           <motion.div
@@ -297,24 +327,74 @@ interface ProjectCarouselProps {
   title: string;
   subtitle: string;
   icon: React.ReactNode;
+  onActiveColorChange?: (color: string) => void;
+  defaultBgColor?: string;
 }
 
-const ProjectCarousel = ({ projects, type, title, subtitle, icon }: ProjectCarouselProps) => {
+const ProjectCarousel = ({ 
+  projects, 
+  type, 
+  title, 
+  subtitle, 
+  icon,
+  onActiveColorChange,
+  defaultBgColor = 'transparent'
+}: ProjectCarouselProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardOffsets, setCardOffsets] = useState<number[]>(projects.map(() => 0));
+  const [hasViewedAll, setHasViewedAll] = useState(false);
+  const viewedIndicesRef = useRef<Set<number>>(new Set([0]));
+  const resetTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRef = useRef(false);
 
   const { ref: sectionRef, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
 
+  // Update background color when active index changes
+  useEffect(() => {
+    if (onActiveColorChange && projects[activeIndex]?.bgColor) {
+      onActiveColorChange(projects[activeIndex].bgColor);
+    }
+    
+    // Track viewed cards
+    viewedIndicesRef.current.add(activeIndex);
+    if (viewedIndicesRef.current.size === projects.length) {
+      setHasViewedAll(true);
+    }
+  }, [activeIndex, projects, onActiveColorChange]);
+
+  // Handle scroll end detection and reset logic
+  const handleScrollEnd = useCallback(() => {
+    isScrollingRef.current = false;
+    
+    // Schedule reset if all cards viewed and on last card
+    if (hasViewedAll && activeIndex === projects.length - 1) {
+      resetTimeoutRef.current = setTimeout(() => {
+        if (!isScrollingRef.current && onActiveColorChange) {
+          onActiveColorChange(defaultBgColor);
+        }
+      }, 700);
+    }
+  }, [hasViewedAll, activeIndex, projects.length, onActiveColorChange, defaultBgColor]);
+
   // Track active card and calculate parallax offsets based on scroll position
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    let scrollEndTimeout: NodeJS.Timeout;
+
     const handleScroll = () => {
+      isScrollingRef.current = true;
+      
+      // Clear any pending reset
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
+      }
+
       const scrollLeft = container.scrollLeft;
       const containerWidth = container.clientWidth;
       const cards = container.querySelectorAll('[data-card]');
@@ -339,12 +419,23 @@ const ProjectCarousel = ({ projects, type, title, subtitle, icon }: ProjectCarou
       
       setCardOffsets(newOffsets);
       setActiveIndex(closestIndex);
+
+      // Debounce scroll end detection
+      clearTimeout(scrollEndTimeout);
+      scrollEndTimeout = setTimeout(handleScrollEnd, 150);
     };
 
-    container.addEventListener('scroll', handleScroll);
+    container.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, []);
+    
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollEndTimeout);
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
+      }
+    };
+  }, [handleScrollEnd]);
 
   const scrollToCard = (index: number) => {
     const container = scrollContainerRef.current;
@@ -368,8 +459,26 @@ const ProjectCarousel = ({ projects, type, title, subtitle, icon }: ProjectCarou
     }
   };
 
+  // Keyboard navigation
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      scrollPrev();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      scrollNext();
+    }
+  }, [activeIndex, projects.length]);
+
   return (
-    <section ref={sectionRef} className="section-padding relative overflow-hidden">
+    <section 
+      ref={sectionRef} 
+      className="section-padding relative overflow-hidden"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="region"
+      aria-label={`${title} ${subtitle} carousel`}
+    >
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -512,8 +621,20 @@ const Projects = () => {
     triggerOnce: true
   });
 
+  const [websitesBgColor, setWebsitesBgColor] = useState('transparent');
+  const [mobileAppsBgColor, setMobileAppsBgColor] = useState('transparent');
+
   return (
     <Layout>
+      {/* Dynamic Background Layer */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 transition-colors duration-300 ease-out"
+        style={{ 
+          backgroundColor: websitesBgColor !== 'transparent' ? websitesBgColor : mobileAppsBgColor,
+          opacity: (websitesBgColor !== 'transparent' || mobileAppsBgColor !== 'transparent') ? 0.15 : 0 
+        }}
+      />
+
       {/* Hero Section */}
       <section className="section-padding bg-secondary/30 relative overflow-hidden">
         {/* Decorative Background */}
@@ -575,24 +696,28 @@ const Projects = () => {
       </section>
 
       {/* Websites Carousel */}
-      <div className="bg-background">
+      <div className="bg-background relative z-10">
         <ProjectCarousel
           projects={websites}
           type="web"
           title="Custom"
           subtitle="Websites"
           icon={<Globe className="w-6 h-6" />}
+          onActiveColorChange={setWebsitesBgColor}
+          defaultBgColor="transparent"
         />
       </div>
 
       {/* Mobile Apps Carousel */}
-      <div className="bg-secondary/30">
+      <div className="bg-secondary/30 relative z-10">
         <ProjectCarousel
           projects={mobileApps}
           type="app"
           title="Mobile"
           subtitle="Applications"
           icon={<Smartphone className="w-6 h-6" />}
+          onActiveColorChange={setMobileAppsBgColor}
+          defaultBgColor="transparent"
         />
       </div>
     </Layout>
