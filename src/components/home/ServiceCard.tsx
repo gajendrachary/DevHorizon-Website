@@ -23,7 +23,7 @@ export const ANIMATION_CONFIG = {
 };
 
 interface ServiceCardProps {
-  icon: LucideIcon;
+  emoji: string;
   accentIcon: LucideIcon;
   title: string;
   description: string;
@@ -38,7 +38,7 @@ interface ServiceCardProps {
 }
 
 export const ServiceCard = ({
-  icon: Icon,
+  emoji,
   accentIcon: AccentIcon,
   title,
   description,
@@ -168,14 +168,14 @@ export const ServiceCard = ({
           <AccentIcon className="w-8 h-8" />
         </motion.div>
 
-        {/* Icon */}
+        {/* Emoji Icon */}
         <motion.div
           className={`relative w-16 h-16 ${color} flex items-center justify-center mb-6 rounded-xl`}
           whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
           transition={{ duration: 0.4 }}
           style={{ transformStyle: 'preserve-3d', translateZ: 20 }}
         >
-          <Icon className="w-8 h-8" />
+          <span className="text-3xl">{emoji}</span>
           <motion.div
             className="absolute inset-0 rounded-xl bg-primary/20"
             initial={{ scale: 0, opacity: 0 }}

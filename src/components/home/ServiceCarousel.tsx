@@ -1,13 +1,12 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Globe, Smartphone, BarChart3, Sparkles, Zap, Target, Clock, Check } from 'lucide-react';
+import { Sparkles, Zap, Target, Clock, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { ServiceCard, ANIMATION_CONFIG } from './ServiceCard';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Background images for services
 import serviceWebDevelopment from '@/assets/service-web-development.png';
@@ -16,7 +15,7 @@ import serviceAppDevelopment from '@/assets/service-app-development.png';
 
 const services = [
   {
-    icon: Globe,
+    emoji: '🌐',
     title: 'Web Development',
     description: 'Modern, responsive websites that drive conversions and establish your digital presence.',
     features: ['SEO-optimized', 'Mobile-responsive', 'Fast loading', 'Modern tech stack'],
@@ -35,7 +34,7 @@ const services = [
     backgroundImage: serviceWebDevelopment
   },
   {
-    icon: Smartphone,
+    emoji: '📱',
     title: 'Mobile App Development',
     description: 'Native and cross-platform mobile applications that deliver exceptional user experiences.',
     features: ['iOS & Android', 'Cloud integration', 'Real-time', 'Scalable'],
@@ -54,7 +53,7 @@ const services = [
     backgroundImage: serviceAppDevelopment
   },
   {
-    icon: BarChart3,
+    emoji: '📊',
     title: 'Meta Ads Management',
     description: 'Strategic Meta advertising campaigns that maximize ROI and reach your target audience.',
     features: ['Campaign strategy', 'Audience targeting', 'Performance optimization', 'Monthly reporting'],
@@ -247,7 +246,7 @@ export const ServiceCarousel = () => {
             {services.map((service, index) => (
               <div key={service.title} data-card>
                 <ServiceCard
-                  icon={service.icon}
+                  emoji={service.emoji}
                   accentIcon={service.accentIcon}
                   title={service.title}
                   description={service.description}
@@ -293,7 +292,7 @@ export const ServiceCarousel = () => {
               <DialogHeader>
                 <div className="flex items-center gap-4">
                   <div className={`w-16 h-16 ${selectedService.color} rounded-xl flex items-center justify-center`}>
-                    <selectedService.icon className="w-8 h-8" />
+                    <span className="text-3xl">{selectedService.emoji}</span>
                   </div>
                   <div>
                     <DialogTitle className="text-2xl">{selectedService.title}</DialogTitle>
