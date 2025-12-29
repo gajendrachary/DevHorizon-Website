@@ -267,8 +267,8 @@ const GetQuote = () => {
   };
 
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: 'Home', url: 'https://devhub.tech/' },
-    { name: 'Get Quote', url: 'https://devhub.tech/get-quote' },
+    { name: 'Home', url: 'https://devhubtechnologies.in/' },
+    { name: 'Get Quote', url: 'https://devhubtechnologies.in/get-quote' },
   ]);
 
   return <Layout>

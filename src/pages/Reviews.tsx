@@ -33,7 +33,7 @@ const reviews = [
     company: "BLR360",
     rating: 5,
     review:
-      "The mobile app DevHub developed for our taxi service is exceptional. Real-time tracking, seamless payments, and great user experience. Our booking rates have increased by 40% since launch.",
+      "The mobile app DevHub Technologies developed for our taxi service is exceptional. Real-time tracking, seamless payments, and great user experience. Our booking rates have increased by 40% since launch.",
     emoji: "🚕",
   },
   {
@@ -151,8 +151,8 @@ const Reviews = () => {
     })),
   };
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: "Home", url: "https://devhub.tech/" },
-    { name: "Reviews", url: "https://devhub.tech/reviews" },
+    { name: "Home", url: "https://devhubtechnologies.in/" },
+    { name: "Reviews", url: "https://devhubtechnologies.in/reviews" },
   ]);
 
   return (

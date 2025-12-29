@@ -233,11 +233,11 @@ const Blog = () => {
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'DevHub Blog',
+    name: 'DevHub Technologies Blog',
     description: 'Insights on web development, mobile apps, Meta ads, and UI/UX design.',
     publisher: {
       '@type': 'Organization',
-      name: 'DevHub',
+      name: 'DevHub Technologies',
     },
     blogPost: blogPosts.map((post) => ({
       '@type': 'BlogPosting',
@@ -249,8 +249,8 @@ const Blog = () => {
   };
 
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: 'Home', url: 'https://devhub.tech/' },
-    { name: 'Blog', url: 'https://devhub.tech/blog' },
+    { name: 'Home', url: 'https://devhubtechnologies.in/' },
+    { name: 'Blog', url: 'https://devhubtechnologies.in/blog' },
   ]);
 
   return (
@@ -271,7 +271,7 @@ const Blog = () => {
             className="max-w-3xl"
           >
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              DevHub Blog
+              DevHub Technologies Blog
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Insights & Updates

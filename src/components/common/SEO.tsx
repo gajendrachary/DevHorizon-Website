@@ -167,7 +167,7 @@ export const getServiceSchema = (services: { name: string; description: string; 
     description: service.description,
     provider: {
       '@type': 'Organization',
-      name: 'DevHub',
+      name: 'DevHub Technologies',
     },
     offers: {
       '@type': 'Offer',
@@ -191,7 +191,7 @@ export const getBreadcrumbSchema = (items: { name: string; url: string }[]) => (
 export const getAggregateRatingSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'DevHub',
+  name: 'DevHub Technologies',
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.9',

@@ -168,7 +168,7 @@ const AdminDashboard = () => {
   return (
     <Layout>
       <SEO
-        title="Admin Dashboard | DevHub"
+        title="Admin Dashboard | DevHub Technologies"
         description="Manage form submissions and client inquiries"
         noindex={true}
       />
