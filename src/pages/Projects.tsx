@@ -635,7 +635,7 @@ const Projects = () => {
   const projectsSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "DevHub Portfolio",
+    name: "DevHub Technologies Portfolio",
     description: "Our portfolio of web and mobile development projects.",
     itemListElement: [
       ...websites.map((p, i) => ({
@@ -656,8 +656,8 @@ const Projects = () => {
   };
 
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: "Home", url: "https://devhub.tech/" },
-    { name: "Projects", url: "https://devhub.tech/projects" },
+    { name: "Home", url: "https://devhubtechnologies.in/" },
+    { name: "Projects", url: "https://devhubtechnologies.in/projects" },
   ]);
 
   return (

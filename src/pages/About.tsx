@@ -193,11 +193,11 @@ const About = () => {
   const aboutSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "About DevHub",
-    description: "Learn about DevHub, a Bengaluru-based digital agency founded in 2025.",
+    name: "About DevHub Technologies",
+    description: "Learn about DevHub Technologies, a Bengaluru-based digital agency founded in 2025.",
     mainEntity: {
       "@type": "Organization",
-      name: "DevHub",
+      name: "DevHub Technologies",
       foundingDate: "2025-06",
       numberOfEmployees: "15+",
       areaServed: ["India", "UAE", "UK", "USA", "Canada"],
@@ -205,15 +205,15 @@ const About = () => {
   };
 
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: "Home", url: "https://devhub.tech/" },
-    { name: "About", url: "https://devhub.tech/about" },
+    { name: "Home", url: "https://devhubtechnologies.in/" },
+    { name: "About", url: "https://devhubtechnologies.in/about" },
   ]);
 
   return (
     <Layout>
       <SEO
-        title="About DevHub - Our Story & Team | Digital Agency Bengaluru"
-        description="Learn about DevHub, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
+        title="About DevHub Technologies - Our Story & Team | Digital Agency Bengaluru"
+        description="Learn about DevHub Technologies, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
         schema={{ "@context": "https://schema.org", "@graph": [aboutSchema, breadcrumbSchema] }}
       />
       {/* Hero Section */}
@@ -226,10 +226,10 @@ const About = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">About DevHub</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">About DevHub Technologies</span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Crafting Digital Excellence Since 2025</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              DevHub is a full-service digital agency based in Bengaluru, India. We specialize in creating exceptional
+              DevHub Technologies is a full-service digital agency based in Bengaluru, India. We specialize in creating exceptional
               digital experiences through innovative web development, mobile applications, and strategic digital
               marketing solutions.
             </p>
@@ -404,7 +404,7 @@ const About = () => {
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
               Meet the Team
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">The People Behind DevHub</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">The People Behind DevHub Technologies</h2>
             <p className="text-muted-foreground">
               A passionate team dedicated to delivering exceptional digital solutions
             </p>
