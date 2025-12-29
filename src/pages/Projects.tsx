@@ -1,15 +1,15 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Layout } from '@/components/layout/Layout';
-import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
+import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Layout } from "@/components/layout/Layout";
+import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 
 // Project Images
-import projectJaggeryTeaPoint from '@/assets/project-jaggery-tea-point.jpg';
-import projectSriKenchambaCeramics from '@/assets/project-sri-kenchamba-ceramics.png';
-import projectLikithaHandcrafts from '@/assets/project-likitha-handcrafts.png';
-import projectHavenSalad from '@/assets/project-haven-salad.jpg';
+import projectJaggeryTeaPoint from "@/assets/project-jaggery-tea-point.jpg";
+import projectSriKenchambaCeramics from "@/assets/project-sri-kenchamba-ceramics.png";
+import projectLikithaHandcrafts from "@/assets/project-likitha-handcrafts.png";
+import projectHavenSalad from "@/assets/project-haven-salad.jpg";
 
 // Animation config - matches ServiceCard
 const ANIMATION_CONFIG = {
@@ -22,7 +22,7 @@ const ANIMATION_CONFIG = {
     scale: 1.02,
     rotateY: 5,
     rotateX: -3,
-    shadowIntensity: '0 25px 50px -12px',
+    shadowIntensity: "0 25px 50px -12px",
   },
   tap: {
     scale: 0.98,
@@ -33,83 +33,85 @@ const ANIMATION_CONFIG = {
 
 const websites = [
   {
-    title: 'Jaggery Tea Point',
-    category: 'F&B / Tea Shop',
-    url: 'https://jaggeryteapoint.site',
-    description: 'A modern website for an artisanal tea shop featuring online ordering and brand storytelling.',
-    color: 'bg-amber-100',
-    bgColor: '#B45309',
-    tech: ['React', 'Node.js', 'Tailwind CSS'],
+    title: "Jaggery Tea Point",
+    category: "F&B / Tea Shop",
+    url: "https://jaggeryteapoint.site",
+    description: "A modern website for an artisanal tea shop featuring online ordering and brand storytelling.",
+    color: "bg-amber-100",
+    bgColor: "#B45309",
+    tech: ["React", "Node.js", "Tailwind CSS"],
     image: projectJaggeryTeaPoint,
   },
   {
-    title: 'Sri Kenchamba Ceramics',
-    category: 'Retail / Sanitaryware & Tiles',
-    url: 'https://srikenchambaceramics.com',
-    description: 'E-commerce platform for premium ceramics and tiles with product catalog and inquiry system.',
-    color: 'bg-stone-100',
-    bgColor: '#44403C',
-    tech: ['Next.js', 'MongoDB', 'Stripe'],
+    title: "Sri Kenchamba Ceramics",
+    category: "Retail / Sanitaryware & Tiles",
+    url: "https://srikenchambaceramics.com",
+    description: "E-commerce platform for premium ceramics and tiles with product catalog and inquiry system.",
+    color: "bg-stone-100",
+    bgColor: "#44403C",
+    tech: ["Next.js", "MongoDB", "Stripe"],
     image: projectSriKenchambaCeramics,
     isLogo: true,
   },
   {
-    title: 'Likitha Handcrafts',
-    category: 'Handcrafts / E-Commerce',
-    url: 'https://likithahandcrafts.online',
-    description: 'Online store for handcrafted products with secure payments and inventory management.',
-    color: 'bg-rose-100',
-    bgColor: '#BE185D',
-    tech: ['React', 'Firebase', 'Razorpay'],
+    title: "Likitha Handcrafts",
+    category: "Handcrafts / E-Commerce",
+    url: "https://likithahandcrafts.online",
+    description: "Online store for handcrafted products with secure payments and inventory management.",
+    color: "bg-rose-100",
+    bgColor: "#BE185D",
+    tech: ["React", "Firebase", "Razorpay"],
     image: projectLikithaHandcrafts,
     isLogo: true,
   },
   {
-    title: 'Haven Salad',
-    category: 'Food & Nutrition / Health',
-    url: 'https://havensalad.in',
-    description: 'Health-focused food delivery website with menu customization and subscription options.',
-    color: 'bg-green-100',
-    bgColor: '#15803D',
-    tech: ['Vue.js', 'Supabase', 'Tailwind CSS'],
+    title: "Haven Salad",
+    category: "Food & Nutrition / Health",
+    url: "https://havensalad.in",
+    description: "Health-focused food delivery website with menu customization and subscription options.",
+    color: "bg-green-100",
+    bgColor: "#15803D",
+    tech: ["Vue.js", "Supabase", "Tailwind CSS"],
     image: projectHavenSalad,
   },
 ];
 
 const mobileApps = [
   {
-    title: 'BLR360',
-    category: 'Bengaluru Taxi Service',
-    platforms: ['iOS', 'Android'],
-    description: 'A comprehensive taxi booking app for Bengaluru with real-time tracking, fare estimation, and multiple payment options.',
-    color: 'bg-blue-100',
-    bgColor: '#1D4ED8',
-    tech: ['React Native', 'Node.js', 'Google Maps API'],
+    title: "BLR360",
+    category: "Bengaluru Taxi Service",
+    platforms: ["iOS", "Android"],
+    description:
+      "A comprehensive taxi booking app for Bengaluru with real-time tracking, fare estimation, and multiple payment options.",
+    color: "bg-blue-100",
+    bgColor: "#1D4ED8",
+    tech: ["React Native", "Node.js", "Google Maps API"],
   },
   {
-    title: 'Trading Automation Bot',
-    category: 'FinTech / Trading Platform',
-    platforms: ['iOS', 'Android'],
-    description: 'Advanced trading automation platform with algorithmic strategies, real-time market data, and portfolio management.',
-    color: 'bg-purple-100',
-    bgColor: '#7C3AED',
-    tech: ['Flutter', 'Python', 'AWS'],
+    title: "Trading Automation Bot",
+    category: "FinTech / Trading Platform",
+    platforms: ["iOS", "Android"],
+    description:
+      "Advanced trading automation platform with algorithmic strategies, real-time market data, and portfolio management.",
+    color: "bg-purple-100",
+    bgColor: "#7C3AED",
+    tech: ["Flutter", "Python", "AWS"],
   },
   {
-    title: 'Saarathi',
-    category: 'Airport Taxi Service',
-    platforms: ['iOS', 'Android'],
-    description: 'Premium airport transfer service app with flight tracking, pre-booking, and corporate accounts.',
-    color: 'bg-sky-100',
-    bgColor: '#0369A1',
-    tech: ['React Native', 'Firebase', 'Stripe'],
+    title: "Saarathi",
+    category: "Airport Taxi Service",
+    platforms: ["iOS", "Android"],
+    description: "Premium airport transfer service app with flight tracking, pre-booking, and corporate accounts.",
+    color: "bg-sky-100",
+    bgColor: "#0369A1",
+    tech: ["React Native", "Firebase", "Stripe"],
   },
 ];
 
 interface ProjectCardProps {
   project: any;
   index: number;
-  type: 'web' | 'app';
+  type: "web" | "app";
   isInView: boolean;
   parallaxOffset?: number;
 }
@@ -129,28 +131,32 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
   return (
     <motion.div
       className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[400px] snap-center"
-      initial={{ 
-        x: '100vw',
-        opacity: 0, 
+      initial={{
+        x: "100vw",
+        opacity: 0,
         rotateY: 15,
       }}
-      animate={isInView ? { 
-        x: 0,
-        opacity: 1, 
-        rotateY: 0,
-      } : {}}
+      animate={
+        isInView
+          ? {
+              x: 0,
+              opacity: 1,
+              rotateY: 0,
+            }
+          : {}
+      }
       transition={{
         duration: ANIMATION_CONFIG.entrance.duration,
         delay: entranceDelay,
         ease: ANIMATION_CONFIG.entrance.ease,
       }}
-      style={{ perspective: '1200px' }}
+      style={{ perspective: "1200px" }}
     >
       <motion.div
         className="relative border border-border bg-card overflow-hidden cursor-pointer h-full rounded-2xl"
         style={{
-          transformStyle: 'preserve-3d',
-          transformOrigin: 'center center',
+          transformStyle: "preserve-3d",
+          transformOrigin: "center center",
         }}
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
@@ -168,19 +174,15 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
             : isHovered
               ? ANIMATION_CONFIG.hover.rotateX
               : parallaxRotateX,
-          scale: isTapped
-            ? ANIMATION_CONFIG.tap.scale
-            : isHovered
-              ? ANIMATION_CONFIG.hover.scale
-              : parallaxScale,
+          scale: isTapped ? ANIMATION_CONFIG.tap.scale : isHovered ? ANIMATION_CONFIG.hover.scale : parallaxScale,
           y: isHovered ? -5 : parallaxTranslateY,
           boxShadow: isHovered
             ? `${ANIMATION_CONFIG.hover.shadowIntensity} hsl(var(--primary) / 0.25)`
             : Math.abs(parallaxOffset) < 0.3
-              ? '0 20px 40px -10px hsl(var(--primary) / 0.15)'
-              : '0 4px 6px -1px hsl(var(--foreground) / 0.1)',
+              ? "0 20px 40px -10px hsl(var(--primary) / 0.15)"
+              : "0 4px 6px -1px hsl(var(--foreground) / 0.1)",
         }}
-        transition={{ duration: 0.15, ease: 'easeOut' }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
       >
         {/* Card Glow Effect */}
         <motion.div
@@ -196,28 +198,27 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
         {/* Project Preview */}
         <div className={`${project.color} h-48 flex items-center justify-center relative overflow-hidden`}>
           {project.image ? (
-            <motion.img 
+            <motion.img
               src={project.image}
               alt={project.title}
-              className={project.isLogo 
-                ? "w-24 h-24 object-contain" 
-                : "absolute inset-0 w-full h-full object-cover object-top"
+              className={
+                project.isLogo ? "w-24 h-24 object-contain" : "absolute inset-0 w-full h-full object-cover object-top"
               }
               initial={{ scale: 1 }}
               animate={{
                 scale: isHovered ? 1.05 : 1,
               }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             />
           ) : (
-            <motion.div 
+            <motion.div
               className="text-6xl font-bold text-foreground/10"
               initial={{ scale: 1 }}
               animate={{
                 scale: isHovered ? 1.2 : 1,
                 rotate: isHovered ? 5 : 0,
               }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             >
               {project.title.charAt(0)}
             </motion.div>
@@ -228,10 +229,10 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
             className="absolute inset-0 bg-primary/10 pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: isHovered ? 1 : 0 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
           />
 
-          {type === 'web' && (
+          {type === "web" && (
             <motion.a
               href={project.url}
               target="_blank"
@@ -242,17 +243,17 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
                 opacity: isHovered ? 1 : 0,
                 y: isHovered ? 0 : 10,
               }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()}
             >
               <ExternalLink className="w-5 h-5 text-primary" />
             </motion.a>
           )}
-          {type === 'app' && (
+          {type === "app" && (
             <div className="absolute top-4 right-4 flex gap-2">
               {project.platforms.map((platform: string) => (
-                <motion.span 
-                  key={platform} 
+                <motion.span
+                  key={platform}
                   className="bg-background/90 backdrop-blur-sm px-3 py-1 text-xs font-medium rounded-full"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -277,24 +278,24 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
 
         {/* Project Info */}
         <div className="p-6 sm:p-8">
-          <motion.h3 
+          <motion.h3
             className="text-xl lg:text-2xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300"
-            style={{ transformStyle: 'preserve-3d', translateZ: 30 }}
+            style={{ transformStyle: "preserve-3d", translateZ: 30 }}
           >
             {project.title}
           </motion.h3>
-          <motion.p 
+          <motion.p
             className="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base"
-            style={{ transformStyle: 'preserve-3d', translateZ: 15 }}
+            style={{ transformStyle: "preserve-3d", translateZ: 15 }}
           >
             {project.description}
           </motion.p>
-          
+
           {/* Tech Stack */}
           <div className="flex flex-wrap gap-2">
             {project.tech.map((tech: string, techIndex: number) => (
-              <motion.span 
-                key={tech} 
+              <motion.span
+                key={tech}
                 className="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-md"
                 initial={{ opacity: 0, x: -10 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -311,15 +312,15 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
             initial={{ opacity: 0 }}
             animate={{ opacity: isHovered || isTapped ? 1 : 0.6 }}
           >
-            {type === 'web' ? 'Visit website →' : 'View details →'}
+            {type === "web" ? "Visit website →" : "View details →"}
           </motion.div>
         </div>
 
         {/* Bottom Border Animation */}
         <motion.div
           className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary via-accent to-primary rounded-b-2xl"
-          initial={{ width: '0%' }}
-          animate={{ width: isHovered ? '100%' : '0%' }}
+          initial={{ width: "0%" }}
+          animate={{ width: isHovered ? "100%" : "0%" }}
           transition={{ duration: 0.4 }}
         />
       </motion.div>
@@ -329,7 +330,7 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
 
 interface ProjectCarouselProps {
   projects: any[];
-  type: 'web' | 'app';
+  type: "web" | "app";
   title: string;
   subtitle: string;
   icon: React.ReactNode;
@@ -337,14 +338,14 @@ interface ProjectCarouselProps {
   defaultBgColor?: string;
 }
 
-const ProjectCarousel = ({ 
-  projects, 
-  type, 
-  title, 
-  subtitle, 
+const ProjectCarousel = ({
+  projects,
+  type,
+  title,
+  subtitle,
   icon,
   onActiveColorChange,
-  defaultBgColor = 'transparent'
+  defaultBgColor = "transparent",
 }: ProjectCarouselProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -364,7 +365,7 @@ const ProjectCarousel = ({
     if (onActiveColorChange && projects[activeIndex]?.bgColor) {
       onActiveColorChange(projects[activeIndex].bgColor);
     }
-    
+
     // Track viewed cards
     viewedIndicesRef.current.add(activeIndex);
     if (viewedIndicesRef.current.size === projects.length) {
@@ -375,7 +376,7 @@ const ProjectCarousel = ({
   // Handle scroll end detection and reset logic
   const handleScrollEnd = useCallback(() => {
     isScrollingRef.current = false;
-    
+
     // Schedule reset if all cards viewed and on last card
     if (hasViewedAll && activeIndex === projects.length - 1) {
       resetTimeoutRef.current = setTimeout(() => {
@@ -395,7 +396,7 @@ const ProjectCarousel = ({
 
     const handleScroll = () => {
       isScrollingRef.current = true;
-      
+
       // Clear any pending reset
       if (resetTimeoutRef.current) {
         clearTimeout(resetTimeoutRef.current);
@@ -403,12 +404,12 @@ const ProjectCarousel = ({
 
       const scrollLeft = container.scrollLeft;
       const containerWidth = container.clientWidth;
-      const cards = container.querySelectorAll('[data-card]');
-      
+      const cards = container.querySelectorAll("[data-card]");
+
       const newOffsets: number[] = [];
       let closestIndex = 0;
       let closestDistance = Infinity;
-      
+
       cards.forEach((card, index) => {
         const cardElement = card as HTMLElement;
         const cardCenter = cardElement.offsetLeft + cardElement.offsetWidth / 2;
@@ -416,13 +417,13 @@ const ProjectCarousel = ({
         const distance = cardCenter - containerCenter;
         const normalizedOffset = Math.max(-1, Math.min(1, distance / (containerWidth * 0.5)));
         newOffsets.push(normalizedOffset);
-        
+
         if (Math.abs(distance) < closestDistance) {
           closestDistance = Math.abs(distance);
           closestIndex = index;
         }
       });
-      
+
       setCardOffsets(newOffsets);
       setActiveIndex(closestIndex);
 
@@ -431,11 +432,11 @@ const ProjectCarousel = ({
       scrollEndTimeout = setTimeout(handleScrollEnd, 150);
     };
 
-    container.addEventListener('scroll', handleScroll, { passive: true });
+    container.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    
+
     return () => {
-      container.removeEventListener('scroll', handleScroll);
+      container.removeEventListener("scroll", handleScroll);
       clearTimeout(scrollEndTimeout);
       if (resetTimeoutRef.current) {
         clearTimeout(resetTimeoutRef.current);
@@ -446,10 +447,10 @@ const ProjectCarousel = ({
   const scrollToCard = (index: number) => {
     const container = scrollContainerRef.current;
     if (!container) return;
-    
-    const cards = container.querySelectorAll('[data-card]');
+
+    const cards = container.querySelectorAll("[data-card]");
     if (cards[index]) {
-      cards[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      cards[index].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     }
   };
 
@@ -466,19 +467,22 @@ const ProjectCarousel = ({
   };
 
   // Keyboard navigation
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      scrollPrev();
-    } else if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      scrollNext();
-    }
-  }, [activeIndex, projects.length]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        scrollPrev();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        scrollNext();
+      }
+    },
+    [activeIndex, projects.length],
+  );
 
   return (
-    <section 
-      ref={sectionRef} 
+    <section
+      ref={sectionRef}
       className="section-padding relative overflow-hidden"
       onKeyDown={handleKeyDown}
       tabIndex={0}
@@ -493,7 +497,7 @@ const ProjectCarousel = ({
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-20 right-[10%] w-80 h-80 bg-accent/10 rounded-full blur-3xl"
@@ -501,7 +505,7 @@ const ProjectCarousel = ({
             scale: [1.2, 1, 1.2],
             opacity: [0.4, 0.2, 0.4],
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
@@ -510,10 +514,10 @@ const ProjectCarousel = ({
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center max-w-2xl mx-auto mb-12 md:mb-16"
         >
-          <motion.div 
+          <motion.div
             className="flex items-center justify-center gap-4 mb-6"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
@@ -529,7 +533,7 @@ const ProjectCarousel = ({
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            {title}{' '}
+            {title}{" "}
             <span className="text-primary relative">
               {subtitle}
               <motion.span
@@ -546,7 +550,7 @@ const ProjectCarousel = ({
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Swipe to explore our {type === 'web' ? 'web' : 'mobile'} projects
+            Swipe to explore our {type === "web" ? "web" : "mobile"} projects
           </motion.p>
         </motion.div>
 
@@ -561,7 +565,7 @@ const ProjectCarousel = ({
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
-          
+
           <button
             onClick={scrollNext}
             className="hidden md:flex absolute -right-4 lg:-right-12 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-card border border-border rounded-full shadow-lg hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
@@ -576,14 +580,14 @@ const ProjectCarousel = ({
             ref={scrollContainerRef}
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8"
             style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+              WebkitOverflowScrolling: "touch",
             }}
           >
             {/* Left spacer for centering first card */}
             <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
-            
+
             {projects.map((project, index) => (
               <div key={project.title} data-card>
                 <ProjectCard
@@ -595,7 +599,7 @@ const ProjectCarousel = ({
                 />
               </div>
             ))}
-            
+
             {/* Right spacer for centering last card */}
             <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
           </div>
@@ -607,9 +611,7 @@ const ProjectCarousel = ({
                 key={index}
                 onClick={() => scrollToCard(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  index === activeIndex 
-                    ? 'w-8 bg-primary' 
-                    : 'w-2 bg-primary/30 hover:bg-primary/50'
+                  index === activeIndex ? "w-8 bg-primary" : "w-2 bg-primary/30 hover:bg-primary/50"
                 }`}
                 aria-label={`Go to project ${index + 1}`}
               />
@@ -624,53 +626,53 @@ const ProjectCarousel = ({
 const Projects = () => {
   const { ref: headerRef, inView: headerInView } = useInView({
     threshold: 0.1,
-    triggerOnce: true
+    triggerOnce: true,
   });
 
-  const [websitesBgColor, setWebsitesBgColor] = useState('transparent');
-  const [mobileAppsBgColor, setMobileAppsBgColor] = useState('transparent');
+  const [websitesBgColor, setWebsitesBgColor] = useState("transparent");
+  const [mobileAppsBgColor, setMobileAppsBgColor] = useState("transparent");
 
   const projectsSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'DevHub Portfolio',
-    description: 'Our portfolio of web and mobile development projects.',
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "DevHub Portfolio",
+    description: "Our portfolio of web and mobile development projects.",
     itemListElement: [
       ...websites.map((p, i) => ({
-        '@type': 'CreativeWork',
+        "@type": "CreativeWork",
         position: i + 1,
         name: p.title,
         description: p.description,
         url: p.url,
       })),
       ...mobileApps.map((p, i) => ({
-        '@type': 'SoftwareApplication',
+        "@type": "SoftwareApplication",
         position: websites.length + i + 1,
         name: p.title,
         description: p.description,
-        applicationCategory: 'MobileApplication',
+        applicationCategory: "MobileApplication",
       })),
     ],
   };
 
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: 'Home', url: 'https://devhub.tech/' },
-    { name: 'Projects', url: 'https://devhub.tech/projects' },
+    { name: "Home", url: "https://devhub.tech/" },
+    { name: "Projects", url: "https://devhub.tech/projects" },
   ]);
 
   return (
     <Layout>
       <SEO
         title="Our Portfolio - Web & Mobile Projects | DevHub Bengaluru"
-        description="View DevHub's portfolio of 40+ successful projects including Jaggery Tea Point, Haven Salad, BLR360 taxi app, and more. See how we've helped businesses grow with custom web and mobile solutions."
-        schema={{ '@context': 'https://schema.org', '@graph': [projectsSchema, breadcrumbSchema] }}
+        description="View DevHub's portfolio of 20+ successful projects including Jaggery Tea Point, Haven Salad, BLR360 taxi app, and more. See how we've helped businesses grow with custom web and mobile solutions."
+        schema={{ "@context": "https://schema.org", "@graph": [projectsSchema, breadcrumbSchema] }}
       />
       {/* Dynamic Background Layer */}
-      <div 
+      <div
         className="fixed inset-0 pointer-events-none z-0 transition-colors duration-300 ease-out"
-        style={{ 
-          backgroundColor: websitesBgColor !== 'transparent' ? websitesBgColor : mobileAppsBgColor,
-          opacity: (websitesBgColor !== 'transparent' || mobileAppsBgColor !== 'transparent') ? 0.15 : 0 
+        style={{
+          backgroundColor: websitesBgColor !== "transparent" ? websitesBgColor : mobileAppsBgColor,
+          opacity: websitesBgColor !== "transparent" || mobileAppsBgColor !== "transparent" ? 0.15 : 0,
         }}
       />
 
@@ -684,7 +686,7 @@ const Projects = () => {
               scale: [1, 1.3, 1],
               opacity: [0.2, 0.4, 0.2],
             }}
-            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
 
@@ -696,7 +698,7 @@ const Projects = () => {
             transition={{ duration: 0.5 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <motion.span 
+            <motion.span
               className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={headerInView ? { opacity: 1, scale: 1 } : {}}
@@ -704,13 +706,13 @@ const Projects = () => {
             >
               Our Portfolio
             </motion.span>
-            <motion.h1 
+            <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={headerInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Projects That Define{' '}
+              Projects That Define{" "}
               <span className="text-primary relative">
                 Excellence
                 <motion.span
@@ -721,14 +723,14 @@ const Projects = () => {
                 />
               </span>
             </motion.h1>
-            <motion.p 
+            <motion.p
               className="text-lg text-muted-foreground leading-relaxed"
               initial={{ opacity: 0 }}
               animate={headerInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Explore our portfolio of successful projects spanning web development, 
-              mobile applications, and digital marketing solutions.
+              Explore our portfolio of successful projects spanning web development, mobile applications, and digital
+              marketing solutions.
             </motion.p>
           </motion.div>
         </div>
