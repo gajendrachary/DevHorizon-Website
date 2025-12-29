@@ -3,8 +3,8 @@ import { useInView } from 'react-intersection-observer';
 import { useAnimatedCounter } from '@/hooks/useAnimatedCounter';
 
 const stats = [
-  { value: 40, suffix: '+', label: 'Websites Built' },
-  { value: 24, suffix: '+', label: 'Mobile Apps Developed' },
+  { value: 20, suffix: '+', label: 'Websites Built' },
+  { value: 5, suffix: '+', label: 'Mobile Apps Developed' },
   { value: 95, suffix: '%', label: 'Client Satisfaction' },
   { value: 15, suffix: '+', label: 'Team Members' },
 ];
