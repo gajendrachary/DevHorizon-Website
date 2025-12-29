@@ -81,7 +81,7 @@ const AdminDashboard = () => {
       if (error) throw error;
       setSubmissions(data || []);
     } catch (error) {
-      console.error('Error fetching submissions:', error);
+      if (import.meta.env.DEV) console.error('Error fetching submissions:', error);
       toast({
         title: 'Error',
         description: 'Failed to load form submissions.',
@@ -113,7 +113,7 @@ const AdminDashboard = () => {
         description: `Submission marked as ${status}.`,
       });
     } catch (error) {
-      console.error('Error updating status:', error);
+      if (import.meta.env.DEV) console.error('Error updating status:', error);
       toast({
         title: 'Error',
         description: 'Failed to update status.',
