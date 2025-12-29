@@ -4,9 +4,10 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Check, ArrowRight, ArrowLeft, Clock, Sparkles, Zap, Target, Palette as PaletteIcon, Cloud as CloudIcon } from 'lucide-react';
+import { Check, ArrowRight, ArrowLeft, Clock, Sparkles, Zap, Target, Palette as PaletteIcon, Cloud as CloudIcon, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
+import { supabase } from '@/integrations/supabase/client';
 
 const ANIMATION_CONFIG = {
   hover: {
@@ -94,6 +95,7 @@ const GetQuote = () => {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [timeline, setTimeline] = useState('standard');
   const [budget, setBudget] = useState(50000);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -107,20 +109,50 @@ const GetQuote = () => {
   const toggleService = (id: string) => {
     setSelectedServices(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]);
   };
-  const handleSubmit = () => {
-    toast({
-      title: "Quote Request Submitted!",
-      description: "We'll get back to you within 24 hours."
-    });
-    setStep(1);
-    setSelectedServices([]);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      company: '',
-      message: ''
-    });
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    
+    try {
+      const { error } = await supabase
+        .from('form_submissions')
+        .insert({
+          form_type: 'quote',
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim() || null,
+          company: formData.company.trim() || null,
+          message: formData.message.trim() || null,
+          services: selectedServices,
+          budget: `₹${budget.toLocaleString()}`,
+          timeline: timeline,
+          status: 'new',
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Quote Request Submitted!",
+        description: "We'll get back to you within 24 hours."
+      });
+      setStep(1);
+      setSelectedServices([]);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Submission Failed",
+        description: "Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   const contactSchema = {
     '@context': 'https://schema.org',
@@ -582,8 +614,9 @@ const GetQuote = () => {
                 
                 {step < 3 ? <Button onClick={() => setStep(step + 1)} disabled={step === 1 && selectedServices.length === 0}>
                     Next <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button> : <Button variant="hero" onClick={handleSubmit} disabled={!formData.name || !formData.email}>
-                    Submit Quote Request
+                  </Button> : <Button variant="hero" onClick={handleSubmit} disabled={!formData.name || !formData.email || isSubmitting}>
+                    {isSubmitting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+                    {isSubmitting ? 'Submitting...' : 'Submit Quote Request'}
                   </Button>}
               </div>
             </div>
