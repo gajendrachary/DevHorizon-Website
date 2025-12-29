@@ -8,7 +8,38 @@ import { Check, ArrowRight, ArrowLeft, Clock, Sparkles, Zap, Target, Palette as 
 import { useToast } from '@/hooks/use-toast';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 import { supabase } from '@/integrations/supabase/client';
+import { z } from 'zod';
 
+// Validation schema for form data
+const quoteFormSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must be less than 100 characters'),
+  email: z.string()
+    .trim()
+    .email('Please enter a valid email address')
+    .max(255, 'Email must be less than 255 characters'),
+  phone: z.string()
+    .trim()
+    .max(20, 'Phone number must be less than 20 characters')
+    .regex(/^[\d\s\-+()]*$/, 'Phone number contains invalid characters')
+    .optional()
+    .or(z.literal('')),
+  company: z.string()
+    .trim()
+    .max(200, 'Company name must be less than 200 characters')
+    .optional()
+    .or(z.literal('')),
+  message: z.string()
+    .trim()
+    .max(2000, 'Message must be less than 2000 characters')
+    .optional()
+    .or(z.literal('')),
+  services: z.array(z.string()).min(1, 'Please select at least one service'),
+  budget: z.number().min(30000).max(500000),
+  timeline: z.enum(['urgent', 'fast', 'standard', 'flexible']),
+});
 const ANIMATION_CONFIG = {
   hover: {
     scale: 1.02,
@@ -93,9 +124,10 @@ const timelines = [{
 const GetQuote = () => {
   const [step, setStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [timeline, setTimeline] = useState('standard');
+  const [timeline, setTimeline] = useState<'urgent' | 'fast' | 'standard' | 'flexible'>('standard');
   const [budget, setBudget] = useState(50000);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -111,20 +143,48 @@ const GetQuote = () => {
   };
   const handleSubmit = async () => {
     setIsSubmitting(true);
+    setFormErrors({});
+    
+    // Validate form data
+    const validationResult = quoteFormSchema.safeParse({
+      ...formData,
+      services: selectedServices,
+      budget,
+      timeline,
+    });
+
+    if (!validationResult.success) {
+      const errors: Record<string, string> = {};
+      validationResult.error.errors.forEach((err) => {
+        const field = err.path[0] as string;
+        errors[field] = err.message;
+      });
+      setFormErrors(errors);
+      setIsSubmitting(false);
+      
+      toast({
+        title: "Validation Error",
+        description: "Please check the form for errors.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const validatedData = validationResult.data;
     
     try {
       const { error } = await supabase
         .from('form_submissions')
         .insert({
           form_type: 'quote',
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          phone: formData.phone.trim() || null,
-          company: formData.company.trim() || null,
-          message: formData.message.trim() || null,
-          services: selectedServices,
-          budget: `₹${budget.toLocaleString()}`,
-          timeline: timeline,
+          name: validatedData.name,
+          email: validatedData.email,
+          phone: validatedData.phone || null,
+          company: validatedData.company || null,
+          message: validatedData.message || null,
+          services: validatedData.services,
+          budget: `₹${validatedData.budget.toLocaleString()}`,
+          timeline: validatedData.timeline,
           status: 'new',
         });
 
@@ -143,8 +203,8 @@ const GetQuote = () => {
         company: '',
         message: ''
       });
+      setFormErrors({});
     } catch (error) {
-      console.error('Error submitting form:', error);
       toast({
         title: "Submission Failed",
         description: "Please try again or contact us directly.",
@@ -342,7 +402,7 @@ const GetQuote = () => {
                         return (
                           <motion.button
                             key={t.id}
-                            onClick={() => setTimeline(t.id)}
+                            onClick={() => setTimeline(t.id as 'urgent' | 'fast' | 'standard' | 'flexible')}
                             className={`relative p-5 border text-center transition-all rounded-xl overflow-hidden ${
                               isSelected 
                                 ? 'border-primary bg-primary/5' 
@@ -504,8 +564,10 @@ const GetQuote = () => {
                               ...formData,
                               name: e.target.value
                             })}
-                            className="transition-all focus:ring-2 focus:ring-primary/20"
+                            maxLength={100}
+                            className={`transition-all focus:ring-2 focus:ring-primary/20 ${formErrors.name ? 'border-destructive' : ''}`}
                           />
+                          {formErrors.name && <p className="text-xs text-destructive mt-1">{formErrors.name}</p>}
                         </motion.div>
                         <motion.div
                           whileHover={{ scale: 1.01 }}
@@ -517,8 +579,10 @@ const GetQuote = () => {
                               ...formData,
                               company: e.target.value
                             })}
-                            className="transition-all focus:ring-2 focus:ring-primary/20"
+                            maxLength={200}
+                            className={`transition-all focus:ring-2 focus:ring-primary/20 ${formErrors.company ? 'border-destructive' : ''}`}
                           />
+                          {formErrors.company && <p className="text-xs text-destructive mt-1">{formErrors.company}</p>}
                         </motion.div>
                       </div>
                     </motion.div>
@@ -552,8 +616,10 @@ const GetQuote = () => {
                               ...formData,
                               email: e.target.value
                             })}
-                            className="transition-all focus:ring-2 focus:ring-primary/20"
+                            maxLength={255}
+                            className={`transition-all focus:ring-2 focus:ring-primary/20 ${formErrors.email ? 'border-destructive' : ''}`}
                           />
+                          {formErrors.email && <p className="text-xs text-destructive mt-1">{formErrors.email}</p>}
                         </motion.div>
                         <motion.div
                           whileHover={{ scale: 1.01 }}
@@ -565,8 +631,10 @@ const GetQuote = () => {
                               ...formData,
                               phone: e.target.value
                             })}
-                            className="transition-all focus:ring-2 focus:ring-primary/20"
+                            maxLength={20}
+                            className={`transition-all focus:ring-2 focus:ring-primary/20 ${formErrors.phone ? 'border-destructive' : ''}`}
                           />
+                          {formErrors.phone && <p className="text-xs text-destructive mt-1">{formErrors.phone}</p>}
                         </motion.div>
                       </div>
                     </motion.div>
@@ -599,8 +667,11 @@ const GetQuote = () => {
                             ...formData,
                             message: e.target.value
                           })}
-                          className="transition-all focus:ring-2 focus:ring-primary/20"
+                          maxLength={2000}
+                          className={`transition-all focus:ring-2 focus:ring-primary/20 ${formErrors.message ? 'border-destructive' : ''}`}
                         />
+                        {formErrors.message && <p className="text-xs text-destructive mt-1">{formErrors.message}</p>}
+                        <p className="text-xs text-muted-foreground mt-1 text-right">{formData.message.length}/2000</p>
                       </motion.div>
                     </motion.div>
                   </div>
