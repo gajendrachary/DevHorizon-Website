@@ -115,13 +115,9 @@ export const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Text scramble effect states
+  // Headline text
   const fullText = "Transforming Ideas Into ";
   const highlightText = "Digital Excellence";
-  const [scrambledText, setScrambledText] = useState("");
-  const [scrambledHighlight, setScrambledHighlight] = useState("");
-  const [revealedCount, setRevealedCount] = useState(0);
-  const [highlightRevealedCount, setHighlightRevealedCount] = useState(0);
 
   // Ensure currentImageIndex is always valid for the current array
   const safeImageIndex = currentImageIndex >= backgroundImages.length ? 0 : currentImageIndex;
@@ -135,43 +131,6 @@ export const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Text scramble effect for main text
-  useEffect(() => {
-    if (revealedCount <= fullText.length) {
-      const scrambleInterval = setInterval(() => {
-        const revealed = fullText.slice(0, revealedCount);
-        const remaining = fullText.slice(revealedCount);
-        const scrambled = remaining.split('').map(char => char === ' ' ? ' ' : scrambleChars[Math.floor(Math.random() * scrambleChars.length)]).join('');
-        setScrambledText(revealed + scrambled);
-      }, 30);
-      const revealTimeout = setTimeout(() => {
-        setRevealedCount(prev => prev + 1);
-      }, 60);
-      return () => {
-        clearInterval(scrambleInterval);
-        clearTimeout(revealTimeout);
-      };
-    }
-  }, [revealedCount]);
-
-  // Text scramble effect for highlight text
-  useEffect(() => {
-    if (revealedCount > fullText.length && highlightRevealedCount <= highlightText.length) {
-      const scrambleInterval = setInterval(() => {
-        const revealed = highlightText.slice(0, highlightRevealedCount);
-        const remaining = highlightText.slice(highlightRevealedCount);
-        const scrambled = remaining.split('').map(char => char === ' ' ? ' ' : scrambleChars[Math.floor(Math.random() * scrambleChars.length)]).join('');
-        setScrambledHighlight(revealed + scrambled);
-      }, 30);
-      const revealTimeout = setTimeout(() => {
-        setHighlightRevealedCount(prev => prev + 1);
-      }, 70);
-      return () => {
-        clearInterval(scrambleInterval);
-        clearTimeout(revealTimeout);
-      };
-    }
-  }, [revealedCount, highlightRevealedCount]);
   const {
     scrollYProgress
   } = useScroll({
@@ -278,33 +237,43 @@ export const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           <motion.div className="max-w-2xl" variants={containerVariants} initial="hidden" animate="visible">
             {/* Badge */}
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-sm font-medium mb-6 text-primary-foreground">
-              •Est. 2025
-              <motion.span className="w-2 h-2 bg-primary rounded-full" animate={{
-                scale: [1, 1.5, 1],
-                opacity: [1, 0.7, 1]
-              }} transition={{
-                duration: 1.5,
-                repeat: Infinity
-              }} />
-              Bengaluru, India
+            <motion.div variants={itemVariants} className="flex flex-col items-start gap-1 mb-6">
+              <span className="text-xl md:text-2xl font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                DevHub Technologies
+              </span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-sm font-medium text-primary-foreground">
+                •Est. 2025
+                <motion.span className="w-2 h-2 bg-primary rounded-full" animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [1, 0.7, 1]
+                }} transition={{
+                  duration: 1.5,
+                  repeat: Infinity
+                }} />
+                Bengaluru, India
+              </div>
             </motion.div>
 
-            {/* Headline with text scramble effect */}
-            <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-mono text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
-              <span className="tracking-tight">{scrambledText}</span>
-              <motion.span animate={{
-              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-            }} transition={{
-              backgroundPosition: {
-                duration: 5,
-                repeat: Infinity,
-                ease: "linear"
-              }
-            }} style={{
-              backgroundSize: '200% 200%'
-            }} className="inline-block tracking-tight text-white">
-                {scrambledHighlight}
+            {/* Headline with smooth fade animation */}
+            <motion.h1 
+              variants={itemVariants} 
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-mono text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+            >
+              <motion.span 
+                className="tracking-tight inline-block"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              >
+                {fullText}
+              </motion.span>
+              <motion.span 
+                className="inline-block tracking-tight text-white"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+              >
+                {highlightText}
               </motion.span>
             </motion.h1>
 
