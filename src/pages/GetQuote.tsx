@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,10 @@ import { useToast } from '@/hooks/use-toast';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 import { supabase } from '@/integrations/supabase/client';
 import { z } from 'zod';
+import DOMPurify from 'dompurify';
+
+// Rate limiting constants
+const RATE_LIMIT_COOLDOWN_MS = 60000; // 60 seconds between submissions
 
 // Validation schema for form data
 const quoteFormSchema = z.object({
@@ -121,6 +125,11 @@ const timelines = [{
   description: '4+ weeks',
   multiplier: 0.9
 }];
+// Sanitize user input to prevent XSS
+const sanitizeInput = (input: string): string => {
+  return DOMPurify.sanitize(input, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }).trim();
+};
+
 const GetQuote = () => {
   const [step, setStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
@@ -128,6 +137,8 @@ const GetQuote = () => {
   const [budget, setBudget] = useState(50000);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [canSubmit, setCanSubmit] = useState(true);
+  const lastSubmitTimeRef = useRef<number>(0);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -142,12 +153,35 @@ const GetQuote = () => {
     setSelectedServices(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]);
   };
   const handleSubmit = async () => {
+    // Rate limiting check
+    const now = Date.now();
+    const timeSinceLastSubmit = now - lastSubmitTimeRef.current;
+    
+    if (timeSinceLastSubmit < RATE_LIMIT_COOLDOWN_MS && lastSubmitTimeRef.current > 0) {
+      const remainingSeconds = Math.ceil((RATE_LIMIT_COOLDOWN_MS - timeSinceLastSubmit) / 1000);
+      toast({
+        title: "Please wait",
+        description: `You can submit again in ${remainingSeconds} seconds.`,
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setFormErrors({});
     
+    // Sanitize all text inputs before validation
+    const sanitizedFormData = {
+      name: sanitizeInput(formData.name),
+      email: sanitizeInput(formData.email),
+      phone: sanitizeInput(formData.phone),
+      company: sanitizeInput(formData.company),
+      message: sanitizeInput(formData.message),
+    };
+    
     // Validate form data
     const validationResult = quoteFormSchema.safeParse({
-      ...formData,
+      ...sanitizedFormData,
       services: selectedServices,
       budget,
       timeline,
@@ -189,6 +223,11 @@ const GetQuote = () => {
         });
 
       if (error) throw error;
+
+      // Update rate limiting timestamp
+      lastSubmitTimeRef.current = Date.now();
+      setCanSubmit(false);
+      setTimeout(() => setCanSubmit(true), RATE_LIMIT_COOLDOWN_MS);
 
       toast({
         title: "Quote Request Submitted!",
@@ -685,9 +724,9 @@ const GetQuote = () => {
                 
                 {step < 3 ? <Button onClick={() => setStep(step + 1)} disabled={step === 1 && selectedServices.length === 0}>
                     Next <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button> : <Button variant="hero" onClick={handleSubmit} disabled={!formData.name || !formData.email || isSubmitting}>
+                  </Button> : <Button variant="hero" onClick={handleSubmit} disabled={!formData.name || !formData.email || isSubmitting || !canSubmit}>
                     {isSubmitting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
-                    {isSubmitting ? 'Submitting...' : 'Submit Quote Request'}
+                    {isSubmitting ? 'Submitting...' : !canSubmit ? 'Please wait...' : 'Submit Quote Request'}
                   </Button>}
               </div>
             </div>
