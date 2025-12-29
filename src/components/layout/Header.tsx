@@ -64,7 +64,7 @@ export const Header = () => {
             whileHover={{ rotate: [0, -5, 5, 0] }}
             transition={{ duration: 0.4 }}
           />
-          <span className="font-logo font-bold text-xl tracking-tight group-hover:text-primary transition-colors duration-200">DevHub</span>
+          <span className="font-logo font-bold text-xl tracking-tight group-hover:text-primary transition-colors duration-200">DevHub Technologies</span>
         </Link>
 
         {/* Desktop Navigation */}

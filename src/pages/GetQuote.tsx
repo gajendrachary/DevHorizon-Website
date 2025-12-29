@@ -260,7 +260,7 @@ const GetQuote = () => {
     description: 'Request a custom quote for web development, mobile apps, or Meta ads services.',
     mainEntity: {
       '@type': 'Organization',
-      name: 'DevHub',
+      name: 'DevHub Technologies',
       telephone: '+91-8688097373',
       email: 'contact@devhub.tech',
     },

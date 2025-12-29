@@ -24,7 +24,7 @@ export const SEO = ({
   noindex = false,
 }: SEOProps) => {
   const location = useLocation();
-  const fullTitle = title.includes('DevHub') ? title : `${title} | DevHub`;
+  const fullTitle = title.includes('DevHub') ? title : `${title} | DevHub Technologies`;
   const canonicalUrl = canonical || `${BASE_URL}${location.pathname}`;
 
   useEffect(() => {
