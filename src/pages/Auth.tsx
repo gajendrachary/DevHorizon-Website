@@ -32,14 +32,19 @@ const Auth = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   
   const { toast } = useToast();
-  const { signIn, signUp, user } = useAuth();
+  const { signIn, signUp, user, isAdmin, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
-      navigate('/admin');
+    if (!authLoading && user) {
+      // Redirect admins to admin dashboard, others to home
+      if (isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
     }
-  }, [user, navigate]);
+  }, [user, isAdmin, authLoading, navigate]);
 
   const validateForm = () => {
     try {
@@ -87,7 +92,7 @@ const Auth = () => {
             title: 'Welcome Back!',
             description: 'Successfully logged in.',
           });
-          navigate('/admin');
+          // Navigation handled by useEffect based on admin status
         }
       } else {
         const { error } = await signUp(formData.email, formData.password, formData.fullName);
