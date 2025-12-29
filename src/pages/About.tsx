@@ -212,8 +212,8 @@ const About = () => {
   return (
     <Layout>
       <SEO
-        title="About DevHub - Our Story & Team | Digital Agency Bengaluru"
-        description="Learn about DevHub, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
+        title="About DevHub Technologies - Our Story & Team | Digital Agency Bengaluru"
+        description="Learn about DevHub Technologies, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
         schema={{ "@context": "https://schema.org", "@graph": [aboutSchema, breadcrumbSchema] }}
       />
       {/* Hero Section */}
@@ -229,9 +229,9 @@ const About = () => {
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">About DevHub</span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Crafting Digital Excellence Since 2025</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              DevHub is a full-service digital agency based in Bengaluru, India. We specialize in creating exceptional
-              digital experiences through innovative web development, mobile applications, and strategic digital
-              marketing solutions.
+              DevHub Technologies is a full-service digital agency based in Bengaluru, India. We specialize in creating
+              exceptional digital experiences through innovative web development, mobile applications, and strategic
+              digital marketing solutions.
             </p>
           </motion.div>
         </div>
@@ -249,9 +249,9 @@ const About = () => {
             >
               <h2 className="text-3xl font-bold mb-6">Our Journey</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Founded in June 2025, DevHub Technologies emerged from a passion for transforming businesses through
-                technology. What started as a small team of developers has grown into a full-service digital agency
-                serving clients across India, UAE, Canada, US, and UK.
+                Founded in June 2025, DevHub emerged from a passion for transforming businesses through technology. What
+                started as a small team of developers has grown into a full-service digital agency serving clients
+                across India, UAE, Canada, US, and UK.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 We believe in the power of technology to solve real-world problems. Our approach combines technical
