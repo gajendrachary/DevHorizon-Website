@@ -249,7 +249,7 @@ const About = () => {
             >
               <h2 className="text-3xl font-bold mb-6">Our Journey</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Founded in June 2025, DevHub emerged from a passion for transforming businesses through technology. What
+                Founded in June 2025, DevHub Technologies emerged from a passion for transforming businesses through technology. What
                 started as a small team of developers has grown into a full-service digital agency serving clients
                 across India, UAE, Canada, US, and UK.
               </p>

@@ -126,8 +126,8 @@ const Auth = () => {
   return (
     <Layout>
       <SEO
-        title={isLogin ? 'Admin Login | DevHub' : 'Create Account | DevHub'}
-        description="Access your DevHub admin dashboard to manage form submissions and client inquiries."
+        title={isLogin ? 'Admin Login | DevHub Technologies' : 'Create Account | DevHub Technologies'}
+        description="Access your DevHub Technologies admin dashboard to manage form submissions and client inquiries."
         noindex={true}
       />
       

@@ -158,8 +158,8 @@ const Reviews = () => {
   return (
     <Layout>
       <SEO
-        title="Client Testimonials & Reviews | DevHub - 95% Client Satisfaction"
-        description="Read what our clients say about DevHub. With 95% client satisfaction and 40+ successful projects delivered, see why businesses choose us for web and mobile development."
+        title="Client Testimonials & Reviews | DevHub Technologies - 95% Client Satisfaction"
+        description="Read what our clients say about DevHub Technologies. With 95% client satisfaction and 40+ successful projects delivered, see why businesses choose us for web and mobile development."
         schema={{ "@context": "https://schema.org", "@graph": [reviewSchema, breadcrumbSchema] }}
       />
 

@@ -256,8 +256,8 @@ const Blog = () => {
   return (
     <Layout>
       <SEO
-        title="DevHub Blog - Web Development, Mobile & Marketing Insights"
-        description="Stay updated with DevHub's blog on web development trends, mobile app best practices, Meta ads optimization tips, and UI/UX design principles. Expert insights from Bengaluru's top digital agency."
+        title="DevHub Technologies Blog - Web Development, Mobile & Marketing Insights"
+        description="Stay updated with DevHub Technologies blog on web development trends, mobile app best practices, Meta ads optimization tips, and UI/UX design principles. Expert insights from Bengaluru's top digital agency."
         schema={{ '@context': 'https://schema.org', '@graph': [blogSchema, breadcrumbSchema] }}
       />
       {/* Hero Section */}
