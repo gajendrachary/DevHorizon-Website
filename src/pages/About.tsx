@@ -62,7 +62,7 @@ const team = [
   },
   {
     name: "Gajendrachary",
-    role: "Lead Developer & Founder",
+    role: "Founder & Developer",
     image: teamGajendrachary,
     links: [
       { icon: Linkedin, href: "https://linkedin.com/in/gajendrachary" },
