@@ -193,8 +193,8 @@ const About = () => {
   const aboutSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "About DevHub Technologies",
-    description: "Learn about DevHub Technologies, a Bengaluru-based digital agency founded in 2025.",
+    name: "About DevHub",
+    description: "Learn about DevHub, a Bengaluru-based digital agency founded in 2025.",
     mainEntity: {
       "@type": "Organization",
       name: "DevHub",
@@ -212,8 +212,8 @@ const About = () => {
   return (
     <Layout>
       <SEO
-        title="About DevHub Technologies - Our Story & Team | Digital Agency Bengaluru"
-        description="Learn about DevHub Technologies, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
+        title="About DevHub - Our Story & Team | Digital Agency Bengaluru"
+        description="Learn about DevHub, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
         schema={{ "@context": "https://schema.org", "@graph": [aboutSchema, breadcrumbSchema] }}
       />
       {/* Hero Section */}
@@ -249,9 +249,9 @@ const About = () => {
             >
               <h2 className="text-3xl font-bold mb-6">Our Journey</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Founded in June 2025, DevHub emerged from a passion for transforming businesses through technology. What
-                started as a small team of developers has grown into a full-service digital agency serving clients
-                across India, UAE, Canada, US, and UK.
+                Founded in June 2025, DevHub Technologies emerged from a passion for transforming businesses through
+                technology. What started as a small team of developers has grown into a full-service digital agency
+                serving clients across India, UAE, Canada, US, and UK.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 We believe in the power of technology to solve real-world problems. Our approach combines technical
@@ -404,7 +404,7 @@ const About = () => {
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
               Meet the Team
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">The People Behind DevHub Technologies</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">The People Behind DevHub</h2>
             <p className="text-muted-foreground">
               A passionate team dedicated to delivering exceptional digital solutions
             </p>
