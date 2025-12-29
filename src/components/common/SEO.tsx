@@ -11,7 +11,7 @@ interface SEOProps {
   noindex?: boolean;
 }
 
-const BASE_URL = 'https://devhub.tech';
+const BASE_URL = 'https://devhubtechnologies.in';
 const DEFAULT_IMAGE = 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/social-images/social-1766729263212-Screenshot 2025-12-26 at 11.37.02 AM.png';
 
 export const SEO = ({
@@ -96,8 +96,8 @@ export const SEO = ({
 export const getOrganizationSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'DevHub',
-  url: 'https://devhub.tech',
+  name: 'DevHub Technologies',
+  url: 'https://devhubtechnologies.in',
   logo: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
   description: 'Full-service digital agency specializing in web development, mobile apps, and Meta advertising.',
   address: {
@@ -128,12 +128,12 @@ export const getOrganizationSchema = () => ({
 export const getLocalBusinessSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://devhub.tech/#localbusiness',
-  name: 'DevHub',
+  '@id': 'https://devhubtechnologies.in/#localbusiness',
+  name: 'DevHub Technologies',
   image: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
   telephone: '+91-8688097373',
   email: 'contact@devhub.tech',
-  url: 'https://devhub.tech',
+  url: 'https://devhubtechnologies.in',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Vidyaranyapura',

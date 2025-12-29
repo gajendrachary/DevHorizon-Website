@@ -1,5 +1,5 @@
-# DevHub Robots.txt
-# https://devhub.tech
+# DevHub Technologies Robots.txt
+# https://devhubtechnologies.in
 
 User-agent: Googlebot
 Allow: /
@@ -18,13 +18,21 @@ Allow: /
 User-agent: LinkedInBot
 Allow: /
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 User-agent: *
 Allow: /
 Crawl-delay: 5
 
 # Sitemap
-Sitemap: https://devhub.tech/sitemap.xml
+Sitemap: https://devhubtechnologies.in/sitemap.xml
 
-# Disallow admin and API routes
+# Disallow admin, auth and API routes
+Disallow: /admin
+Disallow: /auth
 Disallow: /api/
 Disallow: /_
