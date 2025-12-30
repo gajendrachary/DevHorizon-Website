@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import logoSkandaCloudKitchen from '@/assets/logo-skanda-cloud-kitchen.png';
 import logoLikithaHandcrafts from '@/assets/logo-likitha-handcrafts.png';
 import logoHavenSalad from '@/assets/logo-haven-salad.png';
 import logoJaggeryTeaPoint from '@/assets/logo-jaggery-tea-point.png';
 import logoSriKenchambaCeramics from '@/assets/logo-sri-kenchamba-ceramics.png';
 
 const clientLogos = [
+  { name: 'Skanda Cloud Kitchen', logo: logoSkandaCloudKitchen },
   { name: 'Likitha Handcrafts', logo: logoLikithaHandcrafts },
   { name: 'Haven Salad', logo: logoHavenSalad },
   { name: 'Jaggery Tea Point', logo: logoJaggeryTeaPoint },
