@@ -1,18 +1,31 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad, UtensilsCrossed } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ProjectCard } from './ProjectCard';
 
 // Project Images
+import projectSkandaCloudKitchen from '@/assets/logo-skanda-cloud-kitchen.png';
 import projectJaggeryTeaPoint from '@/assets/project-jaggery-tea-point.jpg';
 import projectSriKenchambaCeramics from '@/assets/project-sri-kenchamba-ceramics.png';
 import projectLikithaHandcrafts from '@/assets/project-likitha-handcrafts.png';
 import projectHavenSalad from '@/assets/project-haven-salad.jpg';
 
 const projects = [
+  {
+    title: 'Skanda Cloud Kitchen',
+    category: 'F&B / Cloud Kitchen',
+    url: 'https://skandacloudkitchen.in/',
+    description: 'A modern cloud kitchen website featuring an appetizing menu showcase and seamless ordering experience.',
+    color: 'bg-orange-100',
+    bgColor: '#EA580C',
+    technologies: ['React', 'E-commerce', 'Responsive'],
+    accentIcon: UtensilsCrossed,
+    image: projectSkandaCloudKitchen,
+    isLogo: true,
+  },
   {
     title: 'Jaggery Tea Point',
     category: 'F&B / Tea Shop',

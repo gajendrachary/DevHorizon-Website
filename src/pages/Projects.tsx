@@ -6,6 +6,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 
 // Project Images
+import projectSkandaCloudKitchen from "@/assets/logo-skanda-cloud-kitchen.png";
 import projectJaggeryTeaPoint from "@/assets/project-jaggery-tea-point.jpg";
 import projectSriKenchambaCeramics from "@/assets/project-sri-kenchamba-ceramics.png";
 import projectLikithaHandcrafts from "@/assets/project-likitha-handcrafts.png";
@@ -32,6 +33,17 @@ const ANIMATION_CONFIG = {
 };
 
 const websites = [
+  {
+    title: "Skanda Cloud Kitchen",
+    category: "F&B / Cloud Kitchen",
+    url: "https://skandacloudkitchen.in/",
+    description: "A modern cloud kitchen website featuring an appetizing menu showcase and seamless ordering experience.",
+    color: "bg-orange-100",
+    bgColor: "#EA580C",
+    tech: ["React", "Tailwind CSS", "Responsive"],
+    image: projectSkandaCloudKitchen,
+    isLogo: true,
+  },
   {
     title: "Jaggery Tea Point",
     category: "F&B / Tea Shop",
