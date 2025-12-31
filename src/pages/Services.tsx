@@ -6,6 +6,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { SEO, getServiceSchema, getBreadcrumbSchema } from '@/components/common/SEO';
+import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
 import developerClientMeeting from '@/assets/developer-client-meeting.png';
 import developerPresenting from '@/assets/developer-presenting.png';
 import teamBrainstorming from '@/assets/team-brainstorming.png';
@@ -13,6 +14,13 @@ import codeReview from '@/assets/code-review.png';
 import serviceWebDev from '@/assets/service-web-development.png';
 import serviceAppDev from '@/assets/service-app-development.png';
 import serviceMetaAds from '@/assets/service-meta-ads.png';
+
+// ============= Auto-scroll Configuration =============
+const AUTO_SCROLL_CONFIG = {
+  speed: 0.8,           // Pixels per frame
+  reverseDelay: 1500,   // ms pause before reversing
+  pauseOnHover: true,   // Pause on desktop hover
+};
 
 const backgroundImages = [
   { src: developerClientMeeting, alt: 'Developer meeting with client' },
@@ -112,38 +120,20 @@ const Services = () => {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isScrollingRef = useRef(false);
   
-  // Touch gesture refs
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-  const isTouching = useRef(false);
+  // Auto-scroll hook
+  const {
+    containerRef: autoScrollRef,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleTouchStart: autoTouchStart,
+    handleTouchEnd: autoTouchEnd,
+  } = useAutoScrollCarousel(AUTO_SCROLL_CONFIG);
 
-  // Touch gesture handlers for smoother mobile swiping
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    isTouching.current = true;
+  // Merge refs for the scroll container
+  const setScrollRef = (el: HTMLDivElement | null) => {
+    (scrollContainerRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+    (autoScrollRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
   };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isTouching.current) return;
-    touchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    if (!isTouching.current) return;
-    isTouching.current = false;
-    
-    const diff = touchStartX.current - touchEndX.current;
-    const threshold = 50;
-    
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0 && activeIndex < services.length - 1) {
-        scrollToCard(activeIndex + 1);
-      } else if (diff < 0 && activeIndex > 0) {
-        scrollToCard(activeIndex - 1);
-      }
-    }
-  };
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
@@ -350,12 +340,13 @@ const Services = () => {
             <ChevronRight className="w-6 h-6" />
           </motion.button>
 
-          {/* Carousel Container */}
+          {/* Carousel Container with Auto-scroll */}
           <div
-            ref={scrollContainerRef}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            ref={setScrollRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onTouchStart={autoTouchStart}
+            onTouchEnd={autoTouchEnd}
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 px-4 touch-pan-x"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
           >

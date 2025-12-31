@@ -7,11 +7,19 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { ServiceCard, ANIMATION_CONFIG } from './ServiceCard';
+import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
 
 // Background images for services
 import serviceWebDevelopment from '@/assets/service-web-development.png';
 import serviceMetaAds from '@/assets/service-meta-ads.png';
 import serviceAppDevelopment from '@/assets/service-app-development.png';
+
+// ============= Auto-scroll Configuration =============
+const AUTO_SCROLL_CONFIG = {
+  speed: 0.8,           // Pixels per frame
+  reverseDelay: 1500,   // ms pause before reversing
+  pauseOnHover: true,   // Pause on desktop hover
+};
 
 const services = [
   {
@@ -79,41 +87,24 @@ export const ServiceCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardOffsets, setCardOffsets] = useState<number[]>(services.map(() => 0));
   
-  // Touch gesture refs
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-  const isTouching = useRef(false);
+  // Auto-scroll hook
+  const {
+    containerRef: autoScrollRef,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleTouchStart: autoTouchStart,
+    handleTouchEnd: autoTouchEnd,
+  } = useAutoScrollCarousel(AUTO_SCROLL_CONFIG);
   
   const { ref: sectionRef, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
 
-  // Touch gesture handlers for smoother mobile swiping
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    isTouching.current = true;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isTouching.current) return;
-    touchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    if (!isTouching.current) return;
-    isTouching.current = false;
-    
-    const diff = touchStartX.current - touchEndX.current;
-    const threshold = 50;
-    
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0 && activeIndex < services.length - 1) {
-        scrollToCard(activeIndex + 1);
-      } else if (diff < 0 && activeIndex > 0) {
-        scrollToCard(activeIndex - 1);
-      }
-    }
+  // Merge refs for the scroll container
+  const setScrollRef = (el: HTMLDivElement | null) => {
+    (scrollContainerRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+    (autoScrollRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
   };
 
   // Track active card and calculate parallax offsets based on scroll position
@@ -262,12 +253,13 @@ export const ServiceCarousel = () => {
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Scrollable Carousel */}
+          {/* Scrollable Carousel with Auto-scroll */}
           <div
-            ref={scrollContainerRef}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            ref={setScrollRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onTouchStart={autoTouchStart}
+            onTouchEnd={autoTouchEnd}
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 touch-pan-x"
             style={{
               scrollbarWidth: 'none',

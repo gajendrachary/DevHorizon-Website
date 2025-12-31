@@ -4,6 +4,7 @@ import { Layout } from "@/components/layout/Layout";
 import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
+import { useAutoScrollCarousel } from "@/hooks/useAutoScrollCarousel";
 
 // Project Images
 import projectSkandaCloudKitchen from "@/assets/logo-skanda-cloud-kitchen.png";
@@ -350,6 +351,13 @@ interface ProjectCarouselProps {
   defaultBgColor?: string;
 }
 
+// ============= Auto-scroll Configuration =============
+const AUTO_SCROLL_CONFIG = {
+  speed: 0.8,           // Pixels per frame
+  reverseDelay: 1500,   // ms pause before reversing
+  pauseOnHover: true,   // Pause on desktop hover
+};
+
 const ProjectCarousel = ({
   projects,
   type,
@@ -367,10 +375,25 @@ const ProjectCarousel = ({
   const resetTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isScrollingRef = useRef(false);
 
+  // Auto-scroll hook
+  const {
+    containerRef: autoScrollRef,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleTouchStart: autoTouchStart,
+    handleTouchEnd: autoTouchEnd,
+  } = useAutoScrollCarousel(AUTO_SCROLL_CONFIG);
+
   const { ref: sectionRef, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
+
+  // Merge refs for the scroll container
+  const setScrollRef = (el: HTMLDivElement | null) => {
+    (scrollContainerRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+    (autoScrollRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+  };
 
   // Update background color when active index changes
   useEffect(() => {
@@ -587,10 +610,14 @@ const ProjectCarousel = ({
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Scrollable Carousel */}
+          {/* Scrollable Carousel with Auto-scroll */}
           <div
-            ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8"
+            ref={setScrollRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onTouchStart={autoTouchStart}
+            onTouchEnd={autoTouchEnd}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 touch-pan-x"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",

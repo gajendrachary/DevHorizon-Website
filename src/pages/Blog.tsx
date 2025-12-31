@@ -7,6 +7,14 @@ import { Search, Calendar, ArrowRight, Clock, User, ChevronLeft, ChevronRight } 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
+import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
+
+// ============= Auto-scroll Configuration =============
+const AUTO_SCROLL_CONFIG = {
+  speed: 0.8,           // Pixels per frame
+  reverseDelay: 1500,   // ms pause before reversing
+  pauseOnHover: true,   // Pause on desktop hover
+};
 
 const ANIMATION_CONFIG = {
   entrance: {
@@ -113,10 +121,20 @@ const Blog = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardOffsets, setCardOffsets] = useState<number[]>([]);
   
-  // Touch gesture refs
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-  const isTouching = useRef(false);
+  // Auto-scroll hook
+  const {
+    containerRef: autoScrollRef,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleTouchStart: autoTouchStart,
+    handleTouchEnd: autoTouchEnd,
+  } = useAutoScrollCarousel(AUTO_SCROLL_CONFIG);
+
+  // Merge refs for the scroll container
+  const setScrollRef = (el: HTMLDivElement | null) => {
+    (scrollContainerRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+    (autoScrollRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+  };
 
   const filteredPosts = blogPosts.filter(post => {
     const matchesCategory = activeCategory === 'All' || post.category === activeCategory;
@@ -203,32 +221,6 @@ const Blog = () => {
     scrollToCard(newIndex);
   }, [activeIndex, filteredPosts.length, scrollToCard]);
 
-  // Touch gesture handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    isTouching.current = true;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isTouching.current) return;
-    touchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    if (!isTouching.current) return;
-    isTouching.current = false;
-    
-    const diff = touchStartX.current - touchEndX.current;
-    const threshold = 50;
-    
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0 && activeIndex < filteredPosts.length - 1) {
-        scrollToCard(activeIndex + 1);
-      } else if (diff < 0 && activeIndex > 0) {
-        scrollToCard(activeIndex - 1);
-      }
-    }
-  };
 
   const blogSchema = {
     '@context': 'https://schema.org',
@@ -467,12 +459,13 @@ const Blog = () => {
                 <ChevronRight className="w-6 h-6" />
               </motion.button>
 
-              {/* Carousel Container */}
+              {/* Carousel Container with Auto-scroll */}
               <div
-                ref={scrollContainerRef}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
+                ref={setScrollRef}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onTouchStart={autoTouchStart}
+                onTouchEnd={autoTouchEnd}
                 className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 px-4 touch-pan-x"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
               >
