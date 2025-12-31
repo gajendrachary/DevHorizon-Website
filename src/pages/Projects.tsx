@@ -6,7 +6,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 
 // Project Images
-import projectSkandaCloudKitchen from "@/assets/project-skanda-cloud-kitchen.jpg";
+import projectSkandaCloudKitchen from "@/assets/logo-skanda-cloud-kitchen.png";
 import projectJaggeryTeaPoint from "@/assets/project-jaggery-tea-point.jpg";
 import projectSriKenchambaCeramics from "@/assets/project-sri-kenchamba-ceramics.png";
 import projectLikithaHandcrafts from "@/assets/project-likitha-handcrafts.png";
@@ -42,7 +42,7 @@ const websites = [
     bgColor: "#EA580C",
     tech: ["React", "Tailwind CSS", "Responsive"],
     image: projectSkandaCloudKitchen,
-    isLogo: false,
+    isLogo: true,
   },
   {
     title: "Jaggery Tea Point",
