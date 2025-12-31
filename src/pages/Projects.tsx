@@ -378,6 +378,8 @@ const ProjectCarousel = ({
   // Auto-scroll hook
   const {
     containerRef: autoScrollRef,
+    direction,
+    isPaused,
     handleMouseEnter,
     handleMouseLeave,
     handleTouchStart: autoTouchStart,
@@ -643,18 +645,42 @@ const ProjectCarousel = ({
             <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
           </div>
 
-          {/* Carousel Indicators */}
-          <div className="flex justify-center gap-2 mt-6">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => scrollToCard(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  index === activeIndex ? "w-8 bg-primary" : "w-2 bg-primary/30 hover:bg-primary/50"
-                }`}
-                aria-label={`Go to project ${index + 1}`}
-              />
-            ))}
+          {/* Carousel Indicators with Direction */}
+          <div className="flex justify-center items-center gap-3 mt-6">
+            <motion.div
+              animate={{ 
+                x: direction === 1 ? [0, -3, 0] : [0, 3, 0],
+                opacity: isPaused ? 0.3 : 0.6
+              }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+              className="text-primary"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </motion.div>
+            
+            <div className="flex gap-2">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => scrollToCard(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === activeIndex ? "w-8 bg-primary" : "w-2 bg-primary/30 hover:bg-primary/50"
+                  }`}
+                  aria-label={`Go to project ${index + 1}`}
+                />
+              ))}
+            </div>
+            
+            <motion.div
+              animate={{ 
+                x: direction === 1 ? [0, 3, 0] : [0, -3, 0],
+                opacity: isPaused ? 0.3 : 0.6
+              }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+              className="text-primary"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </motion.div>
           </div>
         </div>
       </div>

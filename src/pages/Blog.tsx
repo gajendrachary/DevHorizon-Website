@@ -124,6 +124,8 @@ const Blog = () => {
   // Auto-scroll hook
   const {
     containerRef: autoScrollRef,
+    direction,
+    isPaused,
     handleMouseEnter,
     handleMouseLeave,
     handleTouchStart: autoTouchStart,
@@ -487,20 +489,44 @@ const Blog = () => {
                 <div className="flex-shrink-0 w-[calc(50vw-42.5vw)] sm:w-[calc(50vw-180px)] md:w-[calc(50vw-200px)]" />
               </div>
 
-              {/* Carousel Indicators */}
-              <div className="flex justify-center gap-2 mt-6">
-                {filteredPosts.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => scrollToCard(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === activeIndex
-                        ? 'w-8 bg-primary'
-                        : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                    }`}
-                    aria-label={`Go to article ${index + 1}`}
-                  />
-                ))}
+              {/* Carousel Indicators with Direction */}
+              <div className="flex justify-center items-center gap-3 mt-6">
+                <motion.div
+                  animate={{ 
+                    x: direction === 1 ? [0, -3, 0] : [0, 3, 0],
+                    opacity: isPaused ? 0.3 : 0.6
+                  }}
+                  transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-primary"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </motion.div>
+                
+                <div className="flex gap-2">
+                  {filteredPosts.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => scrollToCard(index)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        index === activeIndex
+                          ? 'w-8 bg-primary'
+                          : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                      }`}
+                      aria-label={`Go to article ${index + 1}`}
+                    />
+                  ))}
+                </div>
+                
+                <motion.div
+                  animate={{ 
+                    x: direction === 1 ? [0, 3, 0] : [0, -3, 0],
+                    opacity: isPaused ? 0.3 : 0.6
+                  }}
+                  transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-primary"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </motion.div>
               </div>
             </div>
           ) : (

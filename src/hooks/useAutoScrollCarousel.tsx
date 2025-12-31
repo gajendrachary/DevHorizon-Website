@@ -1,10 +1,10 @@
-import { useRef, useCallback, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 // ============= Configuration =============
 export interface AutoScrollConfig {
-  /** Scroll speed in pixels per frame (default: 1) */
+  /** Scroll speed in pixels per frame (default: 0.8) */
   speed?: number;
-  /** Delay in ms before reversing direction at edges (default: 1000) */
+  /** Delay in ms before reversing direction at edges (default: 1500) */
   reverseDelay?: number;
   /** Whether to pause on hover - desktop only (default: true) */
   pauseOnHover?: boolean;
@@ -13,8 +13,8 @@ export interface AutoScrollConfig {
 }
 
 const DEFAULT_CONFIG: Required<AutoScrollConfig> = {
-  speed: 1,
-  reverseDelay: 1000,
+  speed: 0.8,
+  reverseDelay: 1500,
   pauseOnHover: true,
   enabled: true,
 };
@@ -22,7 +22,7 @@ const DEFAULT_CONFIG: Required<AutoScrollConfig> = {
 export interface UseAutoScrollCarouselReturn {
   /** Ref to attach to the scroll container */
   containerRef: React.RefObject<HTMLDivElement>;
-  /** Current scroll direction: 1 = left-to-right content movement (scrolling right), -1 = opposite */
+  /** Current scroll direction: 1 = scrolling right, -1 = scrolling left */
   direction: 1 | -1;
   /** Whether auto-scroll is currently paused */
   isPaused: boolean;
@@ -31,7 +31,7 @@ export interface UseAutoScrollCarouselReturn {
   /** Mouse leave handler for pause-on-hover */
   handleMouseLeave: () => void;
   /** Touch start handler for mobile interaction */
-  handleTouchStart: (e: React.TouchEvent) => void;
+  handleTouchStart: () => void;
   /** Touch end handler for mobile interaction */
   handleTouchEnd: () => void;
   /** Manually pause auto-scroll */
@@ -42,172 +42,145 @@ export interface UseAutoScrollCarouselReturn {
 
 /**
  * Hook for creating an auto-scrolling, infinite back-and-forth carousel.
- * 
- * Features:
- * - Continuous horizontal auto-scroll
- * - Reverses direction at edges with configurable delay
- * - Smooth easing when changing direction
- * - Pause on hover (desktop)
- * - Resumes after touch/swipe interaction (mobile)
- * - Works with any number of items
  */
 export function useAutoScrollCarousel(config: AutoScrollConfig = {}): UseAutoScrollCarouselReturn {
   const mergedConfig = { ...DEFAULT_CONFIG, ...config };
-  const { speed, reverseDelay, pauseOnHover, enabled } = mergedConfig;
-
+  
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number | null>(null);
-  const directionRef = useRef<1 | -1>(1); // 1 = scrolling right (content moves left)
+  
+  // Store all config values in refs to avoid stale closures
+  const speedRef = useRef(mergedConfig.speed);
+  const reverseDelayRef = useRef(mergedConfig.reverseDelay);
+  const pauseOnHoverRef = useRef(mergedConfig.pauseOnHover);
+  const enabledRef = useRef(mergedConfig.enabled);
+  
+  // Animation state refs
+  const directionRef = useRef<1 | -1>(1);
   const isPausedRef = useRef(false);
   const isUserInteractingRef = useRef(false);
-  const reverseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const currentSpeedRef = useRef(speed);
-  const targetSpeedRef = useRef(speed);
+  const currentSpeedRef = useRef(mergedConfig.speed);
+  const targetSpeedRef = useRef(mergedConfig.speed);
+  const isReversingRef = useRef(false);
   
+  // React state for UI updates
   const [direction, setDirection] = useState<1 | -1>(1);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Smooth speed interpolation for direction changes
-  const easeSpeed = useCallback(() => {
-    const diff = targetSpeedRef.current - currentSpeedRef.current;
-    if (Math.abs(diff) > 0.01) {
-      currentSpeedRef.current += diff * 0.05; // Gentle easing
-    } else {
-      currentSpeedRef.current = targetSpeedRef.current;
-    }
-  }, []);
-
-  // Check if at scroll boundaries
-  const checkBoundaries = useCallback(() => {
-    const container = containerRef.current;
-    if (!container) return { atStart: false, atEnd: false };
-
-    const { scrollLeft, scrollWidth, clientWidth } = container;
-    const maxScroll = scrollWidth - clientWidth;
-    
-    // Small threshold to account for floating point errors
-    const threshold = 2;
-    const atStart = scrollLeft <= threshold;
-    const atEnd = scrollLeft >= maxScroll - threshold;
-
-    return { atStart, atEnd };
-  }, []);
-
-  // Schedule direction reversal
-  const scheduleReverse = useCallback(() => {
-    if (reverseTimeoutRef.current) {
-      clearTimeout(reverseTimeoutRef.current);
-    }
-
-    // Start decelerating
-    targetSpeedRef.current = 0;
-
-    reverseTimeoutRef.current = setTimeout(() => {
-      // Reverse direction
-      directionRef.current = directionRef.current === 1 ? -1 : 1;
-      setDirection(directionRef.current);
-      
-      // Start accelerating in new direction
-      targetSpeedRef.current = speed;
-    }, reverseDelay);
-  }, [reverseDelay, speed]);
+  // Sync config changes to refs
+  useEffect(() => {
+    speedRef.current = mergedConfig.speed;
+    reverseDelayRef.current = mergedConfig.reverseDelay;
+    pauseOnHoverRef.current = mergedConfig.pauseOnHover;
+    enabledRef.current = mergedConfig.enabled;
+    targetSpeedRef.current = mergedConfig.speed;
+  }, [mergedConfig.speed, mergedConfig.reverseDelay, mergedConfig.pauseOnHover, mergedConfig.enabled]);
 
   // Main animation loop
-  const animate = useCallback(() => {
-    const container = containerRef.current;
-    if (!container || isPausedRef.current || isUserInteractingRef.current) {
-      animationRef.current = requestAnimationFrame(animate);
-      return;
-    }
-
-    // Apply smooth speed easing
-    easeSpeed();
-
-    const { atStart, atEnd } = checkBoundaries();
-    
-    // Check if we need to reverse
-    if (directionRef.current === 1 && atEnd) {
-      scheduleReverse();
-    } else if (directionRef.current === -1 && atStart) {
-      scheduleReverse();
-    }
-
-    // Apply scroll
-    const scrollAmount = currentSpeedRef.current * directionRef.current;
-    container.scrollLeft += scrollAmount;
-
-    animationRef.current = requestAnimationFrame(animate);
-  }, [easeSpeed, checkBoundaries, scheduleReverse]);
-
-  // Start/stop animation based on enabled state
   useEffect(() => {
-    if (enabled) {
-      animationRef.current = requestAnimationFrame(animate);
-    }
+    if (!mergedConfig.enabled) return;
+
+    let frameId: number;
+    let reverseTimeoutId: NodeJS.Timeout | null = null;
+
+    const animate = () => {
+      const container = containerRef.current;
+      
+      if (!container) {
+        frameId = requestAnimationFrame(animate);
+        return;
+      }
+
+      // Skip if paused or user is interacting
+      if (isPausedRef.current || isUserInteractingRef.current) {
+        frameId = requestAnimationFrame(animate);
+        return;
+      }
+
+      // Smooth speed easing
+      const speedDiff = targetSpeedRef.current - currentSpeedRef.current;
+      if (Math.abs(speedDiff) > 0.01) {
+        currentSpeedRef.current += speedDiff * 0.05;
+      } else {
+        currentSpeedRef.current = targetSpeedRef.current;
+      }
+
+      // Check boundaries
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      const maxScroll = scrollWidth - clientWidth;
+      const threshold = 2;
+      const atStart = scrollLeft <= threshold;
+      const atEnd = scrollLeft >= maxScroll - threshold;
+
+      // Handle direction reversal at edges
+      if (!isReversingRef.current) {
+        if ((directionRef.current === 1 && atEnd) || (directionRef.current === -1 && atStart)) {
+          isReversingRef.current = true;
+          targetSpeedRef.current = 0;
+
+          reverseTimeoutId = setTimeout(() => {
+            directionRef.current = directionRef.current === 1 ? -1 : 1;
+            setDirection(directionRef.current);
+            targetSpeedRef.current = speedRef.current;
+            isReversingRef.current = false;
+          }, reverseDelayRef.current);
+        }
+      }
+
+      // Apply scroll
+      const scrollAmount = currentSpeedRef.current * directionRef.current;
+      container.scrollLeft += scrollAmount;
+
+      frameId = requestAnimationFrame(animate);
+    };
+
+    frameId = requestAnimationFrame(animate);
 
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-      if (reverseTimeoutRef.current) {
-        clearTimeout(reverseTimeoutRef.current);
-      }
-      if (resumeTimeoutRef.current) {
-        clearTimeout(resumeTimeoutRef.current);
+      cancelAnimationFrame(frameId);
+      if (reverseTimeoutId) {
+        clearTimeout(reverseTimeoutId);
       }
     };
-  }, [enabled, animate]);
+  }, [mergedConfig.enabled]);
 
-  // Handle mouse enter (pause on hover)
-  const handleMouseEnter = useCallback(() => {
-    if (!pauseOnHover) return;
+  // Event handlers
+  const handleMouseEnter = () => {
+    if (!pauseOnHoverRef.current) return;
     isPausedRef.current = true;
     setIsPaused(true);
-  }, [pauseOnHover]);
+  };
 
-  // Handle mouse leave (resume)
-  const handleMouseLeave = useCallback(() => {
-    if (!pauseOnHover) return;
+  const handleMouseLeave = () => {
+    if (!pauseOnHoverRef.current) return;
     isPausedRef.current = false;
     setIsPaused(false);
-    // Reset speed for smooth resume
     currentSpeedRef.current = 0;
-    targetSpeedRef.current = speed;
-  }, [pauseOnHover, speed]);
+    targetSpeedRef.current = speedRef.current;
+  };
 
-  // Handle touch start (user is interacting)
-  const handleTouchStart = useCallback(() => {
+  const handleTouchStart = () => {
     isUserInteractingRef.current = true;
-    // Clear any pending resume
-    if (resumeTimeoutRef.current) {
-      clearTimeout(resumeTimeoutRef.current);
-    }
-  }, []);
+  };
 
-  // Handle touch end (schedule resume)
-  const handleTouchEnd = useCallback(() => {
-    // Resume after a short delay to allow momentum scrolling
-    resumeTimeoutRef.current = setTimeout(() => {
+  const handleTouchEnd = () => {
+    setTimeout(() => {
       isUserInteractingRef.current = false;
-      // Reset speed for smooth resume
       currentSpeedRef.current = 0;
-      targetSpeedRef.current = speed;
-    }, 1500); // Wait for momentum to settle
-  }, [speed]);
+      targetSpeedRef.current = speedRef.current;
+    }, 1500);
+  };
 
-  // Manual pause/resume
-  const pause = useCallback(() => {
+  const pause = () => {
     isPausedRef.current = true;
     setIsPaused(true);
-  }, []);
+  };
 
-  const resume = useCallback(() => {
+  const resume = () => {
     isPausedRef.current = false;
     setIsPaused(false);
     currentSpeedRef.current = 0;
-    targetSpeedRef.current = speed;
-  }, [speed]);
+    targetSpeedRef.current = speedRef.current;
+  };
 
   return {
     containerRef,
