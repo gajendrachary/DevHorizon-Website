@@ -1,19 +1,30 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useAnimatedCounter } from '@/hooks/useAnimatedCounter';
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useAnimatedCounter } from "@/hooks/useAnimatedCounter";
 
 const stats = [
-  { value: 20, suffix: '+', label: 'Websites Built' },
-  { value: 5, suffix: '+', label: 'Mobile Apps Developed' },
-  { value: 95, suffix: '%', label: 'Client Satisfaction' },
-  { value: 15, suffix: '+', label: 'Team Members' },
+  { value: 20, suffix: "+", label: "Websites Built" },
+  { value: 5, suffix: "+", label: "Mobile Apps Developed" },
+  { value: 95, suffix: "%", label: "Client Satisfaction" },
 ];
 
-const StatItem = ({ value, suffix, label, delay, index }: { value: number; suffix: string; label: string; delay: number; index: number }) => {
+const StatItem = ({
+  value,
+  suffix,
+  label,
+  delay,
+  index,
+}: {
+  value: number;
+  suffix: string;
+  label: string;
+  delay: number;
+  index: number;
+}) => {
   const { ref, displayValue } = useAnimatedCounter({
     end: value,
     suffix,
-    duration: 2000
+    duration: 2000,
   });
 
   return (
@@ -22,25 +33,19 @@ const StatItem = ({ value, suffix, label, delay, index }: { value: number; suffi
       initial={{ opacity: 0, y: 30, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ 
-        duration: 0.5, 
+      transition={{
+        duration: 0.5,
         delay,
         type: "spring",
-        stiffness: 100
+        stiffness: 100,
       }}
       whileHover={{ scale: 1.05, y: -5 }}
       className="text-center group cursor-pointer"
     >
-      <motion.div 
-        className="relative"
-        whileHover={{ scale: 1.1 }}
-        transition={{ duration: 0.3 }}
-      >
+      <motion.div className="relative" whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
         {/* Glow effect */}
-        <motion.div 
-          className="absolute -inset-4 bg-primary/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        />
-        <motion.div 
+        <motion.div className="absolute -inset-4 bg-primary/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <motion.div
           className="text-4xl md:text-5xl font-bold text-primary mb-2 counter-animate relative"
           initial={{ scale: 0.5 }}
           whileInView={{ scale: 1 }}
@@ -50,7 +55,7 @@ const StatItem = ({ value, suffix, label, delay, index }: { value: number; suffi
           {displayValue}
         </motion.div>
       </motion.div>
-      <motion.div 
+      <motion.div
         className="text-muted-foreground font-medium"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -66,7 +71,7 @@ const StatItem = ({ value, suffix, label, delay, index }: { value: number; suffi
 export const StatsSection = () => {
   const { ref, inView } = useInView({
     threshold: 0.2,
-    triggerOnce: true
+    triggerOnce: true,
   });
 
   return (
@@ -79,7 +84,7 @@ export const StatsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <motion.span 
+          <motion.span
             className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
@@ -87,7 +92,7 @@ export const StatsSection = () => {
           >
             Why Choose DevHub Technologies
           </motion.span>
-          <motion.h2 
+          <motion.h2
             className="text-3xl md:text-4xl font-bold"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
