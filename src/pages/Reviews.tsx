@@ -66,7 +66,6 @@ const stats = [
   { value: "20+", label: "Projects Completed", emoji: "🚀" },
   { value: "95%", label: "Client Satisfaction", emoji: "⭐" },
   { value: "24/7", label: "Support Available", emoji: "💬" },
-  { value: "15+", label: "Team Members", emoji: "👥" },
 ];
 
 const Reviews = () => {
