@@ -103,7 +103,7 @@ export const StatsSection = () => {
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 justify-items-center">
           {stats.map((stat, index) => (
             <StatItem
               key={stat.label}
