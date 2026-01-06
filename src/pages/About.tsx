@@ -6,6 +6,10 @@ import { Button } from "@/components/ui/button";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 import { useRef, useState } from "react";
 import {
+  Dialog,
+  DialogContent,
+} from "@/components/ui/dialog";
+import {
   Linkedin,
   Github,
   Globe,
@@ -119,6 +123,9 @@ const About = () => {
   const [valuesActiveIndex, setValuesActiveIndex] = useState(0);
   const valuesTouchStartX = useRef(0);
   const valuesTouchEndX = useRef(0);
+
+  // Gajendrachary popup state
+  const [isGajendraPopupOpen, setIsGajendraPopupOpen] = useState(false);
 
   const handleTechScroll = () => {
     if (!techScrollRef.current) return;
@@ -418,8 +425,9 @@ const About = () => {
                 animate={teamInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
                 whileHover={{ y: -8, rotateY: 5, transition: { duration: 0.3 } }}
-                className="group relative bg-card border border-border p-8 text-center overflow-hidden rounded-xl"
+                className={`group relative bg-card border border-border p-8 text-center overflow-hidden rounded-xl ${member.name === "Gajendrachary" ? "cursor-pointer" : ""}`}
                 style={{ perspective: "1000px" }}
+                onClick={member.name === "Gajendrachary" ? () => setIsGajendraPopupOpen(true) : undefined}
               >
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -453,7 +461,7 @@ const About = () => {
                 <p className="text-muted-foreground mb-6 text-sm">{member.role}</p>
 
                 {member.links.length > 0 && (
-                  <div className="flex items-center justify-center gap-3">
+                  <div className="flex items-center justify-center gap-3" onClick={(e) => e.stopPropagation()}>
                     {member.links.map((link) => (
                       <a
                         key={link.href}
@@ -603,6 +611,17 @@ const About = () => {
           </motion.div>
         </div>
       </section>
+      {/* Gajendrachary Website Popup */}
+      <Dialog open={isGajendraPopupOpen} onOpenChange={setIsGajendraPopupOpen}>
+        <DialogContent className="max-w-5xl w-[95vw] h-[85vh] p-0 overflow-hidden">
+          <iframe
+            src="https://gajendrachary.in/"
+            className="w-full h-full border-0"
+            title="Gajendrachary Portfolio"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          />
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 };
