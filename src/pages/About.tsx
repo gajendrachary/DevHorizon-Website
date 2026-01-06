@@ -9,7 +9,8 @@ import {
   Dialog,
   DialogContent,
 } from "@/components/ui/dialog";
-import {
+import {150
+  
   Linkedin,
   Github,
   Globe,
@@ -26,7 +27,8 @@ import {
   Mail,
   Phone,
   ChevronLeft,
-  ChevronRight,
+  ChevronRight,,
+    ExternalLink
 } from "lucide-react";
 import teamGajendrachary from "@/assets/team-gajendrachary.png";
 
@@ -444,6 +446,11 @@ const About = () => {
                         decoding="async"
                       />
                     </div>
+                                {member.name === "Gajendrachary" && (
+                                  <div className="absolute top-2 right-2 bg-white rounded-full p-1.5 shadow-md">
+                                                        <ExternalLink className="w-4 h-4 text-primary" />
+                                                      </div>
+                                )}
                   ) : (
                     <div className="w-28 h-28 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
                       <span className="text-4xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
