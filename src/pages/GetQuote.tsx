@@ -4,12 +4,13 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Check, ArrowRight, ArrowLeft, Clock, Sparkles, Zap, Target, Palette as PaletteIcon, Cloud as CloudIcon, Loader2 } from 'lucide-react';
+import { Check, ArrowRight, ArrowLeft, Clock, Sparkles, Zap, Target, Palette as PaletteIcon, Cloud as CloudIcon, Loader2, Shield } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 import { supabase } from '@/integrations/supabase/client';
 import { z } from 'zod';
 import DOMPurify from 'dompurify';
+import { useRecaptcha } from '@/hooks/useRecaptcha';
 
 // Rate limiting constants
 const RATE_LIMIT_COOLDOWN_MS = 60000; // 60 seconds between submissions
@@ -146,9 +147,8 @@ const GetQuote = () => {
     company: '',
     message: ''
   });
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+  const { executeRecaptcha, verifyToken, isReady: recaptchaReady } = useRecaptcha();
   const toggleService = (id: string) => {
     setSelectedServices(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]);
   };
@@ -169,6 +169,23 @@ const GetQuote = () => {
 
     setIsSubmitting(true);
     setFormErrors({});
+
+    // reCAPTCHA verification
+    if (recaptchaReady) {
+      const recaptchaToken = await executeRecaptcha('quote_form');
+      if (recaptchaToken) {
+        const isHuman = await verifyToken(recaptchaToken);
+        if (!isHuman) {
+          setIsSubmitting(false);
+          toast({
+            title: "Verification Failed",
+            description: "Please try again. If the problem persists, contact us directly.",
+            variant: "destructive"
+          });
+          return;
+        }
+      }
+    }
     
     // Sanitize all text inputs before validation
     const sanitizedFormData = {
@@ -717,17 +734,25 @@ const GetQuote = () => {
                 </motion.div>}
 
               {/* Navigation */}
-              <div className="flex justify-between mt-8 pt-6 border-t border-border">
-                {step > 1 ? <Button variant="outline" onClick={() => setStep(step - 1)}>
-                    <ArrowLeft className="w-4 h-4 mr-2" /> Back
-                  </Button> : <div />}
-                
-                {step < 3 ? <Button onClick={() => setStep(step + 1)} disabled={step === 1 && selectedServices.length === 0}>
-                    Next <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button> : <Button variant="hero" onClick={handleSubmit} disabled={!formData.name || !formData.email || isSubmitting || !canSubmit}>
-                    {isSubmitting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
-                    {isSubmitting ? 'Submitting...' : !canSubmit ? 'Please wait...' : 'Submit Quote Request'}
-                  </Button>}
+              <div className="flex flex-col gap-4 mt-8 pt-6 border-t border-border">
+                {step === 3 && recaptchaReady && (
+                  <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                    <Shield className="w-3 h-3" />
+                    <span>Protected by reCAPTCHA</span>
+                  </div>
+                )}
+                <div className="flex justify-between">
+                  {step > 1 ? <Button variant="outline" onClick={() => setStep(step - 1)}>
+                      <ArrowLeft className="w-4 h-4 mr-2" /> Back
+                    </Button> : <div />}
+                  
+                  {step < 3 ? <Button onClick={() => setStep(step + 1)} disabled={step === 1 && selectedServices.length === 0}>
+                      Next <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button> : <Button variant="hero" onClick={handleSubmit} disabled={!formData.name || !formData.email || isSubmitting || !canSubmit}>
+                      {isSubmitting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+                      {isSubmitting ? 'Submitting...' : !canSubmit ? 'Please wait...' : 'Submit Quote Request'}
+                    </Button>}
+                </div>
               </div>
             </div>
           </motion.div>
