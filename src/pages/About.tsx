@@ -453,8 +453,8 @@ const About = () => {
                     </div>
                   )}
                   {member.name === "Gajendrachary" && (
-                    <div className="absolute top-2 right-2 bg-white rounded-full p-1.5 shadow-md">
-                      <ExternalLink className="w-4 h-4 text-primary" />
+                    <div className="absolute -top-1 -right-1 bg-primary rounded-full p-2 shadow-lg group-hover:scale-110 group-hover:shadow-primary/40 transition-all duration-300">
+                      <ExternalLink className="w-4 h-4 text-primary-foreground" />
                     </div>
                   )}
                   {/* Status indicator */}
