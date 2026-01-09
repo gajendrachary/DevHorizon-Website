@@ -170,19 +170,23 @@ const GetQuote = () => {
     setIsSubmitting(true);
     setFormErrors({});
 
-    // reCAPTCHA verification
+    // reCAPTCHA verification (optional - proceed if not available or fails)
     if (recaptchaReady) {
-      const recaptchaToken = await executeRecaptcha('quote_form');
-      if (recaptchaToken) {
-        const isHuman = await verifyToken(recaptchaToken);
-        if (!isHuman) {
-          setIsSubmitting(false);
-          toast({
-            title: "Verification Failed",
-            description: "Please try again. If the problem persists, contact us directly.",
-            variant: "destructive"
-          });
-          return;
+      try {
+        const recaptchaToken = await executeRecaptcha('quote_form');
+        if (recaptchaToken) {
+          const isHuman = await verifyToken(recaptchaToken);
+          if (!isHuman) {
+            // Log for monitoring but don't block submission
+            if (import.meta.env.DEV) {
+              console.log('reCAPTCHA verification returned low score');
+            }
+          }
+        }
+      } catch (error) {
+        // reCAPTCHA failed - proceed anyway with rate limiting protection
+        if (import.meta.env.DEV) {
+          console.log('reCAPTCHA verification skipped:', error);
         }
       }
     }
