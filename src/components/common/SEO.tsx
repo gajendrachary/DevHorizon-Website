@@ -24,7 +24,7 @@ export const SEO = ({
   noindex = false,
 }: SEOProps) => {
   const location = useLocation();
-  const fullTitle = title.includes('DevHub') ? title : `${title} | DevHub Technologies`;
+  const fullTitle = title.includes('DevHorizon') ? title : `${title} | DevHorizon Technologies`;
   const canonicalUrl = canonical || `${BASE_URL}${location.pathname}`;
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export const SEO = ({
 export const getOrganizationSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'DevHub Technologies',
+  name: 'DevHorizon Technologies',
   url: 'https://devhubtechnologies.in',
   logo: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
   description: 'Full-service digital agency specializing in web development, mobile apps, and Meta advertising.',
@@ -111,12 +111,12 @@ export const getOrganizationSchema = () => ({
     '@type': 'ContactPoint',
     telephone: '+91-8688097373',
     contactType: 'customer service',
-    email: 'contact@devhub.tech',
+    email: 'contact@devhorizon.tech',
     availableLanguage: ['English', 'Hindi', 'Kannada'],
   },
   sameAs: [
-    'https://linkedin.com/company/devhub',
-    'https://github.com/devhub',
+    'https://linkedin.com/company/devhorizon',
+    'https://github.com/devhorizon',
   ],
   foundingDate: '2025-06',
   founder: {
@@ -129,10 +129,10 @@ export const getLocalBusinessSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   '@id': 'https://devhubtechnologies.in/#localbusiness',
-  name: 'DevHub Technologies',
+  name: 'DevHorizon Technologies',
   image: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
   telephone: '+91-8688097373',
-  email: 'contact@devhub.tech',
+  email: 'contact@devhorizon.tech',
   url: 'https://devhubtechnologies.in',
   address: {
     '@type': 'PostalAddress',
@@ -167,7 +167,7 @@ export const getServiceSchema = (services: { name: string; description: string; 
     description: service.description,
     provider: {
       '@type': 'Organization',
-      name: 'DevHub Technologies',
+      name: 'DevHorizon Technologies',
     },
     offers: {
       '@type': 'Offer',
@@ -191,7 +191,7 @@ export const getBreadcrumbSchema = (items: { name: string; url: string }[]) => (
 export const getAggregateRatingSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'DevHub Technologies',
+  name: 'DevHorizon Technologies',
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.9',

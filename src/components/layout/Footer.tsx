@@ -52,7 +52,7 @@ export const Footer = () => {
                 animate={{ y: [0, -4, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
-              <span className="font-logo font-bold text-xl text-primary-foreground tracking-tight group-hover:text-primary transition-colors duration-200">DevHub Technologies</span>
+              <span className="font-logo font-bold text-xl text-primary-foreground tracking-tight group-hover:text-primary transition-colors duration-200">DevHorizon Technologies</span>
             </Link>
             <p className="text-sm leading-relaxed opacity-80 mb-6">
               Transforming ideas into digital excellence. We build custom websites, mobile apps, and manage Meta ads to help businesses grow in the digital age.
@@ -185,7 +185,7 @@ export const Footer = () => {
           className="mt-16 pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4"
         >
           <p className="text-sm opacity-60 text-center md:text-left">
-            © 2025 DevHub Technologies. All rights reserved. Crafted with precision in Bengaluru 🇮🇳
+            © 2025 DevHorizon Technologies. All rights reserved. Crafted with precision in Bengaluru 🇮🇳
           </p>
           <div className="flex items-center gap-6">
             <Link

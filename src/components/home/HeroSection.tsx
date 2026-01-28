@@ -239,7 +239,7 @@ export const HeroSection = () => {
             {/* Badge */}
             <motion.div variants={itemVariants} className="flex flex-col items-start gap-1 mb-6">
               <span className="text-xl md:text-2xl font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
-                DevHub Technologies
+                DevHorizon Technologies
               </span>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-sm font-medium text-primary-foreground">
                 •Est. 2025
@@ -284,7 +284,7 @@ export const HeroSection = () => {
 
             {/* Description */}
             <motion.p variants={itemVariants} className="mb-8 leading-relaxed text-white/90 drop-shadow-[0_0_6px_rgba(255,255,255,0.3)]">
-              DevHub Technologies is a full-service digital agency specializing in crafting exceptional digital experiences. 
+              DevHorizon Technologies is a full-service digital agency specializing in crafting exceptional digital experiences. 
               We help businesses establish a powerful online presence and drive measurable growth through 
               innovative technology solutions.
             </motion.p>

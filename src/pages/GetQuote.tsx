@@ -281,9 +281,9 @@ const GetQuote = () => {
     description: 'Request a custom quote for web development, mobile apps, or Meta ads services.',
     mainEntity: {
       '@type': 'Organization',
-      name: 'DevHub Technologies',
+      name: 'DevHorizon Technologies',
       telephone: '+91-8688097373',
-      email: 'contact@devhub.tech',
+      email: 'contact@devhorizon.tech',
     },
   };
 
@@ -294,7 +294,7 @@ const GetQuote = () => {
 
   return <Layout>
       <SEO
-        title="Get a Free Quote | DevHub - Web & App Development Services"
+        title="Get a Free Quote | DevHorizon - Web & App Development Services"
         description="Request a custom quote for your web development, mobile app, or Meta ads project. Free consultation available. Transparent pricing starting from ₹15,000. Response within 24 hours."
         schema={{ '@context': 'https://schema.org', '@graph': [contactSchema, breadcrumbSchema] }}
       />

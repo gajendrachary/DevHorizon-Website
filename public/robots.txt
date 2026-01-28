@@ -1,4 +1,4 @@
-# DevHub Technologies Robots.txt
+# DevHorizon Technologies Robots.txt
 # https://devhubtechnologies.in
 
 User-agent: Googlebot

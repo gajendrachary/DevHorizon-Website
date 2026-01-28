@@ -20,8 +20,8 @@ const Index = () => {
   return (
     <Layout>
       <SEO
-        title="DevHub Technologies - Transforming Ideas Into Digital Excellence | Web & Mobile Development Bengaluru"
-        description="DevHub Technologies is a full-service digital agency in Bengaluru offering custom web development starting ₹30,000, mobile apps from ₹40,000, and Meta ads management. Transform your business with our innovative solutions."
+        title="DevHorizon Technologies - Transforming Ideas Into Digital Excellence | Web & Mobile Development Bengaluru"
+        description="DevHorizon Technologies is a full-service digital agency in Bengaluru offering custom web development starting ₹30,000, mobile apps from ₹40,000, and Meta ads management. Transform your business with our innovative solutions."
         schema={combinedSchema}
       />
       
