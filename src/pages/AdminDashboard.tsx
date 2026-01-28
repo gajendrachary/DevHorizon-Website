@@ -152,7 +152,7 @@ const AdminDashboard = () => {
   if (!isAdmin && !authLoading) {
     return (
       <Layout>
-        <SEO title="Access Denied | DevHub Technologies" description="" noindex={true} />
+        <SEO title="Access Denied | DevHorizon Technologies" description="" noindex={true} />
         <div className="min-h-[80vh] flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-16 h-16 text-destructive mx-auto mb-4" />
@@ -168,7 +168,7 @@ const AdminDashboard = () => {
   return (
     <Layout>
       <SEO
-        title="Admin Dashboard | DevHub Technologies"
+        title="Admin Dashboard | DevHorizon Technologies"
         description="Manage form submissions and client inquiries"
         noindex={true}
       />

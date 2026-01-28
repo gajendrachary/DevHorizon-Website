@@ -700,7 +700,7 @@ const Projects = () => {
   const projectsSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "DevHub Technologies Portfolio",
+    name: "DevHorizon Technologies Portfolio",
     description: "Our portfolio of web and mobile development projects.",
     itemListElement: [
       ...websites.map((p, i) => ({
@@ -728,8 +728,8 @@ const Projects = () => {
   return (
     <Layout>
       <SEO
-        title="Our Portfolio - Web & Mobile Projects | DevHub Bengaluru"
-        description="View DevHub's portfolio of 20+ successful projects including Jaggery Tea Point, Haven Salad, BLR360 taxi app, and more. See how we've helped businesses grow with custom web and mobile solutions."
+        title="Our Portfolio - Web & Mobile Projects | DevHorizon Bengaluru"
+        description="View DevHorizon's portfolio of 20+ successful projects including Jaggery Tea Point, Haven Salad, BLR360 taxi app, and more. See how we've helped businesses grow with custom web and mobile solutions."
         schema={{ "@context": "https://schema.org", "@graph": [projectsSchema, breadcrumbSchema] }}
       />
       {/* Dynamic Background Layer */}

@@ -227,11 +227,11 @@ const Blog = () => {
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'DevHub Technologies Blog',
+    name: 'DevHorizon Technologies Blog',
     description: 'Insights on web development, mobile apps, Meta ads, and UI/UX design.',
     publisher: {
       '@type': 'Organization',
-      name: 'DevHub Technologies',
+      name: 'DevHorizon Technologies',
     },
     blogPost: blogPosts.map((post) => ({
       '@type': 'BlogPosting',
@@ -250,8 +250,8 @@ const Blog = () => {
   return (
     <Layout>
       <SEO
-        title="DevHub Technologies Blog - Web Development, Mobile & Marketing Insights"
-        description="Stay updated with DevHub Technologies blog on web development trends, mobile app best practices, Meta ads optimization tips, and UI/UX design principles. Expert insights from Bengaluru's top digital agency."
+        title="DevHorizon Technologies Blog - Web Development, Mobile & Marketing Insights"
+        description="Stay updated with DevHorizon Technologies blog on web development trends, mobile app best practices, Meta ads optimization tips, and UI/UX design principles. Expert insights from Bengaluru's top digital agency."
         schema={{ '@context': 'https://schema.org', '@graph': [blogSchema, breadcrumbSchema] }}
       />
       {/* Hero Section */}
@@ -265,7 +265,7 @@ const Blog = () => {
             className="max-w-3xl"
           >
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              DevHub Technologies Blog
+              DevHorizon Technologies Blog
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Insights & Updates

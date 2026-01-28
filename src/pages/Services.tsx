@@ -237,8 +237,8 @@ const Services = () => {
   return (
     <Layout>
       <SEO
-        title="Our Services - Web Development, Mobile Apps & Meta Ads | DevHub Bengaluru"
-        description="Explore DevHub's digital services: Custom web development starting ₹30,000, Mobile app development from ₹40,000, and Meta Ads management from ₹15,000/month. Get a free quote today."
+        title="Our Services - Web Development, Mobile Apps & Meta Ads | DevHorizon Bengaluru"
+        description="Explore DevHorizon's digital services: Custom web development starting ₹30,000, Mobile app development from ₹40,000, and Meta Ads management from ₹15,000/month. Get a free quote today."
         schema={{ '@context': 'https://schema.org', '@graph': [serviceSchemaData, breadcrumbSchema] }}
       />
       {/* CTA Section - Now at the top */}

@@ -33,7 +33,7 @@ const reviews = [
     company: "BLR360",
     rating: 5,
     review:
-      "The mobile app DevHub Technologies developed for our taxi service is exceptional. Real-time tracking, seamless payments, and great user experience. Our booking rates have increased by 40% since launch.",
+      "The mobile app DevHorizon Technologies developed for our taxi service is exceptional. Real-time tracking, seamless payments, and great user experience. Our booking rates have increased by 40% since launch.",
     emoji: "🚕",
   },
   {
@@ -41,7 +41,7 @@ const reviews = [
     company: "Haven Salad",
     rating: 5,
     review:
-      "DevHub delivered beyond our expectations. The subscription system they built for our healthy food delivery service works perfectly. Their ongoing support has been invaluable.",
+      "DevHorizon delivered beyond our expectations. The subscription system they built for our healthy food delivery service works perfectly. Their ongoing support has been invaluable.",
     emoji: "🥗",
   },
   {
@@ -49,7 +49,7 @@ const reviews = [
     company: "Sri Kenchamba Ceramics",
     rating: 5,
     review:
-      "Professional, responsive, and technically excellent. DevHub created a comprehensive product catalog website that has helped us reach customers across South India. Highly recommended!",
+      "Professional, responsive, and technically excellent. DevHorizon created a comprehensive product catalog website that has helped us reach customers across South India. Highly recommended!",
     emoji: "🏺",
   },
   {
@@ -57,7 +57,7 @@ const reviews = [
     company: "TechStart UAE",
     rating: 5,
     review:
-      "As an international client, I was impressed by DevHub's communication and professionalism. They delivered our web application on time and within budget. Great experience working with them.",
+      "As an international client, I was impressed by DevHorizon's communication and professionalism. They delivered our web application on time and within budget. Great experience working with them.",
     emoji: "🌍",
   },
 ];
@@ -157,8 +157,8 @@ const Reviews = () => {
   return (
     <Layout>
       <SEO
-        title="Client Testimonials & Reviews | DevHub Technologies - 95% Client Satisfaction"
-        description="Read what our clients say about DevHub Technologies. With 95% client satisfaction and 40+ successful projects delivered, see why businesses choose us for web and mobile development."
+        title="Client Testimonials & Reviews | DevHorizon Technologies - 95% Client Satisfaction"
+        description="Read what our clients say about DevHorizon Technologies. With 95% client satisfaction and 40+ successful projects delivered, see why businesses choose us for web and mobile development."
         schema={{ "@context": "https://schema.org", "@graph": [reviewSchema, breadcrumbSchema] }}
       />
 
@@ -178,7 +178,7 @@ const Reviews = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-6">What Our Clients Say</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Don't just take our word for it. Here's what our clients have to say about their experience working with
-              DevHub.
+              DevHorizon.
             </p>
           </motion.div>
         </div>
