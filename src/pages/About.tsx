@@ -60,8 +60,8 @@ const techStack = [
 
 const team = [
   {
-    name: "Pavan Raj",
-    role: "Operations & Client Relations",
+    name: "A Eswari",
+    role: "Director",
     image: null,
     links: [],
   },
