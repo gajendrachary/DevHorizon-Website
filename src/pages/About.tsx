@@ -272,7 +272,7 @@ const About = () => {
                 work closely with our clients to ensure their vision becomes a digital reality.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                DEVHORIZON TECHNOLOGIES PRIVATE LIMITED having CIN U62011KA2026PTC216351 is 1 days old Private company incorporated with MCA on 19th February, 2026. DEVHORIZON TECHNOLOGIES PRIVATE LIMITED is listed in the class of Private company and classified as Non-govt company. This company is registered at Registrar of Companies(ROC), RoC-Bangalore.
+                DEVHORIZON TECHNOLOGIES PRIVATE LIMITED having CIN U62011KA2026PTC216351 is  Private company incorporated with MCA on 19th February, 2026. DEVHORIZON TECHNOLOGIES PRIVATE LIMITED is listed in the class of Private company and classified as Non-govt company. This company is registered at Registrar of Companies(ROC), RoC-Bangalore.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 The company has 2 directors/key management personal A ESWARI, A GAJENDRACHARY. DEVHORIZON TECHNOLOGIES PVT LTD company registration number is 216351 and its Corporate Identification Number(CIN) provided from MCA is U62011KA2026PTC216351.
