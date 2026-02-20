@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 import { useRef, useState } from "react";
+import teamEswari from "@/assets/team-eswari.png";
 import {
   Dialog,
   DialogContent,
@@ -62,7 +63,7 @@ const team = [
   {
     name: "A Eswari",
     role: "Director",
-    image: null,
+    image: teamEswari,
     links: [],
   },
   {
