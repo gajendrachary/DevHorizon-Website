@@ -126,7 +126,7 @@ export const HeroSection = () => {
   // Background image carousel with longer interval
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex(prev => (prev + 1) % backgroundImages.length);
+      setCurrentImageIndex((prev) => (prev + 1) % backgroundImages.length);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -152,30 +152,30 @@ export const HeroSection = () => {
       backgroundColor: "#1a1a1a"
     }}>
         <AnimatePresence mode="sync">
-          <motion.img 
-            key={safeImageIndex} 
-            src={currentImage.src} 
-            alt={currentImage.alt} 
-            className="absolute inset-0 w-full h-full object-cover object-top sm:object-center" 
-            loading={safeImageIndex === 0 ? "eager" : "lazy"}
-            decoding="async"
-            fetchPriority={safeImageIndex === 0 ? "high" : "low"}
-            initial={{
-              opacity: 0,
-              scale: 1.1
-            }} 
-            animate={{
-              opacity: 0.75,
-              scale: 1
-            }} 
-            exit={{
-              opacity: 0
-            }} 
-            transition={{
-              duration: 1.2,
-              ease: "easeInOut"
-            }} 
-          />
+          <motion.img
+          key={safeImageIndex}
+          src={currentImage.src}
+          alt={currentImage.alt}
+          className="absolute inset-0 w-full h-full object-cover object-top sm:object-center"
+          loading={safeImageIndex === 0 ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={safeImageIndex === 0 ? "high" : "low"}
+          initial={{
+            opacity: 0,
+            scale: 1.1
+          }}
+          animate={{
+            opacity: 0.75,
+            scale: 1
+          }}
+          exit={{
+            opacity: 0
+          }}
+          transition={{
+            duration: 1.2,
+            ease: "easeInOut"
+          }} />
+
         </AnimatePresence>
         {/* Carousel indicators */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
@@ -239,40 +239,40 @@ export const HeroSection = () => {
             {/* Badge */}
             <motion.div variants={itemVariants} className="flex flex-col items-start gap-1 mb-6">
               <span className="text-xl md:text-2xl font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
-                DevHorizon Technologies
+                DevHorizon Technologies Private Limited
               </span>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-sm font-medium text-primary-foreground">
                 •Est. 2025
                 <motion.span className="w-2 h-2 bg-primary rounded-full" animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [1, 0.7, 1]
-                }} transition={{
-                  duration: 1.5,
-                  repeat: Infinity
-                }} />
+                scale: [1, 1.5, 1],
+                opacity: [1, 0.7, 1]
+              }} transition={{
+                duration: 1.5,
+                repeat: Infinity
+              }} />
                 Bengaluru, India
               </div>
             </motion.div>
 
             {/* Headline with smooth fade animation */}
-            <motion.h1 
-              variants={itemVariants} 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-mono text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-            >
-              <motion.span 
-                className="tracking-tight inline-block"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              >
+            <motion.h1
+            variants={itemVariants}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-mono text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+
+              <motion.span
+              className="tracking-tight inline-block"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}>
+
                 {fullText}
               </motion.span>
-              <motion.span 
-                className="inline-block tracking-tight text-white"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              >
+              <motion.span
+              className="inline-block tracking-tight text-white"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}>
+
                 {highlightText}
               </motion.span>
             </motion.h1>
