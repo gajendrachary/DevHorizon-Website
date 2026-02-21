@@ -33,7 +33,7 @@ const reviews = [
     company: "BLR360",
     rating: 5,
     review:
-      "The mobile app DevHorizon Technologies developed for our taxi service is exceptional. Real-time tracking, seamless payments, and great user experience. Our booking rates have increased by 40% since launch.",
+      "The mobile app DevHorizon Technologies Private Limited developed for our taxi service is exceptional. Real-time tracking, seamless payments, and great user experience. Our booking rates have increased by 40% since launch.",
     emoji: "🚕",
   },
   {
@@ -157,8 +157,8 @@ const Reviews = () => {
   return (
     <Layout>
       <SEO
-        title="Client Testimonials & Reviews | DevHorizon Technologies - 95% Client Satisfaction"
-        description="Read what our clients say about DevHorizon Technologies. With 95% client satisfaction and 40+ successful projects delivered, see why businesses choose us for web and mobile development."
+        title="Client Testimonials & Reviews | DevHorizon Technologies Private Limited - 95% Client Satisfaction"
+        description="Read what our clients say about DevHorizon Technologies Private Limited. With 95% client satisfaction and 40+ successful projects delivered, see why businesses choose us for web and mobile development."
         schema={{ "@context": "https://schema.org", "@graph": [reviewSchema, breadcrumbSchema] }}
       />
 

@@ -9,8 +9,8 @@ import {
 
 const faqs = [
   {
-    question: 'What services does DevHorizon Technologies offer?',
-    answer: 'DevHorizon Technologies offers comprehensive digital services including custom web development, mobile app development (iOS & Android), Meta ads management, UI/UX design, and cloud solutions. We specialize in creating tailored solutions that drive business growth.'
+    question: 'What services does DevHorizon Technologies Private Limited offer?',
+    answer: 'DevHorizon Technologies Private Limited offers comprehensive digital services including custom web development, mobile app development (iOS & Android), Meta ads management, UI/UX design, and cloud solutions. We specialize in creating tailored solutions that drive business growth.'
   },
   {
     question: 'How long does it typically take to build a website?',

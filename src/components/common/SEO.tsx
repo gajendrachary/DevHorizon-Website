@@ -24,7 +24,7 @@ export const SEO = ({
   noindex = false,
 }: SEOProps) => {
   const location = useLocation();
-  const fullTitle = title.includes('DevHorizon') ? title : `${title} | DevHorizon Technologies`;
+  const fullTitle = title.includes('DevHorizon') ? title : `${title} | DevHorizon Technologies Private Limited`;
   const canonicalUrl = canonical || `${BASE_URL}${location.pathname}`;
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export const SEO = ({
 export const getOrganizationSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'DevHorizon Technologies',
+  name: 'DevHorizon Technologies Private Limited',
   url: 'https://devhubtechnologies.in',
   logo: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
   description: 'Full-service digital agency specializing in web development, mobile apps, and Meta advertising.',
@@ -129,7 +129,7 @@ export const getLocalBusinessSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   '@id': 'https://devhubtechnologies.in/#localbusiness',
-  name: 'DevHorizon Technologies',
+  name: 'DevHorizon Technologies Private Limited',
   image: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
   telephone: '+91-8688097373',
   email: 'contact@devhorizon.tech',
@@ -167,7 +167,7 @@ export const getServiceSchema = (services: { name: string; description: string; 
     description: service.description,
     provider: {
       '@type': 'Organization',
-      name: 'DevHorizon Technologies',
+      name: 'DevHorizon Technologies Private Limited',
     },
     offers: {
       '@type': 'Offer',
@@ -191,7 +191,7 @@ export const getBreadcrumbSchema = (items: { name: string; url: string }[]) => (
 export const getAggregateRatingSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'DevHorizon Technologies',
+  name: 'DevHorizon Technologies Private Limited',
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.9',
