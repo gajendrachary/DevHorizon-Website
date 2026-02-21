@@ -284,10 +284,10 @@ export const HeroSection = () => {
 
             {/* Description */}
             <motion.p variants={itemVariants} className="mb-8 leading-relaxed text-white/90 drop-shadow-[0_0_6px_rgba(255,255,255,0.3)]">
-              DevHorizon Technologies is a full-service digital agency specializing in crafting exceptional digital experiences. 
-              We help businesses establish a powerful online presence and drive measurable growth through 
-              innovative technology solutions.
-            </motion.p>
+              DevHorizon Technologies Private Limited is a full-service digital agency specializing in crafting exceptional digital experiences. We help businesses establish a powerful online presence and drive measurable growth through innovative technology solutions.
+            
+
+          </motion.p>
 
             {/* CTAs with shine effect */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mb-12">
