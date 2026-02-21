@@ -8,8 +8,8 @@ import { useRef, useState } from "react";
 import teamEswari from "@/assets/team-eswari.png";
 import {
   Dialog,
-  DialogContent,
-} from "@/components/ui/dialog";
+  DialogContent } from
+"@/components/ui/dialog";
 import {
   Linkedin,
   Github,
@@ -28,90 +28,90 @@ import {
   Phone,
   ChevronLeft,
   ChevronRight,
-  ExternalLink,
-} from "lucide-react";
+  ExternalLink } from
+"lucide-react";
 import teamGajendrachary from "@/assets/team-gajendrachary.png";
 
 const techStack = [
-  {
-    category: "Frontend",
-    icon: Globe,
-    emoji: "🌐",
-    technologies: ["React.js", "Vue.js", "Next.js", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    category: "Mobile",
-    icon: Smartphone,
-    emoji: "📱",
-    technologies: ["iOS (Swift)", "Android (Kotlin)", "React Native", "Firebase"],
-  },
-  {
-    category: "Backend & Cloud",
-    icon: Server,
-    emoji: "⚙️",
-    technologies: ["Node.js", "Python", "Django", "AWS", "GCP"],
-  },
-  {
-    category: "Design",
-    icon: Palette,
-    emoji: "🎨",
-    technologies: ["UI/UX", "Figma", "Prototyping", "Brand Identity"],
-  },
-];
+{
+  category: "Frontend",
+  icon: Globe,
+  emoji: "🌐",
+  technologies: ["React.js", "Vue.js", "Next.js", "TypeScript", "Tailwind CSS"]
+},
+{
+  category: "Mobile",
+  icon: Smartphone,
+  emoji: "📱",
+  technologies: ["iOS (Swift)", "Android (Kotlin)", "React Native", "Firebase"]
+},
+{
+  category: "Backend & Cloud",
+  icon: Server,
+  emoji: "⚙️",
+  technologies: ["Node.js", "Python", "Django", "AWS", "GCP"]
+},
+{
+  category: "Design",
+  icon: Palette,
+  emoji: "🎨",
+  technologies: ["UI/UX", "Figma", "Prototyping", "Brand Identity"]
+}];
+
 
 const team = [
-  {
-    name: "A Eswari",
-    role: "Director",
-    image: teamEswari,
-    links: [],
-  },
-  {
-    name: "Gajendrachary",
-    role: "Founder & Developer",
-    image: teamGajendrachary,
-    links: [
-      { icon: Linkedin, href: "https://linkedin.com/in/gajendrachary" },
-      { icon: Github, href: "https://github.com/gajendrachary" },
-    ],
-  },
-];
+{
+  name: "A Eswari",
+  role: "Director",
+  image: teamEswari,
+  links: []
+},
+{
+  name: "Gajendrachary",
+  role: "Founder & Developer",
+  image: teamGajendrachary,
+  links: [
+  { icon: Linkedin, href: "https://linkedin.com/in/gajendrachary" },
+  { icon: Github, href: "https://github.com/gajendrachary" }]
+
+}];
+
 
 const values = [
-  { icon: Target, emoji: "🎯", title: "Innovation", description: "Pushing boundaries with cutting-edge solutions" },
-  { icon: Trophy, emoji: "🏆", title: "Excellence", description: "Delivering nothing but the best quality" },
-  { icon: Shield, emoji: "🛡️", title: "Integrity", description: "Honest and transparent in all dealings" },
-  { icon: Users, emoji: "👥", title: "Reliability", description: "Dependable partnerships you can count on" },
-  { icon: Handshake, emoji: "🤝", title: "Collaboration", description: "Working together for shared success" },
-  { icon: Leaf, emoji: "🌱", title: "Sustainability", description: "Building for long-term growth" },
-];
+{ icon: Target, emoji: "🎯", title: "Innovation", description: "Pushing boundaries with cutting-edge solutions" },
+{ icon: Trophy, emoji: "🏆", title: "Excellence", description: "Delivering nothing but the best quality" },
+{ icon: Shield, emoji: "🛡️", title: "Integrity", description: "Honest and transparent in all dealings" },
+{ icon: Users, emoji: "👥", title: "Reliability", description: "Dependable partnerships you can count on" },
+{ icon: Handshake, emoji: "🤝", title: "Collaboration", description: "Working together for shared success" },
+{ icon: Leaf, emoji: "🌱", title: "Sustainability", description: "Building for long-term growth" }];
+
 
 const stats = [
-  { value: "20+", label: "Successful website projects" },
-  { value: "5+", label: "Mobile applications deployed" },
-  { value: "500+", label: "Active users" },
-  { value: "95%", label: "Client satisfaction" },
-];
+{ value: "20+", label: "Successful website projects" },
+{ value: "5+", label: "Mobile applications deployed" },
+{ value: "500+", label: "Active users" },
+{ value: "95%", label: "Client satisfaction" }];
+
 
 const About = () => {
   const { ref: heroRef, inView: heroInView } = useInView({
     threshold: 0.1,
-    triggerOnce: true,
+    triggerOnce: true
   });
 
   const { ref: techRef, inView: techInView } = useInView({
     threshold: 0.1,
-    triggerOnce: true,
+    triggerOnce: true
   });
 
   const { ref: teamRef, inView: teamInView } = useInView({
     threshold: 0.1,
-    triggerOnce: true,
+    triggerOnce: true
   });
 
   const { ref: valuesRef, inView: valuesInView } = useInView({
     threshold: 0.1,
-    triggerOnce: true,
+    triggerOnce: true
   });
 
   // Tech Stack Carousel State
@@ -209,22 +209,22 @@ const About = () => {
       name: "DevHorizon Technologies",
       foundingDate: "2025-06",
       numberOfEmployees: "15+",
-      areaServed: ["India", "UAE", "UK", "USA", "Canada"],
-    },
+      areaServed: ["India", "UAE", "UK", "USA", "Canada"]
+    }
   };
 
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: "Home", url: "https://devhubtechnologies.in/" },
-    { name: "About", url: "https://devhubtechnologies.in/about" },
-  ]);
+  { name: "Home", url: "https://devhubtechnologies.in/" },
+  { name: "About", url: "https://devhubtechnologies.in/about" }]
+  );
 
   return (
     <Layout>
       <SEO
         title="About DevHorizon Technologies - Our Story & Team | Digital Agency Bengaluru"
         description="Learn about DevHorizon Technologies, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
-        schema={{ "@context": "https://schema.org", "@graph": [aboutSchema, breadcrumbSchema] }}
-      />
+        schema={{ "@context": "https://schema.org", "@graph": [aboutSchema, breadcrumbSchema] }} />
+
       {/* Hero Section */}
       <section className="section-padding bg-secondary/30">
         <div className="container-swiss">
@@ -233,14 +233,14 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl"
-          >
+            className="max-w-3xl">
+
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">About DevHorizon Technologies</span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Crafting Digital Excellence Since 2025</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              DevHorizon Technologies is a full-service digital agency based in Bengaluru, India. We specialize in creating exceptional
-              digital experiences through innovative web development, mobile applications, and strategic digital
-              marketing solutions.
+              DevHorizon Technologies Private Limited is a full-service digital agency based in Bengaluru, India. We specialize in creating exceptional digital experiences through innovative web development, mobile applications, and strategic digital marketing solutions.
+            
+
             </p>
           </motion.div>
         </div>
@@ -254,8 +254,8 @@ const About = () => {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
+              transition={{ duration: 0.5 }}>
+
               <h2 className="text-3xl font-bold mb-6">Our Journey</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 Founded in June 2025, DevHorizon Technologies emerged from a passion for transforming businesses through
@@ -284,14 +284,14 @@ const About = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 gap-6"
-            >
-              {stats.map((stat, index) => (
-                <div key={stat.label} className="bg-secondary/50 p-6 text-center">
+              className="grid grid-cols-2 gap-6">
+
+              {stats.map((stat, index) =>
+              <div key={stat.label} className="bg-secondary/50 p-6 text-center">
                   <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </div>
-              ))}
+              )}
             </motion.div>
           </div>
         </div>
@@ -304,8 +304,8 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={techInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-center max-w-2xl mx-auto mb-8"
-          >
+            className="text-center max-w-2xl mx-auto mb-8">
+
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
               Our Expertise
             </span>
@@ -317,15 +317,15 @@ const About = () => {
             <button
               onClick={() => scrollTechTo(Math.max(0, techActiveIndex - 1))}
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
-              disabled={techActiveIndex === 0}
-            >
+              disabled={techActiveIndex === 0}>
+
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={() => scrollTechTo(Math.min(techStack.length - 1, techActiveIndex + 1))}
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
-              disabled={techActiveIndex === techStack.length - 1}
-            >
+              disabled={techActiveIndex === techStack.length - 1}>
+
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
@@ -339,19 +339,19 @@ const About = () => {
           onTouchMove={handleTechTouchMove}
           onTouchEnd={handleTechTouchEnd}
           className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-4 md:px-8 pb-4 touch-pan-x"
-          style={{ WebkitOverflowScrolling: "touch", scrollBehavior: "smooth" }}
-        >
-          {techStack.map((stack, index) => (
-            <motion.div
-              key={stack.category}
-              initial={{ opacity: 0, y: 20 }}
-              animate={techInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02, rotateY: 5, rotateX: -3 }}
-              whileTap={{ scale: 0.98 }}
-              className="snap-center shrink-0 w-[85vw] md:w-[400px] lg:w-[350px]"
-              style={{ perspective: "1000px" }}
-            >
+          style={{ WebkitOverflowScrolling: "touch", scrollBehavior: "smooth" }}>
+
+          {techStack.map((stack, index) =>
+          <motion.div
+            key={stack.category}
+            initial={{ opacity: 0, y: 20 }}
+            animate={techInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ scale: 1.02, rotateY: 5, rotateX: -3 }}
+            whileTap={{ scale: 0.98 }}
+            className="snap-center shrink-0 w-[85vw] md:w-[400px] lg:w-[350px]"
+            style={{ perspective: "1000px" }}>
+
               <div className="relative bg-card border border-border p-8 h-full overflow-hidden group rounded-xl">
                 {/* 3D Emoji */}
                 <div className="absolute top-4 right-4 text-4xl transform group-hover:scale-110 transition-transform duration-300">
@@ -372,32 +372,32 @@ const About = () => {
                     {stack.category}
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {stack.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="bg-secondary text-secondary-foreground px-3 py-1.5 text-sm font-medium rounded-lg"
-                      >
+                    {stack.technologies.map((tech) =>
+                  <span
+                    key={tech}
+                    className="bg-secondary text-secondary-foreground px-3 py-1.5 text-sm font-medium rounded-lg">
+
                         {tech}
                       </span>
-                    ))}
+                  )}
                   </div>
                 </div>
               </div>
             </motion.div>
-          ))}
+          )}
         </div>
 
         {/* Carousel Indicators */}
         <div className="flex justify-center gap-2 mt-6">
-          {techStack.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollTechTo(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === techActiveIndex ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30"
-              }`}
-            />
-          ))}
+          {techStack.map((_, index) =>
+          <button
+            key={index}
+            onClick={() => scrollTechTo(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+            index === techActiveIndex ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30"}`
+            } />
+
+          )}
         </div>
       </section>
 
@@ -414,8 +414,8 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={teamInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-center max-w-2xl mx-auto mb-16"
-          >
+            className="text-center max-w-2xl mx-auto mb-16">
+
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
               Meet the Team
             </span>
@@ -426,44 +426,44 @@ const About = () => {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            {team.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                animate={teamInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                whileHover={{ y: -8, rotateY: 5, transition: { duration: 0.3 } }}
-                className={`group relative bg-card border border-border p-8 text-center overflow-hidden rounded-xl ${member.name === "Gajendrachary" ? "cursor-pointer" : ""}`}
-                style={{ perspective: "1000px" }}
-                onClick={member.name === "Gajendrachary" ? () => setIsGajendraPopupOpen(true) : undefined}
-              >
+            {team.map((member, index) =>
+            <motion.div
+              key={member.name}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={teamInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              whileHover={{ y: -8, rotateY: 5, transition: { duration: 0.3 } }}
+              className={`group relative bg-card border border-border p-8 text-center overflow-hidden rounded-xl ${member.name === "Gajendrachary" ? "cursor-pointer" : ""}`}
+              style={{ perspective: "1000px" }}
+              onClick={member.name === "Gajendrachary" ? () => setIsGajendraPopupOpen(true) : undefined}>
+
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Avatar with ring */}
                 <div className="relative mx-auto mb-6">
-                  {member.image ? (
-                    <div className="w-28 h-28 rounded-full overflow-hidden mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
+                  {member.image ?
+                <div className="w-28 h-28 rounded-full overflow-hidden mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
                       <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-28 h-28 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async" />
+
+                    </div> :
+
+                <div className="w-28 h-28 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
                       <span className="text-4xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
                         {member.name.charAt(0)}
                       </span>
                     </div>
-                  )}
-                  {member.name === "Gajendrachary" && (
-                    <div className="absolute -top-1 -right-1 bg-primary rounded-full p-2 shadow-lg group-hover:scale-110 group-hover:shadow-primary/40 transition-all duration-300">
+                }
+                  {member.name === "Gajendrachary" &&
+                <div className="absolute -top-1 -right-1 bg-primary rounded-full p-2 shadow-lg group-hover:scale-110 group-hover:shadow-primary/40 transition-all duration-300">
                       <ExternalLink className="w-4 h-4 text-primary-foreground" />
                     </div>
-                  )}
+                }
                   {/* Status indicator */}
                   <div className="absolute bottom-1 right-1/2 translate-x-8 w-4 h-4 bg-green-500 rounded-full border-2 border-card" />
                 </div>
@@ -473,35 +473,35 @@ const About = () => {
                 </h3>
                 <p className="text-muted-foreground mb-6 text-sm">{member.role}</p>
 
-                {member.links.length > 0 && (
-                  <div className="flex items-center justify-center gap-3" onClick={(e) => e.stopPropagation()}>
+                {member.links.length > 0 &&
+              <div className="flex items-center justify-center gap-3" onClick={(e) => e.stopPropagation()}>
                     {member.links.map((link) => {
-                      const isLinkedIn = link.href.includes("linkedin");
-                      const isGitHub = link.href.includes("github");
-                      return (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg ${
-                            isLinkedIn
-                              ? "text-[#0A66C2] border-[#0A66C2]/30 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:shadow-[#0A66C2]/25"
-                              : isGitHub
-                              ? "text-[#333] dark:text-white border-[#333]/30 dark:border-white/30 hover:bg-[#333] dark:hover:bg-white hover:text-white dark:hover:text-[#333] hover:border-[#333] dark:hover:border-white hover:shadow-[#333]/25 dark:hover:shadow-white/25"
-                              : "border-border hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-primary/25"
-                          }`}
-                        >
+                  const isLinkedIn = link.href.includes("linkedin");
+                  const isGitHub = link.href.includes("github");
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg ${
+                      isLinkedIn ?
+                      "text-[#0A66C2] border-[#0A66C2]/30 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:shadow-[#0A66C2]/25" :
+                      isGitHub ?
+                      "text-[#333] dark:text-white border-[#333]/30 dark:border-white/30 hover:bg-[#333] dark:hover:bg-white hover:text-white dark:hover:text-[#333] hover:border-[#333] dark:hover:border-white hover:shadow-[#333]/25 dark:hover:shadow-white/25" :
+                      "border-border hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-primary/25"}`
+                      }>
+
                           <link.icon className="w-5 h-5" />
-                        </a>
-                      );
-                    })}
+                        </a>);
+
+                })}
                   </div>
-                )}
+              }
 
                 {member.links.length === 0 && <div className="h-11" />}
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -513,8 +513,8 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={valuesInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-center max-w-2xl mx-auto mb-8"
-          >
+            className="text-center max-w-2xl mx-auto mb-8">
+
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
               What We Stand For
             </span>
@@ -526,15 +526,15 @@ const About = () => {
             <button
               onClick={() => scrollValuesTo(Math.max(0, valuesActiveIndex - 1))}
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
-              disabled={valuesActiveIndex === 0}
-            >
+              disabled={valuesActiveIndex === 0}>
+
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={() => scrollValuesTo(Math.min(values.length - 1, valuesActiveIndex + 1))}
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
-              disabled={valuesActiveIndex === values.length - 1}
-            >
+              disabled={valuesActiveIndex === values.length - 1}>
+
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
@@ -548,19 +548,19 @@ const About = () => {
           onTouchMove={handleValuesTouchMove}
           onTouchEnd={handleValuesTouchEnd}
           className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-4 md:px-8 pb-4 touch-pan-x"
-          style={{ WebkitOverflowScrolling: "touch", scrollBehavior: "smooth" }}
-        >
-          {values.map((value, index) => (
-            <motion.div
-              key={value.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={valuesInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              whileHover={{ scale: 1.02, rotateY: 5, rotateX: -3 }}
-              whileTap={{ scale: 0.98 }}
-              className="snap-center shrink-0 w-[85vw] md:w-[350px] lg:w-[300px]"
-              style={{ perspective: "1000px" }}
-            >
+          style={{ WebkitOverflowScrolling: "touch", scrollBehavior: "smooth" }}>
+
+          {values.map((value, index) =>
+          <motion.div
+            key={value.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={valuesInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: index * 0.05 }}
+            whileHover={{ scale: 1.02, rotateY: 5, rotateX: -3 }}
+            whileTap={{ scale: 0.98 }}
+            className="snap-center shrink-0 w-[85vw] md:w-[350px] lg:w-[300px]"
+            style={{ perspective: "1000px" }}>
+
               <div className="relative bg-card border border-border p-8 h-full overflow-hidden group rounded-xl">
                 {/* 3D Emoji */}
                 <div className="absolute top-4 right-4 text-4xl transform group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300">
@@ -582,20 +582,20 @@ const About = () => {
                 </div>
               </div>
             </motion.div>
-          ))}
+          )}
         </div>
 
         {/* Carousel Indicators */}
         <div className="flex justify-center gap-2 mt-6">
-          {values.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollValuesTo(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === valuesActiveIndex ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30"
-              }`}
-            />
-          ))}
+          {values.map((_, index) =>
+          <button
+            key={index}
+            onClick={() => scrollValuesTo(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+            index === valuesActiveIndex ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30"}`
+            } />
+
+          )}
         </div>
       </section>
 
@@ -607,8 +607,8 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto bg-foreground text-background p-8 md:p-12 rounded-xl"
-          >
+            className="max-w-2xl mx-auto bg-foreground text-background p-8 md:p-12 rounded-xl">
+
             <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
             <div className="space-y-4 mb-8">
               <div className="flex items-start gap-4">
@@ -641,12 +641,12 @@ const About = () => {
             src="https://gajendrachary.in/"
             className="w-full h-full border-0"
             title="Gajendrachary Portfolio"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          />
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />
+
         </DialogContent>
       </Dialog>
-    </Layout>
-  );
+    </Layout>);
+
 };
 
 export default About;
