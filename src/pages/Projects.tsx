@@ -700,7 +700,7 @@ const Projects = () => {
   const projectsSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "DevHorizon Technologies Portfolio",
+    name: "DevHorizon Technologies Private Limited Portfolio",
     description: "Our portfolio of web and mobile development projects.",
     itemListElement: [
       ...websites.map((p, i) => ({

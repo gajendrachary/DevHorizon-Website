@@ -202,11 +202,11 @@ const About = () => {
   const aboutSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "About DevHorizon Technologies",
-    description: "Learn about DevHorizon Technologies, a Bengaluru-based digital agency founded in 2025.",
+    name: "About DevHorizon Technologies Private Limited",
+    description: "Learn about DevHorizon Technologies Private Limited, a Bengaluru-based digital agency founded in 2025.",
     mainEntity: {
       "@type": "Organization",
-      name: "DevHorizon Technologies",
+      name: "DevHorizon Technologies Private Limited",
       foundingDate: "2025-06",
       numberOfEmployees: "15+",
       areaServed: ["India", "UAE", "UK", "USA", "Canada"]
@@ -221,8 +221,8 @@ const About = () => {
   return (
     <Layout>
       <SEO
-        title="About DevHorizon Technologies - Our Story & Team | Digital Agency Bengaluru"
-        description="Learn about DevHorizon Technologies, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
+        title="About DevHorizon Technologies Private Limited - Our Story & Team | Digital Agency Bengaluru"
+        description="Learn about DevHorizon Technologies Private Limited, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
         schema={{ "@context": "https://schema.org", "@graph": [aboutSchema, breadcrumbSchema] }} />
 
       {/* Hero Section */}
@@ -235,7 +235,7 @@ const About = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl">
 
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">About DevHorizon Technologies</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">About DevHorizon Technologies Private Limited</span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Crafting Digital Excellence Since 2025</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               DevHorizon Technologies Private Limited is a full-service digital agency based in Bengaluru, India. We specialize in creating exceptional digital experiences through innovative web development, mobile applications, and strategic digital marketing solutions.
@@ -258,7 +258,7 @@ const About = () => {
 
               <h2 className="text-3xl font-bold mb-6">Our Journey</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Founded in June 2025, DevHorizon Technologies emerged from a passion for transforming businesses through
+                Founded in June 2025, DevHorizon Technologies Private Limited emerged from a passion for transforming businesses through
                 technology. What started as a small team of developers has grown into a full-service digital agency
                 serving clients across India, UAE, Canada, US, and UK.
               </p>
@@ -419,7 +419,7 @@ const About = () => {
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
               Meet the Team
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">The People Behind DevHorizon Technologies</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">The People Behind DevHorizon Technologies Private Limited</h2>
             <p className="text-muted-foreground">
               A passionate team dedicated to delivering exceptional digital solutions
             </p>
