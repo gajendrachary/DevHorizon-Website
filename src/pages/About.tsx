@@ -479,7 +479,17 @@ const About = () => {
                 <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
                   {member.name}
                 </h3>
-                <p className="text-muted-foreground mb-6 text-sm">{member.role}</p>
+                <p className="text-muted-foreground mb-2 text-sm">{member.role}</p>
+                {member.name === "A Eswari" && (
+                  <a
+                    href="mailto:eshwari.director@devhorizontech.com"
+                    className="text-primary text-sm hover:underline mb-4 block"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    eshwari.director@devhorizontech.com
+                  </a>
+                )}
+                {member.name !== "A Eswari" && <div className="mb-4" />}
 
                 {member.links.length > 0 && (
                   <div className="flex items-center justify-center gap-3" onClick={(e) => e.stopPropagation()}>
