@@ -11,7 +11,7 @@ interface SEOProps {
   noindex?: boolean;
 }
 
-const BASE_URL = 'https://devhubtechnologies.in';
+const BASE_URL = 'https://devhorizontech.com';
 const DEFAULT_IMAGE = 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/social-images/social-1766729263212-Screenshot 2025-12-26 at 11.37.02 AM.png';
 
 export const SEO = ({

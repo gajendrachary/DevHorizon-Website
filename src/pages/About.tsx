@@ -479,45 +479,40 @@ const About = () => {
                 <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
                   {member.name}
                 </h3>
-                <p className="text-muted-foreground mb-2 text-sm">{member.role}</p>
-                {member.name === "A Eswari" && (
-                  <a
-                    href="mailto:eshwari.director@devhorizontech.com"
-                    className="text-primary text-sm hover:underline mb-4 block"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    eshwari.director@devhorizontech.com
-                  </a>
-                )}
-                {member.name !== "A Eswari" && <div className="mb-4" />}
+                <p className="text-muted-foreground mb-6 text-sm">{member.role}</p>
 
-                {member.links.length > 0 && (
-                  <div className="flex items-center justify-center gap-3" onClick={(e) => e.stopPropagation()}>
-                    {member.links.map((link) => {
-                      const isLinkedIn = link.href.includes("linkedin");
-                      const isGitHub = link.href.includes("github");
-                      return (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg ${
-                            isLinkedIn
-                              ? "text-[#0A66C2] border-[#0A66C2]/30 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:shadow-[#0A66C2]/25"
-                              : isGitHub
-                                ? "text-[#333] dark:text-white border-[#333]/30 dark:border-white/30 hover:bg-[#333] dark:hover:bg-white hover:text-white dark:hover:text-[#333] hover:border-[#333] dark:hover:border-white hover:shadow-[#333]/25 dark:hover:shadow-white/25"
-                                : "border-border hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-primary/25"
-                          }`}
-                        >
-                          <link.icon className="w-5 h-5" />
-                        </a>
-                      );
-                    })}
-                  </div>
-                )}
-
-                {member.links.length === 0 && <div className="h-11" />}
+                <div className="flex items-center justify-center gap-3" onClick={(e) => e.stopPropagation()}>
+                  {member.name === "A Eswari" && (
+                    <a
+                      href="mailto:eshwari.director@devhorizontech.com"
+                      className="w-11 h-11 rounded-full border border-primary/30 text-primary flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-primary/25"
+                      title="eshwari.director@devhorizontech.com"
+                    >
+                      <Mail className="w-5 h-5" />
+                    </a>
+                  )}
+                  {member.links.map((link) => {
+                    const isLinkedIn = link.href.includes("linkedin");
+                    const isGitHub = link.href.includes("github");
+                    return (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg ${
+                          isLinkedIn
+                            ? "text-[#0A66C2] border-[#0A66C2]/30 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:shadow-[#0A66C2]/25"
+                            : isGitHub
+                              ? "text-[#333] dark:text-white border-[#333]/30 dark:border-white/30 hover:bg-[#333] dark:hover:bg-white hover:text-white dark:hover:text-[#333] hover:border-[#333] dark:hover:border-white hover:shadow-[#333]/25 dark:hover:shadow-white/25"
+                              : "border-border hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-primary/25"
+                        }`}
+                      >
+                        <link.icon className="w-5 h-5" />
+                      </a>
+                    );
+                  })}
+                </div>
               </motion.div>
             ))}
           </div>
