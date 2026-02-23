@@ -97,7 +97,7 @@ export const getOrganizationSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'DevHorizon Technologies Private Limited',
-  url: 'https://devhubtechnologies.in',
+  url: 'https://devhorizontech.com',
   logo: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
   description: 'Full-service digital agency specializing in web development, mobile apps, and Meta advertising.',
   address: {
@@ -111,7 +111,7 @@ export const getOrganizationSchema = () => ({
     '@type': 'ContactPoint',
     telephone: '+91-8688097373',
     contactType: 'customer service',
-    email: 'contact@devhorizon.tech',
+    email: 'info@devhorizontech.com',
     availableLanguage: ['English', 'Hindi', 'Kannada'],
   },
   sameAs: [
@@ -128,12 +128,12 @@ export const getOrganizationSchema = () => ({
 export const getLocalBusinessSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://devhubtechnologies.in/#localbusiness',
+  '@id': 'https://devhorizontech.com/#localbusiness',
   name: 'DevHorizon Technologies Private Limited',
   image: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
   telephone: '+91-8688097373',
-  email: 'contact@devhorizon.tech',
-  url: 'https://devhubtechnologies.in',
+  email: 'info@devhorizontech.com',
+  url: 'https://devhorizontech.com',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Vidyaranyapura',

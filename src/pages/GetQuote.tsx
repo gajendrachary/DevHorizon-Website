@@ -283,13 +283,13 @@ const GetQuote = () => {
       '@type': 'Organization',
       name: 'DevHorizon Technologies Private Limited',
       telephone: '+91-8688097373',
-      email: 'contact@devhorizon.tech',
+      email: 'info@devhorizontech.com',
     },
   };
 
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: 'Home', url: 'https://devhubtechnologies.in/' },
-    { name: 'Get Quote', url: 'https://devhubtechnologies.in/get-quote' },
+    { name: 'Home', url: 'https://devhorizontech.com/' },
+    { name: 'Get Quote', url: 'https://devhorizontech.com/get-quote' },
   ]);
 
   return <Layout>

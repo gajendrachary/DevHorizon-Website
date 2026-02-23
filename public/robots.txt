@@ -1,5 +1,5 @@
 # DevHorizon Technologies Robots.txt
-# https://devhubtechnologies.in
+# https://devhorizontech.com
 
 User-agent: Googlebot
 Allow: /
@@ -29,7 +29,7 @@ Allow: /
 Crawl-delay: 5
 
 # Sitemap
-Sitemap: https://devhubtechnologies.in/sitemap.xml
+Sitemap: https://devhorizontech.com/sitemap.xml
 
 # Disallow admin, auth and API routes
 Disallow: /admin
