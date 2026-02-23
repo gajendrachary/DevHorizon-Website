@@ -185,7 +185,7 @@ export const Footer = () => {
           className="mt-16 pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4"
         >
           <p className="text-sm opacity-60 text-center md:text-left">
-            © 2025 DevHorizon Technologies Private Limited. All rights reserved. Crafted with precision in Bengaluru 🇮🇳
+            © 2026 DevHorizon Technologies Private Limited. All rights reserved. We build your business
           </p>
           <div className="flex items-center gap-6">
             <Link

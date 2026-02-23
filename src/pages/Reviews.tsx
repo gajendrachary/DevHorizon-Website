@@ -150,8 +150,8 @@ const Reviews = () => {
     })),
   };
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: "Home", url: "https://devhubtechnologies.in/" },
-    { name: "Reviews", url: "https://devhubtechnologies.in/reviews" },
+    { name: "Home", url: "https://devhorizontech.com/" },
+    { name: "Reviews", url: "https://devhorizontech.com/reviews" },
   ]);
 
   return (
