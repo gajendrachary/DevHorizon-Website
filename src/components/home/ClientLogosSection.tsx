@@ -5,9 +5,13 @@ import logoLikithaHandcrafts from '@/assets/logo-likitha-handcrafts.png';
 import logoHavenSalad from '@/assets/logo-haven-salad.png';
 import logoJaggeryTeaPoint from '@/assets/logo-jaggery-tea-point.png';
 import logoSriKenchambaCeramics from '@/assets/logo-sri-kenchamba-ceramics.png';
+import logoJzGreenHeaven from '@/assets/logo-jz-green-heaven.png';
+import logoUnitedNewsKannada from '@/assets/logo-united-news-kannada.jpg';
 
 const clientLogos = [
   { name: 'Skanda Cloud Kitchen', logo: logoSkandaCloudKitchen },
+  { name: 'JZ Green Heaven Lodge', logo: logoJzGreenHeaven },
+  { name: 'United News Kannada', logo: logoUnitedNewsKannada },
   { name: 'Likitha Handcrafts', logo: logoLikithaHandcrafts },
   { name: 'Haven Salad', logo: logoHavenSalad },
   { name: 'Jaggery Tea Point', logo: logoJaggeryTeaPoint },

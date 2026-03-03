@@ -13,6 +13,7 @@ import projectJaggeryTeaPoint from '@/assets/project-jaggery-tea-point.jpg';
 import projectSriKenchambaCeramics from '@/assets/project-sri-kenchamba-ceramics.png';
 import projectLikithaHandcrafts from '@/assets/project-likitha-handcrafts.png';
 import projectHavenSalad from '@/assets/project-haven-salad.jpg';
+import projectJzGreenHeaven from '@/assets/logo-jz-green-heaven.png';
 
 // ============= Auto-scroll Configuration =============
 const AUTO_SCROLL_CONFIG = {
@@ -32,6 +33,18 @@ const projects = [
     technologies: ['React', 'E-commerce', 'Responsive'],
     accentIcon: UtensilsCrossed,
     image: projectSkandaCloudKitchen,
+    isLogo: true,
+  },
+  {
+    title: 'JZ Green Heaven Lodge',
+    category: 'Hospitality / Lodge',
+    url: 'https://www.jzgreenheaven.com',
+    description: 'A nature retreat lodge website showcasing scenic accommodations, booking options, and travel experiences.',
+    color: 'bg-emerald-100',
+    bgColor: '#166534',
+    technologies: ['React', 'Booking', 'Responsive'],
+    accentIcon: Store,
+    image: projectJzGreenHeaven,
     isLogo: true,
   },
   {

@@ -12,6 +12,7 @@ import projectJaggeryTeaPoint from "@/assets/project-jaggery-tea-point.jpg";
 import projectSriKenchambaCeramics from "@/assets/project-sri-kenchamba-ceramics.png";
 import projectLikithaHandcrafts from "@/assets/project-likitha-handcrafts.png";
 import projectHavenSalad from "@/assets/project-haven-salad.jpg";
+import projectJzGreenHeaven from "@/assets/logo-jz-green-heaven.png";
 
 // Animation config - matches ServiceCard
 const ANIMATION_CONFIG = {
@@ -43,6 +44,17 @@ const websites = [
     bgColor: "#EA580C",
     tech: ["React", "Tailwind CSS", "Responsive"],
     image: projectSkandaCloudKitchen,
+    isLogo: true,
+  },
+  {
+    title: "JZ Green Heaven Lodge",
+    category: "Hospitality / Lodge",
+    url: "https://www.jzgreenheaven.com",
+    description: "A nature retreat lodge website showcasing scenic accommodations, booking options, and travel experiences.",
+    color: "bg-emerald-100",
+    bgColor: "#166534",
+    tech: ["React", "Booking", "Responsive"],
+    image: projectJzGreenHeaven,
     isLogo: true,
   },
   {
