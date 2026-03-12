@@ -48,6 +48,17 @@ const websites = [
     isLogo: true,
   },
   {
+    title: "United News Kannada",
+    category: "Media / News Portal",
+    url: "https://unitednewskannada.com",
+    description: "A regional Kannada news portal delivering breaking news, local stories, and multimedia content.",
+    color: "bg-red-100",
+    bgColor: "#DC2626",
+    tech: ["React", "CMS", "SEO"],
+    image: projectUnitedNewsKannada,
+    isLogo: true,
+  },
+  {
     title: "JZ Green Heaven Lodge",
     category: "Hospitality / Lodge",
     url: "https://www.jzgreenheaven.com",
