@@ -13,6 +13,7 @@ import projectSriKenchambaCeramics from "@/assets/project-sri-kenchamba-ceramics
 import projectLikithaHandcrafts from "@/assets/project-likitha-handcrafts.png";
 import projectHavenSalad from "@/assets/project-haven-salad.jpg";
 import projectJzGreenHeaven from "@/assets/logo-jz-green-heaven.png";
+import projectUnitedNewsKannada from "@/assets/logo-united-news-kannada.jpg";
 
 // Animation config - matches ServiceCard
 const ANIMATION_CONFIG = {
@@ -44,6 +45,17 @@ const websites = [
     bgColor: "#EA580C",
     tech: ["React", "Tailwind CSS", "Responsive"],
     image: projectSkandaCloudKitchen,
+    isLogo: true,
+  },
+  {
+    title: "United News Kannada",
+    category: "Media / News Portal",
+    url: "https://unitednewskannada.com",
+    description: "A regional Kannada news portal delivering breaking news, local stories, and multimedia content.",
+    color: "bg-red-100",
+    bgColor: "#DC2626",
+    tech: ["React", "CMS", "SEO"],
+    image: projectUnitedNewsKannada,
     isLogo: true,
   },
   {

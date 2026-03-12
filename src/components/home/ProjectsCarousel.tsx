@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad, UtensilsCrossed } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad, UtensilsCrossed, Newspaper } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ProjectCard } from './ProjectCard';
@@ -14,6 +14,7 @@ import projectSriKenchambaCeramics from '@/assets/project-sri-kenchamba-ceramics
 import projectLikithaHandcrafts from '@/assets/project-likitha-handcrafts.png';
 import projectHavenSalad from '@/assets/project-haven-salad.jpg';
 import projectJzGreenHeaven from '@/assets/logo-jz-green-heaven.png';
+import projectUnitedNewsKannada from '@/assets/logo-united-news-kannada.jpg';
 
 // ============= Auto-scroll Configuration =============
 const AUTO_SCROLL_CONFIG = {
@@ -33,6 +34,18 @@ const projects = [
     technologies: ['React', 'E-commerce', 'Responsive'],
     accentIcon: UtensilsCrossed,
     image: projectSkandaCloudKitchen,
+    isLogo: true,
+  },
+  {
+    title: 'United News Kannada',
+    category: 'Media / News Portal',
+    url: 'https://unitednewskannada.com',
+    description: 'A regional Kannada news portal delivering breaking news, local stories, and multimedia content.',
+    color: 'bg-red-100',
+    bgColor: '#DC2626',
+    technologies: ['React', 'CMS', 'SEO'],
+    accentIcon: Newspaper,
+    image: projectUnitedNewsKannada,
     isLogo: true,
   },
   {
