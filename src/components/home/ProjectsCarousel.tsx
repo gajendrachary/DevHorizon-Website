@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad, UtensilsCrossed } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad, UtensilsCrossed, Newspaper } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ProjectCard } from './ProjectCard';
