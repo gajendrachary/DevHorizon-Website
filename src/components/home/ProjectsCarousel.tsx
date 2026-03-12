@@ -14,6 +14,7 @@ import projectSriKenchambaCeramics from '@/assets/project-sri-kenchamba-ceramics
 import projectLikithaHandcrafts from '@/assets/project-likitha-handcrafts.png';
 import projectHavenSalad from '@/assets/project-haven-salad.jpg';
 import projectJzGreenHeaven from '@/assets/logo-jz-green-heaven.png';
+import projectUnitedNewsKannada from '@/assets/logo-united-news-kannada.jpg';
 
 // ============= Auto-scroll Configuration =============
 const AUTO_SCROLL_CONFIG = {
