@@ -453,7 +453,7 @@ const ProjectCarousel = ({
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    let scrollEndTimeout: NodeJS.Timeout;
+    let scrollEndTimeout: ReturnType<typeof setTimeout>;
 
     const handleScroll = () => {
       isScrollingRef.current = true;
