@@ -17,7 +17,7 @@ export const useCarouselBackground = ({
   const [hasViewedAll, setHasViewedAll] = useState(false);
   const [currentColor, setCurrentColor] = useState(defaultColor);
   const viewedIndicesRef = useRef<Set<number>>(new Set([0]));
-  const resetTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isInteractingRef = useRef(false);
 
   // Update color when active index changes

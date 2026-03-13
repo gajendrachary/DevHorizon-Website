@@ -80,7 +80,7 @@ export function useAutoScrollCarousel(config: AutoScrollConfig = {}): UseAutoScr
     if (!mergedConfig.enabled) return;
 
     let frameId: number;
-    let reverseTimeoutId: NodeJS.Timeout | null = null;
+    let reverseTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
     const animate = () => {
       const container = containerRef.current;
