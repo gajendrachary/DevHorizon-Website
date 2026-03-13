@@ -118,7 +118,7 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
   const [cardOffsets, setCardOffsets] = useState<number[]>(projects.map(() => 0));
   const [hasViewedAll, setHasViewedAll] = useState(false);
   const viewedIndicesRef = useRef<Set<number>>(new Set([0]));
-  const resetTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isScrollingRef = useRef(false);
 
   // Auto-scroll hook
