@@ -157,7 +157,7 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
 
-  const entranceDelay = index * ANIMATION_CONFIG.entrance.stagger;
+  const entranceDelay = Math.min(index * ANIMATION_CONFIG.entrance.stagger, 0.9);
 
   // Parallax transformations
   const parallaxRotateY = parallaxOffset * 8;
@@ -169,9 +169,9 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
     <motion.div
       className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[400px] snap-center"
       initial={{
-        x: "100vw",
+        x: 80,
         opacity: 0,
-        rotateY: 15,
+        rotateY: 8,
       }}
       animate={
         isInView
@@ -183,7 +183,7 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
           : {}
       }
       transition={{
-        duration: ANIMATION_CONFIG.entrance.duration,
+        duration: 0.6,
         delay: entranceDelay,
         ease: ANIMATION_CONFIG.entrance.ease,
       }}
