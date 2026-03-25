@@ -234,10 +234,12 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    pauseAutoScroll();
     const cards = container.querySelectorAll('[data-project-card]');
     if (cards[index]) {
       cards[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
+    setTimeout(() => resumeAutoScroll(), 2000);
   };
 
   const scrollPrev = () => {
