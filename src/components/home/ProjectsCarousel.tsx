@@ -396,16 +396,19 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
 
           {/* Carousel Indicators with Direction */}
           <div className="flex justify-center items-center gap-3 mt-6">
-            <motion.div
+            <motion.button
+              onClick={scrollPrev}
+              disabled={activeIndex === 0}
               animate={{ 
                 x: direction === 1 ? [0, -3, 0] : [0, 3, 0],
                 opacity: isPaused ? 0.3 : 0.6
               }}
               transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-              className="text-primary"
+              className="text-primary cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed"
+              aria-label="Previous project"
             >
               <ChevronLeft className="w-4 h-4" />
-            </motion.div>
+            </motion.button>
             
             <div className="flex gap-2">
               {projects.map((_, index) => (
@@ -422,16 +425,19 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
               ))}
             </div>
             
-            <motion.div
+            <motion.button
+              onClick={scrollNext}
+              disabled={activeIndex === projects.length - 1}
               animate={{ 
                 x: direction === 1 ? [0, 3, 0] : [0, -3, 0],
                 opacity: isPaused ? 0.3 : 0.6
               }}
               transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-              className="text-primary"
+              className="text-primary cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed"
+              aria-label="Next project"
             >
               <ChevronRight className="w-4 h-4" />
-            </motion.div>
+            </motion.button>
           </div>
         </div>
 
