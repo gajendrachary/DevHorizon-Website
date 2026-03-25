@@ -416,7 +416,6 @@ const ProjectCarousel = ({
     pause: pauseAutoScroll,
     resume: resumeAutoScroll,
   } = useAutoScrollCarousel(AUTO_SCROLL_CONFIG);
-  } = useAutoScrollCarousel(AUTO_SCROLL_CONFIG);
 
   const { ref: sectionRef, inView } = useInView({
     threshold: 0.2,
