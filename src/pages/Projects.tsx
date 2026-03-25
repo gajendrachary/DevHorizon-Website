@@ -413,6 +413,9 @@ const ProjectCarousel = ({
     handleMouseLeave,
     handleTouchStart: autoTouchStart,
     handleTouchEnd: autoTouchEnd,
+    pause: pauseAutoScroll,
+    resume: resumeAutoScroll,
+  } = useAutoScrollCarousel(AUTO_SCROLL_CONFIG);
   } = useAutoScrollCarousel(AUTO_SCROLL_CONFIG);
 
   const { ref: sectionRef, inView } = useInView({
