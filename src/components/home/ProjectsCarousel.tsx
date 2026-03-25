@@ -130,6 +130,8 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
     handleMouseLeave,
     handleTouchStart: autoTouchStart,
     handleTouchEnd: autoTouchEnd,
+    pause: pauseAutoScroll,
+    resume: resumeAutoScroll,
   } = useAutoScrollCarousel(AUTO_SCROLL_CONFIG);
 
   const { ref: sectionRef, inView } = useInView({
@@ -232,10 +234,12 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    pauseAutoScroll();
     const cards = container.querySelectorAll('[data-project-card]');
     if (cards[index]) {
       cards[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
+    setTimeout(() => resumeAutoScroll(), 2000);
   };
 
   const scrollPrev = () => {

@@ -413,6 +413,8 @@ const ProjectCarousel = ({
     handleMouseLeave,
     handleTouchStart: autoTouchStart,
     handleTouchEnd: autoTouchEnd,
+    pause: pauseAutoScroll,
+    resume: resumeAutoScroll,
   } = useAutoScrollCarousel(AUTO_SCROLL_CONFIG);
 
   const { ref: sectionRef, inView } = useInView({
@@ -514,10 +516,12 @@ const ProjectCarousel = ({
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    pauseAutoScroll();
     const cards = container.querySelectorAll("[data-card]");
     if (cards[index]) {
       cards[index].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     }
+    setTimeout(() => resumeAutoScroll(), 2000);
   };
 
   const scrollPrev = () => {
