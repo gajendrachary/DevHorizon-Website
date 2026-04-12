@@ -43,7 +43,7 @@ export const FAQSection = () => {
   return (
     <section ref={ref} className="section-padding bg-secondary/30">
       <div className="container-swiss">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left Column - Header */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}

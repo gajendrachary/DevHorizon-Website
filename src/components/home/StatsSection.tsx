@@ -82,7 +82,7 @@ export const StatsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-10"
+          className="text-center max-w-2xl mx-auto mb-6"
         >
           <motion.span
             className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"

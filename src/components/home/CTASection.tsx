@@ -99,7 +99,7 @@ export const CTASection = () => {
             Ready to Transform Your Digital Presence?
           </motion.h2>
           <motion.p 
-            className="text-lg text-white/90 mb-10 leading-relaxed drop-shadow-md"
+            className="text-lg text-white/90 mb-6 leading-relaxed drop-shadow-md"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}

@@ -137,7 +137,7 @@
 
   /* Section spacing */
   .section-padding {
-    @apply py-10 md:py-16 lg:py-20;
+    @apply py-6 md:py-10 lg:py-14;
   }
 
   /* Card hover effects */
