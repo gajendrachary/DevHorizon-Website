@@ -10,6 +10,8 @@ import logoUnitedNewsKannada from '@/assets/logo-united-news-kannada.jpg';
 import logoSkcConstructions from '@/assets/logo-skc-constructions.png';
 import logoAnanthBuildcon from '@/assets/logo-ananth-buildcon.png';
 import logoSahasra from '@/assets/logo-sahasra.png';
+import logoNriConnectingPeople from '@/assets/logo-nri-connecting-people.png';
+import logoAnandTransports from '@/assets/logo-anand-transports.png';
 
 const clientLogos = [
   { name: 'Skanda Cloud Kitchen', logo: logoSkandaCloudKitchen },
@@ -22,6 +24,8 @@ const clientLogos = [
   { name: 'Haven Salad', logo: logoHavenSalad },
   { name: 'Jaggery Tea Point', logo: logoJaggeryTeaPoint },
   { name: 'Sri Kenchamba Ceramics', logo: logoSriKenchambaCeramics },
+  { name: 'NRI Connecting People', logo: logoNriConnectingPeople },
+  { name: 'Anand Transports', logo: logoAnandTransports },
 ];
 
 // Duplicate logos for seamless infinite scroll
