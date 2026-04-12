@@ -36,7 +36,7 @@ export const Footer = () => {
   return (
     <footer ref={ref} className="footer-dark">
       <div className="container-swiss section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           {/* Brand Column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

@@ -307,7 +307,7 @@ const GetQuote = () => {
           opacity: 1,
           y: 0
         }} className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h1 className="text-4xl font-bold mb-4">Get a Custom Quote</h1>
               <p className="text-muted-foreground">Tell us about your project and we'll provide a tailored quote.</p>
               
