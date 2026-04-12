@@ -242,7 +242,7 @@ const Services = () => {
         schema={{ '@context': 'https://schema.org', '@graph': [serviceSchemaData, breadcrumbSchema] }}
       />
       {/* CTA Section - Now at the top */}
-      <section className="py-20 lg:py-32 bg-secondary text-foreground relative overflow-hidden">
+      <section className="py-10 lg:py-14 bg-secondary text-foreground relative overflow-hidden">
         {/* Background Image with Crossfade */}
         <div className="absolute inset-0 z-0">
           <AnimatePresence mode="sync">
@@ -292,7 +292,7 @@ const Services = () => {
       </section>
 
       {/* Hero Section */}
-      <section className="py-20 lg:py-32 bg-secondary">
+      <section className="py-10 lg:py-14 bg-secondary">
         <div className="container mx-auto px-4">
           <motion.div
             ref={heroRef}
@@ -316,7 +316,7 @@ const Services = () => {
       </section>
 
       {/* Services Carousel */}
-      <section className="py-20 lg:py-32 relative overflow-hidden">
+      <section className="py-10 lg:py-14 relative overflow-hidden">
         <div ref={servicesRef} className="relative">
           {/* Navigation Arrows */}
           <motion.button

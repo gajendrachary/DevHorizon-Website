@@ -250,7 +250,7 @@ const About = () => {
       {/* Our Journey Section */}
       <section className="section-padding bg-background">
         <div className="container-swiss">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -420,7 +420,7 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={teamInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-center max-w-2xl mx-auto mb-16"
+            className="text-center max-w-2xl mx-auto mb-8"
           >
             <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
               Meet the Team
