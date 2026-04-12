@@ -5,7 +5,7 @@ import { useState } from 'react';
 // Animation config - matches ServiceCard
 export const PROJECT_ANIMATION_CONFIG = {
   entrance: {
-    duration: 0.8,
+    duration: 0.6,
     stagger: 0.3,
     ease: [0.25, 0.46, 0.45, 0.94] as const,
   },
@@ -54,7 +54,7 @@ export const ProjectCard = ({
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
 
-  const entranceDelay = index * PROJECT_ANIMATION_CONFIG.entrance.stagger;
+  const entranceDelay = Math.min(index * PROJECT_ANIMATION_CONFIG.entrance.stagger, 0.9);
 
   // Parallax transformations
   const parallaxRotateY = parallaxOffset * 8;
@@ -69,9 +69,9 @@ export const ProjectCard = ({
       rel="noopener noreferrer"
       className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[400px] snap-center block"
       initial={{
-        x: '100vw',
+        x: 80,
         opacity: 0,
-        rotateY: 15,
+        rotateY: 8,
       }}
       animate={isInView ? {
         x: 0,
