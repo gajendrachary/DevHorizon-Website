@@ -40,7 +40,7 @@ export const ClientLogosSection = () => {
   return (
     <section 
       ref={ref} 
-      className="py-12 overflow-hidden"
+      className="py-6 md:py-8 overflow-hidden"
       style={{ backgroundColor: '#f5f5f5', borderTop: '1px solid #e0e0e0', borderBottom: '1px solid #e0e0e0' }}
     >
       <div className="container-swiss">
