@@ -3,8 +3,7 @@ import { useInView } from "react-intersection-observer";
 import { useAnimatedCounter } from "@/hooks/useAnimatedCounter";
 
 const stats = [
-  { value: 20, suffix: "+", label: "Websites Built" },
-  { value: 5, suffix: "+", label: "Mobile Apps Developed" },
+  { value: 50, suffix: "+", label: "Clients" },
   { value: 95, suffix: "%", label: "Client Satisfaction" },
 ];
 
@@ -103,7 +102,7 @@ export const StatsSection = () => {
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 justify-items-center max-w-2xl mx-auto">
           {stats.map((stat, index) => (
             <StatItem
               key={stat.label}
