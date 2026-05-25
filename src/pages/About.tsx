@@ -219,7 +219,7 @@ const About = () => {
   return (
     <Layout>
       <SEO
-        title="About DevHorizon Technologies Private Limited - Our Story & Team | Digital Agency Bengaluru"
+        title="About DevHorizon Technologies Private Limited - Our Story & Team | Digital Company Bengaluru"
         description="Learn about DevHorizon Technologies Private Limited, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
         schema={{ "@context": "https://schema.org", "@graph": [aboutSchema, breadcrumbSchema] }}
       />
