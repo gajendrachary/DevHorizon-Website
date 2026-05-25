@@ -99,7 +99,7 @@ export const getOrganizationSchema = () => ({
   name: 'DevHorizon Technologies Private Limited',
   url: 'https://devhorizontech.com',
   logo: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
-  description: 'Full-service digital agency specializing in web development, mobile apps, and Meta advertising.',
+  description: 'Full-service digital company specializing in web development, mobile apps, and Meta advertising.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Bengaluru',
