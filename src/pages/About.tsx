@@ -201,7 +201,7 @@ const About = () => {
     "@type": "AboutPage",
     name: "About DevHorizon Technologies Private Limited",
     description:
-      "Learn about DevHorizon Technologies Private Limited, a Bengaluru-based digital agency founded in 2025.",
+      "Learn about DevHorizon Technologies Private Limited, a Bengaluru-based digital company founded in 2025.",
     mainEntity: {
       "@type": "Organization",
       name: "DevHorizon Technologies Private Limited",
@@ -220,7 +220,7 @@ const About = () => {
     <Layout>
       <SEO
         title="About DevHorizon Technologies Private Limited - Our Story & Team | Digital Company Bengaluru"
-        description="Learn about DevHorizon Technologies Private Limited, a Bengaluru-based digital agency founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
+        description="Learn about DevHorizon Technologies Private Limited, a Bengaluru-based digital company founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
         schema={{ "@context": "https://schema.org", "@graph": [aboutSchema, breadcrumbSchema] }}
       />
 
@@ -239,7 +239,7 @@ const About = () => {
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Crafting Digital Excellence Since 2025</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              DevHorizon Technologies Private Limited is a full-service digital agency based in Bengaluru, India. We
+              DevHorizon Technologies Private Limited is a full-service digital company based in Bengaluru, India. We
               specialize in creating exceptional digital experiences through innovative web development, mobile
               applications, and strategic digital marketing solutions.
             </p>
@@ -261,7 +261,7 @@ const About = () => {
               <p className="text-muted-foreground leading-relaxed mb-4">
                 Founded in June 2025, DevHorizon Technologies Private Limited emerged from a passion for transforming
                 businesses through technology. What started as a small team of developers has grown into a full-service
-                digital agency serving clients across India, UAE, Canada, US, and UK.
+                digital company serving clients across India, UAE, Canada, US, and UK.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 We believe in the power of technology to solve real-world problems. Our approach combines technical

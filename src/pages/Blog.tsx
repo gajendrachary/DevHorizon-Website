@@ -251,7 +251,7 @@ const Blog = () => {
     <Layout>
       <SEO
         title="DevHorizon Technologies Private Limited Blog - Web Development, Mobile & Marketing Insights"
-        description="Stay updated with DevHorizon Technologies Private Limited blog on web development trends, mobile app best practices, Meta ads optimization tips, and UI/UX design principles. Expert insights from Bengaluru's top digital agency."
+        description="Stay updated with DevHorizon Technologies Private Limited blog on web development trends, mobile app best practices, Meta ads optimization tips, and UI/UX design principles. Expert insights from Bengaluru's top digital company."
         schema={{ '@context': 'https://schema.org', '@graph': [blogSchema, breadcrumbSchema] }}
       />
       {/* Hero Section */}
