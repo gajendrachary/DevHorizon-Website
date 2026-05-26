@@ -414,10 +414,16 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
                   isInView={inView}
                   parallaxOffset={cardOffsets[index] || 0}
                   image={project.image}
-                  isLogo={project.isLogo}
+                  isLogo={(project as any).isLogo}
+                  onClick={
+                    (project as any).screenshots
+                      ? () => setActiveDetailIndex(index)
+                      : undefined
+                  }
                 />
               </div>
             ))}
+
 
             {/* Right spacer for centering last card */}
             <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
