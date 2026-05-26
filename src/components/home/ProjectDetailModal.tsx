@@ -133,9 +133,9 @@ export const ProjectDetailModal = ({
               {screenshots.map((src, i) => (
                 <CarouselItem
                   key={src}
-                  className="pl-3 sm:pl-4 basis-[78%] sm:basis-[48%] lg:basis-[34%]"
+                  className="pl-3 sm:pl-4 basis-[58%] sm:basis-[48%] lg:basis-[34%]"
                 >
-                  <div className="aspect-[9/19.5] rounded-[2rem] bg-foreground p-1.5 shadow-xl">
+                  <div className="aspect-[9/19.5] max-h-[27rem] sm:max-h-none rounded-[2rem] bg-foreground p-1.5 shadow-xl">
                     <img
                       src={src}
                       alt={`${title} screenshot ${i + 1}`}
