@@ -106,20 +106,20 @@ export const ProjectDetailModal = ({
                 {currentSlide}/{screenshots.length}
               </span>
               <div className="hidden sm:flex gap-2">
-              <button
-                onClick={() => carouselApi?.scrollPrev()}
-                className="w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center hover:bg-accent transition-colors"
-                aria-label="Previous screenshot"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => carouselApi?.scrollNext()}
-                className="w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center hover:bg-accent transition-colors"
-                aria-label="Next screenshot"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
+                <button
+                  onClick={() => carouselApi?.scrollPrev()}
+                  className="w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center hover:bg-accent transition-colors"
+                  aria-label="Previous screenshot"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => carouselApi?.scrollNext()}
+                  className="w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center hover:bg-accent transition-colors"
+                  aria-label="Next screenshot"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
@@ -152,30 +152,30 @@ export const ProjectDetailModal = ({
         {/* About */}
         <div className="px-4 sm:px-8 py-6">
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
-          <section className="min-w-0">
-            <h3 className="text-base sm:text-lg font-bold mb-2 text-foreground">
-              About this app
-            </h3>
-            <p className="max-w-prose text-sm sm:text-base text-muted-foreground leading-7 sm:leading-8">
-              {details.about}
-            </p>
-          </section>
+            <section className="min-w-0">
+              <h3 className="text-base sm:text-lg font-bold mb-2 text-foreground">
+                About this app
+              </h3>
+              <p className="max-w-prose text-sm sm:text-base text-muted-foreground leading-7 sm:leading-8">
+                {details.about}
+              </p>
+            </section>
 
-          <section className="min-w-0">
-            <h3 className="text-base sm:text-lg font-bold mb-3 text-foreground">
-              How it makes your work easy
-            </h3>
-            <ul className="space-y-3">
-              {details.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-3 text-sm sm:text-base text-foreground/90">
-                  <span className="mt-0.5 w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                    <Check className="w-3 h-3" strokeWidth={3} />
-                  </span>
-                  <span className="leading-7 sm:leading-8">{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+            <section className="min-w-0">
+              <h3 className="text-base sm:text-lg font-bold mb-3 text-foreground">
+                How it makes your work easy
+              </h3>
+              <ul className="space-y-3">
+                {details.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3 text-sm sm:text-base text-foreground/90">
+                    <span className="mt-0.5 w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3" strokeWidth={3} />
+                    </span>
+                    <span className="leading-7 sm:leading-8">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
           </div>
 
 
