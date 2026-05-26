@@ -28,7 +28,6 @@ export const ProjectDetailModal = ({
   category,
   icon,
   platforms,
-  tech,
   url,
   screenshots,
   details,
