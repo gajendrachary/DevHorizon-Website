@@ -86,7 +86,7 @@ export const ProjectDetailModal = ({
 
         {/* App Store style preview gallery */}
         <div className="relative bg-muted/40 py-6 border-y border-border">
-          <div className="flex items-center justify-between px-6 sm:px-8 mb-3">
+          <div className="flex items-center justify-between px-4 sm:px-8 mb-3">
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wide">
               Preview
             </h3>
