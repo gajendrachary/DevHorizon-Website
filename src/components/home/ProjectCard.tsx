@@ -35,6 +35,7 @@ interface ProjectCardProps {
   parallaxOffset?: number;
   image?: string;
   isLogo?: boolean;
+  onClick?: () => void;
 }
 
 export const ProjectCard = ({
@@ -50,6 +51,7 @@ export const ProjectCard = ({
   parallaxOffset = 0,
   image,
   isLogo = false,
+  onClick,
 }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
@@ -62,12 +64,23 @@ export const ProjectCard = ({
   const parallaxScale = 1 - Math.abs(parallaxOffset) * 0.05;
   const parallaxTranslateY = Math.abs(parallaxOffset) * 10;
 
+  const useButton = !!onClick;
+  const RootTag: any = useButton ? motion.button : motion.a;
+  const rootProps: any = useButton
+    ? {
+        type: 'button',
+        onClick,
+      }
+    : {
+        href: url,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      };
+
   return (
-    <motion.a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[400px] snap-center block"
+    <RootTag
+      {...rootProps}
+      className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[400px] snap-center block text-left"
       initial={{
         x: 80,
         opacity: 0,
