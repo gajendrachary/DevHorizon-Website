@@ -44,7 +44,7 @@ export const ProjectDetailModal = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[92vh] overflow-y-auto p-0 rounded-2xl">
+      <DialogContent className="max-w-4xl w-[95vw] sm:w-full max-h-[92vh] overflow-y-auto overflow-x-hidden p-0 rounded-2xl">
         {/* Header */}
         <DialogHeader className="px-6 sm:px-8 pt-6 sm:pt-8 pb-4 text-left">
           <div className="flex items-center gap-4">
