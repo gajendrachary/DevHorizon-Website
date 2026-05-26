@@ -501,6 +501,22 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
           </motion.div>
         </motion.div>
       </div>
+
+      {activeDetailIndex !== null && (projects[activeDetailIndex] as any).screenshots && (
+        <ProjectDetailModal
+          open={activeDetailIndex !== null}
+          onOpenChange={(o) => !o && setActiveDetailIndex(null)}
+          title={projects[activeDetailIndex].title}
+          category={projects[activeDetailIndex].category}
+          icon={projects[activeDetailIndex].image as string}
+          platforms={(projects[activeDetailIndex] as any).platforms}
+          tech={projects[activeDetailIndex].technologies}
+          url={projects[activeDetailIndex].url}
+          screenshots={(projects[activeDetailIndex] as any).screenshots}
+          details={(projects[activeDetailIndex] as any).details}
+        />
+      )}
     </section>
   );
 };
+
