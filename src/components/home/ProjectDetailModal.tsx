@@ -110,7 +110,7 @@ export const ProjectDetailModal = ({
 
           <div
             ref={galleryRef}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 sm:px-8 pb-2"
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth px-4 sm:px-8 pb-2"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
