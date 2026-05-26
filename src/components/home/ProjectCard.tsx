@@ -236,21 +236,6 @@ export const ProjectCard = ({
             {description}
           </motion.p>
 
-          {/* Technologies */}
-          <div className="flex flex-wrap gap-2">
-            {technologies.map((tech, techIndex) => (
-              <motion.span
-                key={tech}
-                className="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-md"
-                initial={{ opacity: 0, x: -10 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: entranceDelay + 0.3 + techIndex * 0.08 }}
-              >
-                {tech}
-              </motion.span>
-            ))}
-          </div>
-
           {/* Click Hint */}
           <motion.div
             className="mt-6 text-xs text-primary font-medium"
