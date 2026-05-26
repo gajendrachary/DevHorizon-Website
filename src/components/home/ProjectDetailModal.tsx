@@ -1,8 +1,9 @@
-import { useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ChevronLeft, ChevronRight, ExternalLink, Check } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 
 export interface ProjectDetails {
   about: string;
@@ -32,15 +33,25 @@ export const ProjectDetailModal = ({
   screenshots,
   details,
 }: ProjectDetailModalProps) => {
-  const galleryRef = useRef<HTMLDivElement>(null);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [currentSlide, setCurrentSlide] = useState(1);
 
-  const scrollBy = (dir: 1 | -1) => {
-    const el = galleryRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>('[data-shot]');
-    const step = card ? card.offsetWidth + 16 : 280;
-    el.scrollBy({ left: step * dir, behavior: 'smooth' });
-  };
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    const updateCurrentSlide = () => {
+      setCurrentSlide(carouselApi.selectedScrollSnap() + 1);
+    };
+
+    updateCurrentSlide();
+    carouselApi.on('select', updateCurrentSlide);
+    carouselApi.on('reInit', updateCurrentSlide);
+
+    return () => {
+      carouselApi.off('select', updateCurrentSlide);
+      carouselApi.off('reInit', updateCurrentSlide);
+    };
+  }, [carouselApi]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -85,81 +96,87 @@ export const ProjectDetailModal = ({
         </DialogHeader>
 
         {/* App Store style preview gallery */}
-        <div className="relative bg-muted/40 py-6 border-y border-border">
+        <div className="relative overflow-hidden bg-muted/40 py-6 border-y border-border">
           <div className="flex items-center justify-between px-4 sm:px-8 mb-3">
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wide">
               Preview
             </h3>
-            <div className="hidden sm:flex gap-2">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="text-xs text-muted-foreground tabular-nums">
+                {currentSlide}/{screenshots.length}
+              </span>
+              <div className="hidden sm:flex gap-2">
               <button
-                onClick={() => scrollBy(-1)}
+                onClick={() => carouselApi?.scrollPrev()}
                 className="w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center hover:bg-accent transition-colors"
                 aria-label="Previous screenshot"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
-                onClick={() => scrollBy(1)}
+                onClick={() => carouselApi?.scrollNext()}
                 className="w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center hover:bg-accent transition-colors"
                 aria-label="Next screenshot"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
+              </div>
             </div>
           </div>
 
-          <div
-            ref={galleryRef}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth px-4 sm:px-8 pb-2"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              WebkitOverflowScrolling: 'touch',
-            }}
+          <Carousel
+            setApi={setCarouselApi}
+            opts={{ align: 'center', loop: screenshots.length > 1 }}
+            className="w-full px-4 sm:px-8"
           >
-            {screenshots.map((src, i) => (
-              <div
-                key={src}
-                data-shot
-                className="flex-shrink-0 snap-center w-[220px] sm:w-[240px] aspect-[9/19.5] rounded-[2rem] bg-foreground p-1.5 shadow-xl"
-              >
-                <img
-                  src={src}
-                  alt={`${title} screenshot ${i + 1}`}
-                  loading="lazy"
-                  className="w-full h-full object-cover object-top rounded-[1.6rem]"
-                />
-              </div>
-            ))}
-          </div>
+            <CarouselContent className="-ml-3 sm:-ml-4">
+              {screenshots.map((src, i) => (
+                <CarouselItem
+                  key={src}
+                  className="pl-3 sm:pl-4 basis-[78%] sm:basis-[48%] lg:basis-[34%]"
+                >
+                  <div className="aspect-[9/19.5] rounded-[2rem] bg-foreground p-1.5 shadow-xl">
+                    <img
+                      src={src}
+                      alt={`${title} screenshot ${i + 1}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover object-top rounded-[1.6rem]"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
 
         {/* About */}
-        <div className="px-4 sm:px-8 py-6 space-y-6">
-          <section>
+        <div className="px-4 sm:px-8 py-6">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
+          <section className="min-w-0">
             <h3 className="text-base sm:text-lg font-bold mb-2 text-foreground">
               About this app
             </h3>
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+            <p className="max-w-prose text-sm sm:text-base text-muted-foreground leading-7 sm:leading-8">
               {details.about}
             </p>
           </section>
 
-          <section>
+          <section className="min-w-0">
             <h3 className="text-base sm:text-lg font-bold mb-3 text-foreground">
               How it makes your work easy
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {details.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2.5 text-sm sm:text-base text-foreground/90">
-                  <span className="mt-1 w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+                <li key={feature} className="flex items-start gap-3 text-sm sm:text-base text-foreground/90">
+                  <span className="mt-0.5 w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
                     <Check className="w-3 h-3" strokeWidth={3} />
                   </span>
-                  <span className="leading-relaxed">{feature}</span>
+                  <span className="leading-7 sm:leading-8">{feature}</span>
                 </li>
               ))}
             </ul>
           </section>
+          </div>
 
 
           {url && (
