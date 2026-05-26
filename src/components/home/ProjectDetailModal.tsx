@@ -135,7 +135,7 @@ export const ProjectDetailModal = ({
         </div>
 
         {/* About */}
-        <div className="px-6 sm:px-8 py-6 space-y-6">
+        <div className="px-4 sm:px-8 py-6 space-y-6">
           <section>
             <h3 className="text-base sm:text-lg font-bold mb-2 text-foreground">
               About this app
