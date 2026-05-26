@@ -32,6 +32,22 @@ const AUTO_SCROLL_CONFIG = {
 
 const projects = [
   {
+    title: 'Skanda Billing Software',
+    category: 'Cloud Kitchen / Billing POS',
+    url: 'https://skandacloudkitchen.in/',
+    description: 'A fast, easy-to-use POS and billing app for cloud kitchens — order entry, bills, payments and reports in one place.',
+    color: 'bg-orange-100',
+    bgColor: '#EA580C',
+    technologies: ['React', 'TypeScript', 'Supabase'],
+    accentIcon: Receipt,
+    image: skandaBillingCover,
+    isLogo: false,
+    screenshots: skandaBillingScreenshots,
+    details: skandaBillingDetails,
+    platforms: ['iOS', 'Android', 'Web'],
+  },
+
+  {
     title: 'Skanda Cloud Kitchen',
     category: 'F&B / Cloud Kitchen',
     url: 'https://skandacloudkitchen.in/',
