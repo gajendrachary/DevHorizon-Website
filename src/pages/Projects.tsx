@@ -5,6 +5,12 @@ import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from "luci
 import { useState, useRef, useEffect, useCallback } from "react";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 import { useAutoScrollCarousel } from "@/hooks/useAutoScrollCarousel";
+import { ProjectDetailModal } from "@/components/home/ProjectDetailModal";
+import {
+  skandaBillingCover,
+  skandaBillingScreenshots,
+  skandaBillingDetails,
+} from "@/data/skandaBillingProject";
 
 // Project Images
 import projectSkandaCloudKitchen from "@/assets/logo-skanda-cloud-kitchen.png";
@@ -14,6 +20,7 @@ import projectLikithaHandcrafts from "@/assets/project-likitha-handcrafts.png";
 import projectHavenSalad from "@/assets/project-haven-salad.jpg";
 import projectJzGreenHeaven from "@/assets/logo-jz-green-heaven.png";
 import projectUnitedNewsKannada from "@/assets/logo-united-news-kannada.jpg";
+
 
 // Animation config - matches ServiceCard
 const ANIMATION_CONFIG = {
