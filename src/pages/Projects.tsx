@@ -225,11 +225,14 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
         onTapStart={() => setIsTapped(true)}
         onTap={() => {
           setIsTapped(false);
-          if (type === "web" && project.url) {
+          if (project.screenshots && onOpenDetails) {
+            onOpenDetails();
+          } else if (type === "web" && project.url) {
             window.open(project.url, '_blank', 'noopener,noreferrer');
           }
         }}
         onTapCancel={() => setIsTapped(false)}
+
         animate={{
           rotateY: isTapped
             ? ANIMATION_CONFIG.tap.rotateY
