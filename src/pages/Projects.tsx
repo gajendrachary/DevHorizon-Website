@@ -757,9 +757,25 @@ const ProjectCarousel = ({
           </div>
         </div>
       </div>
+
+      {activeDetailIndex !== null && projects[activeDetailIndex]?.screenshots && (
+        <ProjectDetailModal
+          open={activeDetailIndex !== null}
+          onOpenChange={(o) => !o && setActiveDetailIndex(null)}
+          title={projects[activeDetailIndex].title}
+          category={projects[activeDetailIndex].category}
+          icon={projects[activeDetailIndex].image}
+          platforms={projects[activeDetailIndex].platforms}
+          tech={projects[activeDetailIndex].tech}
+          url={projects[activeDetailIndex].url}
+          screenshots={projects[activeDetailIndex].screenshots}
+          details={projects[activeDetailIndex].details}
+        />
+      )}
     </section>
   );
 };
+
 
 const Projects = () => {
   const { ref: headerRef, inView: headerInView } = useInView({
