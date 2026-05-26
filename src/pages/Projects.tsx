@@ -424,6 +424,8 @@ const ProjectCarousel = ({
   onActiveColorChange,
   defaultBgColor = "transparent",
 }: ProjectCarouselProps) => {
+  const [activeDetailIndex, setActiveDetailIndex] = useState<number | null>(null);
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardOffsets, setCardOffsets] = useState<number[]>(projects.map(() => 0));
