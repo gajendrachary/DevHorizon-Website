@@ -122,6 +122,22 @@ const websites = [
 
 const mobileApps = [
   {
+    title: "Skanda Billing Software",
+    category: "Cloud Kitchen / Billing POS",
+    platforms: ["iOS", "Android", "Web"],
+    description:
+      "A purpose-built billing & POS app for cloud kitchens — fast order entry, automatic bills, payments and daily/monthly reports.",
+    color: "bg-orange-100",
+    bgColor: "#EA580C",
+    tech: ["React", "TypeScript", "Supabase"],
+    image: skandaBillingCover,
+    isLogo: false,
+    url: "https://skandacloudkitchen.in/",
+    screenshots: skandaBillingScreenshots,
+    details: skandaBillingDetails,
+  },
+
+  {
     title: "BLR360",
     category: "Bengaluru Taxi Service",
     platforms: ["iOS", "Android"],
