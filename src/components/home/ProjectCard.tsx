@@ -269,6 +269,6 @@ export const ProjectCard = ({
           transition={{ duration: 0.4 }}
         />
       </motion.div>
-    </motion.a>
+    </RootTag>
   );
 };
