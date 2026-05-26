@@ -174,11 +174,13 @@ interface ProjectCardProps {
   type: "web" | "app";
   isInView: boolean;
   parallaxOffset?: number;
+  onOpenDetails?: () => void;
 }
 
-const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: ProjectCardProps) => {
+const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpenDetails }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
+
 
   const entranceDelay = Math.min(index * ANIMATION_CONFIG.entrance.stagger, 0.9);
 
