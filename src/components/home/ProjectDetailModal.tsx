@@ -16,7 +16,6 @@ export interface ProjectDetailModalProps {
   category: string;
   icon: string;
   platforms?: string[];
-  tech?: string[];
   url?: string;
   screenshots: string[];
   details: ProjectDetails;
