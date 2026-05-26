@@ -1,55 +1,56 @@
+# Plan
 
+## 1. Fix horizontal scrolling
 
-# Fix Website Issues and Improvements
+Add `overflow-x: hidden` to `html, body` in `src/index.css` and `overflow-x-hidden` on the root `Layout` wrapper to prevent any child (carousels with `w-[85vw]`, 3D rotated cards, animated translateX) from leaking horizontal overflow into the page.
 
-## Issues Identified
+## 2. Add screenshots as a new project: "Skanda Billing Software"
 
-1. **Home page ProjectCard entrance animation** uses `x: '100vw'` and `rotateY: 15` with uncapped stagger delay -- cards fly in from off-screen and take too long to appear (already fixed on Projects page but not on the home page's `ProjectCard.tsx`)
+Copy the 7 uploaded WhatsApp screenshots into `src/assets/skanda-billing/` as:
+- `skanda-billing-1.jpg` … `skanda-billing-7.jpg`
 
-2. **Excessive section spacing** -- the `section-padding` class applies `py-16 md:py-24 lg:py-32` (128px on large screens), creating very large empty gaps between sections. Several sections also have large `mb-12 md:mb-16` margins on headers.
+Use `skanda-billing-1.jpg` (the home screen with SKANDA header) as the card cover image.
 
-3. **Card click issues on home page** -- The `ProjectCard.tsx` (home page) wraps the entire card in `<motion.a>` which should work, but the entrance animation with `x: '100vw'` may cause cards to be positioned off-screen or have click target issues.
+Add a new entry to:
+- `src/components/home/ProjectsCarousel.tsx` → `projects[]` (Recent Projects on homepage)
+- `src/pages/Projects.tsx` → `mobileApps[]` (Projects page, Mobile Apps section)
 
-4. **No TypeScript errors remaining** -- The `NodeJS` namespace errors were previously fixed by using `ReturnType<typeof setTimeout>` (confirmed in current code).
+Entry data:
+- title: "Skanda Billing Software"
+- category: "Cloud Kitchen / Billing POS"
+- platforms: ["iOS", "Android", "Web"]
+- description: short tagline (one line)
+- bgColor: orange (#EA580C) to match the app's brand
+- tech: ["React", "TypeScript", "Supabase"]
+- A new `screenshots: string[]` field with all 7 images
+- A new `details` object with sections used by the modal (see below)
 
-## Plan
+## 3. Click-to-open detail modal (App Store style)
 
-### Step 1: Fix Home Page ProjectCard Entrance Animation
-**File: `src/components/home/ProjectCard.tsx`**
-- Change `initial.x` from `'100vw'` to `80` (matching Projects page fix)
-- Change `initial.rotateY` from `15` to `8`
-- Cap the entrance delay: `Math.min(index * stagger, 0.9)`
-- Reduce entrance duration to `0.6`
+Currently `ProjectCard` opens the URL on click. New behavior: when a project has a `screenshots`/`details` payload, clicking the card opens a modal instead of navigating away.
 
-### Step 2: Reduce Section Spacing Site-wide
-**File: `src/index.css`**
-- Change `.section-padding` from `py-16 md:py-24 lg:py-32` to `py-10 md:py-16 lg:py-20` (reduce ~40%)
+Build `src/components/home/ProjectDetailModal.tsx` using shadcn `Dialog`:
 
-**File: `src/components/home/ProjectsCarousel.tsx`**
-- Reduce header margin from `mb-12 md:mb-16` to `mb-8 md:mb-10`
+- **Header**: app icon (cover image rounded-2xl), title, category, small "Mobile + Web" badges
+- **Screenshot gallery**: horizontal snap-scrolling row of phone-framed screenshots (rounded-[2.5rem] device frame, shadow, ~260px wide each) — App Store "Preview" style, swipeable on mobile, arrow buttons on desktop
+- **About this app**: paragraph explaining what Skanda Billing Software does
+- **How it eases your work**: bulleted feature list:
+  - Fast order entry with categorized menu + search (Breakfast/Lunch/Dinner, Bestseller Combos, Chicken/Mutton/Seafood/Tandoori, Biriyani, Tiffin, Indian Breads)
+  - One-tap add to cart with live order summary and quantity controls
+  - Automatic bill summary: subtotal, discount, packing, delivery, grand total, amount-in-words
+  - Multiple payment modes (Cash, UPI, Card, Wallet) with paid/balance tracking
+  - One-click Print Bill, Save, Clear
+  - Bills History with unique bill IDs, order type and payment chips, search and delete
+  - Daily and Monthly Reports — total orders, sales, avg order, discount, payment & order-type breakdown, CSV export
+  - Customer management and full Menu/Category editor (add/rename/delete, item counts)
+  - Works offline-friendly, optimized for tablets and phones used at the counter
+- **Footer**: optional "Visit Website" CTA (skandacloudkitchen.in) + Close
 
-**File: `src/components/home/CTASection.tsx`**
-- Review and tighten internal spacing
+Wire `ProjectCard` (homepage) and the inline card in `Projects.tsx` to call an `onClick` that opens the modal when `project.screenshots` exists; otherwise keep current external-link behavior.
 
-**File: `src/components/home/StatsSection.tsx`**
-- Review and tighten internal spacing
+## Technical notes
 
-**File: `src/pages/Projects.tsx`**
-- Reduce header margins in carousel sections
-
-### Step 3: Ensure Card Clicks Work Reliably
-**File: `src/components/home/ProjectCard.tsx`**
-- Ensure the `<motion.a>` wrapper has proper `z-index` and no `pointer-events` conflicts
-- Verify the parallax transforms don't push cards outside their clickable bounds
-
-### Step 4: Review and Fix Other Pages
-- Check Services page and Projects page for consistent spacing reductions
-- Ensure all carousel arrow buttons work properly across pages
-
-## Suggestions After Review
-After implementing these fixes, I'll also recommend:
-- The hero section has a lot of text -- consider trimming the description paragraph
-- Footer has empty space above it that could be reduced
-- The "Trusted by businesses" logo carousel could be slightly more compact
-- Consider adding a testimonials/reviews preview section on the home page
-
+- Add to memory index: new feature "Project Detail Modal" for projects that ship `screenshots`/`details`
+- Keep card animation/parallax intact — only change the click handler when detail payload exists
+- Modal scroll: gallery uses `overflow-x-auto snap-x snap-mandatory` and inner phone frames with the screenshot inside (`object-cover object-top`), matching App Store preview look
+- No business-logic / backend changes

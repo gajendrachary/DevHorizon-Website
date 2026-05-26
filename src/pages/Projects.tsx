@@ -5,6 +5,12 @@ import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from "luci
 import { useState, useRef, useEffect, useCallback } from "react";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 import { useAutoScrollCarousel } from "@/hooks/useAutoScrollCarousel";
+import { ProjectDetailModal } from "@/components/home/ProjectDetailModal";
+import {
+  skandaBillingCover,
+  skandaBillingScreenshots,
+  skandaBillingDetails,
+} from "@/data/skandaBillingProject";
 
 // Project Images
 import projectSkandaCloudKitchen from "@/assets/logo-skanda-cloud-kitchen.png";
@@ -14,6 +20,7 @@ import projectLikithaHandcrafts from "@/assets/project-likitha-handcrafts.png";
 import projectHavenSalad from "@/assets/project-haven-salad.jpg";
 import projectJzGreenHeaven from "@/assets/logo-jz-green-heaven.png";
 import projectUnitedNewsKannada from "@/assets/logo-united-news-kannada.jpg";
+
 
 // Animation config - matches ServiceCard
 const ANIMATION_CONFIG = {
@@ -115,6 +122,22 @@ const websites = [
 
 const mobileApps = [
   {
+    title: "Skanda Billing Software",
+    category: "Cloud Kitchen / Billing POS",
+    platforms: ["iOS", "Android", "Web"],
+    description:
+      "A purpose-built billing & POS app for cloud kitchens — fast order entry, automatic bills, payments and daily/monthly reports.",
+    color: "bg-orange-100",
+    bgColor: "#EA580C",
+    tech: ["React", "TypeScript", "Supabase"],
+    image: skandaBillingCover,
+    isLogo: false,
+    url: "https://skandacloudkitchen.in/",
+    screenshots: skandaBillingScreenshots,
+    details: skandaBillingDetails,
+  },
+
+  {
     title: "BLR360",
     category: "Bengaluru Taxi Service",
     platforms: ["iOS", "Android"],
@@ -151,11 +174,13 @@ interface ProjectCardProps {
   type: "web" | "app";
   isInView: boolean;
   parallaxOffset?: number;
+  onOpenDetails?: () => void;
 }
 
-const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: ProjectCardProps) => {
+const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpenDetails }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
+
 
   const entranceDelay = Math.min(index * ANIMATION_CONFIG.entrance.stagger, 0.9);
 
@@ -200,11 +225,14 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0 }: Pro
         onTapStart={() => setIsTapped(true)}
         onTap={() => {
           setIsTapped(false);
-          if (type === "web" && project.url) {
+          if (project.screenshots && onOpenDetails) {
+            onOpenDetails();
+          } else if (type === "web" && project.url) {
             window.open(project.url, '_blank', 'noopener,noreferrer');
           }
         }}
         onTapCancel={() => setIsTapped(false)}
+
         animate={{
           rotateY: isTapped
             ? ANIMATION_CONFIG.tap.rotateY
@@ -396,6 +424,8 @@ const ProjectCarousel = ({
   onActiveColorChange,
   defaultBgColor = "transparent",
 }: ProjectCarouselProps) => {
+  const [activeDetailIndex, setActiveDetailIndex] = useState<number | null>(null);
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardOffsets, setCardOffsets] = useState<number[]>(projects.map(() => 0));
@@ -670,9 +700,13 @@ const ProjectCarousel = ({
                   type={type}
                   isInView={inView}
                   parallaxOffset={cardOffsets[index] || 0}
+                  onOpenDetails={
+                    project.screenshots ? () => setActiveDetailIndex(index) : undefined
+                  }
                 />
               </div>
             ))}
+
 
             {/* Right spacer for centering last card */}
             <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
@@ -723,9 +757,25 @@ const ProjectCarousel = ({
           </div>
         </div>
       </div>
+
+      {activeDetailIndex !== null && projects[activeDetailIndex]?.screenshots && (
+        <ProjectDetailModal
+          open={activeDetailIndex !== null}
+          onOpenChange={(o) => !o && setActiveDetailIndex(null)}
+          title={projects[activeDetailIndex].title}
+          category={projects[activeDetailIndex].category}
+          icon={projects[activeDetailIndex].image}
+          platforms={projects[activeDetailIndex].platforms}
+          tech={projects[activeDetailIndex].tech}
+          url={projects[activeDetailIndex].url}
+          screenshots={projects[activeDetailIndex].screenshots}
+          details={projects[activeDetailIndex].details}
+        />
+      )}
     </section>
   );
 };
+
 
 const Projects = () => {
   const { ref: headerRef, inView: headerInView } = useInView({

@@ -1,11 +1,17 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad, UtensilsCrossed, Newspaper } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad, UtensilsCrossed, Newspaper, Receipt } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ProjectCard } from './ProjectCard';
+import { ProjectDetailModal } from './ProjectDetailModal';
 import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
+import {
+  skandaBillingCover,
+  skandaBillingScreenshots,
+  skandaBillingDetails,
+} from '@/data/skandaBillingProject';
 
 // Project Images
 import projectSkandaCloudKitchen from '@/assets/logo-skanda-cloud-kitchen.png';
@@ -23,7 +29,24 @@ const AUTO_SCROLL_CONFIG = {
   pauseOnHover: true,   // Pause on desktop hover
 };
 
+
 const projects = [
+  {
+    title: 'Skanda Billing Software',
+    category: 'Cloud Kitchen / Billing POS',
+    url: 'https://skandacloudkitchen.in/',
+    description: 'A fast, easy-to-use POS and billing app for cloud kitchens — order entry, bills, payments and reports in one place.',
+    color: 'bg-orange-100',
+    bgColor: '#EA580C',
+    technologies: ['React', 'TypeScript', 'Supabase'],
+    accentIcon: Receipt,
+    image: skandaBillingCover,
+    isLogo: false,
+    screenshots: skandaBillingScreenshots,
+    details: skandaBillingDetails,
+    platforms: ['iOS', 'Android', 'Web'],
+  },
+
   {
     title: 'Skanda Cloud Kitchen',
     category: 'F&B / Cloud Kitchen',
@@ -117,9 +140,11 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardOffsets, setCardOffsets] = useState<number[]>(projects.map(() => 0));
   const [hasViewedAll, setHasViewedAll] = useState(false);
+  const [activeDetailIndex, setActiveDetailIndex] = useState<number | null>(null);
   const viewedIndicesRef = useRef<Set<number>>(new Set([0]));
   const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isScrollingRef = useRef(false);
+
 
   // Auto-scroll hook
   const {
@@ -389,10 +414,16 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
                   isInView={inView}
                   parallaxOffset={cardOffsets[index] || 0}
                   image={project.image}
-                  isLogo={project.isLogo}
+                  isLogo={(project as any).isLogo}
+                  onClick={
+                    (project as any).screenshots
+                      ? () => setActiveDetailIndex(index)
+                      : undefined
+                  }
                 />
               </div>
             ))}
+
 
             {/* Right spacer for centering last card */}
             <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
@@ -470,6 +501,22 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
           </motion.div>
         </motion.div>
       </div>
+
+      {activeDetailIndex !== null && (projects[activeDetailIndex] as any).screenshots && (
+        <ProjectDetailModal
+          open={activeDetailIndex !== null}
+          onOpenChange={(o) => !o && setActiveDetailIndex(null)}
+          title={projects[activeDetailIndex].title}
+          category={projects[activeDetailIndex].category}
+          icon={projects[activeDetailIndex].image as string}
+          platforms={(projects[activeDetailIndex] as any).platforms}
+          tech={projects[activeDetailIndex].technologies}
+          url={projects[activeDetailIndex].url}
+          screenshots={(projects[activeDetailIndex] as any).screenshots}
+          details={(projects[activeDetailIndex] as any).details}
+        />
+      )}
     </section>
   );
 };
+
