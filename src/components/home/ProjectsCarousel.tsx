@@ -1,11 +1,17 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad, UtensilsCrossed, Newspaper } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Coffee, Store, Palette, Salad, UtensilsCrossed, Newspaper, Receipt } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ProjectCard } from './ProjectCard';
+import { ProjectDetailModal } from './ProjectDetailModal';
 import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
+import {
+  skandaBillingCover,
+  skandaBillingScreenshots,
+  skandaBillingDetails,
+} from '@/data/skandaBillingProject';
 
 // Project Images
 import projectSkandaCloudKitchen from '@/assets/logo-skanda-cloud-kitchen.png';
@@ -22,6 +28,7 @@ const AUTO_SCROLL_CONFIG = {
   reverseDelay: 1500,   // ms pause before reversing
   pauseOnHover: true,   // Pause on desktop hover
 };
+
 
 const projects = [
   {
