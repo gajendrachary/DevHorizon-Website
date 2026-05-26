@@ -163,23 +163,6 @@ export const ProjectDetailModal = ({
             </ul>
           </section>
 
-          {tech && tech.length > 0 && (
-            <section>
-              <h3 className="text-sm font-semibold mb-2 text-muted-foreground uppercase tracking-wide">
-                Built with
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {tech.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-1 bg-primary/10 text-primary text-xs font-medium rounded-md"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </section>
-          )}
 
           {url && (
             <Button asChild size="lg" className="w-full sm:hidden rounded-full font-semibold">
