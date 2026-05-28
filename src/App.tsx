@@ -16,6 +16,13 @@ import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
 import Careers from "./pages/Careers";
 import CareersAdmin from "./pages/CareersAdmin";
+import CareersAbout from "./pages/careers/About";
+import CareersOpenings from "./pages/careers/Openings";
+import CareersWhyJoin from "./pages/careers/WhyJoinPage";
+import CareersProcess from "./pages/careers/ProcessPage";
+import CareersResumeTips from "./pages/careers/ResumeTipsPage";
+import CareersFAQ from "./pages/careers/FAQPage";
+import CareersApply from "./pages/careers/ApplyPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +46,13 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/careers/about" element={<CareersAbout />} />
+            <Route path="/careers/openings" element={<CareersOpenings />} />
+            <Route path="/careers/why-join" element={<CareersWhyJoin />} />
+            <Route path="/careers/process" element={<CareersProcess />} />
+            <Route path="/careers/resume-tips" element={<CareersResumeTips />} />
+            <Route path="/careers/faq" element={<CareersFAQ />} />
+            <Route path="/careers/apply" element={<CareersApply />} />
             <Route path="/careers/admin" element={<CareersAdmin />} />
             <Route path="/services/web-development" element={<Services />} />
             <Route path="/services/mobile-apps" element={<Services />} />
