@@ -85,7 +85,7 @@ export const OpeningsManager = () => {
     };
     const op = editing
       ? supabase.from('job_openings').update(payload).eq('id', editing.id)
-      : supabase.from('job_openings').insert(payload);
+      : supabase.from('job_openings').insert([payload]);
     const { error } = await op;
     setSaving(false);
     if (error) {
