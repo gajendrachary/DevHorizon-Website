@@ -65,6 +65,132 @@ export type Database = {
         }
         Relationships: []
       }
+      job_applications: {
+        Row: {
+          application_type: string
+          availability: string | null
+          college_university: string
+          consent_given: boolean
+          current_city: string
+          email: string
+          expected_compensation: string | null
+          full_name: string
+          github_url: string | null
+          highest_qualification: string
+          id: string
+          linkedin_url: string | null
+          mobile: string
+          portfolio_url: string | null
+          resume_file_url: string
+          role_applied: string
+          short_intro: string
+          skills: string
+          status: string
+          submitted_at: string
+          updated_at: string
+          years_experience: string
+        }
+        Insert: {
+          application_type: string
+          availability?: string | null
+          college_university: string
+          consent_given?: boolean
+          current_city: string
+          email: string
+          expected_compensation?: string | null
+          full_name: string
+          github_url?: string | null
+          highest_qualification: string
+          id?: string
+          linkedin_url?: string | null
+          mobile: string
+          portfolio_url?: string | null
+          resume_file_url: string
+          role_applied: string
+          short_intro: string
+          skills: string
+          status?: string
+          submitted_at?: string
+          updated_at?: string
+          years_experience: string
+        }
+        Update: {
+          application_type?: string
+          availability?: string | null
+          college_university?: string
+          consent_given?: boolean
+          current_city?: string
+          email?: string
+          expected_compensation?: string | null
+          full_name?: string
+          github_url?: string | null
+          highest_qualification?: string
+          id?: string
+          linkedin_url?: string | null
+          mobile?: string
+          portfolio_url?: string | null
+          resume_file_url?: string
+          role_applied?: string
+          short_intro?: string
+          skills?: string
+          status?: string
+          submitted_at?: string
+          updated_at?: string
+          years_experience?: string
+        }
+        Relationships: []
+      }
+      job_openings: {
+        Row: {
+          created_at: string
+          department: string
+          description: string
+          eligibility_criteria: string | null
+          experience_level: string
+          id: string
+          job_type: string
+          location: string
+          responsibilities: string | null
+          skills: string[]
+          status: string
+          title: string
+          updated_at: string
+          work_mode: string
+        }
+        Insert: {
+          created_at?: string
+          department: string
+          description: string
+          eligibility_criteria?: string | null
+          experience_level: string
+          id?: string
+          job_type: string
+          location?: string
+          responsibilities?: string | null
+          skills?: string[]
+          status?: string
+          title: string
+          updated_at?: string
+          work_mode: string
+        }
+        Update: {
+          created_at?: string
+          department?: string
+          description?: string
+          eligibility_criteria?: string | null
+          experience_level?: string
+          id?: string
+          job_type?: string
+          location?: string
+          responsibilities?: string | null
+          skills?: string[]
+          status?: string
+          title?: string
+          updated_at?: string
+          work_mode?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
