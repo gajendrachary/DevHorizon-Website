@@ -38,8 +38,7 @@ export const SuccessAnimation = ({ onClose }: { onClose: () => void }) => (
     </div>
     <h3 className="text-2xl font-bold mb-3">Thank you for submitting your application.</h3>
     <p className="text-muted-foreground max-w-md mx-auto mb-6">
-      We've received your application and our team will review it shortly. We'll revert back to you
-      soon over email.
+      We'll shortly revert back to you.
     </p>
     <button
       onClick={onClose}

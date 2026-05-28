@@ -29,8 +29,7 @@ export const CareersHero = ({ hasOpenings }: { hasOpenings: boolean }) => (
         </h1>
 
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-          DevHorizon is a Bengaluru-based software & digital engineering company. Join a small,
-          senior team shipping real SaaS, AI and automation products.
+          DevHorizon — Building Digital Excellence.
         </p>
 
         <div className="flex flex-wrap gap-3 pt-2">
