@@ -111,10 +111,10 @@ export const ApplyForm = ({ openRoles, prefillRole, prefillType }: Props) => {
         .upload(path, file, { contentType: file.type, upsert: false });
       if (upErr) throw upErr;
 
-      const { error: insErr } = await supabase.from('job_applications').insert({
-        ...parsed.data,
-        resume_file_url: path,
-      });
+      const { error: insErr } = await supabase
+        .from('job_applications')
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .insert({ ...parsed.data, resume_file_url: path } as any);
       if (insErr) throw insErr;
 
       setSubmitted(true);
