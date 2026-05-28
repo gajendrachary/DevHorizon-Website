@@ -14,6 +14,8 @@ import GetQuote from "./pages/GetQuote";
 import Services from "./pages/Services";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
+import Careers from "./pages/Careers";
+import CareersAdmin from "./pages/CareersAdmin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +38,8 @@ const App = () => (
             <Route path="/get-quote" element={<GetQuote />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/careers/admin" element={<CareersAdmin />} />
             <Route path="/services/web-development" element={<Services />} />
             <Route path="/services/mobile-apps" element={<Services />} />
             <Route path="/services/meta-ads" element={<Services />} />
