@@ -84,8 +84,10 @@ export const OpeningsManager = () => {
       responsibilities: parsed.data.responsibilities || null,
     };
     const op = editing
-      ? supabase.from('job_openings').update(payload).eq('id', editing.id)
-      : supabase.from('job_openings').insert([payload]);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ? supabase.from('job_openings').update(payload as any).eq('id', editing.id)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      : supabase.from('job_openings').insert(payload as any);
     const { error } = await op;
     setSaving(false);
     if (error) {
