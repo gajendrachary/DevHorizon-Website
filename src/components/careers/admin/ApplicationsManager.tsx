@@ -49,12 +49,19 @@ export const ApplicationsManager = () => {
   };
 
   const downloadResume = async (path: string) => {
-    const { data, error } = await supabase.storage.from('resumes').createSignedUrl(path, 60);
+    const { data, error } = await supabase.storage.from('resumes').download(path);
     if (error || !data) {
-      toast({ title: 'Failed', description: error?.message ?? 'No URL', variant: 'destructive' });
+      toast({ title: 'Failed', description: error?.message ?? 'No file', variant: 'destructive' });
       return;
     }
-    window.open(data.signedUrl, '_blank', 'noopener,noreferrer');
+    const url = URL.createObjectURL(data);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = path.split('/').pop() ?? 'resume';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
   if (loading) return <Loader2 className="h-6 w-6 animate-spin" />;
