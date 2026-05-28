@@ -42,9 +42,26 @@ const CareersAdmin = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSigningIn(true);
-    const { error } = await signIn(email, password);
+    const { error } = await signIn(email.trim(), password);
     setSigningIn(false);
-    if (error) toast({ title: 'Sign in failed', description: error.message, variant: 'destructive' });
+    if (error) {
+      const msg = error.message.toLowerCase().includes('invalid')
+        ? 'Incorrect email or password. If you forgot your password, click "Forgot password" below to reset it.'
+        : error.message;
+      toast({ title: 'Sign in failed', description: msg, variant: 'destructive' });
+    }
+  };
+
+  const onForgotPassword = async () => {
+    if (!email.trim()) {
+      toast({ title: 'Enter your email first', description: 'Type your admin email above, then click Forgot password.', variant: 'destructive' });
+      return;
+    }
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${window.location.origin}/careers/admin`,
+    });
+    if (error) toast({ title: 'Could not send reset email', description: error.message, variant: 'destructive' });
+    else toast({ title: 'Reset email sent', description: `Check ${email} for a password reset link.` });
   };
 
   return (
@@ -70,6 +87,13 @@ const CareersAdmin = () => {
                 {signingIn && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
                 Sign in
               </Button>
+              <button
+                type="button"
+                onClick={onForgotPassword}
+                className="text-xs text-muted-foreground hover:text-foreground underline w-full text-center"
+              >
+                Forgot password?
+              </button>
               <p className="text-xs text-muted-foreground text-center">
                 Admin accounts are provisioned by the team.
               </p>
