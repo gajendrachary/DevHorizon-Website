@@ -1,56 +1,90 @@
-# Plan
+## Careers Page Implementation Plan
 
-## 1. Fix horizontal scrolling
+Build a complete careers system at `/careers` with admin dashboard at `/careers/admin`, integrated into the existing DevHorizon site shell.
 
-Add `overflow-x: hidden` to `html, body` in `src/index.css` and `overflow-x-hidden` on the root `Layout` wrapper to prevent any child (carousels with `w-[85vw]`, 3D rotated cards, animated translateX) from leaking horizontal overflow into the page.
+### 1. Database (Lovable Cloud migration)
 
-## 2. Add screenshots as a new project: "Skanda Billing Software"
+**Extend `app_role` enum** to include `recruiter` (admin and user already exist).
 
-Copy the 7 uploaded WhatsApp screenshots into `src/assets/skanda-billing/` as:
-- `skanda-billing-1.jpg` … `skanda-billing-7.jpg`
+**Tables:**
+- `job_openings` — title, department, job_type, experience_level, location (default 'Bengaluru, India'), work_mode, skills text[], description, eligibility_criteria, responsibilities, status (default 'open'), created_at
+- `job_applications` — all personal/role/education/links/resume fields per spec, status default 'new', consent_given bool, submitted_at
 
-Use `skanda-billing-1.jpg` (the home screen with SKANDA header) as the card cover image.
+**RLS:**
+- `job_openings`: public SELECT where status='open'; admin full CRUD
+- `job_applications`: anyone INSERT with consent_given=true; admin+recruiter SELECT/UPDATE; admin DELETE
+- `user_roles`: users SELECT own; mutations via service role only (no policies for INSERT/UPDATE/DELETE from authenticated)
 
-Add a new entry to:
-- `src/components/home/ProjectsCarousel.tsx` → `projects[]` (Recent Projects on homepage)
-- `src/pages/Projects.tsx` → `mobileApps[]` (Projects page, Mobile Apps section)
+**Storage:** private bucket `resumes`, 5MB limit, MIME allowlist (PDF/DOC/DOCX). Policy: anyone can INSERT (upload via form); only admins can SELECT (signed URLs).
 
-Entry data:
-- title: "Skanda Billing Software"
-- category: "Cloud Kitchen / Billing POS"
-- platforms: ["iOS", "Android", "Web"]
-- description: short tagline (one line)
-- bgColor: orange (#EA580C) to match the app's brand
-- tech: ["React", "TypeScript", "Supabase"]
-- A new `screenshots: string[]` field with all 7 images
-- A new `details` object with sections used by the modal (see below)
+**Seed data:** 6 openings (Full Stack Engineer, AI/ML Engineer, DevOps Engineer, Automation QA Engineer, Data Engineer, Frontend Intern).
 
-## 3. Click-to-open detail modal (App Store style)
+### 2. Routes & Navigation
 
-Currently `ProjectCard` opens the URL on click. New behavior: when a project has a `screenshots`/`details` payload, clicking the card opens a modal instead of navigating away.
+- Add `/careers` and `/careers/admin` to `src/App.tsx`
+- Add "Careers" link to `src/components/layout/Header.tsx` navLinks
+- Add `/careers` to `public/sitemap.xml` and `scripts/generate-sitemap.ts`
+- `/careers/admin` rendered with `<meta name="robots" content="noindex,nofollow">` via SEO component
 
-Build `src/components/home/ProjectDetailModal.tsx` using shadcn `Dialog`:
+### 3. `/careers` page structure
 
-- **Header**: app icon (cover image rounded-2xl), title, category, small "Mobile + Web" badges
-- **Screenshot gallery**: horizontal snap-scrolling row of phone-framed screenshots (rounded-[2.5rem] device frame, shadow, ~260px wide each) — App Store "Preview" style, swipeable on mobile, arrow buttons on desktop
-- **About this app**: paragraph explaining what Skanda Billing Software does
-- **How it eases your work**: bulleted feature list:
-  - Fast order entry with categorized menu + search (Breakfast/Lunch/Dinner, Bestseller Combos, Chicken/Mutton/Seafood/Tandoori, Biriyani, Tiffin, Indian Breads)
-  - One-tap add to cart with live order summary and quantity controls
-  - Automatic bill summary: subtotal, discount, packing, delivery, grand total, amount-in-words
-  - Multiple payment modes (Cash, UPI, Card, Wallet) with paid/balance tracking
-  - One-click Print Bill, Save, Clear
-  - Bills History with unique bill IDs, order type and payment chips, search and delete
-  - Daily and Monthly Reports — total orders, sales, avg order, discount, payment & order-type breakdown, CSV export
-  - Customer management and full Menu/Category editor (add/rename/delete, item counts)
-  - Works offline-friendly, optimized for tablets and phones used at the counter
-- **Footer**: optional "Visit Website" CTA (skandacloudkitchen.in) + Close
+Uses existing `Layout` (Header + Footer). Sections in order:
+1. Hero (eyebrow chip, H1, sub, two CTAs)
+2. Focus pills strip
+3. About — "DevHorizon — Building Digital Excellence"
+4. Sticky sub-nav (under main header) — desktop: horizontal links with active scroll-spy; mobile: hamburger → Sheet side panel
+5. `#openings` — fetched live; hidden entirely if zero results; search + filters (job_type, department, experience_level); cards with Apply button that scrolls to `#apply` and pre-fills role
+6. Why join (6 cards)
+7. Hiring process (5 steps)
+8. `#apply` — Zod-validated form with sections; resume upload to `resumes` bucket; insert into `job_applications`; PhonePe-style success (animated green circle + check stroke + ripple)
+9. Resume tips (5 numbered)
+10. FAQs accordion (6 items)
 
-Wire `ProjectCard` (homepage) and the inline card in `Projects.tsx` to call an `onClick` that opens the modal when `project.screenshots` exists; otherwise keep current external-link behavior.
+SEO: `<title>Careers — DevHorizon Technologies</title>`, meta desc, canonical `/careers`, JSON-LD `JobPosting` array generated from fetched openings.
 
-## Technical notes
+### 4. `/careers/admin` page
 
-- Add to memory index: new feature "Project Detail Modal" for projects that ship `screenshots`/`details`
-- Keep card animation/parallax intact — only change the click handler when detail payload exists
-- Modal scroll: gallery uses `overflow-x-auto snap-x snap-mandatory` and inner phone frames with the screenshot inside (`object-cover object-top`), matching App Store preview look
-- No business-logic / backend changes
+- Email/password sign-in form only (no signup link, no Google button on this page)
+- After auth: check `has_role(uid, 'admin')` — non-admins see "Access denied"
+- Tabs: **Openings** (CRUD table with create/edit modal covering all columns) and **Applications** (read-only table, status dropdown new→shortlisted→interview→rejected/hired, "Download Resume" button calling `storage.createSignedUrl('resumes', path, 60)`)
+- Realtime: subscribe to `job_openings` changes so public page updates live (enable via `ALTER PUBLICATION supabase_realtime ADD TABLE job_openings`)
+- Provision first admin: include in migration — promote `gajendrachary518@gmail.com` to admin if user exists; otherwise document via insert tool after signup
+
+### 5. Design
+
+- Inherit existing tokens from `index.css` and `tailwind.config.ts` (dark theme, white text with glow, black-bg buttons with shadow per project memory)
+- Rounded-xl cards, subtle borders, soft shadows, generous whitespace
+- Fully responsive, keyboard-nav, WCAG AA contrast
+- Use existing `Button`, `Input`, `Textarea`, `Select`, `Accordion`, `Sheet`, `Dialog`, `Table`, `Badge`, `Card` shadcn components
+- No new theme toggle
+
+### 6. New files
+
+```
+src/pages/Careers.tsx
+src/pages/CareersAdmin.tsx
+src/components/careers/CareersHero.tsx
+src/components/careers/CareersSubNav.tsx
+src/components/careers/OpeningsSection.tsx
+src/components/careers/JobCard.tsx
+src/components/careers/ApplyForm.tsx
+src/components/careers/SuccessAnimation.tsx
+src/components/careers/WhyJoin.tsx
+src/components/careers/HiringProcess.tsx
+src/components/careers/ResumeTips.tsx
+src/components/careers/CareersFAQ.tsx
+src/components/careers/admin/OpeningsManager.tsx
+src/components/careers/admin/ApplicationsManager.tsx
+src/lib/careersSchemas.ts  (Zod)
+```
+
+Plus edits to: `src/App.tsx`, `src/components/layout/Header.tsx`, `public/sitemap.xml`, `scripts/generate-sitemap.ts`.
+
+### Technical notes
+
+- Resume upload path: `applications/{uuid}.{ext}` — uploaded with anon key (storage policy allows INSERT to anyone), then path stored in `resume_file_url`
+- File validation client-side: size ≤ 5MB, mime in [pdf, msword, vnd.openxmlformats-officedocument.wordprocessingml.document]
+- Sub-nav uses IntersectionObserver for active section highlight
+- Form pre-fills role via URL hash query `?role=...` or local state when Apply button on a card is clicked
+- Realtime subscription on public page so newly created openings appear without refresh
+- DOMPurify sanitization on text inputs per project security memory
