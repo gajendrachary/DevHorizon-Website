@@ -14,7 +14,7 @@ const CareersAbout = () => (
         <h1 className="text-3xl md:text-4xl font-bold mt-2 mb-6">DevHorizon — Building Digital Excellence</h1>
         <div className="space-y-4 text-muted-foreground leading-relaxed text-base md:text-lg">
           <p>
-            DevHorizon is a Bengaluru-based software studio building production-grade SaaS,
+            DevHorizon is a Bengaluru-based software Company building production-grade SaaS,
             AI-powered tools and automation systems for startups and enterprises across India and
             abroad. We're small, senior and ship fast.
           </p>
