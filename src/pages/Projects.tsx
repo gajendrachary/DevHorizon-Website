@@ -271,6 +271,8 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
             <motion.img
               src={project.image}
               alt={project.title}
+              loading="lazy"
+              decoding="async"
               className={
                 project.isLogo ? "w-24 h-24 object-contain" : "absolute inset-0 w-full h-full object-cover object-top"
               }
