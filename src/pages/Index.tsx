@@ -24,11 +24,11 @@ const Index = () => {
 
       <HeroSection />
       <ClientLogosSection />
-      <CTASection />
-      <ServicesSection />
-      <StatsSection />
-      <ProjectsPreviewSection />
-      <FAQSection />
+      <div className="cv-auto"><CTASection /></div>
+      <div className="cv-auto"><ServicesSection /></div>
+      <div className="cv-auto"><StatsSection /></div>
+      <div className="cv-auto"><ProjectsPreviewSection /></div>
+      <div className="cv-auto"><FAQSection /></div>
     </Layout>
   );
 };

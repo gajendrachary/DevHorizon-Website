@@ -1,90 +1,52 @@
-## Careers Page Implementation Plan
+# Performance Optimization Plan
 
-Build a complete careers system at `/careers` with admin dashboard at `/careers/admin`, integrated into the existing DevHorizon site shell.
+The site is slow because of three concrete bottlenecks I measured on the live preview. This plan fixes them without changing the look or feel.
 
-### 1. Database (Lovable Cloud migration)
+## What's actually slow (measured)
 
-**Extend `app_role` enum** to include `recruiter` (admin and user already exist).
+- **First Contentful Paint: 5.5s**, full load: 7s (target: <2s FCP)
+- **21.6 MB of images** on the homepage — 5 client logos alone are **2–2.8 MB each** (uncompressed PNGs)
+- **DOM: 11,580 nodes**, **Style recalc: 3.15s**, **Script: 4.29s** — caused by many always-on framer-motion animations + scroll listeners running every frame
+- 33 images loading without `loading="lazy"`, width/height, or modern format
 
-**Tables:**
-- `job_openings` — title, department, job_type, experience_level, location (default 'Bengaluru, India'), work_mode, skills text[], description, eligibility_criteria, responsibilities, status (default 'open'), created_at
-- `job_applications` — all personal/role/education/links/resume fields per spec, status default 'new', consent_given bool, submitted_at
+## Fixes
 
-**RLS:**
-- `job_openings`: public SELECT where status='open'; admin full CRUD
-- `job_applications`: anyone INSERT with consent_given=true; admin+recruiter SELECT/UPDATE; admin DELETE
-- `user_roles`: users SELECT own; mutations via service role only (no policies for INSERT/UPDATE/DELETE from authenticated)
+### 1. Image weight (biggest win, ~90% reduction)
+- Convert oversized PNG/JPG assets to **WebP** and resize to actual display size:
+  - Client logos → 400×400 max, ~20–40 KB each (was 2–2.8 MB)
+  - Service background images (`service-*.png`) → 1200px wide WebP (~80 KB, was 600 KB)
+  - Project images → 1200px WebP
+- Add `loading="lazy"` and `decoding="async"` to every non-hero `<img>` / `motion.img`
+- Add explicit `width`/`height` on images to prevent layout shift
+- Add `<link rel="preload" as="image">` for the hero LCP image only
 
-**Storage:** private bucket `resumes`, 5MB limit, MIME allowlist (PDF/DOC/DOCX). Policy: anyone can INSERT (upload via form); only admins can SELECT (signed URLs).
+### 2. Animation cost
+- Gate decorative blob/glow animations behind `useInView` so they pause off-screen (Hero, Services, Projects, Stats)
+- Replace 3 always-running infinite background blobs per section with CSS-only static gradients where they aren't essential
+- Respect `prefers-reduced-motion` globally — disable parallax & infinite animations for users who opt out
+- Remove duplicate `motion.div` wrappers in service cards that add DOM nodes without visual effect
 
-**Seed data:** 6 openings (Full Stack Engineer, AI/ML Engineer, DevOps Engineer, Automation QA Engineer, Data Engineer, Frontend Intern).
+### 3. Scroll & carousel performance
+- Throttle the scroll handler in `ServiceCarousel`, `ProjectsCarousel`, and the auto-scroll carousel hook using `requestAnimationFrame` (currently fires on every scroll event)
+- Mark scroll/touch listeners as `{ passive: true }`
+- Stop the auto-scroll RAF loop when the carousel is off-screen (IntersectionObserver)
+- Memoize the per-card parallax offset calculation; currently recomputed for every card on every scroll tick
 
-### 2. Routes & Navigation
+### 4. Smaller wins
+- Remove `Documents: 5` / `Frames: 3` overhead — check for stray iframes/dev overlays we control
+- Add `content-visibility: auto` to below-the-fold sections (FAQ, Projects, Stats) so the browser skips rendering them until scrolled into view
 
-- Add `/careers` and `/careers/admin` to `src/App.tsx`
-- Add "Careers" link to `src/components/layout/Header.tsx` navLinks
-- Add `/careers` to `public/sitemap.xml` and `scripts/generate-sitemap.ts`
-- `/careers/admin` rendered with `<meta name="robots" content="noindex,nofollow">` via SEO component
+## Files I'll touch
 
-### 3. `/careers` page structure
+- `src/assets/logo-*.png|jpg` → re-export as `.webp` (and update imports)
+- `src/assets/service-*.png` → re-export as `.webp`
+- `src/assets/project-*.jpg` → compress in place
+- `src/components/home/HeroSection.tsx`, `ServiceCarousel.tsx`, `ProjectsCarousel.tsx`, `ClientLogosSection.tsx`, `StatsSection.tsx`, `CTASection.tsx`, `ServiceCard.tsx`, `ProjectCard.tsx`
+- `src/hooks/useAutoScrollCarousel.tsx` — RAF throttling + viewport gating
+- `src/index.css` — `prefers-reduced-motion` rules + `content-visibility` helper class
+- `index.html` — LCP preload tag
 
-Uses existing `Layout` (Header + Footer). Sections in order:
-1. Hero (eyebrow chip, H1, sub, two CTAs)
-2. Focus pills strip
-3. About — "DevHorizon — Building Digital Excellence"
-4. Sticky sub-nav (under main header) — desktop: horizontal links with active scroll-spy; mobile: hamburger → Sheet side panel
-5. `#openings` — fetched live; hidden entirely if zero results; search + filters (job_type, department, experience_level); cards with Apply button that scrolls to `#apply` and pre-fills role
-6. Why join (6 cards)
-7. Hiring process (5 steps)
-8. `#apply` — Zod-validated form with sections; resume upload to `resumes` bucket; insert into `job_applications`; PhonePe-style success (animated green circle + check stroke + ripple)
-9. Resume tips (5 numbered)
-10. FAQs accordion (6 items)
-
-SEO: `<title>Careers — DevHorizon Technologies</title>`, meta desc, canonical `/careers`, JSON-LD `JobPosting` array generated from fetched openings.
-
-### 4. `/careers/admin` page
-
-- Email/password sign-in form only (no signup link, no Google button on this page)
-- After auth: check `has_role(uid, 'admin')` — non-admins see "Access denied"
-- Tabs: **Openings** (CRUD table with create/edit modal covering all columns) and **Applications** (read-only table, status dropdown new→shortlisted→interview→rejected/hired, "Download Resume" button calling `storage.createSignedUrl('resumes', path, 60)`)
-- Realtime: subscribe to `job_openings` changes so public page updates live (enable via `ALTER PUBLICATION supabase_realtime ADD TABLE job_openings`)
-- Provision first admin: include in migration — promote `gajendrachary518@gmail.com` to admin if user exists; otherwise document via insert tool after signup
-
-### 5. Design
-
-- Inherit existing tokens from `index.css` and `tailwind.config.ts` (dark theme, white text with glow, black-bg buttons with shadow per project memory)
-- Rounded-xl cards, subtle borders, soft shadows, generous whitespace
-- Fully responsive, keyboard-nav, WCAG AA contrast
-- Use existing `Button`, `Input`, `Textarea`, `Select`, `Accordion`, `Sheet`, `Dialog`, `Table`, `Badge`, `Card` shadcn components
-- No new theme toggle
-
-### 6. New files
-
-```
-src/pages/Careers.tsx
-src/pages/CareersAdmin.tsx
-src/components/careers/CareersHero.tsx
-src/components/careers/CareersSubNav.tsx
-src/components/careers/OpeningsSection.tsx
-src/components/careers/JobCard.tsx
-src/components/careers/ApplyForm.tsx
-src/components/careers/SuccessAnimation.tsx
-src/components/careers/WhyJoin.tsx
-src/components/careers/HiringProcess.tsx
-src/components/careers/ResumeTips.tsx
-src/components/careers/CareersFAQ.tsx
-src/components/careers/admin/OpeningsManager.tsx
-src/components/careers/admin/ApplicationsManager.tsx
-src/lib/careersSchemas.ts  (Zod)
-```
-
-Plus edits to: `src/App.tsx`, `src/components/layout/Header.tsx`, `public/sitemap.xml`, `scripts/generate-sitemap.ts`.
-
-### Technical notes
-
-- Resume upload path: `applications/{uuid}.{ext}` — uploaded with anon key (storage policy allows INSERT to anyone), then path stored in `resume_file_url`
-- File validation client-side: size ≤ 5MB, mime in [pdf, msword, vnd.openxmlformats-officedocument.wordprocessingml.document]
-- Sub-nav uses IntersectionObserver for active section highlight
-- Form pre-fills role via URL hash query `?role=...` or local state when Apply button on a card is clicked
-- Realtime subscription on public page so newly created openings appear without refresh
-- DOMPurify sanitization on text inputs per project security memory
+## Out of scope
+- No visual redesign, no copy changes, no removed sections
+- No backend / schema changes
+- Carousels keep their 3D look and auto-scroll behavior — just smoother

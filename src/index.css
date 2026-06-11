@@ -478,3 +478,33 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary));
 }
+
+/* ============= Performance Optimizations ============= */
+
+/* Respect user motion preference: disable all infinite/decorative animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-scroll-left {
+    animation: none !important;
+  }
+}
+
+/* Skip rendering off-screen heavy sections until they're near the viewport */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
+/* Hint compositor to promote layers used by carousels/parallax */
+.gpu {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}

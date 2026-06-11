@@ -75,22 +75,29 @@ export function useAutoScrollCarousel(config: AutoScrollConfig = {}): UseAutoScr
     targetSpeedRef.current = mergedConfig.speed;
   }, [mergedConfig.speed, mergedConfig.reverseDelay, mergedConfig.pauseOnHover, mergedConfig.enabled]);
 
-  // Main animation loop
+  // Main animation loop — gated by viewport visibility & reduced-motion preference
   useEffect(() => {
     if (!mergedConfig.enabled) return;
 
-    let frameId: number;
+    // Respect reduced-motion preference — skip auto-scroll entirely
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    let frameId: number | null = null;
     let reverseTimeoutId: ReturnType<typeof setTimeout> | null = null;
+    let isVisible = false;
 
     const animate = () => {
       const container = containerRef.current;
-      
-      if (!container) {
-        frameId = requestAnimationFrame(animate);
+
+      if (!container || !isVisible) {
+        frameId = null;
         return;
       }
 
-      // Skip if paused or user is interacting
+      // Skip if paused or user is interacting — but keep checking next frame
       if (isPausedRef.current || isUserInteractingRef.current) {
         frameId = requestAnimationFrame(animate);
         return;
@@ -133,13 +140,38 @@ export function useAutoScrollCarousel(config: AutoScrollConfig = {}): UseAutoScr
       frameId = requestAnimationFrame(animate);
     };
 
-    frameId = requestAnimationFrame(animate);
+    // Only run RAF loop when carousel is in viewport
+    const container = containerRef.current;
+    let observer: IntersectionObserver | null = null;
+    if (container && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          const nowVisible = entry?.isIntersecting ?? false;
+          if (nowVisible && !isVisible) {
+            isVisible = true;
+            if (frameId == null) frameId = requestAnimationFrame(animate);
+          } else if (!nowVisible) {
+            isVisible = false;
+            if (frameId != null) {
+              cancelAnimationFrame(frameId);
+              frameId = null;
+            }
+          }
+        },
+        { threshold: 0.05 }
+      );
+      observer.observe(container);
+    } else {
+      // Fallback: always run
+      isVisible = true;
+      frameId = requestAnimationFrame(animate);
+    }
 
     return () => {
-      cancelAnimationFrame(frameId);
-      if (reverseTimeoutId) {
-        clearTimeout(reverseTimeoutId);
-      }
+      if (frameId != null) cancelAnimationFrame(frameId);
+      if (reverseTimeoutId) clearTimeout(reverseTimeoutId);
+      observer?.disconnect();
     };
   }, [mergedConfig.enabled]);
 
