@@ -61,7 +61,6 @@ const services = [{
   emoji: '🌐',
   accentIcon: Sparkles,
   name: 'Web Development',
-  price: '₹30,000',
   description: 'Custom websites & web apps',
   timeline: '1-2 weeks'
 }, {
@@ -69,7 +68,6 @@ const services = [{
   emoji: '📱',
   accentIcon: Zap,
   name: 'Mobile App Development',
-  price: '₹40,000',
   description: 'iOS & Android apps',
   timeline: '2-4 weeks'
 }, {
@@ -77,7 +75,6 @@ const services = [{
   emoji: '📊',
   accentIcon: Target,
   name: 'Meta Ads Management',
-  price: '₹15,000',
   description: 'Facebook & Instagram ads',
   timeline: 'Monthly'
 }, {
@@ -85,7 +82,6 @@ const services = [{
   emoji: '🎨',
   accentIcon: PaletteIcon,
   name: 'UI/UX Design',
-  price: '₹20,000',
   description: 'User interface design',
   timeline: '1-2 weeks'
 }, {
@@ -93,7 +89,6 @@ const services = [{
   emoji: '☁️',
   accentIcon: CloudIcon,
   name: 'Cloud Solutions',
-  price: '₹25,000',
   description: 'Cloud infrastructure',
   timeline: '2-3 weeks'
 }];
@@ -295,7 +290,7 @@ const GetQuote = () => {
   return <Layout>
       <SEO
         title="Get a Free Quote | DevHorizon - Web & App Development Services"
-        description="Request a custom quote for your web development, mobile app, or Meta ads project. Free consultation available. Transparent pricing starting from ₹15,000. Response within 24 hours."
+        description="Request a custom quote for your web development, mobile app, or Meta ads project. Free consultation available. Response within 24 hours."
         schema={{ '@context': 'https://schema.org', '@graph': [contactSchema, breadcrumbSchema] }}
       />
       <section className="section-padding bg-secondary/30">
@@ -413,8 +408,6 @@ const GetQuote = () => {
                             <div className="text-sm text-muted-foreground">{service.description}</div>
                           </div>
 
-                          {/* Price */}
-                          <div className="text-sm font-bold text-primary relative z-10">From {service.price}</div>
 
                           {/* Selection Checkmark */}
                           {isSelected && (

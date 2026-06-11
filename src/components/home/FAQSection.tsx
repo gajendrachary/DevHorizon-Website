@@ -17,10 +17,6 @@ const faqs = [
     answer: 'The timeline varies based on project complexity. A standard business website typically takes 2-3 weeks, while complex e-commerce platforms or web applications may take 4-8 weeks. We provide detailed timelines during our initial consultation.'
   },
   {
-    question: 'What is your pricing structure?',
-    answer: 'Our pricing is project-based and depends on your specific requirements. Web development starts from ₹30,000, mobile apps from ₹40,000, and Meta ads management from ₹15,000/month. We provide detailed quotes after understanding your needs.'
-  },
-  {
     question: 'Do you offer ongoing support and maintenance?',
     answer: 'Yes! We provide comprehensive post-launch support including regular updates, security patches, performance monitoring, and content updates. Our support packages are flexible and can be customized to your needs.'
   },
