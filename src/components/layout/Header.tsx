@@ -61,12 +61,23 @@ export const Header = () => {
           : "bg-transparent py-5"
       )}
     >
-      <div className="container-swiss flex items-center justify-between">
+      <div className="container-swiss relative flex items-center justify-center lg:justify-between">
+        {/* Mobile Menu Button - LEFT on mobile */}
+        <div className="flex-1 flex justify-start lg:hidden">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 transition-transform duration-200 active:scale-95"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <motion.img 
-            src={devhubLogo} 
-            alt="DevHub Logo" 
+          <motion.img
+            src={devhubLogo}
+            alt="DevHub Logo"
             className="h-10 w-auto transition-all duration-300 group-hover:scale-110"
             whileHover={{ rotate: [0, -5, 5, 0] }}
             transition={{ duration: 0.4 }}
@@ -95,11 +106,11 @@ export const Header = () => {
               >
                 {link.name}
                 {link.dropdown && (
-                  <ChevronDown 
+                  <ChevronDown
                     className={cn(
                       "w-4 h-4 transition-transform duration-200",
                       activeDropdown === link.name && "rotate-180"
-                    )} 
+                    )}
                   />
                 )}
               </Link>
@@ -137,14 +148,8 @@ export const Header = () => {
           </Button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="lg:hidden p-2 transition-transform duration-200 active:scale-95"
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* Spacer to balance mobile layout */}
+        <div className="flex-1 lg:hidden" />
       </div>
 
       {/* Mobile Menu */}
