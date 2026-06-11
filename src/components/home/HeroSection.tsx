@@ -327,6 +327,15 @@ export const HeroSection = () => {
                   <Link to="/projects">View Our Work</Link>
                 </Button>
               </motion.div>
+              <motion.div whileHover={{
+              scale: 1.02
+            }} whileTap={{
+              scale: 0.98
+            }}>
+                <Button asChild variant="heroOutline" size="lg">
+                  <Link to="/careers/apply">Careers</Link>
+                </Button>
+              </motion.div>
             </motion.div>
 
             {/* Service Icons - 3D Animated */}
