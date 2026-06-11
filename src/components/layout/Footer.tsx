@@ -21,10 +21,10 @@ const services = [
 ];
 
 const socialLinks = [
-  { icon: Linkedin, href: "https://linkedin.com/in/gajendrachary", label: "LinkedIn" },
-  { icon: Github, href: "https://github.com/gajendrachary", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/devhorizon-technologies-pvt-ltd/", label: "LinkedIn" },
+  { icon: Github, href: "https://github.com/DevHorizon-Technologies", label: "GitHub" },
   { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "https://www.instagram.com/_dev.hub_/", label: "Instagram" },
+  { icon: Instagram, href: "https://www.instagram.com/devhorizon.technologies/", label: "Instagram" },
 ];
 
 export const Footer = () => {
@@ -52,7 +52,7 @@ export const Footer = () => {
                 animate={{ y: [0, -4, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
-              <span className="font-logo font-bold text-xl text-primary-foreground tracking-tight group-hover:text-primary transition-colors duration-200">
+              <span className="font-poppins font-bold text-xl text-primary-foreground tracking-tight group-hover:text-primary transition-colors duration-200">
                 DevHorizon Technologies Private Limited
               </span>
             </Link>
