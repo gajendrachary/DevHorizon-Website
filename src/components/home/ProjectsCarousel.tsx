@@ -198,17 +198,18 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
     }
   }, [hasViewedAll, activeIndex, onActiveColorChange]);
 
-  // Track active card and calculate parallax offsets
+  // Track active card and calculate parallax offsets — rAF-throttled
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
     let scrollEndTimeout: ReturnType<typeof setTimeout>;
+    let rafId: number | null = null;
 
-    const handleScroll = () => {
+    const compute = () => {
+      rafId = null;
       isScrollingRef.current = true;
-      
-      // Clear any pending reset
+
       if (resetTimeoutRef.current) {
         clearTimeout(resetTimeoutRef.current);
       }
@@ -238,17 +239,22 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
       setCardOffsets(newOffsets);
       setActiveIndex(closestIndex);
 
-      // Debounce scroll end detection
       clearTimeout(scrollEndTimeout);
       scrollEndTimeout = setTimeout(handleScrollEnd, 150);
     };
 
+    const handleScroll = () => {
+      if (rafId != null) return;
+      rafId = requestAnimationFrame(compute);
+    };
+
     container.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    
+    compute();
+
     return () => {
       container.removeEventListener('scroll', handleScroll);
       clearTimeout(scrollEndTimeout);
+      if (rafId != null) cancelAnimationFrame(rafId);
       if (resetTimeoutRef.current) {
         clearTimeout(resetTimeoutRef.current);
       }
