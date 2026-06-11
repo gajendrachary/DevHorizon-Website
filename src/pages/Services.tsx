@@ -53,7 +53,7 @@ const services = [
     emoji: '🌐',
     accentIcon: Sparkles,
     title: 'Web Development',
-    price: '₹30,000',
+    
     timeline: '2-4 weeks',
     description: 'Custom, SEO-optimized websites built with modern technologies for maximum performance and user engagement.',
     features: [
@@ -72,7 +72,7 @@ const services = [
     emoji: '📱',
     accentIcon: Zap,
     title: 'Mobile App Development',
-    price: '₹40,000',
+    
     timeline: '4-8 weeks',
     description: 'Native and cross-platform mobile applications for iOS and Android with seamless user experiences.',
     features: [
@@ -91,7 +91,7 @@ const services = [
     emoji: '📊',
     accentIcon: TargetIcon,
     title: 'Meta Ads Management',
-    price: '₹15,000',
+    
     timeline: 'Monthly',
     description: 'Strategic Facebook and Instagram advertising campaigns to maximize your ROI and reach your target audience.',
     features: [
@@ -226,7 +226,7 @@ const Services = () => {
   }, [activeIndex, scrollToCard]);
 
   const serviceSchemaData = getServiceSchema(
-    services.map((s) => ({ name: s.title, description: s.description, price: s.price }))
+    services.map((s) => ({ name: s.title, description: s.description }))
   );
 
   const breadcrumbSchema = getBreadcrumbSchema([
@@ -238,7 +238,7 @@ const Services = () => {
     <Layout>
       <SEO
         title="Our Services - Web Development, Mobile Apps & Meta Ads | DevHorizon Bengaluru"
-        description="Explore DevHorizon's digital services: Custom web development starting ₹30,000, Mobile app development from ₹40,000, and Meta Ads management from ₹15,000/month. Get a free quote today."
+        description="Explore DevHorizon's digital services: Custom web development, mobile app development for iOS & Android, and Meta Ads management. Get a free quote today."
         schema={{ '@context': 'https://schema.org', '@graph': [serviceSchemaData, breadcrumbSchema] }}
       />
       {/* CTA Section - Now at the top */}
@@ -563,12 +563,6 @@ const ServicePageCard = ({ service, index, isInView, entranceDelay, AccentIcon, 
           {service.title}
         </motion.h3>
         
-        <motion.p 
-          className="text-primary font-semibold mb-3 relative z-10"
-          style={{ transformStyle: 'preserve-3d', translateZ: 25 }}
-        >
-          Starting from {service.price}
-        </motion.p>
         
         <motion.p 
           className="text-foreground mb-6 leading-relaxed text-sm sm:text-base font-medium relative z-10"

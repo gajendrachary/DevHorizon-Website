@@ -153,11 +153,11 @@ export const getLocalBusinessSchema = () => ({
     opens: '09:00',
     closes: '18:00',
   },
-  priceRange: '₹₹',
+  
   areaServed: ['Bengaluru', 'India', 'UAE', 'UK', 'USA', 'Canada'],
 });
 
-export const getServiceSchema = (services: { name: string; description: string; price: string }[]) => ({
+export const getServiceSchema = (services: { name: string; description: string }[]) => ({
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   itemListElement: services.map((service, index) => ({
@@ -168,11 +168,6 @@ export const getServiceSchema = (services: { name: string; description: string; 
     provider: {
       '@type': 'Organization',
       name: 'DevHorizon Technologies Private Limited',
-    },
-    offers: {
-      '@type': 'Offer',
-      price: service.price.replace(/[^\d]/g, ''),
-      priceCurrency: 'INR',
     },
   })),
 });
