@@ -110,19 +110,23 @@ export const ServiceCarousel = () => {
   };
 
   // Track active card and calculate parallax offsets based on scroll position
+  // Throttled with rAF to avoid layout thrash on every scroll event.
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    const handleScroll = () => {
+    let rafId: number | null = null;
+
+    const compute = () => {
+      rafId = null;
       const scrollLeft = container.scrollLeft;
       const containerWidth = container.clientWidth;
       const cards = container.querySelectorAll('[data-card]');
-      
+
       const newOffsets: number[] = [];
       let closestIndex = 0;
       let closestDistance = Infinity;
-      
+
       cards.forEach((card, index) => {
         const cardElement = card as HTMLElement;
         const cardCenter = cardElement.offsetLeft + cardElement.offsetWidth / 2;
@@ -130,20 +134,28 @@ export const ServiceCarousel = () => {
         const distance = cardCenter - containerCenter;
         const normalizedOffset = Math.max(-1, Math.min(1, distance / (containerWidth * 0.5)));
         newOffsets.push(normalizedOffset);
-        
+
         if (Math.abs(distance) < closestDistance) {
           closestDistance = Math.abs(distance);
           closestIndex = index;
         }
       });
-      
+
       setCardOffsets(newOffsets);
       setActiveIndex(closestIndex);
     };
 
-    container.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial calculation
-    return () => container.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      if (rafId != null) return;
+      rafId = requestAnimationFrame(compute);
+    };
+
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    compute(); // Initial calculation
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+      if (rafId != null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   // Scroll to specific card
