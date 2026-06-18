@@ -1,0 +1,27 @@
+# DevHorizon Technologies
+
+> DevHorizon Technologies Private Limited is a Bengaluru-based digital company building custom websites, mobile apps, and Meta ads campaigns for clients across India, UAE, UK, US, and Canada.
+
+## Pages
+
+- [Home](/): Overview of DevHorizon's services, projects, and approach.
+- [About](/about): Company story, team, mission, and core values.
+- [Services](/services): Web development, mobile apps, and Meta ads management.
+- [Web Development](/services/web-development): Custom, SEO-optimized website builds.
+- [Mobile Apps](/services/mobile-apps): iOS and Android app development.
+- [Meta Ads](/services/meta-ads): Facebook and Instagram ads management.
+- [Projects](/projects): Portfolio of shipped client work.
+- [Reviews](/reviews): Client testimonials and ratings.
+- [Blog](/blog): Articles on web, mobile, and marketing.
+- [Get a Quote](/get-quote): Request a project estimate.
+
+## Careers
+
+- [Careers](/careers): Overview of working at DevHorizon.
+- [About the Team](/careers/about): Culture and engineering practices.
+- [Open Roles](/careers/openings): Current job and internship openings.
+- [Why Join](/careers/why-join): Benefits, growth, and what makes us different.
+- [Hiring Process](/careers/process): How interviews and decisions work.
+- [Resume Tips](/careers/resume-tips): What we look for in applications.
+- [Careers FAQ](/careers/faq): Common questions about joining.
+- [Apply](/careers/apply): Submit an application.

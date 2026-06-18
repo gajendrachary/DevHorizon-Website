@@ -237,8 +237,8 @@ const Services = () => {
   return (
     <Layout>
       <SEO
-        title="Our Services - Web Development, Mobile Apps & Meta Ads | DevHorizon Bengaluru"
-        description="Explore DevHorizon's digital services: Custom web development, mobile app development for iOS & Android, and Meta Ads management. Get a free quote today."
+        title="Services — Web, Mobile & Meta Ads | DevHorizon"
+        description="DevHorizon's services: custom web development, iOS & Android mobile apps, and Meta Ads management. Bengaluru-based, serving clients globally."
         schema={{ '@context': 'https://schema.org', '@graph': [serviceSchemaData, breadcrumbSchema] }}
       />
       {/* CTA Section - Now at the top */}

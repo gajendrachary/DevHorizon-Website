@@ -157,8 +157,8 @@ const Reviews = () => {
   return (
     <Layout>
       <SEO
-        title="Client Testimonials & Reviews | DevHorizon Technologies Private Limited - 95% Client Satisfaction"
-        description="Read what our clients say about DevHorizon Technologies Private Limited. With 95% client satisfaction and 40+ successful projects delivered, see why businesses choose us for web and mobile development."
+        title="Client Reviews & Testimonials | DevHorizon Technologies"
+        description="Read reviews from DevHorizon's clients. 95% client satisfaction across 20+ web and mobile projects delivered in India, UAE, UK, US, and Canada."
         schema={{ "@context": "https://schema.org", "@graph": [reviewSchema, breadcrumbSchema] }}
       />
 
@@ -197,6 +197,7 @@ const Reviews = () => {
           <div className="relative">
             <motion.button
               onClick={scrollPrev}
+              aria-label="Previous review"
               className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-background/80 backdrop-blur-sm border border-border rounded-full items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors hidden md:flex"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -205,6 +206,7 @@ const Reviews = () => {
             </motion.button>
             <motion.button
               onClick={scrollNext}
+              aria-label="Next review"
               className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-background/80 backdrop-blur-sm border border-border rounded-full items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors hidden md:flex"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}

@@ -219,8 +219,8 @@ const About = () => {
   return (
     <Layout>
       <SEO
-        title="About DevHorizon Technologies Private Limited - Our Story & Team | Digital Company Bengaluru"
-        description="Learn about DevHorizon Technologies Private Limited, a Bengaluru-based digital company founded in 2025. Meet our team of expert developers and discover our mission to transform businesses through technology."
+        title="About DevHorizon — Bengaluru Digital Company"
+        description="DevHorizon Technologies is a Bengaluru-based digital company building custom websites, mobile apps, and Meta ads campaigns. Meet our team and mission."
         schema={{ "@context": "https://schema.org", "@graph": [aboutSchema, breadcrumbSchema] }}
       />
 
@@ -322,6 +322,7 @@ const About = () => {
           <div className="hidden md:flex justify-end gap-2 mb-4">
             <button
               onClick={() => scrollTechTo(Math.max(0, techActiveIndex - 1))}
+              aria-label="Previous tech stack"
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
               disabled={techActiveIndex === 0}
             >
@@ -329,6 +330,7 @@ const About = () => {
             </button>
             <button
               onClick={() => scrollTechTo(Math.min(techStack.length - 1, techActiveIndex + 1))}
+              aria-label="Next tech stack"
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
               disabled={techActiveIndex === techStack.length - 1}
             >
@@ -485,6 +487,7 @@ const About = () => {
                   {member.name === "A Eswari" && (
                     <a
                       href="mailto:eshwari.director@devhorizontech.com"
+                      aria-label={`Email ${member.name}`}
                       className="w-11 h-11 rounded-full border border-primary/30 text-primary flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-primary/25"
                       title="eshwari.director@devhorizontech.com"
                     >
@@ -494,12 +497,14 @@ const About = () => {
                   {member.links.map((link) => {
                     const isLinkedIn = link.href.includes("linkedin");
                     const isGitHub = link.href.includes("github");
+                    const network = isLinkedIn ? "LinkedIn" : isGitHub ? "GitHub" : "profile";
                     return (
                       <a
                         key={link.href}
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`${member.name} on ${network}`}
                         className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg ${
                           isLinkedIn
                             ? "text-[#0A66C2] border-[#0A66C2]/30 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:shadow-[#0A66C2]/25"
@@ -538,6 +543,7 @@ const About = () => {
           <div className="hidden md:flex justify-end gap-2 mb-4">
             <button
               onClick={() => scrollValuesTo(Math.max(0, valuesActiveIndex - 1))}
+              aria-label="Previous value"
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
               disabled={valuesActiveIndex === 0}
             >
@@ -545,6 +551,7 @@ const About = () => {
             </button>
             <button
               onClick={() => scrollValuesTo(Math.min(values.length - 1, valuesActiveIndex + 1))}
+              aria-label="Next value"
               className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
               disabled={valuesActiveIndex === values.length - 1}
             >

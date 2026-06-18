@@ -1,7 +1,7 @@
 import { writeFileSync } from "fs"
 import { resolve } from "path"
 
-const BASE_URL = "https://devhorizontech.com"
+const BASE_URL = "https://www.devhorizontech.com"
 
 interface SitemapEntry {
   path: string
@@ -21,6 +21,13 @@ const entries: SitemapEntry[] = [
   { path: "/reviews", changefreq: "monthly", priority: "0.8" },
   { path: "/blog", changefreq: "daily", priority: "0.8" },
   { path: "/careers", changefreq: "weekly", priority: "0.9" },
+  { path: "/careers/about", changefreq: "monthly", priority: "0.7" },
+  { path: "/careers/openings", changefreq: "weekly", priority: "0.9" },
+  { path: "/careers/why-join", changefreq: "monthly", priority: "0.7" },
+  { path: "/careers/process", changefreq: "monthly", priority: "0.7" },
+  { path: "/careers/resume-tips", changefreq: "monthly", priority: "0.6" },
+  { path: "/careers/faq", changefreq: "monthly", priority: "0.6" },
+  { path: "/careers/apply", changefreq: "monthly", priority: "0.8" },
   { path: "/get-quote", changefreq: "monthly", priority: "0.9" },
 ]
 
