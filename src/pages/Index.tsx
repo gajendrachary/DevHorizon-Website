@@ -6,19 +6,47 @@ import { ProjectsPreviewSection } from "@/components/home/ProjectsPreviewSection
 import { ClientLogosSection } from "@/components/home/ClientLogosSection";
 import { FAQSection } from "@/components/home/FAQSection";
 import { CTASection } from "@/components/home/CTASection";
-import { SEO, getOrganizationSchema, getLocalBusinessSchema } from "@/components/common/SEO";
+import { SEO, getOrganizationSchema, getLocalBusinessSchema, getFAQSchema } from "@/components/common/SEO";
+
+const homepageFaqs = [
+  {
+    question: "What services does DevHorizon Technologies Private Limited offer?",
+    answer:
+      "DevHorizon Technologies Private Limited offers comprehensive digital services including custom web development, mobile app development (iOS & Android), Meta ads management, UI/UX design, and cloud solutions. We specialize in creating tailored solutions that drive business growth.",
+  },
+  {
+    question: "How long does it typically take to build a website?",
+    answer:
+      "The timeline varies based on project complexity. A standard business website typically takes 2-3 weeks, while complex e-commerce platforms or web applications may take 4-8 weeks. We provide detailed timelines during our initial consultation.",
+  },
+  {
+    question: "Do you offer ongoing support and maintenance?",
+    answer:
+      "Yes! We provide comprehensive post-launch support including regular updates, security patches, performance monitoring, and content updates. Our support packages are flexible and can be customized to your needs.",
+  },
+  {
+    question: "Can you help with SEO and digital marketing?",
+    answer:
+      "Absolutely. All our websites are built with SEO best practices in mind. We also offer Meta ads management services to help you reach your target audience effectively and drive measurable results.",
+  },
+  {
+    question: "Do you work with international clients?",
+    answer:
+      "Yes, we work with clients globally including UAE, Canada, US, UK, and across India. We use modern collaboration tools to ensure seamless communication regardless of timezone differences.",
+  },
+];
 
 const Index = () => {
   const combinedSchema = {
     "@context": "https://schema.org",
-    "@graph": [getOrganizationSchema(), getLocalBusinessSchema()],
+    "@graph": [getOrganizationSchema(), getLocalBusinessSchema(), getFAQSchema(homepageFaqs)],
   };
 
   return (
     <Layout>
       <SEO
-        title="DevHorizon Technologies Private Limited - Transforming Ideas Into Digital Excellence | Web & Mobile Development Bengaluru"
-        description="DevHorizon Technologies Private Limited is a full-service digital company in Bengaluru offering custom web development , mobile apps , and Meta ads management. Transform your business with our innovative solutions."
+        title="DevHorizon — Web & Mobile Development in Bengaluru"
+        description="DevHorizon Technologies builds custom websites, mobile apps, and Meta ads campaigns for businesses in Bengaluru and worldwide. Get a free quote today."
         schema={combinedSchema}
       />
 
