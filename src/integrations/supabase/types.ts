@@ -151,7 +151,6 @@ export type Database = {
           job_type: string
           location: string
           responsibilities: string | null
-          salary_range: string | null
           skills: string[]
           status: string
           title: string
@@ -168,7 +167,6 @@ export type Database = {
           job_type: string
           location?: string
           responsibilities?: string | null
-          salary_range?: string | null
           skills?: string[]
           status?: string
           title: string
@@ -185,7 +183,6 @@ export type Database = {
           job_type?: string
           location?: string
           responsibilities?: string | null
-          salary_range?: string | null
           skills?: string[]
           status?: string
           title?: string

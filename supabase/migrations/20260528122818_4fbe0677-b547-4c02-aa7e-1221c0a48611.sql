@@ -149,6 +149,6 @@ INSERT INTO public.job_openings (title, department, job_type, experience_level, 
  'Build ETL/ELT pipelines. Maintain data warehouse. Partner with product on analytics.'),
 ('Frontend Intern','Engineering','Internship','Fresher','Onsite',
  ARRAY['React','TypeScript','Tailwind CSS','Git'],
- '6-month internship building real product UI in React. Mentored by senior engineers.  Stipend: 10,000 - 15,000 per month.',
+ '6-month internship building real product UI in React. Mentored by senior engineers. High potential for full-time conversion.',
  'Final-year student or recent graduate. Solid HTML/CSS/JS. Portfolio of React projects preferred.',
  'Ship UI components for production apps. Pair with seniors. Participate in code reviews. Learn fast.');

@@ -42,7 +42,6 @@ export const openingSchema = z.object({
   description: z.string().trim().min(10).max(4000),
   eligibility_criteria: z.string().trim().max(2000).optional().or(z.literal('')),
   responsibilities: z.string().trim().max(2000).optional().or(z.literal('')),
-  salary_range: z.string().trim().max(100).optional().or(z.literal('')),
   status: z.enum(['open', 'closed']),
 });
 
