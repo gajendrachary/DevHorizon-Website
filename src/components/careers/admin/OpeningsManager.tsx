@@ -187,6 +187,7 @@ export const OpeningsManager = () => {
                 <TableHead>Department</TableHead>
                 <TableHead>Type</TableHead>
                 <TableHead>Mode</TableHead>
+                <TableHead>Salary</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
@@ -198,6 +199,7 @@ export const OpeningsManager = () => {
                   <TableCell>{r.department}</TableCell>
                   <TableCell>{r.job_type}</TableCell>
                   <TableCell>{r.work_mode}</TableCell>
+                  <TableCell>{r.salary_range ?? '—'}</TableCell>
                   <TableCell><Badge variant={r.status === 'open' ? 'default' : 'secondary'}>{r.status}</Badge></TableCell>
                   <TableCell className="text-right space-x-2">
                     <Button size="sm" variant="outline" onClick={() => startEdit(r)}><Pencil className="h-3.5 w-3.5" /></Button>
