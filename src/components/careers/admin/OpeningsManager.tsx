@@ -66,6 +66,7 @@ export const OpeningsManager = () => {
       skills: r.skills.join(', '), description: r.description,
       eligibility_criteria: r.eligibility_criteria ?? '',
       responsibilities: r.responsibilities ?? '',
+      salary_range: r.salary_range ?? '',
       status: r.status,
     });
     setOpen(true);
