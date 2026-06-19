@@ -24,6 +24,7 @@ interface Opening {
   description: string;
   eligibility_criteria: string | null;
   responsibilities: string | null;
+  salary_range: string | null;
   status: string;
   created_at: string;
 }
@@ -31,7 +32,7 @@ interface Opening {
 const empty = {
   title: '', department: '', job_type: 'Full-time', experience_level: '',
   location: 'Bengaluru, India', work_mode: 'Hybrid', skills: '',
-  description: '', eligibility_criteria: '', responsibilities: '', status: 'open',
+  description: '', eligibility_criteria: '', responsibilities: '', salary_range: '2.3 LPA – 4 LPA', status: 'open',
 };
 
 export const OpeningsManager = () => {
@@ -65,6 +66,7 @@ export const OpeningsManager = () => {
       skills: r.skills.join(', '), description: r.description,
       eligibility_criteria: r.eligibility_criteria ?? '',
       responsibilities: r.responsibilities ?? '',
+      salary_range: r.salary_range ?? '',
       status: r.status,
     });
     setOpen(true);
@@ -82,6 +84,7 @@ export const OpeningsManager = () => {
       skills: parsed.data.skills.split(',').map((s) => s.trim()).filter(Boolean),
       eligibility_criteria: parsed.data.eligibility_criteria || null,
       responsibilities: parsed.data.responsibilities || null,
+      salary_range: parsed.data.salary_range || null,
     };
     const op = editing
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -133,6 +136,7 @@ export const OpeningsManager = () => {
                   </Select>
                 </div>
                 <div><Label>Experience level</Label><Input value={form.experience_level} onChange={(e) => setForm({ ...form, experience_level: e.target.value })} placeholder="Fresher, 2-5 yrs" /></div>
+                <div><Label>Salary range</Label><Input value={form.salary_range} onChange={(e) => setForm({ ...form, salary_range: e.target.value })} placeholder="e.g. 2.3 LPA – 4 LPA" /></div>
                 <div><Label>Location</Label><Input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} /></div>
                 <div>
                   <Label>Work mode</Label>
@@ -183,6 +187,7 @@ export const OpeningsManager = () => {
                 <TableHead>Department</TableHead>
                 <TableHead>Type</TableHead>
                 <TableHead>Mode</TableHead>
+                <TableHead>Salary</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
@@ -194,6 +199,7 @@ export const OpeningsManager = () => {
                   <TableCell>{r.department}</TableCell>
                   <TableCell>{r.job_type}</TableCell>
                   <TableCell>{r.work_mode}</TableCell>
+                  <TableCell>{r.salary_range ?? '—'}</TableCell>
                   <TableCell><Badge variant={r.status === 'open' ? 'default' : 'secondary'}>{r.status}</Badge></TableCell>
                   <TableCell className="text-right space-x-2">
                     <Button size="sm" variant="outline" onClick={() => startEdit(r)}><Pencil className="h-3.5 w-3.5" /></Button>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, Briefcase, GraduationCap, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { MapPin, Briefcase, GraduationCap, IndianRupee, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -15,6 +15,7 @@ export interface JobOpening {
   description: string;
   eligibility_criteria: string | null;
   responsibilities: string | null;
+  salary_range: string | null;
   status: string;
   created_at: string;
 }
@@ -47,6 +48,9 @@ export const JobCard = ({ job, onApply }: Props) => {
         <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4" />{job.location}</span>
         <span className="inline-flex items-center gap-1.5"><GraduationCap className="h-4 w-4" />{job.experience_level}</span>
         <span className="inline-flex items-center gap-1.5"><Briefcase className="h-4 w-4" />{job.work_mode}</span>
+        {job.salary_range && (
+          <span className="inline-flex items-center gap-1.5"><IndianRupee className="h-4 w-4" />{job.salary_range}</span>
+        )}
       </div>
 
       <p className="text-sm md:text-base text-foreground/80 leading-relaxed mb-4">
