@@ -20,7 +20,19 @@ const navLinks = [
   { name: 'Projects', path: '/projects' },
   { name: 'Blog', path: '/blog' },
   { name: 'Reviews', path: '/reviews' },
-  { name: 'Careers', path: '/careers' },
+  {
+    name: 'Careers',
+    path: '/careers',
+    dropdown: [
+      { name: 'About', path: '/careers/about' },
+      { name: 'Openings', path: '/careers/openings' },
+      { name: 'Why Join', path: '/careers/why-join' },
+      { name: 'Process', path: '/careers/process' },
+      { name: 'Resume Tips', path: '/careers/resume-tips' },
+      { name: 'FAQ', path: '/careers/faq' },
+      { name: 'Apply', path: '/careers/apply' },
+    ],
+  },
   { name: 'About', path: '/about' },
 ];
 
