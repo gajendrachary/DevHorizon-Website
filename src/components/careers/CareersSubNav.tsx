@@ -1,8 +1,4 @@
-import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
 const SECTIONS = [
@@ -16,7 +12,6 @@ const SECTIONS = [
 ];
 
 export const CareersSubNav = ({ showOpenings = true }: { showOpenings?: boolean }) => {
-  const [open, setOpen] = useState(false);
   const location = useLocation();
   const links = SECTIONS.filter((s) => s.to !== '/careers/openings' || showOpenings);
   const current = links.find((l) => l.to === location.pathname)?.label ?? 'Careers';
