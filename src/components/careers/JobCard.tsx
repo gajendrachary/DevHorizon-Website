@@ -49,7 +49,7 @@ export const JobCard = ({ job, onApply }: Props) => {
         <span className="inline-flex items-center gap-1.5"><GraduationCap className="h-4 w-4" />{job.experience_level}</span>
         <span className="inline-flex items-center gap-1.5"><Briefcase className="h-4 w-4" />{job.work_mode}</span>
         {job.salary_range && (
-          <span className="inline-flex items-center gap-1.5"><IndianRupee className="h-4 w-4" />{job.salary_range}</span>
+          <span className="inline-flex items-center gap-1.5"><IndianRupee className="h-4 w-4" />{job.title === 'Frontend Intern' ? '10-15K stipend per month' : job.salary_range}</span>
         )}
       </div>
 
