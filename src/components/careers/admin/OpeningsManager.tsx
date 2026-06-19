@@ -24,6 +24,7 @@ interface Opening {
   description: string;
   eligibility_criteria: string | null;
   responsibilities: string | null;
+  salary_range: string | null;
   status: string;
   created_at: string;
 }
@@ -31,7 +32,7 @@ interface Opening {
 const empty = {
   title: '', department: '', job_type: 'Full-time', experience_level: '',
   location: 'Bengaluru, India', work_mode: 'Hybrid', skills: '',
-  description: '', eligibility_criteria: '', responsibilities: '', status: 'open',
+  description: '', eligibility_criteria: '', responsibilities: '', salary_range: '2.3 LPA – 4 LPA', status: 'open',
 };
 
 export const OpeningsManager = () => {
