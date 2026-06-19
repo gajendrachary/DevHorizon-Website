@@ -84,6 +84,7 @@ export const OpeningsManager = () => {
       skills: parsed.data.skills.split(',').map((s) => s.trim()).filter(Boolean),
       eligibility_criteria: parsed.data.eligibility_criteria || null,
       responsibilities: parsed.data.responsibilities || null,
+      salary_range: parsed.data.salary_range || null,
     };
     const op = editing
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -135,6 +136,7 @@ export const OpeningsManager = () => {
                   </Select>
                 </div>
                 <div><Label>Experience level</Label><Input value={form.experience_level} onChange={(e) => setForm({ ...form, experience_level: e.target.value })} placeholder="Fresher, 2-5 yrs" /></div>
+                <div><Label>Salary range</Label><Input value={form.salary_range} onChange={(e) => setForm({ ...form, salary_range: e.target.value })} placeholder="e.g. 2.3 LPA – 4 LPA" /></div>
                 <div><Label>Location</Label><Input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} /></div>
                 <div>
                   <Label>Work mode</Label>
