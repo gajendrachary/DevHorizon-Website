@@ -12,10 +12,6 @@ export const Layout = ({ children }: LayoutProps) => {
       <Header />
       <main className="flex-1 pt-20">
         {children}
- <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1 pt-20">
-        {children}
       </main>
       <Footer />
     </div>
