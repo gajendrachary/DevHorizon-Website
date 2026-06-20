@@ -632,28 +632,28 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto bg-foreground text-background p-8 md:p-12 rounded-xl"
+            className="max-w-2xl mx-auto bg-white text-black p-8 md:p-12 rounded-xl"
           >
             <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
             <div className="space-y-4 mb-8">
               <div className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-black shrink-0 mt-0.5" />
                 <span>Vidyaranyapura, Bengaluru, Karnataka, India</span>
               </div>
               <div className="flex items-center gap-4">
-                <Mail className="w-5 h-5 text-primary shrink-0" />
-                <a href="mailto:info@devhorizontech.com" className="hover:text-primary transition-colors">
-                  contact@devhub.tech
+                <Mail className="w-5 h-5 text-black shrink-0" />
+                <a href="mailto:info@devhorizontech.com" className="hover:opacity-70 transition-opacity">
+                  info@devhorizontech.com
                 </a>
               </div>
               <div className="flex items-center gap-4">
-                <Phone className="w-5 h-5 text-primary shrink-0" />
-                <a href="tel:+918688097373" className="hover:text-primary transition-colors">
+                <Phone className="w-5 h-5 text-black shrink-0" />
+                <a href="tel:+918688097373" className="hover:opacity-70 transition-opacity">
                   +91 8688097373
                 </a>
               </div>
             </div>
-            <Button asChild variant="cta" size="lg">
+            <Button asChild variant="hero" size="lg">
               <Link to="/get-quote">Start a Project</Link>
             </Button>
           </motion.div>
