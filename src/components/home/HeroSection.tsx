@@ -1,9 +1,8 @@
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useRef, useState, useEffect } from 'react';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useRef } from 'react';
 
 // Hero Section Images - SET 1
 import heroWebDev1 from '@/assets/hero-web-dev-1.png';
