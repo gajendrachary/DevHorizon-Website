@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
 
-import heroWebDev1 from '@/assets/hero-web-dev-1.png';
+import heroBg from '@/assets/hero-bg.jpg.asset.json';
 
 const serviceIcons = [{
   emoji: '🌐',
@@ -108,9 +108,9 @@ export const HeroSection = () => {
       backgroundColor: "#1a1a1a"
     }}>
         <img
-          src={heroWebDev1}
-          alt="Web development workspace with multiple monitors"
-          className="absolute inset-0 w-full h-full object-cover object-top sm:object-center"
+          src={heroBg.url}
+          alt="DevHorizon digital solutions background"
+          className="absolute inset-0 w-full h-full object-cover object-center"
           loading="eager"
           decoding="async"
           fetchPriority="high"
