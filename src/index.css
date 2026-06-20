@@ -508,3 +508,8 @@
   transform: translateZ(0);
   backface-visibility: hidden;
 }
+
+/* Hide Google reCAPTCHA badge and any error overlays it injects */
+.grecaptcha-badge { visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+iframe[src*="recaptcha/api2/bframe"],
+iframe[src*="recaptcha/enterprise/bframe"] { display: none !important; }
