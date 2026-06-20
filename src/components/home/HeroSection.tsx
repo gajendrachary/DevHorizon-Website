@@ -4,34 +4,8 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
 
-// Hero Section Images - SET 1
 import heroWebDev1 from '@/assets/hero-web-dev-1.png';
-import heroWebDev2 from '@/assets/hero-web-dev-2.png';
-import heroAppDev1 from '@/assets/hero-app-dev-1.png';
-import heroAppDev2 from '@/assets/hero-app-dev-2.png';
-import heroMetaAds1 from '@/assets/hero-meta-ads-1.png';
-import heroMetaAds2 from '@/assets/hero-meta-ads-2.png';
 
-// All 6 hero images - optimized for both mobile (9:16) and desktop
-const backgroundImages = [{
-  src: heroWebDev1,
-  alt: 'Web development workspace with multiple monitors'
-}, {
-  src: heroWebDev2,
-  alt: 'Developer coding with syntax highlighting'
-}, {
-  src: heroAppDev1,
-  alt: 'Mobile app development with device testing'
-}, {
-  src: heroAppDev2,
-  alt: 'Cross-platform app development workflow'
-}, {
-  src: heroMetaAds1,
-  alt: 'Analytics dashboard with marketing metrics'
-}, {
-  src: heroMetaAds2,
-  alt: 'Digital marketing analytics and campaigns'
-}];
 const serviceIcons = [{
   emoji: '🌐',
   label: 'Web Development'
@@ -108,27 +82,12 @@ const floatingParticles = [{
   delay: 0.8
 }];
 
-// Characters for scramble effect
-const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*<>[]{}";
 export const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Headline text
   const fullText = "Transforming Ideas Into ";
   const highlightText = "Digital Excellence";
-
-  // Ensure currentImageIndex is always valid for the current array
-  const safeImageIndex = currentImageIndex >= backgroundImages.length ? 0 : currentImageIndex;
-  const currentImage = backgroundImages[safeImageIndex];
-
-  // Background image carousel with longer interval
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % backgroundImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   const {
     scrollYProgress
@@ -138,49 +97,24 @@ export const HeroSection = () => {
   });
 
   // Parallax transforms for different layers
-
   const orb1Y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const orb2Y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
-  const illustrationY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.3]);
   const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   return <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background Image Carousel with Crossfade */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0 overflow-hidden" style={{
       backgroundColor: "#1a1a1a"
     }}>
-        <AnimatePresence mode="sync">
-          <motion.img
-          key={safeImageIndex}
-          src={currentImage.src}
-          alt={currentImage.alt}
+        <img
+          src={heroWebDev1}
+          alt="Web development workspace with multiple monitors"
           className="absolute inset-0 w-full h-full object-cover object-top sm:object-center"
-          loading={safeImageIndex === 0 ? "eager" : "lazy"}
+          loading="eager"
           decoding="async"
-          fetchPriority={safeImageIndex === 0 ? "high" : "low"}
-          initial={{
-            opacity: 0,
-            scale: 1.1
-          }}
-          animate={{
-            opacity: 0.75,
-            scale: 1
-          }}
-          exit={{
-            opacity: 0
-          }}
-          transition={{
-            duration: 1.2,
-            ease: "easeInOut"
-          }} />
-
-        </AnimatePresence>
-        {/* Carousel indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-          {backgroundImages.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'bg-primary w-8' : 'bg-foreground/30 hover:bg-foreground/50'}`} aria-label={`Go to slide ${index + 1}`} />)}
-        </div>
-        {/* Lighter overlay for better image visibility */}
+          fetchPriority="high"
+        />
         <div className="absolute inset-0 bg-secondary/60" />
       </div>
 
@@ -284,9 +218,7 @@ export const HeroSection = () => {
             {/* Description */}
             <motion.p variants={itemVariants} className="mb-8 leading-relaxed text-white/90 drop-shadow-[0_0_6px_rgba(255,255,255,0.3)]">
               DevHorizon Technologies Private Limited is a full-service digital company specializing in crafting exceptional digital experiences. We help businesses establish a powerful online presence and drive measurable growth through innovative technology solutions.
-            
-
-          </motion.p>
+            </motion.p>
 
             {/* CTAs with shine effect */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mb-12">
@@ -393,9 +325,6 @@ export const HeroSection = () => {
                 </motion.div>)}
             </motion.div>
           </motion.div>
-
-          {/* Hero Image/Illustration with Parallax */}
-          
         </div>
       </motion.div>
 
@@ -411,7 +340,6 @@ export const HeroSection = () => {
     }} style={{
       opacity: scrollIndicatorOpacity
     }}>
-        
         <motion.div animate={{
         y: [0, 8, 0]
       }} transition={{
@@ -419,7 +347,6 @@ export const HeroSection = () => {
         repeat: Infinity,
         ease: "easeInOut"
       }}>
-          
         </motion.div>
       </motion.div>
     </section>;
