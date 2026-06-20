@@ -159,7 +159,7 @@ export const HeroSection = () => {
           className="absolute inset-0 w-full h-full object-cover object-top sm:object-center"
           loading={safeImageIndex === 0 ? "eager" : "lazy"}
           decoding="async"
-          fetchPriority={safeImageIndex === 0 ? "high" : "low"}
+          {...({ fetchpriority: safeImageIndex === 0 ? "high" : "low" } as any)}
           initial={{
             opacity: 0,
             scale: 1.1
