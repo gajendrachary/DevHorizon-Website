@@ -636,7 +636,7 @@ const About = () => {
           >
             <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
             <div className="space-y-4 mb-8">
-              <div className="rounded-lg overflow-hidden border border-black/10">
+              <div className="rounded-2xl overflow-hidden border border-black/10">
                 <iframe
                   src="https://maps.google.com/maps?q=DevHorizon+Technologies+Pvt+Ltd,+AB+Complex,+Hesaraghatta+Rd,+Vidyaranyapura,+Bengaluru,+Karnataka+560097&t=&z=16&ie=UTF8&iwloc=&output=embed"
                   width="100%"
