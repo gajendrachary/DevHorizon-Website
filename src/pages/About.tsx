@@ -636,9 +636,17 @@ const About = () => {
           >
             <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
             <div className="space-y-4 mb-8">
-              <div className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 text-black shrink-0 mt-0.5" />
-                <span>Vidyaranyapura, Bengaluru, Karnataka, India</span>
+              <div className="rounded-lg overflow-hidden border border-black/10">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31091.29228250336!2d77.54861465!3d13.08341265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m3!3e6!4m0!4m0!5e0!3m2!1sen!2sin!4v1750435200000!5m2!1sen!2sin"
+                  width="100%"
+                  height="200"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="DevHorizon Technologies Location"
+                />
               </div>
               <div className="flex items-center gap-4">
                 <Mail className="w-5 h-5 text-black shrink-0" />
