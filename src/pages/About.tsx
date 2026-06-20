@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 import { useRef, useState } from "react";
-import teamEswari from "@/assets/team-eswari.png";
+import teamEswari from "@/assets/team-eswari.jpg";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   Linkedin,
@@ -27,7 +27,7 @@ import {
   ChevronRight,
   ExternalLink,
 } from "lucide-react";
-import teamGajendrachary from "@/assets/team-gajendrachary.png";
+import teamGajendrachary from "@/assets/team-gajendrachary.jpg";
 
 const techStack = [
   {

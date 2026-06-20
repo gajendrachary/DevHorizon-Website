@@ -6,12 +6,12 @@ import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 
 // CTA Section Images - SET 2
-import ctaWebDev1 from '@/assets/cta-web-dev-1.png';
-import ctaWebDev2 from '@/assets/cta-web-dev-2.png';
-import ctaAppDev1 from '@/assets/cta-app-dev-1.png';
-import ctaAppDev2 from '@/assets/cta-app-dev-2.png';
-import ctaMetaAds1 from '@/assets/cta-meta-ads-1.png';
-import ctaMetaAds2 from '@/assets/cta-meta-ads-2.png';
+import ctaWebDev1 from '@/assets/cta-web-dev-1.jpg';
+import ctaWebDev2 from '@/assets/cta-web-dev-2.jpg';
+import ctaAppDev1 from '@/assets/cta-app-dev-1.jpg';
+import ctaAppDev2 from '@/assets/cta-app-dev-2.jpg';
+import ctaMetaAds1 from '@/assets/cta-meta-ads-1.jpg';
+import ctaMetaAds2 from '@/assets/cta-meta-ads-2.jpg';
 
 // All 6 CTA images - optimized for both mobile (9:16) and desktop
 const backgroundImages = [

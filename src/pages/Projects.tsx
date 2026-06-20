@@ -15,8 +15,8 @@ import {
 // Project Images
 import projectSkandaCloudKitchen from "@/assets/logo-skanda-cloud-kitchen.png";
 import projectJaggeryTeaPoint from "@/assets/project-jaggery-tea-point.jpg";
-import projectSriKenchambaCeramics from "@/assets/project-sri-kenchamba-ceramics.png";
-import projectLikithaHandcrafts from "@/assets/project-likitha-handcrafts.png";
+import projectSriKenchambaCeramics from "@/assets/project-sri-kenchamba-ceramics.jpg";
+import projectLikithaHandcrafts from "@/assets/project-likitha-handcrafts.jpg";
 import projectHavenSalad from "@/assets/project-haven-salad.jpg";
 import projectJzGreenHeaven from "@/assets/logo-jz-green-heaven.png";
 import projectUnitedNewsKannada from "@/assets/logo-united-news-kannada.jpg";
