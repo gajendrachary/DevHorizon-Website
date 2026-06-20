@@ -126,6 +126,9 @@ const About = () => {
   // Gajendrachary popup state
   const [isGajendraPopupOpen, setIsGajendraPopupOpen] = useState(false);
 
+  // Lazy-mount Google Map when it scrolls into view
+  const { ref: mapRef, inView: mapInView } = useInView({ triggerOnce: true, rootMargin: "200px" });
+
   const handleTechScroll = () => {
     if (!techScrollRef.current) return;
     const scrollLeft = techScrollRef.current.scrollLeft;
