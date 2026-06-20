@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import esquireVenturesLogo from '@/assets/esquire-ventures-logo.png.asset.json';
 import { useInView } from 'react-intersection-observer';
 import logoSkandaCloudKitchen from '@/assets/logo-skanda-cloud-kitchen.png';
 import logoLikithaHandcrafts from '@/assets/logo-likitha-handcrafts.png';
