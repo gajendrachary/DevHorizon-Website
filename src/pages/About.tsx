@@ -442,48 +442,53 @@ const About = () => {
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
                 animate={teamInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
-                whileHover={{ y: -8, rotateY: 5, transition: { duration: 0.3 } }}
-                className={`group relative bg-card border border-border p-8 text-center overflow-hidden rounded-xl ${member.name === "Gajendrachary" ? "cursor-pointer" : ""}`}
-                style={{ perspective: "1000px" }}
-                onClick={member.name === "Gajendrachary" ? () => setIsGajendraPopupOpen(true) : undefined}
+                className="flex flex-col items-center"
               >
-                {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <motion.div
+                  whileHover={{ y: -8, rotateY: 5, transition: { duration: 0.3 } }}
+                  className={`group relative w-full bg-card border border-border p-8 text-center overflow-hidden rounded-xl ${member.name === "Gajendrachary" ? "cursor-pointer" : ""}`}
+                  style={{ perspective: "1000px" }}
+                  onClick={member.name === "Gajendrachary" ? () => setIsGajendraPopupOpen(true) : undefined}
+                >
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Avatar with ring */}
-                <div className="relative mx-auto mb-6">
-                  {member.image ? (
-                    <div className="w-28 h-28 rounded-full overflow-hidden mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-28 h-28 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
-                      <span className="text-4xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
-                        {member.name.charAt(0)}
-                      </span>
-                    </div>
-                  )}
-                  {member.name === "Gajendrachary" && (
-                    <div className="absolute -top-1 -right-1 bg-primary rounded-full p-2 shadow-lg group-hover:scale-110 group-hover:shadow-primary/40 transition-all duration-300">
-                      <ExternalLink className="w-4 h-4 text-primary-foreground" />
-                    </div>
-                  )}
-                  {/* Status indicator */}
-                  <div className="absolute bottom-1 right-1/2 translate-x-8 w-4 h-4 bg-green-500 rounded-full border-2 border-card" />
-                </div>
+                  {/* Avatar with ring */}
+                  <div className="relative mx-auto mb-6">
+                    {member.image ? (
+                      <div className="w-28 h-28 rounded-full overflow-hidden mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-28 h-28 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
+                        <span className="text-4xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
+                          {member.name.charAt(0)}
+                        </span>
+                      </div>
+                    )}
+                    {member.name === "Gajendrachary" && (
+                      <div className="absolute -top-1 -right-1 bg-primary rounded-full p-2 shadow-lg group-hover:scale-110 group-hover:shadow-primary/40 transition-all duration-300">
+                        <ExternalLink className="w-4 h-4 text-primary-foreground" />
+                      </div>
+                    )}
+                    {/* Status indicator */}
+                    <div className="absolute bottom-1 right-1/2 translate-x-8 w-4 h-4 bg-green-500 rounded-full border-2 border-card" />
+                  </div>
 
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
-                  {member.name}
-                </h3>
-                <p className="text-muted-foreground mb-6 text-sm">{member.role}</p>
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
+                    {member.name}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">{member.role}</p>
+                </motion.div>
 
-                <div className="flex items-center justify-center gap-3" onClick={(e) => e.stopPropagation()}>
+                {/* Social / contact links BELOW the card */}
+                <div className="flex items-center justify-center gap-3 mt-4">
                   {member.name === "A Eswari" && (
                     <a
                       href="mailto:eshwari.director@devhorizontech.com"

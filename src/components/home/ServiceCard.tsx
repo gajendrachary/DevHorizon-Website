@@ -53,15 +53,37 @@ export const ServiceCard = ({
 }: ServiceCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isTapped, setIsTapped] = useState(false);
+  const touchStart = useState({ x: 0, y: 0, t: 0 })[0];
 
   // Calculate entrance animation delay based on index
   const entranceDelay = index * ANIMATION_CONFIG.entrance.stagger;
 
   // Parallax transformations based on scroll offset
-  const parallaxRotateY = parallaxOffset * 8; // Subtle Y rotation
-  const parallaxRotateX = Math.abs(parallaxOffset) * -3; // Tilt away from center
-  const parallaxScale = 1 - Math.abs(parallaxOffset) * 0.05; // Slightly smaller when off-center
-  const parallaxTranslateY = Math.abs(parallaxOffset) * 10; // Rise up when centered
+  const parallaxRotateY = parallaxOffset * 8;
+  const parallaxRotateX = Math.abs(parallaxOffset) * -3;
+  const parallaxScale = 1 - Math.abs(parallaxOffset) * 0.05;
+  const parallaxTranslateY = Math.abs(parallaxOffset) * 10;
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touchStart.x = t.clientX;
+    touchStart.y = t.clientY;
+    touchStart.t = Date.now();
+    setIsTapped(true);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    setIsTapped(false);
+    const t = e.changedTouches[0];
+    const dx = Math.abs(t.clientX - touchStart.x);
+    const dy = Math.abs(t.clientY - touchStart.y);
+    const dt = Date.now() - touchStart.t;
+    // Only treat as a tap if finger barely moved and lift was quick
+    if (dx < 10 && dy < 10 && dt < 400) {
+      e.preventDefault();
+      onClick();
+    }
+  };
 
   return (
     <motion.div
@@ -91,12 +113,15 @@ export const ServiceCard = ({
         }}
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
-        onTapStart={() => setIsTapped(true)}
-        onTap={() => {
-          setIsTapped(false);
+        onClick={(e) => {
+          // Mouse only — touch handled in onTouchEnd to filter out scroll/swipe
+          const ne = e.nativeEvent as PointerEvent;
+          if (ne.pointerType && ne.pointerType !== 'mouse') return;
           onClick();
         }}
-        onTapCancel={() => setIsTapped(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={() => setIsTapped(false)}
         animate={{
           rotateY: isTapped 
             ? ANIMATION_CONFIG.tap.rotateY 
