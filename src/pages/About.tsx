@@ -68,7 +68,7 @@ const team = [
     role: "Founder & Developer",
     image: teamGajendrachary,
     links: [
-      { icon: Linkedin, href: "https://linkedin.com/in/gajendrachary" },
+      { icon: Linkedin, href: "https://www.linkedin.com/in/gajendrachary/" },
       { icon: Github, href: "https://github.com/gajendrachary" },
     ],
   },
