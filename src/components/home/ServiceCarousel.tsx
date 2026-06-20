@@ -10,9 +10,9 @@ import { ServiceCard, ANIMATION_CONFIG } from './ServiceCard';
 import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
 
 // Background images for services
-import serviceWebDevelopment from '@/assets/service-web-development.png';
-import serviceMetaAds from '@/assets/service-meta-ads.png';
-import serviceAppDevelopment from '@/assets/service-app-development.png';
+import serviceWebDevelopment from '@/assets/service-web-development.jpg';
+import serviceMetaAds from '@/assets/service-meta-ads.jpg';
+import serviceAppDevelopment from '@/assets/service-app-development.jpg';
 
 // ============= Auto-scroll Configuration =============
 const AUTO_SCROLL_CONFIG = {

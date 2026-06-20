@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 import { useRef, useState } from "react";
-import teamEswari from "@/assets/team-eswari.png";
+import teamEswari from "@/assets/team-eswari.jpg";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   Linkedin,
@@ -27,7 +27,7 @@ import {
   ChevronRight,
   ExternalLink,
 } from "lucide-react";
-import teamGajendrachary from "@/assets/team-gajendrachary.png";
+import teamGajendrachary from "@/assets/team-gajendrachary.jpg";
 
 const techStack = [
   {
@@ -125,6 +125,9 @@ const About = () => {
 
   // Gajendrachary popup state
   const [isGajendraPopupOpen, setIsGajendraPopupOpen] = useState(false);
+
+  // Lazy-mount Google Map when it scrolls into view
+  const { ref: mapRef, inView: mapInView } = useInView({ triggerOnce: true, rootMargin: "200px" });
 
   const handleTechScroll = () => {
     if (!techScrollRef.current) return;
@@ -636,17 +639,19 @@ const About = () => {
           >
             <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
             <div className="space-y-4 mb-8">
-              <div className="rounded-2xl overflow-hidden border border-black/10">
-                <iframe
-                  src="https://maps.google.com/maps?q=DevHorizon+Technologies+Pvt+Ltd,+AB+Complex,+Hesaraghatta+Rd,+Vidyaranyapura,+Bengaluru,+Karnataka+560097&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                  width="100%"
-                  height="200"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="DevHorizon Technologies Location"
-                />
+              <div ref={mapRef} className="rounded-2xl overflow-hidden border border-black/10" style={{ minHeight: 200 }}>
+                {mapInView ? (
+                  <iframe
+                    src="https://maps.google.com/maps?q=DevHorizon+Technologies+Pvt+Ltd,+AB+Complex,+Hesaraghatta+Rd,+Vidyaranyapura,+Bengaluru,+Karnataka+560097&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="200"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="DevHorizon Technologies Location"
+                  />
+                ) : null}
               </div>
               <div className="flex items-center gap-4">
                 <Mail className="w-5 h-5 text-black shrink-0" />

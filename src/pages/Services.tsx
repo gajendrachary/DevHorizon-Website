@@ -7,13 +7,13 @@ import { Button } from '@/components/ui/button';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { SEO, getServiceSchema, getBreadcrumbSchema } from '@/components/common/SEO';
 import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
-import developerClientMeeting from '@/assets/developer-client-meeting.png';
-import developerPresenting from '@/assets/developer-presenting.png';
-import teamBrainstorming from '@/assets/team-brainstorming.png';
-import codeReview from '@/assets/code-review.png';
-import serviceWebDev from '@/assets/service-web-development.png';
-import serviceAppDev from '@/assets/service-app-development.png';
-import serviceMetaAds from '@/assets/service-meta-ads.png';
+import developerClientMeeting from '@/assets/developer-client-meeting.jpg';
+import developerPresenting from '@/assets/developer-presenting.jpg';
+import teamBrainstorming from '@/assets/team-brainstorming.jpg';
+import codeReview from '@/assets/code-review.jpg';
+import serviceWebDev from '@/assets/service-web-development.jpg';
+import serviceAppDev from '@/assets/service-app-development.jpg';
+import serviceMetaAds from '@/assets/service-meta-ads.jpg';
 
 // ============= Auto-scroll Configuration =============
 const AUTO_SCROLL_CONFIG = {

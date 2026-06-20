@@ -6,12 +6,12 @@ import { useRef, useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 // Hero Section Images - SET 1
-import heroWebDev1 from '@/assets/hero-web-dev-1.png';
-import heroWebDev2 from '@/assets/hero-web-dev-2.png';
-import heroAppDev1 from '@/assets/hero-app-dev-1.png';
-import heroAppDev2 from '@/assets/hero-app-dev-2.png';
-import heroMetaAds1 from '@/assets/hero-meta-ads-1.png';
-import heroMetaAds2 from '@/assets/hero-meta-ads-2.png';
+import heroWebDev1 from '@/assets/hero-web-dev-1.jpg';
+import heroWebDev2 from '@/assets/hero-web-dev-2.jpg';
+import heroAppDev1 from '@/assets/hero-app-dev-1.jpg';
+import heroAppDev2 from '@/assets/hero-app-dev-2.jpg';
+import heroMetaAds1 from '@/assets/hero-meta-ads-1.jpg';
+import heroMetaAds2 from '@/assets/hero-meta-ads-2.jpg';
 
 // All 6 hero images - optimized for both mobile (9:16) and desktop
 const backgroundImages = [{
@@ -159,7 +159,7 @@ export const HeroSection = () => {
           className="absolute inset-0 w-full h-full object-cover object-top sm:object-center"
           loading={safeImageIndex === 0 ? "eager" : "lazy"}
           decoding="async"
-          fetchPriority={safeImageIndex === 0 ? "high" : "low"}
+          {...({ fetchpriority: safeImageIndex === 0 ? "high" : "low" } as any)}
           initial={{
             opacity: 0,
             scale: 1.1
