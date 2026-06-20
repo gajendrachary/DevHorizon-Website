@@ -27,6 +27,7 @@ const clientLogos = [
   { name: 'Sri Kenchamba Ceramics', logo: logoSriKenchambaCeramics },
   { name: 'NRI Connecting People', logo: logoNriConnectingPeople },
   { name: 'Anand Transports', logo: logoAnandTransports },
+  { name: 'Esquire Ventures', logo: esquireVenturesLogo.url },
 ];
 
 // Duplicate logos for seamless infinite scroll
