@@ -117,6 +117,10 @@
     font-family: "Inter", system-ui, sans-serif;
   }
 
+  button {
+    @apply rounded-lg;
+  }
+
   /* Respect reduced motion preferences */
   @media (prefers-reduced-motion: reduce) {
     *,
