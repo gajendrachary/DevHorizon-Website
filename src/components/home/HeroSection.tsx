@@ -333,7 +333,7 @@ export const HeroSection = () => {
               scale: 0.98
             }}>
                 <Button asChild variant="heroOutline" size="lg">
-                  <Link to="/careers/apply">Careers</Link>
+                  <Link to="/careers">Careers</Link>
                 </Button>
               </motion.div>
             </motion.div>
