@@ -4,18 +4,21 @@ import { ArrowRight } from 'lucide-react';
 import { SEO } from '@/components/common/SEO';
 import { CareersLayout } from '@/components/careers/CareersLayout';
 import { CareersHero } from '@/components/careers/CareersHero';
+import { HiringClosedNotice } from '@/components/careers/HiringClosedNotice';
+import { HIRING_OPEN } from '@/lib/careersConfig';
 import { supabase } from '@/integrations/supabase/client';
 
 const FOCUS = ['Web Development', 'SaaS Platforms', 'Automation', 'AI / ML', 'Dashboards'];
 
-const SECTIONS = [
+type Section = { to: string; title: string; desc: string; hiringOnly?: boolean };
+const SECTIONS: Section[] = [
   { to: '/careers/about', title: 'About', desc: 'Who we are and what we build.' },
-  { to: '/careers/openings', title: 'Open roles', desc: 'Live positions across engineering, AI/ML, and design.' },
+  { to: '/careers/openings', title: 'Open roles', desc: 'Live positions across engineering, AI/ML, and design.', hiringOnly: true },
   { to: '/careers/why-join', title: 'Why join', desc: 'Real impact, senior mentorship, modern stack.' },
   { to: '/careers/process', title: 'Hiring process', desc: 'A clear 5-step path from application to offer.' },
   { to: '/careers/resume-tips', title: 'Resume tips', desc: 'Help your application stand out.' },
   { to: '/careers/faq', title: 'FAQ', desc: 'Answers to common questions.' },
-  { to: '/careers/apply', title: 'Apply', desc: 'Submit your application — we review every one.' },
+  { to: '/careers/apply', title: 'Apply', desc: 'Submit your application — we review every one.', hiringOnly: true },
 ];
 
 const Careers = () => {
