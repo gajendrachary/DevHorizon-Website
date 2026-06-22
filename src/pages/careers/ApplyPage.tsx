@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Mail } from 'lucide-react';
 import { SEO } from '@/components/common/SEO';
 import { CareersLayout } from '@/components/careers/CareersLayout';
 import { ApplyForm } from '@/components/careers/ApplyForm';
-import { HiringClosedNotice } from '@/components/careers/HiringClosedNotice';
-import { HIRING_OPEN } from '@/lib/careersConfig';
+import { Button } from '@/components/ui/button';
+import {
+  HIRING_OPEN,
+  HIRING_CLOSED_TITLE,
+  HIRING_CLOSED_MESSAGE,
+  HIRING_CONTACT_EMAIL,
+} from '@/lib/careersConfig';
 import { supabase } from '@/integrations/supabase/client';
 import type { JobOpening } from '@/components/careers/JobCard';
 
