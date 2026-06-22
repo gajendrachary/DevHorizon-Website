@@ -1,20 +1,24 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { HIRING_OPEN } from '@/lib/careersConfig';
 
 const SECTIONS = [
   { to: '/careers/about', label: 'About' },
-  { to: '/careers/openings', label: 'Openings' },
+  { to: '/careers/openings', label: 'Openings', hiringOnly: true },
   { to: '/careers/why-join', label: 'Why join' },
   { to: '/careers/process', label: 'Process' },
   { to: '/careers/resume-tips', label: 'Resume tips' },
   { to: '/careers/faq', label: 'FAQ' },
-  { to: '/careers/apply', label: 'Apply' },
+  { to: '/careers/apply', label: 'Apply', hiringOnly: true },
 ];
 
 export const CareersSubNav = ({ showOpenings = true }: { showOpenings?: boolean }) => {
   const location = useLocation();
-  const links = SECTIONS.filter((s) => s.to !== '/careers/openings' || showOpenings);
-  const current = links.find((l) => l.to === location.pathname)?.label ?? 'Careers';
+  const links = SECTIONS.filter((s) => {
+    if (s.hiringOnly && !HIRING_OPEN) return false;
+    if (s.to === '/careers/openings' && !showOpenings) return false;
+    return true;
+  });
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     cn(

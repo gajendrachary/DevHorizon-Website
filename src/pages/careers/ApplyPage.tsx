@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { SEO } from '@/components/common/SEO';
 import { CareersLayout } from '@/components/careers/CareersLayout';
 import { ApplyForm } from '@/components/careers/ApplyForm';
+import { HiringClosedNotice } from '@/components/careers/HiringClosedNotice';
+import { HIRING_OPEN } from '@/lib/careersConfig';
 import { supabase } from '@/integrations/supabase/client';
 import type { JobOpening } from '@/components/careers/JobCard';
 
@@ -12,6 +14,7 @@ const ApplyPage = () => {
   const [jobs, setJobs] = useState<JobOpening[]>([]);
 
   useEffect(() => {
+    if (!HIRING_OPEN) return;
     supabase
       .from('job_openings')
       .select('*')
@@ -29,18 +32,30 @@ const ApplyPage = () => {
       />
       <section className="py-14 md:py-20">
         <div className="container-swiss max-w-3xl">
-          <div className="mb-8">
-            <span className="text-xs uppercase tracking-widest text-muted-foreground">Apply</span>
-            <h1 className="text-3xl md:text-4xl font-bold mt-2 mb-3">Apply for a role</h1>
-            <p className="text-muted-foreground">
-              Tell us about yourself. We review every application within ~5 business days.
-            </p>
-          </div>
-          <ApplyForm
-            openRoles={jobs.map((j) => ({ title: j.title, job_type: j.job_type }))}
-            prefillRole={prefill?.role}
-            prefillType={prefill?.type}
-          />
+          {HIRING_OPEN ? (
+            <>
+              <div className="mb-8">
+                <span className="text-xs uppercase tracking-widest text-muted-foreground">Apply</span>
+                <h1 className="text-3xl md:text-4xl font-bold mt-2 mb-3">Apply for a role</h1>
+                <p className="text-muted-foreground">
+                  Tell us about yourself. We review every application within ~5 business days.
+                </p>
+              </div>
+              <ApplyForm
+                openRoles={jobs.map((j) => ({ title: j.title, job_type: j.job_type }))}
+                prefillRole={prefill?.role}
+                prefillType={prefill?.type}
+              />
+            </>
+          ) : (
+            <>
+              <div className="mb-8 text-center">
+                <span className="text-xs uppercase tracking-widest text-muted-foreground">Apply</span>
+                <h1 className="text-3xl md:text-4xl font-bold mt-2">Applications closed</h1>
+              </div>
+              <HiringClosedNotice />
+            </>
+          )}
         </div>
       </section>
     </CareersLayout>

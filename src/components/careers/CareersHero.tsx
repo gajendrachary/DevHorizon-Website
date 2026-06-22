@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Briefcase, MapPin } from 'lucide-react';
+import { ArrowRight, Briefcase, MapPin, Mail } from 'lucide-react';
+import { HIRING_OPEN, HIRING_CONTACT_EMAIL } from '@/lib/careersConfig';
 
 export const CareersHero = ({ hasOpenings }: { hasOpenings: boolean }) => {
   const navigate = useNavigate();
@@ -20,21 +21,38 @@ export const CareersHero = ({ hasOpenings }: { hasOpenings: boolean }) => {
           </span>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
-            Start your Career with us
+            {HIRING_OPEN ? 'Start your Career with us' : 'Careers at DevHorizon'}
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            DevHorizon — Building Digital Excellence.
+            {HIRING_OPEN
+              ? 'DevHorizon — Building Digital Excellence.'
+              : "We've paused new applications for now. Thank you for your interest — please check back soon."}
           </p>
 
           <div className="flex flex-wrap gap-3 pt-2">
-            <Button size="lg" onClick={() => navigate('/careers/apply')}>
-              Apply now <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            {hasOpenings && (
-              <Button size="lg" variant="outline" onClick={() => navigate('/careers/openings')}>
-                <Briefcase className="mr-2 h-4 w-4" /> View open roles
-              </Button>
+            {HIRING_OPEN ? (
+              <>
+                <Button size="lg" onClick={() => navigate('/careers/apply')}>
+                  Apply now <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+                {hasOpenings && (
+                  <Button size="lg" variant="outline" onClick={() => navigate('/careers/openings')}>
+                    <Briefcase className="mr-2 h-4 w-4" /> View open roles
+                  </Button>
+                )}
+              </>
+            ) : (
+              <>
+                <span className="inline-flex items-center px-4 py-2 rounded-full bg-secondary/50 border border-border text-sm font-medium text-muted-foreground">
+                  Hiring paused
+                </span>
+                <Button size="lg" variant="outline" asChild>
+                  <a href={`mailto:${HIRING_CONTACT_EMAIL}`}>
+                    <Mail className="mr-2 h-4 w-4" /> Contact us
+                  </a>
+                </Button>
+              </>
             )}
           </div>
         </motion.div>
