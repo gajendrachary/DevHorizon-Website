@@ -25,6 +25,7 @@ const Careers = () => {
   const [hasOpenings, setHasOpenings] = useState(false);
 
   useEffect(() => {
+    if (!HIRING_OPEN) { setHasOpenings(false); return; }
     supabase
       .from('job_openings')
       .select('id', { count: 'exact', head: true })
@@ -52,24 +53,35 @@ const Careers = () => {
         </div>
       </div>
 
+      {!HIRING_OPEN && (
+        <section className="py-10 md:py-14">
+          <div className="container-swiss">
+            <HiringClosedNotice showBack={false} />
+          </div>
+        </section>
+      )}
+
       <section className="py-14 md:py-20">
         <div className="container-swiss">
           <span className="text-xs uppercase tracking-widest text-muted-foreground">Explore</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-8">Everything about working with us</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {SECTIONS.filter((s) => s.to !== '/careers/openings' || hasOpenings).map((s) => (
-              <Link
-                key={s.to}
-                to={s.to}
-                className="group rounded-xl border border-border bg-card p-6 shadow-soft hover:shadow-medium transition-all hover:-translate-y-0.5"
-              >
-                <h3 className="text-lg font-semibold mb-2 flex items-center justify-between">
-                  {s.title}
-                  <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-              </Link>
-            ))}
+            {SECTIONS
+              .filter((s) => (s.hiringOnly ? HIRING_OPEN : true))
+              .filter((s) => s.to !== '/careers/openings' || hasOpenings)
+              .map((s) => (
+                <Link
+                  key={s.to}
+                  to={s.to}
+                  className="group rounded-xl border border-border bg-card p-6 shadow-soft hover:shadow-medium transition-all hover:-translate-y-0.5"
+                >
+                  <h3 className="text-lg font-semibold mb-2 flex items-center justify-between">
+                    {s.title}
+                    <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                </Link>
+              ))}
           </div>
         </div>
       </section>
