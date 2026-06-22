@@ -38,30 +38,39 @@ const ApplyPage = () => {
       />
       <section className="py-14 md:py-20">
         <div className="container-swiss max-w-3xl">
-          {HIRING_OPEN ? (
-            <>
-              <div className="mb-8">
-                <span className="text-xs uppercase tracking-widest text-muted-foreground">Apply</span>
-                <h1 className="text-3xl md:text-4xl font-bold mt-2 mb-3">Apply for a role</h1>
-                <p className="text-muted-foreground">
-                  Tell us about yourself. We review every application within ~5 business days.
-                </p>
+          <div className="mb-8">
+            <span className="text-xs uppercase tracking-widest text-muted-foreground">Apply</span>
+            <h1 className="text-3xl md:text-4xl font-bold mt-2 mb-3">Apply for a role</h1>
+            <p className="text-muted-foreground">
+              Tell us about yourself. We review every application within ~5 business days.
+            </p>
+          </div>
+
+          {!HIRING_OPEN && (
+            <div className="mb-8 rounded-xl border border-border bg-card p-6 md:p-8 shadow-soft">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 border border-border text-xs font-medium text-muted-foreground shrink-0">
+                  Hiring paused
+                </span>
+                <div className="flex-1">
+                  <h2 className="text-lg md:text-xl font-bold mb-1">{HIRING_CLOSED_TITLE}</h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{HIRING_CLOSED_MESSAGE}</p>
+                </div>
+                <Button asChild size="lg" className="shrink-0">
+                  <a href={`mailto:${HIRING_CONTACT_EMAIL}`}>
+                    <Mail className="mr-2 h-4 w-4" /> Contact us
+                  </a>
+                </Button>
               </div>
-              <ApplyForm
-                openRoles={jobs.map((j) => ({ title: j.title, job_type: j.job_type }))}
-                prefillRole={prefill?.role}
-                prefillType={prefill?.type}
-              />
-            </>
-          ) : (
-            <>
-              <div className="mb-8 text-center">
-                <span className="text-xs uppercase tracking-widest text-muted-foreground">Apply</span>
-                <h1 className="text-3xl md:text-4xl font-bold mt-2">Applications closed</h1>
-              </div>
-              <HiringClosedNotice />
-            </>
+            </div>
           )}
+
+          <ApplyForm
+            openRoles={jobs.map((j) => ({ title: j.title, job_type: j.job_type }))}
+            prefillRole={prefill?.role}
+            prefillType={prefill?.type}
+            disabled={!HIRING_OPEN}
+          />
         </div>
       </section>
     </CareersLayout>
