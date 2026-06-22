@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { SEO } from '@/components/common/SEO';
 import { CareersLayout } from '@/components/careers/CareersLayout';
 import { OpeningsSection } from '@/components/careers/OpeningsSection';
+import { HiringClosedNotice } from '@/components/careers/HiringClosedNotice';
+import { HIRING_OPEN } from '@/lib/careersConfig';
 import { supabase } from '@/integrations/supabase/client';
 import type { JobOpening } from '@/components/careers/JobCard';
 
@@ -11,6 +13,7 @@ const CareersOpenings = () => {
   const [jobs, setJobs] = useState<JobOpening[]>([]);
 
   useEffect(() => {
+    if (!HIRING_OPEN) return;
     const load = async () => {
       const { data } = await supabase
         .from('job_openings')
@@ -59,17 +62,18 @@ const CareersOpenings = () => {
         title="Open Roles — Careers at DevHorizon"
         description="Live job openings at DevHorizon Technologies — engineering, AI/ML, DevOps, data and internships in Bengaluru."
         canonical="https://devhorizontech.com/careers/openings"
-        schema={jobs.length ? jobPostingSchema : undefined}
+        schema={HIRING_OPEN && jobs.length ? jobPostingSchema : undefined}
       />
-      {jobs.length > 0 ? (
+      {HIRING_OPEN && jobs.length > 0 ? (
         <OpeningsSection jobs={jobs} onApply={handleApply} />
       ) : (
         <section className="py-20">
-          <div className="container-swiss max-w-2xl text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-3">No active openings</h1>
-            <p className="text-muted-foreground">
-              We don't have live roles right now — but we always welcome general applications.
-            </p>
+          <div className="container-swiss">
+            <div className="text-center mb-10">
+              <span className="text-xs uppercase tracking-widest text-muted-foreground">Open roles</span>
+              <h1 className="text-3xl md:text-4xl font-bold mt-2">No active openings</h1>
+            </div>
+            <HiringClosedNotice />
           </div>
         </section>
       )}
