@@ -110,8 +110,6 @@ const values = [
 ];
 
 const stats = [
-  { value: "20+", label: "Successful website projects" },
-  { value: "5+", label: "Mobile applications deployed" },
   { value: "500+", label: "Active users" },
   { value: "95%", label: "Client satisfaction" },
 ];
