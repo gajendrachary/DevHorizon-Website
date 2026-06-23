@@ -72,12 +72,30 @@ const team = [
   },
   {
     name: "Gajendrachary",
-    role: "Founder & Developer",
+    role: "Founder & Managing Director",
     image: teamGajendrachary,
     links: [
       { icon: Linkedin, href: "https://www.linkedin.com/in/gajendrachary/" },
       { icon: Github, href: "https://github.com/gajendrachary" },
     ],
+  },
+  {
+    name: "Devanath",
+    role: "Quality Assurance Automation Engineer",
+    image: teamDevanath,
+    links: [],
+  },
+  {
+    name: "Rohith",
+    role: "AI & ML Engineer",
+    image: teamRohith,
+    links: [],
+  },
+  {
+    name: "Madhu",
+    role: "Prompt Engineer",
+    image: teamMadhu,
+    links: [],
   },
 ];
 
