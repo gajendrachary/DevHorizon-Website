@@ -331,113 +331,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Technical Expertise Section - Horizontal Carousel */}
-      <section ref={techRef} className="section-padding bg-secondary/30 overflow-hidden">
-        <div className="container-swiss">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={techInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-2xl mx-auto mb-8"
-          >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              Our Expertise
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold">Technical Excellence</h2>
-          </motion.div>
-
-          {/* Navigation Arrows - Desktop */}
-          <div className="hidden md:flex justify-end gap-2 mb-4">
-            <button
-              onClick={() => scrollTechTo(Math.max(0, techActiveIndex - 1))}
-              aria-label="Previous tech stack"
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
-              disabled={techActiveIndex === 0}
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => scrollTechTo(Math.min(techStack.length - 1, techActiveIndex + 1))}
-              aria-label="Next tech stack"
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
-              disabled={techActiveIndex === techStack.length - 1}
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* Carousel Container */}
-        <div
-          ref={techScrollRef}
-          onScroll={handleTechScroll}
-          onTouchStart={handleTechTouchStart}
-          onTouchMove={handleTechTouchMove}
-          onTouchEnd={handleTechTouchEnd}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-4 md:px-8 pb-4 touch-pan-x"
-          style={{ WebkitOverflowScrolling: "touch", scrollBehavior: "smooth" }}
-        >
-          {techStack.map((stack, index) => (
-            <motion.div
-              key={stack.category}
-              initial={{ opacity: 0, y: 20 }}
-              animate={techInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02, rotateY: 5, rotateX: -3 }}
-              whileTap={{ scale: 0.98 }}
-              className="snap-center shrink-0 w-[85vw] md:w-[400px] lg:w-[350px]"
-              style={{ perspective: "1000px" }}
-            >
-              <div className="relative bg-card border border-border p-8 h-full overflow-hidden group rounded-xl">
-                {/* 3D Emoji */}
-                <div className="absolute top-4 right-4 text-4xl transform group-hover:scale-110 transition-transform duration-300">
-                  {stack.emoji}
-                </div>
-
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* Accent corner */}
-                <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-primary/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-primary/10 text-primary flex items-center justify-center mb-6 rounded-xl group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                    <stack.icon className="w-7 h-7" />
-                  </div>
-                  <h3 className="font-bold text-xl mb-4 group-hover:text-primary transition-colors">
-                    {stack.category}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {stack.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="bg-secondary text-secondary-foreground px-3 py-1.5 text-sm font-medium rounded-lg"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Carousel Indicators */}
-        <div className="flex justify-center gap-2 mt-6">
-          {techStack.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollTechTo(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === techActiveIndex ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30"
-              }`}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* Team Section */}
       <section ref={teamRef} className="section-padding bg-background relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 opacity-5">
@@ -554,6 +447,113 @@ const About = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      {/* Technical Expertise Section - Horizontal Carousel */}
+      <section ref={techRef} className="section-padding bg-secondary/30 overflow-hidden">
+        <div className="container-swiss">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={techInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-2xl mx-auto mb-8"
+          >
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+              Our Expertise
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold">Technical Excellence</h2>
+          </motion.div>
+
+          {/* Navigation Arrows - Desktop */}
+          <div className="hidden md:flex justify-end gap-2 mb-4">
+            <button
+              onClick={() => scrollTechTo(Math.max(0, techActiveIndex - 1))}
+              aria-label="Previous tech stack"
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+              disabled={techActiveIndex === 0}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => scrollTechTo(Math.min(techStack.length - 1, techActiveIndex + 1))}
+              aria-label="Next tech stack"
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+              disabled={techActiveIndex === techStack.length - 1}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Carousel Container */}
+        <div
+          ref={techScrollRef}
+          onScroll={handleTechScroll}
+          onTouchStart={handleTechTouchStart}
+          onTouchMove={handleTechTouchMove}
+          onTouchEnd={handleTechTouchEnd}
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-4 md:px-8 pb-4 touch-pan-x"
+          style={{ WebkitOverflowScrolling: "touch", scrollBehavior: "smooth" }}
+        >
+          {techStack.map((stack, index) => (
+            <motion.div
+              key={stack.category}
+              initial={{ opacity: 0, y: 20 }}
+              animate={techInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.02, rotateY: 5, rotateX: -3 }}
+              whileTap={{ scale: 0.98 }}
+              className="snap-center shrink-0 w-[85vw] md:w-[400px] lg:w-[350px]"
+              style={{ perspective: "1000px" }}
+            >
+              <div className="relative bg-card border border-border p-8 h-full overflow-hidden group rounded-xl">
+                {/* 3D Emoji */}
+                <div className="absolute top-4 right-4 text-4xl transform group-hover:scale-110 transition-transform duration-300">
+                  {stack.emoji}
+                </div>
+
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Accent corner */}
+                <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-primary/20 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                <div className="relative z-10">
+                  <div className="w-14 h-14 bg-primary/10 text-primary flex items-center justify-center mb-6 rounded-xl group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <stack.icon className="w-7 h-7" />
+                  </div>
+                  <h3 className="font-bold text-xl mb-4 group-hover:text-primary transition-colors">
+                    {stack.category}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {stack.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="bg-secondary text-secondary-foreground px-3 py-1.5 text-sm font-medium rounded-lg"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Carousel Indicators */}
+        <div className="flex justify-center gap-2 mt-6">
+          {techStack.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollTechTo(index)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === techActiveIndex ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30"
+              }`}
+            />
+          ))}
         </div>
       </section>
 
