@@ -331,7 +331,135 @@ const About = () => {
         </div>
       </section>
 
+      {/* Team Section */}
+      <section ref={teamRef} className="section-padding bg-background relative overflow-hidden">
+
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary rounded-full blur-3xl" />
+        </div>
+
+        <div className="container-swiss relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={teamInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-2xl mx-auto mb-8"
+          >
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+              Meet the Team
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              The People Behind DevHorizon Technologies Private Limited
+            </h2>
+            <p className="text-muted-foreground">
+              A passionate team dedicated to delivering exceptional digital solutions
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+            {team.map((member, index) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={teamInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                className="flex flex-col items-center"
+              >
+                <motion.div
+                  whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                  className={`group relative w-full overflow-hidden rounded-2xl p-[1.5px] bg-gradient-to-br from-primary/40 via-primary/10 to-primary/40 shadow-lg hover:shadow-2xl hover:shadow-primary/20 transition-shadow duration-500 ${member.name === "Gajendrachary" ? "cursor-pointer" : ""}`}
+                  onClick={member.name === "Gajendrachary" ? () => setIsGajendraPopupOpen(true) : undefined}
+                >
+                  <div className="relative bg-card rounded-2xl p-8 text-center overflow-hidden h-full">
+                    {/* Decorative gradient blobs */}
+                    <div className="absolute -top-16 -right-16 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute -bottom-16 -left-16 w-40 h-40 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    {/* Avatar with gradient ring */}
+                    <div className="relative mx-auto mb-6 w-32 h-32">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary via-primary/60 to-primary/20 p-[3px] group-hover:rotate-180 transition-transform duration-[1.2s] ease-in-out">
+                        <div className="w-full h-full rounded-full bg-card" />
+                      </div>
+                      <div className="absolute inset-[5px] rounded-full overflow-hidden ring-1 ring-border">
+                        {member.image ? (
+                          <img
+                            src={member.image}
+                            alt={member.name}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-primary/30 to-primary/5 flex items-center justify-center">
+                            <span className="text-4xl font-bold text-primary">
+                              {member.name.charAt(0)}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      {member.name === "Gajendrachary" && (
+                        <div className="absolute -top-1 -right-1 bg-primary rounded-full p-2 shadow-lg group-hover:scale-110 group-hover:shadow-primary/40 transition-all duration-300 z-10">
+                          <ExternalLink className="w-4 h-4 text-primary-foreground" />
+                        </div>
+                      )}
+                    </div>
+
+                    <h3 className="relative text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
+                      {member.name}
+                    </h3>
+                    <span className="relative inline-block text-xs font-medium uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">
+                      {member.role}
+                    </span>
+                  </div>
+                </motion.div>
+
+
+                {/* Social / contact links BELOW the card */}
+                <div className="flex items-center justify-center gap-3 mt-4">
+                  {member.name === "A Eswari" && (
+                    <a
+                      href="mailto:eshwari.director@devhorizontech.com"
+                      aria-label={`Email ${member.name}`}
+                      className="w-11 h-11 rounded-full border border-primary/30 text-primary flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-primary/25"
+                      title="eshwari.director@devhorizontech.com"
+                    >
+                      <Mail className="w-5 h-5" />
+                    </a>
+                  )}
+                  {member.links.map((link) => {
+                    const isLinkedIn = link.href.includes("linkedin");
+                    const isGitHub = link.href.includes("github");
+                    const network = isLinkedIn ? "LinkedIn" : isGitHub ? "GitHub" : "profile";
+                    return (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${member.name} on ${network}`}
+                        className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg ${
+                          isLinkedIn
+                            ? "text-[#0A66C2] border-[#0A66C2]/30 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:shadow-[#0A66C2]/25"
+                            : isGitHub
+                              ? "text-[#333] dark:text-white border-[#333]/30 dark:border-white/30 hover:bg-[#333] dark:hover:bg-white hover:text-white dark:hover:text-[#333] hover:border-[#333] dark:hover:border-white hover:shadow-[#333]/25 dark:hover:shadow-white/25"
+                              : "border-border hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-primary/25"
+                        }`}
+                      >
+                        <link.icon className="w-5 h-5" />
+                      </a>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Technical Expertise Section - Horizontal Carousel */}
+
       <section ref={techRef} className="section-padding bg-secondary/30 overflow-hidden">
         <div className="container-swiss">
           <motion.div
@@ -434,126 +562,6 @@ const About = () => {
               }`}
             />
           ))}
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section ref={teamRef} className="section-padding bg-background relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary rounded-full blur-3xl" />
-        </div>
-
-        <div className="container-swiss relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={teamInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-2xl mx-auto mb-8"
-          >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              Meet the Team
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              The People Behind DevHorizon Technologies Private Limited
-            </h2>
-            <p className="text-muted-foreground">
-              A passionate team dedicated to delivering exceptional digital solutions
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            {team.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                animate={teamInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="flex flex-col items-center"
-              >
-                <motion.div
-                  whileHover={{ y: -8, rotateY: 5, transition: { duration: 0.3 } }}
-                  className={`group relative w-full bg-card border border-border p-8 text-center overflow-hidden rounded-xl ${member.name === "Gajendrachary" ? "cursor-pointer" : ""}`}
-                  style={{ perspective: "1000px" }}
-                  onClick={member.name === "Gajendrachary" ? () => setIsGajendraPopupOpen(true) : undefined}
-                >
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                  {/* Avatar with ring */}
-                  <div className="relative mx-auto mb-6">
-                    {member.image ? (
-                      <div className="w-28 h-28 rounded-full overflow-hidden mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-28 h-28 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
-                        <span className="text-4xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
-                          {member.name.charAt(0)}
-                        </span>
-                      </div>
-                    )}
-                    {member.name === "Gajendrachary" && (
-                      <div className="absolute -top-1 -right-1 bg-primary rounded-full p-2 shadow-lg group-hover:scale-110 group-hover:shadow-primary/40 transition-all duration-300">
-                        <ExternalLink className="w-4 h-4 text-primary-foreground" />
-                      </div>
-                    )}
-                    {/* Status indicator */}
-                    <div className="absolute bottom-1 right-1/2 translate-x-8 w-4 h-4 bg-green-500 rounded-full border-2 border-card" />
-                  </div>
-
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
-                    {member.name}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">{member.role}</p>
-                </motion.div>
-
-                {/* Social / contact links BELOW the card */}
-                <div className="flex items-center justify-center gap-3 mt-4">
-                  {member.name === "A Eswari" && (
-                    <a
-                      href="mailto:eshwari.director@devhorizontech.com"
-                      aria-label={`Email ${member.name}`}
-                      className="w-11 h-11 rounded-full border border-primary/30 text-primary flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-primary/25"
-                      title="eshwari.director@devhorizontech.com"
-                    >
-                      <Mail className="w-5 h-5" />
-                    </a>
-                  )}
-                  {member.links.map((link) => {
-                    const isLinkedIn = link.href.includes("linkedin");
-                    const isGitHub = link.href.includes("github");
-                    const network = isLinkedIn ? "LinkedIn" : isGitHub ? "GitHub" : "profile";
-                    return (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${member.name} on ${network}`}
-                        className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg ${
-                          isLinkedIn
-                            ? "text-[#0A66C2] border-[#0A66C2]/30 hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] hover:shadow-[#0A66C2]/25"
-                            : isGitHub
-                              ? "text-[#333] dark:text-white border-[#333]/30 dark:border-white/30 hover:bg-[#333] dark:hover:bg-white hover:text-white dark:hover:text-[#333] hover:border-[#333] dark:hover:border-white hover:shadow-[#333]/25 dark:hover:shadow-white/25"
-                              : "border-border hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-primary/25"
-                        }`}
-                      >
-                        <link.icon className="w-5 h-5" />
-                      </a>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
