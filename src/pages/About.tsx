@@ -27,7 +27,14 @@ import {
   ChevronRight,
   ExternalLink,
 } from "lucide-react";
-import teamGajendrachary from "@/assets/team-gajendrachary.jpg";
+import teamGajendraAsset from "@/assets/team-gajendrachary-new.jpg.asset.json";
+import teamDevanathAsset from "@/assets/team-devanath.png.asset.json";
+import teamRohithAsset from "@/assets/team-rohith.png.asset.json";
+import teamMadhuAsset from "@/assets/team-madhu.png.asset.json";
+const teamGajendrachary = teamGajendraAsset.url;
+const teamDevanath = teamDevanathAsset.url;
+const teamRohith = teamRohithAsset.url;
+const teamMadhu = teamMadhuAsset.url;
 
 const techStack = [
   {
@@ -65,12 +72,30 @@ const team = [
   },
   {
     name: "Gajendrachary",
-    role: "Founder & Developer",
+    role: "Founder & Managing Director",
     image: teamGajendrachary,
     links: [
       { icon: Linkedin, href: "https://www.linkedin.com/in/gajendrachary/" },
       { icon: Github, href: "https://github.com/gajendrachary" },
     ],
+  },
+  {
+    name: "Devanath",
+    role: "Quality Assurance Automation Engineer",
+    image: teamDevanath,
+    links: [],
+  },
+  {
+    name: "Rohith",
+    role: "AI & ML Engineer",
+    image: teamRohith,
+    links: [],
+  },
+  {
+    name: "Madhu",
+    role: "Prompt Engineer",
+    image: teamMadhu,
+    links: [],
   },
 ];
 
