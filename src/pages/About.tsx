@@ -368,47 +368,53 @@ const About = () => {
                 className="flex flex-col items-center"
               >
                 <motion.div
-                  whileHover={{ y: -8, rotateY: 5, transition: { duration: 0.3 } }}
-                  className={`group relative w-full bg-card border border-border p-8 text-center overflow-hidden rounded-xl ${member.name === "Gajendrachary" ? "cursor-pointer" : ""}`}
-                  style={{ perspective: "1000px" }}
+                  whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                  className={`group relative w-full overflow-hidden rounded-2xl p-[1.5px] bg-gradient-to-br from-primary/40 via-primary/10 to-primary/40 shadow-lg hover:shadow-2xl hover:shadow-primary/20 transition-shadow duration-500 ${member.name === "Gajendrachary" ? "cursor-pointer" : ""}`}
                   onClick={member.name === "Gajendrachary" ? () => setIsGajendraPopupOpen(true) : undefined}
                 >
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative bg-card rounded-2xl p-8 text-center overflow-hidden h-full">
+                    {/* Decorative gradient blobs */}
+                    <div className="absolute -top-16 -right-16 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute -bottom-16 -left-16 w-40 h-40 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                  {/* Avatar with ring */}
-                  <div className="relative mx-auto mb-6">
-                    {member.image ? (
-                      <div className="w-28 h-28 rounded-full overflow-hidden mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                          loading="lazy"
-                          decoding="async"
-                        />
+                    {/* Avatar with gradient ring */}
+                    <div className="relative mx-auto mb-6 w-32 h-32">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary via-primary/60 to-primary/20 p-[3px] group-hover:rotate-180 transition-transform duration-[1.2s] ease-in-out">
+                        <div className="w-full h-full rounded-full bg-card" />
                       </div>
-                    ) : (
-                      <div className="w-28 h-28 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center mx-auto ring-4 ring-primary/10 group-hover:ring-primary/30 transition-all duration-300">
-                        <span className="text-4xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
-                          {member.name.charAt(0)}
-                        </span>
+                      <div className="absolute inset-[5px] rounded-full overflow-hidden ring-1 ring-border">
+                        {member.image ? (
+                          <img
+                            src={member.image}
+                            alt={member.name}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-primary/30 to-primary/5 flex items-center justify-center">
+                            <span className="text-4xl font-bold text-primary">
+                              {member.name.charAt(0)}
+                            </span>
+                          </div>
+                        )}
                       </div>
-                    )}
-                    {member.name === "Gajendrachary" && (
-                      <div className="absolute -top-1 -right-1 bg-primary rounded-full p-2 shadow-lg group-hover:scale-110 group-hover:shadow-primary/40 transition-all duration-300">
-                        <ExternalLink className="w-4 h-4 text-primary-foreground" />
-                      </div>
-                    )}
-                    {/* Status indicator */}
-                    <div className="absolute bottom-1 right-1/2 translate-x-8 w-4 h-4 bg-green-500 rounded-full border-2 border-card" />
+                      {member.name === "Gajendrachary" && (
+                        <div className="absolute -top-1 -right-1 bg-primary rounded-full p-2 shadow-lg group-hover:scale-110 group-hover:shadow-primary/40 transition-all duration-300 z-10">
+                          <ExternalLink className="w-4 h-4 text-primary-foreground" />
+                        </div>
+                      )}
+                    </div>
+
+                    <h3 className="relative text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
+                      {member.name}
+                    </h3>
+                    <span className="relative inline-block text-xs font-medium uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">
+                      {member.role}
+                    </span>
                   </div>
-
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
-                    {member.name}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">{member.role}</p>
                 </motion.div>
+
 
                 {/* Social / contact links BELOW the card */}
                 <div className="flex items-center justify-center gap-3 mt-4">
