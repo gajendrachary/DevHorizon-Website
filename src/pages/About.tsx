@@ -458,8 +458,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
       {/* Technical Expertise Section - Horizontal Carousel */}
+
       <section ref={techRef} className="section-padding bg-secondary/30 overflow-hidden">
         <div className="container-swiss">
           <motion.div
