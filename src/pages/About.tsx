@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 import { useRef, useState } from "react";
 import teamEswari from "@/assets/team-eswari.jpg";
+import devhubLogo from "@/assets/devhub-logo.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   Linkedin,
