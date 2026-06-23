@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 import { useRef, useState } from "react";
 import teamEswari from "@/assets/team-eswari.jpg";
+import devhubLogo from "@/assets/devhub-logo.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   Linkedin,
@@ -376,6 +377,18 @@ const About = () => {
                     {/* Decorative gradient blobs */}
                     <div className="absolute -top-16 -right-16 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="absolute -bottom-16 -left-16 w-40 h-40 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    {/* Brand logo badge - top left */}
+                    <div className="absolute top-3 left-3 z-10 w-9 h-9 rounded-lg overflow-hidden ring-1 ring-border/60 bg-card shadow-md group-hover:shadow-primary/30 transition-shadow duration-300">
+                      <img
+                        src={devhubLogo}
+                        alt="DevHorizon"
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+
 
                     {/* Avatar with gradient ring */}
                     <div className="relative mx-auto mb-6 w-32 h-32">
