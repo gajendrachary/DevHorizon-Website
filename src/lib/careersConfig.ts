@@ -5,5 +5,5 @@ export const HIRING_OPEN = false;
 
 export const HIRING_CLOSED_TITLE = "We're not hiring right now";
 export const HIRING_CLOSED_MESSAGE =
-  "Thank you for your interest in DevHorizon Technologies. We've paused new applications while we focus on our current team and projects. Please check back soon — or reach us at info@devhorizontech.com for future opportunities.";
-export const HIRING_CONTACT_EMAIL = 'info@devhorizontech.com';
+  "Thank you for your interest in DevHorizon Technologies. We've paused new applications while we focus on our current team and projects. Please check back soon — or reach us at careers@devhorizontech.com for future opportunities.";
+export const HIRING_CONTACT_EMAIL = 'careers@devhorizontech.com';
