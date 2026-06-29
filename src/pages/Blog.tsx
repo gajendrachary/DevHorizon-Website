@@ -256,8 +256,8 @@ const Blog = () => {
   };
 
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: 'Home', url: 'https://devhorizontech.com/' },
-    { name: 'Blog', url: 'https://devhorizontech.com/blog' },
+    { name: 'Home', url: 'https://www.devhorizontech.com/' },
+    { name: 'Blog', url: 'https://www.devhorizontech.com/blog' },
   ]);
 
   return (

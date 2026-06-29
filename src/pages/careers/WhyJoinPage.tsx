@@ -7,7 +7,7 @@ const WhyJoinPage = () => (
     <SEO
       title="Why Join — Careers at DevHorizon"
       description="Real project work, senior mentorship, modern stack, and fast growth at DevHorizon Technologies."
-      canonical="https://devhorizontech.com/careers/why-join"
+      canonical="https://www.devhorizontech.com/careers/why-join"
     />
     <WhyJoin />
   </CareersLayout>

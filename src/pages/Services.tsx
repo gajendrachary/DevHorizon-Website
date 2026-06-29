@@ -230,8 +230,8 @@ const Services = () => {
   );
 
   const breadcrumbSchema = getBreadcrumbSchema([
-    { name: 'Home', url: 'https://devhorizontech.com/' },
-    { name: 'Services', url: 'https://devhorizontech.com/services' },
+    { name: 'Home', url: 'https://www.devhorizontech.com/' },
+    { name: 'Services', url: 'https://www.devhorizontech.com/services' },
   ]);
 
   return (
