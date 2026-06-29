@@ -265,6 +265,8 @@ const Blog = () => {
       <SEO
         title="DevHorizon Blog — Web, Mobile & Marketing Insights"
         description="DevHorizon's blog on web development trends, mobile app best practices, Meta ads tips, and UI/UX design — from Bengaluru's digital experts."
+        canonical="https://www.devhorizontech.com/blog"
+        image={featuredPost ? (featuredPost as any).thumbnail : undefined}
         schema={{ '@context': 'https://schema.org', '@graph': [blogSchema, breadcrumbSchema] }}
       />
       {/* Hero Section */}
