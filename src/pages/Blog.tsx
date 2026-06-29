@@ -167,7 +167,18 @@ const Blog = () => {
 
   const featuredPost = blogPosts.find(post => post.featured);
 
-  const { ref: headerRef, inView: headerInView } = useInView({
+  const handleCopyFeaturedLink = async () => {
+    if (!featuredPost) return;
+    const url = `https://www.devhorizontech.com/blog/${featuredPost.slug}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      toast.success('Article link copied to clipboard');
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error('Failed to copy link');
+    }
+  };
     threshold: 0.1,
     triggerOnce: true
   });
