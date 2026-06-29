@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar, ArrowLeft, Linkedin } from 'lucide-react';
+import { Calendar, ArrowLeft, Linkedin, Link2, Check } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
+import { toast } from 'sonner';
 import jzThumb from '@/assets/jz-launch-thumbnail.jpg.asset.json';
 import jzArticle from '@/assets/jz-launch-article.jpg.asset.json';
 
@@ -73,9 +75,22 @@ const BlogPost = () => {
   const { slug = '' } = useParams();
   const post = posts[slug];
 
+  const [copied, setCopied] = useState(false);
+
   if (!post) return <Navigate to="/blog" replace />;
 
   const url = `https://www.devhorizontech.com/blog/${post.slug}`;
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      toast.success('Article link copied to clipboard');
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error('Failed to copy link');
+    }
+  };
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -177,11 +192,14 @@ const BlogPost = () => {
               <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1"><Calendar className="w-4 h-4" />{post.date}</span>
               </div>
-              <div className="mt-6">
+              <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Button asChild variant="hero" className="rounded-full">
                   <a href={linkedInShare} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <Linkedin className="w-4 h-4" /> Share on LinkedIn
                   </a>
+                </Button>
+                <Button variant="outline" className="rounded-full" onClick={handleCopyLink}>
+                  {copied ? <><Check className="w-4 h-4 mr-2" /> Copied</> : <><Link2 className="w-4 h-4 mr-2" /> Copy Link</>}
                 </Button>
               </div>
             </motion.div>
@@ -236,11 +254,16 @@ const BlogPost = () => {
                 <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-primary hover:underline">
                   <ArrowLeft className="w-4 h-4" /> All Articles
                 </Link>
-                <Button asChild variant="outline" className="rounded-full">
-                  <a href={linkedInShare} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                    <Linkedin className="w-4 h-4" /> Share on LinkedIn
-                  </a>
-                </Button>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button asChild variant="outline" className="rounded-full">
+                    <a href={linkedInShare} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                      <Linkedin className="w-4 h-4" /> Share on LinkedIn
+                    </a>
+                  </Button>
+                  <Button variant="ghost" className="rounded-full" onClick={handleCopyLink}>
+                    {copied ? <><Check className="w-4 h-4 mr-2" /> Copied</> : <><Link2 className="w-4 h-4 mr-2" /> Copy Link</>}
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

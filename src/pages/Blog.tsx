@@ -3,11 +3,12 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Layout } from '@/components/layout/Layout';
 import { Link } from 'react-router-dom';
-import { Search, Calendar, ArrowRight, Clock, User, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Calendar, ArrowRight, Clock, User, ChevronLeft, ChevronRight, Link2, Check } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
+import { toast } from 'sonner';
 import jzThumb from '@/assets/jz-launch-thumbnail.jpg.asset.json';
 
 // ============= Auto-scroll Configuration =============
@@ -130,6 +131,7 @@ const blogPosts = [
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [copied, setCopied] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardOffsets, setCardOffsets] = useState<number[]>([]);
@@ -165,6 +167,18 @@ const Blog = () => {
 
   const featuredPost = blogPosts.find(post => post.featured);
 
+  const handleCopyFeaturedLink = async () => {
+    if (!featuredPost) return;
+    const url = `https://www.devhorizontech.com/blog/${featuredPost.slug}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      toast.success('Article link copied to clipboard');
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error('Failed to copy link');
+    }
+  };
   const { ref: headerRef, inView: headerInView } = useInView({
     threshold: 0.1,
     triggerOnce: true
@@ -351,12 +365,29 @@ const Blog = () => {
                       {featuredPost.readTime}
                     </span>
                   </div>
-                  <Button asChild variant="outline" className="w-fit">
-                    <Link to={`/blog/${featuredPost.slug}`} className="flex items-center gap-2">
-                      Read Article
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </Button>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button asChild variant="outline" className="w-fit">
+                      <Link to={`/blog/${featuredPost.slug}`} className="flex items-center gap-2">
+                        Read Article
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="w-fit"
+                      onClick={handleCopyFeaturedLink}
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-4 h-4 mr-2" /> Copied
+                        </>
+                      ) : (
+                        <>
+                          <Link2 className="w-4 h-4 mr-2" /> Copy Link
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </motion.div>
