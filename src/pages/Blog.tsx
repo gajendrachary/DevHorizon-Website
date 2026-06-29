@@ -48,6 +48,18 @@ const categories = ['All', 'Technology', 'Mobile', 'Marketing', 'Design'];
 
 const blogPosts = [
   {
+    id: 0,
+    title: 'JZ Group of Hotels — Website & App Launch, Bengaluru (14-02-2026)',
+    excerpt: 'DevHorizon Technologies powered the digital transformation of JZ Group of Hotels with a state-of-the-art website, mobile app, and billing system — redefining luxury hospitality with future-ready technology.',
+    category: 'Technology',
+    date: 'Feb 14, 2026',
+    readTime: '5 min read',
+    author: 'Gajendrachary',
+    featured: true,
+    slug: 'jz-group-hotels-launch-bengaluru-2026',
+    thumbnail: jzThumb.url,
+  },
+  {
     id: 1,
     title: 'The Future of Web Development in 2025',
     excerpt: 'Explore the cutting-edge technologies and trends shaping the future of web development, from AI integration to advanced frameworks.',
@@ -55,7 +67,7 @@ const blogPosts = [
     date: 'Dec 15, 2025',
     readTime: '8 min read',
     author: 'Gajendrachary',
-    featured: true,
+    featured: false,
     slug: 'future-of-web-development-2025'
   },
   {
