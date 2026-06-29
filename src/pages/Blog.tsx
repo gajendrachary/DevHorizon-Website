@@ -179,6 +179,7 @@ const Blog = () => {
       toast.error('Failed to copy link');
     }
   };
+  const { ref: headerRef, inView: headerInView } = useInView({
     threshold: 0.1,
     triggerOnce: true
   });
