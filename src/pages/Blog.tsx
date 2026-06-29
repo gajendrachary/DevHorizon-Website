@@ -365,12 +365,29 @@ const Blog = () => {
                       {featuredPost.readTime}
                     </span>
                   </div>
-                  <Button asChild variant="outline" className="w-fit">
-                    <Link to={`/blog/${featuredPost.slug}`} className="flex items-center gap-2">
-                      Read Article
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </Button>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button asChild variant="outline" className="w-fit">
+                      <Link to={`/blog/${featuredPost.slug}`} className="flex items-center gap-2">
+                        Read Article
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="w-fit"
+                      onClick={handleCopyFeaturedLink}
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-4 h-4 mr-2" /> Copied
+                        </>
+                      ) : (
+                        <>
+                          <Link2 className="w-4 h-4 mr-2" /> Copy Link
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </motion.div>
