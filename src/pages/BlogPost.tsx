@@ -1,9 +1,10 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar, ArrowLeft, Linkedin } from 'lucide-react';
+import { Calendar, ArrowLeft, Linkedin, Link2, Check } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
+import { toast } from 'sonner';
 import jzThumb from '@/assets/jz-launch-thumbnail.jpg.asset.json';
 import jzArticle from '@/assets/jz-launch-article.jpg.asset.json';
 

@@ -3,11 +3,12 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Layout } from '@/components/layout/Layout';
 import { Link } from 'react-router-dom';
-import { Search, Calendar, ArrowRight, Clock, User, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Calendar, ArrowRight, Clock, User, ChevronLeft, ChevronRight, Link2, Check } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
+import { toast } from 'sonner';
 import jzThumb from '@/assets/jz-launch-thumbnail.jpg.asset.json';
 
 // ============= Auto-scroll Configuration =============
