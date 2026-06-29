@@ -303,12 +303,12 @@ const Blog = () => {
               className="border border-border bg-card overflow-hidden rounded-2xl"
             >
               <div className="grid lg:grid-cols-2 gap-8">
-                <div className="bg-primary/10 h-64 lg:h-auto flex items-center justify-center relative overflow-hidden">
+                <div className="bg-secondary/40 lg:h-auto flex items-center justify-center relative overflow-hidden">
                   {(featuredPost as any).thumbnail ? (
                     <img
                       src={(featuredPost as any).thumbnail}
                       alt={featuredPost.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain max-h-[420px]"
                       loading="lazy"
                     />
                   ) : (
