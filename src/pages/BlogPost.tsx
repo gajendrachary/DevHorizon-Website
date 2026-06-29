@@ -254,11 +254,16 @@ const BlogPost = () => {
                 <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-primary hover:underline">
                   <ArrowLeft className="w-4 h-4" /> All Articles
                 </Link>
-                <Button asChild variant="outline" className="rounded-full">
-                  <a href={linkedInShare} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                    <Linkedin className="w-4 h-4" /> Share on LinkedIn
-                  </a>
-                </Button>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button asChild variant="outline" className="rounded-full">
+                    <a href={linkedInShare} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                      <Linkedin className="w-4 h-4" /> Share on LinkedIn
+                    </a>
+                  </Button>
+                  <Button variant="ghost" className="rounded-full" onClick={handleCopyLink}>
+                    {copied ? <><Check className="w-4 h-4 mr-2" /> Copied</> : <><Link2 className="w-4 h-4 mr-2" /> Copy Link</>}
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
