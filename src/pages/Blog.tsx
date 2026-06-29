@@ -131,6 +131,7 @@ const blogPosts = [
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [copied, setCopied] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardOffsets, setCardOffsets] = useState<number[]>([]);
