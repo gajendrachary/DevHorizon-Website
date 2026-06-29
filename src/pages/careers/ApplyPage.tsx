@@ -34,7 +34,7 @@ const ApplyPage = () => {
       <SEO
         title="Apply — Careers at DevHorizon"
         description="Apply to open roles at DevHorizon Technologies. We review every application within ~5 business days."
-        canonical="https://devhorizontech.com/careers/apply"
+        canonical="https://www.devhorizontech.com/careers/apply"
       />
       <section className="py-14 md:py-20">
         <div className="container-swiss max-w-3xl">

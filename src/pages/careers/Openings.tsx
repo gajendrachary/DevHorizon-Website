@@ -41,7 +41,7 @@ const CareersOpenings = () => {
       hiringOrganization: {
         '@type': 'Organization',
         name: 'DevHorizon Technologies Private Limited',
-        sameAs: 'https://devhorizontech.com',
+        sameAs: 'https://www.devhorizontech.com',
       },
       jobLocation: {
         '@type': 'Place',
@@ -61,7 +61,7 @@ const CareersOpenings = () => {
       <SEO
         title="Open Roles — Careers at DevHorizon"
         description="Live job openings at DevHorizon Technologies — engineering, AI/ML, DevOps, data and internships in Bengaluru."
-        canonical="https://devhorizontech.com/careers/openings"
+        canonical="https://www.devhorizontech.com/careers/openings"
         schema={HIRING_OPEN && jobs.length ? jobPostingSchema : undefined}
       />
       {HIRING_OPEN && jobs.length > 0 ? (

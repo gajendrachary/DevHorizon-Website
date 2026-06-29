@@ -38,7 +38,7 @@ const Careers = () => {
       <SEO
         title="Careers — DevHorizon Technologies"
         description="Open roles at DevHorizon Technologies in Bengaluru — full-stack, AI/ML, DevOps, data and internships. Hybrid and remote-friendly."
-        canonical="https://devhorizontech.com/careers"
+        canonical="https://www.devhorizontech.com/careers"
       />
 
       <CareersHero hasOpenings={hasOpenings} />

@@ -7,7 +7,7 @@ const ProcessPage = () => (
     <SEO
       title="Hiring Process — Careers at DevHorizon"
       description="Our 5-step hiring process: apply, screening, technical interview, final discussion, and offer."
-      canonical="https://devhorizontech.com/careers/process"
+      canonical="https://www.devhorizontech.com/careers/process"
     />
     <HiringProcess />
   </CareersLayout>

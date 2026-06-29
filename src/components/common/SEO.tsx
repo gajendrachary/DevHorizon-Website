@@ -11,7 +11,7 @@ interface SEOProps {
   noindex?: boolean;
 }
 
-const BASE_URL = 'https://devhorizontech.com';
+const BASE_URL = 'https://www.devhorizontech.com';
 const DEFAULT_IMAGE = 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/social-images/social-1766729263212-Screenshot 2025-12-26 at 11.37.02 AM.png';
 
 export const SEO = ({
@@ -97,7 +97,7 @@ export const getOrganizationSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'DevHorizon Technologies Private Limited',
-  url: 'https://devhorizontech.com',
+  url: 'https://www.devhorizontech.com',
   logo: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
   description: 'Full-service digital company specializing in web development, mobile apps, and Meta advertising.',
   address: {
@@ -128,12 +128,12 @@ export const getOrganizationSchema = () => ({
 export const getLocalBusinessSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://devhorizontech.com/#localbusiness',
+  '@id': 'https://www.devhorizontech.com/#localbusiness',
   name: 'DevHorizon Technologies Private Limited',
   image: 'https://storage.googleapis.com/gpt-engineer-file-uploads/pkvyJBGC6VYC9rCCpwRzSlSJLDy2/uploads/1766556238529-cropped_circle_image (11).png',
   telephone: '+91-8688097373',
   email: 'info@devhorizontech.com',
-  url: 'https://devhorizontech.com',
+  url: 'https://www.devhorizontech.com',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Vidyaranyapura',

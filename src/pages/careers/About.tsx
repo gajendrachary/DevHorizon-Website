@@ -6,7 +6,7 @@ const CareersAbout = () => (
     <SEO
       title="About — Careers at DevHorizon"
       description="DevHorizon is a Bengaluru-based software studio building production-grade SaaS, AI tools, and automation."
-      canonical="https://devhorizontech.com/careers/about"
+      canonical="https://www.devhorizontech.com/careers/about"
     />
     <section className="py-14 md:py-20">
       <div className="container-swiss max-w-3xl">
