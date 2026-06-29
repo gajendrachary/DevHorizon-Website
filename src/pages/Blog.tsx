@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
+import jzThumb from '@/assets/jz-launch-thumbnail.jpg.asset.json';
 
 // ============= Auto-scroll Configuration =============
 const AUTO_SCROLL_CONFIG = {
