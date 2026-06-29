@@ -10,6 +10,7 @@ import Projects from "./pages/Projects";
 import About from "./pages/About";
 import Reviews from "./pages/Reviews";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import GetQuote from "./pages/GetQuote";
 import Services from "./pages/Services";
 import Auth from "./pages/Auth";
