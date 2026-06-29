@@ -112,30 +112,34 @@ const BlogPost = () => {
       />
 
       <article className="bg-background">
-        {/* Hero */}
-        <section className="relative">
-          <div className="relative h-[55vh] min-h-[360px] w-full overflow-hidden">
-            <img
-              src={post.cover}
-              alt={post.title}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/10" />
+        {/* Hero Image — full, uncropped */}
+        <section className="pt-8 md:pt-12">
+          <div className="container-swiss">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-6"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back to Blog
+            </Link>
+            <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border bg-card">
+              <img
+                src={post.cover}
+                alt={post.title}
+                className="w-full h-auto object-contain"
+              />
+            </div>
           </div>
+        </section>
 
-          <div className="container-swiss -mt-24 relative z-10">
+        {/* Title & meta below the image */}
+        <section className="pt-8">
+          <div className="container-swiss">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="max-w-3xl mx-auto bg-card border border-border rounded-2xl p-6 md:p-10 shadow-xl"
+              className="max-w-3xl mx-auto"
             >
-              <Link
-                to="/blog"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-4"
-              >
-                <ArrowLeft className="w-4 h-4" /> Back to Blog
-              </Link>
               <span className="text-xs font-semibold text-primary uppercase tracking-wider">
                 {post.category}
               </span>
@@ -157,6 +161,7 @@ const BlogPost = () => {
             </motion.div>
           </div>
         </section>
+
 
         {/* Body */}
         <section className="py-12 md:py-16">
