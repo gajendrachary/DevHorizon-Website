@@ -304,13 +304,22 @@ const Blog = () => {
             >
               <div className="grid lg:grid-cols-2 gap-8">
                 <div className="bg-primary/10 h-64 lg:h-auto flex items-center justify-center relative overflow-hidden">
-                  <motion.span 
-                    className="text-8xl"
-                    animate={{ y: [0, -10, 0], rotate: [-5, 5, -5] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    {categoryEmojis[featuredPost.category] || '📝'}
-                  </motion.span>
+                  {(featuredPost as any).thumbnail ? (
+                    <img
+                      src={(featuredPost as any).thumbnail}
+                      alt={featuredPost.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <motion.span
+                      className="text-8xl"
+                      animate={{ y: [0, -10, 0], rotate: [-5, 5, -5] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      {categoryEmojis[featuredPost.category] || '📝'}
+                    </motion.span>
+                  )}
                   <div className="absolute top-4 left-4 px-3 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full">
                     ⭐ Featured
                   </div>
