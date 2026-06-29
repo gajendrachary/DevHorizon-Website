@@ -131,8 +131,13 @@ const BlogPost = () => {
   return (
     <Layout>
       <SEO
-        title={post.title}
-        description={post.excerpt}
+        title={`${post.title} | Gajendrachary, DevHorizon Technologies`}
+        description={`Gajendrachary, Founder & MD of DevHorizon Technologies, leads the launch of JZ Group of Hotels' new website, mobile app & billing system in Bengaluru (14-Feb-2026). ${post.excerpt}`}
+        canonical={url}
+        type="article"
+        image={post.cover}
+        schema={{ '@context': 'https://schema.org', '@graph': [articleSchema, breadcrumbSchema] }}
+      />
         canonical={url}
         type="article"
         image={post.cover}
