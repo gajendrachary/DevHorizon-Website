@@ -75,9 +75,22 @@ const BlogPost = () => {
   const { slug = '' } = useParams();
   const post = posts[slug];
 
+  const [copied, setCopied] = useState(false);
+
   if (!post) return <Navigate to="/blog" replace />;
 
   const url = `https://www.devhorizontech.com/blog/${post.slug}`;
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      toast.success('Article link copied to clipboard');
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error('Failed to copy link');
+    }
+  };
 
   const articleSchema = {
     '@context': 'https://schema.org',
