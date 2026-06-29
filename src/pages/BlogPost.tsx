@@ -79,17 +79,45 @@ const BlogPost = () => {
 
   const articleSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'NewsArticle',
     headline: post.title,
     description: post.excerpt,
-    image: post.cover,
-    datePublished: post.date,
-    author: { '@type': 'Person', name: post.author },
+    image: [post.cover, post.articleImage].filter(Boolean),
+    datePublished: '2026-02-14',
+    dateModified: '2026-02-14',
+    keywords: [
+      'Gajendrachary',
+      'DevHorizon',
+      'DevHorizon Technologies',
+      'DevHorizon Technologies Private Limited',
+      'JZ Group of Hotels',
+      'Bengaluru',
+      'Hospitality Technology',
+      'Hotel Booking App',
+      'Hotel Website Launch',
+    ],
+    articleSection: 'Technology',
+    author: {
+      '@type': 'Person',
+      name: 'Gajendrachary',
+      jobTitle: 'Founder & Managing Director',
+      worksFor: { '@type': 'Organization', name: 'DevHorizon Technologies Private Limited' },
+      url: 'https://www.devhorizontech.com/about',
+    },
     publisher: {
       '@type': 'Organization',
       name: 'DevHorizon Technologies Private Limited',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.devhorizontech.com/devhub-logo.png',
+      },
     },
-    mainEntityOfPage: url,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    about: [
+      { '@type': 'Person', name: 'Gajendrachary' },
+      { '@type': 'Organization', name: 'DevHorizon Technologies Private Limited' },
+      { '@type': 'Organization', name: 'JZ Group of Hotels' },
+    ],
   };
 
   const breadcrumbSchema = getBreadcrumbSchema([
@@ -103,8 +131,8 @@ const BlogPost = () => {
   return (
     <Layout>
       <SEO
-        title={post.title}
-        description={post.excerpt}
+        title={`${post.title} | Gajendrachary, DevHorizon Technologies`}
+        description={`Gajendrachary, Founder & MD of DevHorizon Technologies, leads the launch of JZ Group of Hotels' new website, mobile app & billing system in Bengaluru (14-Feb-2026). ${post.excerpt}`}
         canonical={url}
         type="article"
         image={post.cover}
