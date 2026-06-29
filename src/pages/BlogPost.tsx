@@ -192,11 +192,14 @@ const BlogPost = () => {
               <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1"><Calendar className="w-4 h-4" />{post.date}</span>
               </div>
-              <div className="mt-6">
+              <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Button asChild variant="hero" className="rounded-full">
                   <a href={linkedInShare} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <Linkedin className="w-4 h-4" /> Share on LinkedIn
                   </a>
+                </Button>
+                <Button variant="outline" className="rounded-full" onClick={handleCopyLink}>
+                  {copied ? <><Check className="w-4 h-4 mr-2" /> Copied</> : <><Link2 className="w-4 h-4 mr-2" /> Copy Link</>}
                 </Button>
               </div>
             </motion.div>
