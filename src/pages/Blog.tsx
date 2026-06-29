@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
+import jzThumb from '@/assets/jz-launch-thumbnail.jpg.asset.json';
 
 // ============= Auto-scroll Configuration =============
 const AUTO_SCROLL_CONFIG = {
@@ -47,6 +48,18 @@ const categories = ['All', 'Technology', 'Mobile', 'Marketing', 'Design'];
 
 const blogPosts = [
   {
+    id: 0,
+    title: 'JZ Group of Hotels — Website & App Launch, Bengaluru (14-02-2026)',
+    excerpt: 'DevHorizon Technologies powered the digital transformation of JZ Group of Hotels with a state-of-the-art website, mobile app, and billing system — redefining luxury hospitality with future-ready technology.',
+    category: 'Technology',
+    date: 'Feb 14, 2026',
+    readTime: '5 min read',
+    author: 'Gajendrachary',
+    featured: true,
+    slug: 'jz-group-hotels-launch-bengaluru-2026',
+    thumbnail: jzThumb.url,
+  },
+  {
     id: 1,
     title: 'The Future of Web Development in 2025',
     excerpt: 'Explore the cutting-edge technologies and trends shaping the future of web development, from AI integration to advanced frameworks.',
@@ -54,7 +67,7 @@ const blogPosts = [
     date: 'Dec 15, 2025',
     readTime: '8 min read',
     author: 'Gajendrachary',
-    featured: true,
+    featured: false,
     slug: 'future-of-web-development-2025'
   },
   {
@@ -291,13 +304,22 @@ const Blog = () => {
             >
               <div className="grid lg:grid-cols-2 gap-8">
                 <div className="bg-primary/10 h-64 lg:h-auto flex items-center justify-center relative overflow-hidden">
-                  <motion.span 
-                    className="text-8xl"
-                    animate={{ y: [0, -10, 0], rotate: [-5, 5, -5] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    {categoryEmojis[featuredPost.category] || '📝'}
-                  </motion.span>
+                  {(featuredPost as any).thumbnail ? (
+                    <img
+                      src={(featuredPost as any).thumbnail}
+                      alt={featuredPost.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <motion.span
+                      className="text-8xl"
+                      animate={{ y: [0, -10, 0], rotate: [-5, 5, -5] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      {categoryEmojis[featuredPost.category] || '📝'}
+                    </motion.span>
+                  )}
                   <div className="absolute top-4 left-4 px-3 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full">
                     ⭐ Featured
                   </div>
