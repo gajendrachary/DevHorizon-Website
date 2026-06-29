@@ -138,11 +138,6 @@ const BlogPost = () => {
         image={post.cover}
         schema={{ '@context': 'https://schema.org', '@graph': [articleSchema, breadcrumbSchema] }}
       />
-        canonical={url}
-        type="article"
-        image={post.cover}
-        schema={{ '@context': 'https://schema.org', '@graph': [articleSchema, breadcrumbSchema] }}
-      />
 
       <article className="bg-background">
         {/* Hero Image — full, uncropped */}
