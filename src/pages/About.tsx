@@ -31,11 +31,9 @@ import {
 import teamGajendraAsset from "@/assets/team-gajendrachary-new.jpg.asset.json";
 import teamDevanathAsset from "@/assets/team-devanath.png.asset.json";
 import teamRohithAsset from "@/assets/team-rohith.png.asset.json";
-import teamMadhuAsset from "@/assets/team-madhu.png.asset.json";
 const teamGajendrachary = teamGajendraAsset.url;
 const teamDevanath = teamDevanathAsset.url;
 const teamRohith = teamRohithAsset.url;
-const teamMadhu = teamMadhuAsset.url;
 
 const techStack = [
   {
@@ -90,12 +88,6 @@ const team = [
     name: "Rohith",
     role: "AI & ML Engineer",
     image: teamRohith,
-    links: [],
-  },
-  {
-    name: "Madhu",
-    role: "Prompt Engineer",
-    image: teamMadhu,
     links: [],
   },
 ];
