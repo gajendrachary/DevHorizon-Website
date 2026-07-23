@@ -92,12 +92,6 @@ const team = [
     image: teamRohith,
     links: [],
   },
-  {
-    name: "Madhu",
-    role: "Prompt Engineer",
-    image: teamMadhu,
-    links: [],
-  },
 ];
 
 const values = [
