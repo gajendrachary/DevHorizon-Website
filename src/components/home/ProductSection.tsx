@@ -21,10 +21,12 @@ export const ProductSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-10"
         >
-          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-3">
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-logo-gradient mb-3">
             Our Product
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">HorizonHire</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-logo-gradient">
+            HorizonHire
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Our in-house hiring platform that helps companies post roles, manage applications and hire
             faster — designed and built by DevHorizon Technologies.
@@ -42,7 +44,7 @@ export const ProductSection = () => {
               whileHover={{ y: -6 }}
               className="rounded-lg border border-border bg-card p-6 shadow-soft"
             >
-              <item.icon className="w-8 h-8 text-primary mb-4" />
+              <span className="inline-flex w-12 h-12 items-center justify-center rounded-xl bg-logo-gradient mb-4"><item.icon className="w-6 h-6" /></span>
               <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
             </motion.div>
@@ -56,7 +58,7 @@ export const ProductSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex justify-center"
         >
-          <Button asChild variant="hero" size="xl">
+          <Button asChild size="xl" className="bg-logo-gradient hover:opacity-90 border-0">
             <a
               href={PRODUCT_URL}
               target="_blank"

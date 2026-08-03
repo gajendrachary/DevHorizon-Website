@@ -50,7 +50,6 @@ const ANIMATION_CONFIG = {
 
 const services = [
   {
-    emoji: '🌐',
     accentIcon: Sparkles,
     title: 'Web Development',
     
@@ -69,7 +68,6 @@ const services = [
     backgroundImage: serviceWebDev
   },
   {
-    emoji: '📱',
     accentIcon: Zap,
     title: 'Mobile App Development',
     
@@ -88,7 +86,6 @@ const services = [
     backgroundImage: serviceAppDev
   },
   {
-    emoji: '📊',
     accentIcon: TargetIcon,
     title: 'Meta Ads Management',
     
@@ -546,7 +543,7 @@ const ServicePageCard = ({ service, index, isInView, entranceDelay, AccentIcon, 
           transition={{ duration: 0.4 }}
           style={{ transformStyle: 'preserve-3d', translateZ: 20 }}
         >
-          <span className="text-4xl">{service.emoji}</span>
+          <AccentIcon className="w-8 h-8 text-primary" />
           <motion.div
             className="absolute inset-0 rounded-xl bg-primary/20"
             initial={{ scale: 0, opacity: 0 }}

@@ -517,3 +517,21 @@
 .grecaptcha-badge { visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
 iframe[src*="recaptcha/api2/bframe"],
 iframe[src*="recaptcha/enterprise/bframe"] { display: none !important; }
+
+/* DevHorizon logo gradient (cyan -> blue -> violet) */
+:root {
+  --gradient-logo: linear-gradient(100deg, hsl(187 92% 55%) 0%, hsl(215 90% 55%) 45%, hsl(266 85% 58%) 100%);
+}
+.text-logo-gradient {
+  background-image: var(--gradient-logo);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bg-logo-gradient {
+  background-image: var(--gradient-logo);
+  color: hsl(0 0% 100%);
+}
+.border-logo-gradient {
+  border-color: hsl(215 90% 55%);
+}

@@ -23,7 +23,6 @@ const AUTO_SCROLL_CONFIG = {
 
 const services = [
   {
-    emoji: '🌐',
     title: 'Web Development',
     description: 'Modern, responsive websites that drive conversions and establish your digital presence.',
     features: ['SEO-optimized', 'Mobile-responsive', 'Fast loading', 'Modern tech stack'],
@@ -42,7 +41,6 @@ const services = [
     backgroundImage: serviceWebDevelopment
   },
   {
-    emoji: '📱',
     title: 'Mobile App Development',
     description: 'Native and cross-platform mobile applications that deliver exceptional user experiences.',
     features: ['iOS & Android', 'Cloud integration', 'Real-time', 'Scalable'],
@@ -61,7 +59,6 @@ const services = [
     backgroundImage: serviceAppDevelopment
   },
   {
-    emoji: '📊',
     title: 'Meta Ads Management',
     description: 'Strategic Meta advertising campaigns that maximize ROI and reach your target audience.',
     features: ['Campaign strategy', 'Audience targeting', 'Performance optimization', 'Monthly reporting'],
@@ -287,7 +284,6 @@ export const ServiceCarousel = () => {
             {services.map((service, index) => (
               <div key={service.title} data-card>
                 <ServiceCard
-                  emoji={service.emoji}
                   accentIcon={service.accentIcon}
                   title={service.title}
                   description={service.description}
@@ -357,7 +353,7 @@ export const ServiceCarousel = () => {
               <DialogHeader>
                 <div className="flex items-center gap-4">
                   <div className={`w-16 h-16 ${selectedService.color} rounded-xl flex items-center justify-center`}>
-                    <span className="text-3xl">{selectedService.emoji}</span>
+                    <selectedService.accentIcon className="w-8 h-8" />
                   </div>
                   <div>
                     <DialogTitle className="text-2xl">{selectedService.title}</DialogTitle>
