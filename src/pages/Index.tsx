@@ -6,6 +6,7 @@ import { ProjectsPreviewSection } from "@/components/home/ProjectsPreviewSection
 import { ClientLogosSection } from "@/components/home/ClientLogosSection";
 import { FAQSection } from "@/components/home/FAQSection";
 import { CTASection } from "@/components/home/CTASection";
+import { ProductSection } from "@/components/home/ProductSection";
 import { SEO, getOrganizationSchema, getLocalBusinessSchema, getFAQSchema } from "@/components/common/SEO";
 
 const homepageFaqs = [
