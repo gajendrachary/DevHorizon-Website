@@ -55,6 +55,7 @@ const Index = () => {
       <ClientLogosSection />
       <div className="cv-auto"><CTASection /></div>
       <div className="cv-auto"><ServicesSection /></div>
+      <div className="cv-auto"><ProductSection /></div>
       <div className="cv-auto"><StatsSection /></div>
       <div className="cv-auto"><ProjectsPreviewSection /></div>
       <div className="cv-auto"><FAQSection /></div>
