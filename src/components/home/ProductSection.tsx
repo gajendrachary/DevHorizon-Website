@@ -21,10 +21,12 @@ export const ProductSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-10"
         >
-          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-3">
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-logo-gradient mb-3">
             Our Product
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">HorizonHire</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-logo-gradient inline-block">
+            HorizonHire
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Our in-house hiring platform that helps companies post roles, manage applications and hire
             faster — designed and built by DevHorizon Technologies.
