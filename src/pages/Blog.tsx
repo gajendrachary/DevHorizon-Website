@@ -396,7 +396,6 @@ const Blog = () => {
                       : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                   }`}
                 >
-                  <span>{categoryEmojis[category]}</span>
                   {category}
                 </button>
               ))}
@@ -703,7 +702,6 @@ const BlogCard = ({ post, index, isInView, parallaxOffset }: BlogCardProps) => {
           
           <div className="p-6 relative z-10">
             <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-2 flex items-center gap-2">
-              <span>{categoryEmojis[post.category]}</span>
               {post.category}
             </span>
             <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors duration-200">
