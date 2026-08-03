@@ -621,7 +621,7 @@ const ProjectCarousel = ({
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             {title}{" "}
-            <span className="text-primary relative">
+            <span className="text-foreground relative">
               {subtitle}
               <motion.span
                 className="absolute -bottom-2 left-0 w-full h-1 bg-primary/30 rounded-full"
@@ -853,7 +853,7 @@ const Projects = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               Projects That Define{" "}
-              <span className="text-primary relative">
+              <span className="text-foreground relative">
                 Excellence
                 <motion.span
                   className="absolute -bottom-2 left-0 w-full h-1 bg-primary/30 rounded-full"

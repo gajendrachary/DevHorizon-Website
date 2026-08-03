@@ -309,7 +309,7 @@ const About = () => {
             >
               {stats.map((stat, index) => (
                 <div key={stat.label} className="bg-secondary/50 p-6 text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
+                  <div className="text-3xl font-bold text-foreground mb-2">{stat.value}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
@@ -392,7 +392,7 @@ const About = () => {
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-primary/30 to-primary/5 flex items-center justify-center">
-                            <span className="text-4xl font-bold text-primary">
+                            <span className="text-4xl font-bold text-foreground">
                               {member.name.charAt(0)}
                             </span>
                           </div>
