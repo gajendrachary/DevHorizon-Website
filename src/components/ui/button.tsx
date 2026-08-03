@@ -16,13 +16,13 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         // Hero button variants
-        hero: "bg-black text-white border border-black hover:bg-black/90 hover:scale-[1.03] shadow-soft hover:shadow-medium font-bold",
-        heroOutline: "bg-black text-white border-2 border-black hover:bg-black/90 hover:scale-[1.02]",
+        hero: "bg-logo-gradient text-white border-0 hover:opacity-90 hover:scale-[1.03] shadow-soft hover:shadow-medium font-bold",
+        heroOutline: "bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground hover:scale-[1.02]",
         // CTA buttons
-        cta: "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.03] pulse-glow",
+        cta: "bg-logo-gradient text-white border-0 hover:opacity-90 hover:scale-[1.03] pulse-glow",
         ctaOutline: "border-2 border-primary-foreground bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary hover:scale-[1.02]",
         // Dark theme buttons (for footer/dark sections)
-        dark: "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02]",
+        dark: "bg-logo-gradient text-white border-0 hover:opacity-90 hover:scale-[1.02]",
         darkOutline: "border border-primary-foreground/30 bg-transparent text-primary-foreground/90 hover:border-primary-foreground hover:text-primary-foreground hover:scale-[1.02]",
       },
       size: {
