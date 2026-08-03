@@ -453,7 +453,7 @@ const Blog = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Latest{' '}
-              <span className="text-primary relative">
+              <span className="text-foreground relative">
                 Articles
                 <motion.span
                   className="absolute -bottom-2 left-0 w-full h-1 bg-primary/30 rounded-full"

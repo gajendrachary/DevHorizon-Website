@@ -256,7 +256,7 @@ const Reviews = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-4xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-4xl font-bold text-foreground mb-2">{stat.value}</div>
                 <div className="text-muted-foreground">{stat.label}</div>
               </motion.div>
             ))}

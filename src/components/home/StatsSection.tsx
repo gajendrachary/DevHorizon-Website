@@ -45,7 +45,7 @@ const StatItem = ({
         {/* Glow effect */}
         <motion.div className="absolute -inset-4 bg-primary/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <motion.div
-          className="text-4xl md:text-5xl font-bold text-primary mb-2 counter-animate relative"
+          className="text-4xl md:text-5xl font-bold text-foreground mb-2 counter-animate relative"
           initial={{ scale: 0.5 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
