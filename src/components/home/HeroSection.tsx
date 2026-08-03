@@ -34,13 +34,10 @@ const backgroundImages = [{
   alt: 'Digital marketing analytics and campaigns'
 }];
 const serviceIcons = [{
-  emoji: '🌐',
   label: 'Web Development'
 }, {
-  emoji: '📱',
   label: 'Mobile Apps'
 }, {
-  emoji: '📊',
   label: 'Meta Ads'
 }];
 const containerVariants = {
@@ -368,29 +365,7 @@ export const HeroSection = () => {
               perspective: '1000px',
               transformStyle: 'preserve-3d'
             }}>
-                  <motion.span className="text-3xl" style={{
-                transformStyle: 'preserve-3d',
-                filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
-              }} whileHover={{
-                rotateY: 20,
-                rotateX: -15,
-                scale: 1.2,
-                filter: 'drop-shadow(0 0 20px hsl(var(--primary) / 0.7)) drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
-              }} whileTap={{
-                scale: 1.15,
-                filter: 'drop-shadow(0 0 15px hsl(var(--primary) / 0.6)) drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
-              }} animate={{
-                rotateY: [0, 5, -5, 0],
-                rotateX: [0, -3, 3, 0]
-              }} transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: index * 0.3
-              }}>
-                    {service.emoji}
-                  </motion.span>
-                  <span className="hidden sm:block font-bold">{service.label}</span>
+                  <span className="font-bold">{service.label}</span>
                 </motion.div>)}
             </motion.div>
           </motion.div>

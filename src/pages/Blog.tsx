@@ -37,14 +37,6 @@ const ANIMATION_CONFIG = {
   },
 };
 
-const categoryEmojis: Record<string, string> = {
-  'Technology': '💻',
-  'Mobile': '📱',
-  'Marketing': '📊',
-  'Design': '🎨',
-  'All': '✨',
-};
-
 const categories = ['All', 'Technology', 'Mobile', 'Marketing', 'Design'];
 
 const blogPosts = [
@@ -328,21 +320,14 @@ const Blog = () => {
                       loading="lazy"
                     />
                   ) : (
-                    <motion.span
-                      className="text-8xl"
-                      animate={{ y: [0, -10, 0], rotate: [-5, 5, -5] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      {categoryEmojis[featuredPost.category] || '📝'}
-                    </motion.span>
+                    <span className="text-6xl font-bold text-muted-foreground/20">{featuredPost.category}</span>
                   )}
                   <div className="absolute top-4 left-4 px-3 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full">
-                    ⭐ Featured
+                    Featured
                   </div>
                 </div>
                 <div className="p-8 lg:p-12 flex flex-col justify-center">
                   <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <span>{categoryEmojis[featuredPost.category]}</span>
                     {featuredPost.category}
                   </span>
                   <h2 className="text-2xl md:text-3xl font-bold mb-4">
@@ -602,13 +587,6 @@ const Blog = () => {
             transition={{ duration: 0.5 }}
             className="max-w-xl mx-auto text-center"
           >
-            <motion.span 
-              className="text-5xl block mb-4"
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              📬
-            </motion.span>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Subscribe to Our Newsletter
             </h2>
@@ -711,17 +689,7 @@ const BlogCard = ({ post, index, isInView, parallaxOffset }: BlogCardProps) => {
           {/* Accent Corner */}
           <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[80px] opacity-50" />
 
-          {/* Floating Emoji */}
-          <motion.div
-            className="absolute top-4 right-4 text-4xl z-10"
-            animate={{
-              y: isHovered ? [-2, 2, -2] : 0,
-              rotate: isHovered ? [0, 10, -10, 0] : 0,
-            }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            {categoryEmojis[post.category] || '📝'}
-          </motion.div>
+          
 
           <div className="bg-secondary/50 h-40 flex items-center justify-center relative overflow-hidden">
             <motion.span 

@@ -178,7 +178,7 @@ const AdminDashboard = () => {
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-3xl font-bold mb-1">📊 Admin Dashboard</h1>
+              <h1 className="text-3xl font-bold mb-1">Admin Dashboard</h1>
               <p className="text-muted-foreground">Manage client form submissions</p>
             </div>
             <div className="flex items-center gap-3">
