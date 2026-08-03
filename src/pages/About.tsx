@@ -39,25 +39,21 @@ const techStack = [
   {
     category: "Frontend",
     icon: Globe,
-    emoji: "🌐",
     technologies: ["React.js", "Vue.js", "Next.js", "TypeScript", "Tailwind CSS"],
   },
   {
     category: "Mobile",
     icon: Smartphone,
-    emoji: "📱",
     technologies: ["iOS (Swift)", "Android (Kotlin)", "React Native", "Firebase"],
   },
   {
     category: "Backend & Cloud",
     icon: Server,
-    emoji: "⚙️",
     technologies: ["Node.js", "Python", "Django", "AWS", "GCP"],
   },
   {
     category: "Design",
     icon: Palette,
-    emoji: "🎨",
     technologies: ["UI/UX", "Figma", "Prototyping", "Brand Identity"],
   },
 ];
@@ -93,12 +89,12 @@ const team = [
 ];
 
 const values = [
-  { icon: Target, emoji: "🎯", title: "Innovation", description: "Pushing boundaries with cutting-edge solutions" },
-  { icon: Trophy, emoji: "🏆", title: "Excellence", description: "Delivering nothing but the best quality" },
-  { icon: Shield, emoji: "🛡️", title: "Integrity", description: "Honest and transparent in all dealings" },
-  { icon: Users, emoji: "👥", title: "Reliability", description: "Dependable partnerships you can count on" },
-  { icon: Handshake, emoji: "🤝", title: "Collaboration", description: "Working together for shared success" },
-  { icon: Leaf, emoji: "🌱", title: "Sustainability", description: "Building for long-term growth" },
+  { icon: Target, title: "Innovation", description: "Pushing boundaries with cutting-edge solutions" },
+  { icon: Trophy, title: "Excellence", description: "Delivering nothing but the best quality" },
+  { icon: Shield, title: "Integrity", description: "Honest and transparent in all dealings" },
+  { icon: Users, title: "Reliability", description: "Dependable partnerships you can count on" },
+  { icon: Handshake, title: "Collaboration", description: "Working together for shared success" },
+  { icon: Leaf, title: "Sustainability", description: "Building for long-term growth" },
 ];
 
 const stats = [
@@ -520,9 +516,9 @@ const About = () => {
               style={{ perspective: "1000px" }}
             >
               <div className="relative bg-card border border-border p-8 h-full overflow-hidden group rounded-xl">
-                {/* 3D Emoji */}
+                
                 <div className="absolute top-4 right-4 text-4xl transform group-hover:scale-110 transition-transform duration-300">
-                  {stack.emoji}
+                  <stack.icon className="w-7 h-7 text-primary" />
                 </div>
 
                 {/* Gradient overlay */}
@@ -626,9 +622,9 @@ const About = () => {
               style={{ perspective: "1000px" }}
             >
               <div className="relative bg-card border border-border p-8 h-full overflow-hidden group rounded-xl">
-                {/* 3D Emoji */}
+                
                 <div className="absolute top-4 right-4 text-4xl transform group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300">
-                  {value.emoji}
+                  <value.icon className="w-7 h-7 text-primary" />
                 </div>
 
                 {/* Gradient overlay */}

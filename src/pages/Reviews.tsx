@@ -18,7 +18,6 @@ const reviews = [
     rating: 5,
     review:
       "DevHub transformed our tea shop's online presence completely. The website they built captures our brand essence perfectly, and we've seen a significant increase in online orders since launch.",
-    emoji: "☕",
   },
   {
     name: "Priya Sharma",
@@ -26,7 +25,6 @@ const reviews = [
     rating: 5,
     review:
       "Working with DevHub was an absolute pleasure. They understood our handcraft business and created a beautiful e-commerce platform that our customers love. The payment integration works flawlessly.",
-    emoji: "🎨",
   },
   {
     name: "Mohammed Ali",
@@ -34,7 +32,6 @@ const reviews = [
     rating: 5,
     review:
       "The mobile app DevHorizon Technologies Private Limited developed for our taxi service is exceptional. Real-time tracking, seamless payments, and great user experience. Our booking rates have increased by 40% since launch.",
-    emoji: "🚕",
   },
   {
     name: "Anitha Reddy",
@@ -42,7 +39,6 @@ const reviews = [
     rating: 5,
     review:
       "DevHorizon delivered beyond our expectations. The subscription system they built for our healthy food delivery service works perfectly. Their ongoing support has been invaluable.",
-    emoji: "🥗",
   },
   {
     name: "Venkat Rao",
@@ -50,7 +46,6 @@ const reviews = [
     rating: 5,
     review:
       "Professional, responsive, and technically excellent. DevHorizon created a comprehensive product catalog website that has helped us reach customers across South India. Highly recommended!",
-    emoji: "🏺",
   },
   {
     name: "Sarah Mitchell",
@@ -58,14 +53,13 @@ const reviews = [
     rating: 5,
     review:
       "As an international client, I was impressed by DevHorizon's communication and professionalism. They delivered our web application on time and within budget. Great experience working with them.",
-    emoji: "🌍",
   },
 ];
 
 const stats = [
-  { value: "20+", label: "Projects Completed", emoji: "🚀" },
-  { value: "95%", label: "Client Satisfaction", emoji: "⭐" },
-  { value: "24/7", label: "Support Available", emoji: "💬" },
+  { value: "20+", label: "Projects Completed" },
+  { value: "95%", label: "Client Satisfaction" },
+  { value: "24/7", label: "Support Available" },
 ];
 
 const Reviews = () => {
@@ -262,13 +256,6 @@ const Reviews = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-center"
               >
-                <motion.span
-                  className="text-4xl block mb-2"
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
-                >
-                  {stat.emoji}
-                </motion.span>
                 <div className="text-4xl font-bold text-primary mb-2">{stat.value}</div>
                 <div className="text-muted-foreground">{stat.label}</div>
               </motion.div>
@@ -325,13 +312,6 @@ const ReviewCard = ({
         <div className="absolute top-6 right-6 text-muted-foreground/20">
           <Quote className="w-10 h-10" />
         </div>
-        <motion.div
-          className="absolute top-4 left-4 text-3xl"
-          animate={{ y: isHovered ? [-2, 2, -2] : 0 }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          {review.emoji}
-        </motion.div>
         <div className="flex gap-1 mb-4 mt-8">
           {[...Array(review.rating)].map((_, i) => (
             <Star key={i} className="w-4 h-4 fill-primary text-primary" />

@@ -58,35 +58,30 @@ const ANIMATION_CONFIG = {
 
 const services = [{
   id: 'web',
-  emoji: '🌐',
   accentIcon: Sparkles,
   name: 'Web Development',
   description: 'Custom websites & web apps',
   timeline: '1-2 weeks'
 }, {
   id: 'mobile',
-  emoji: '📱',
   accentIcon: Zap,
   name: 'Mobile App Development',
   description: 'iOS & Android apps',
   timeline: '2-4 weeks'
 }, {
   id: 'ads',
-  emoji: '📊',
   accentIcon: Target,
   name: 'Meta Ads Management',
   description: 'Facebook & Instagram ads',
   timeline: 'Monthly'
 }, {
   id: 'design',
-  emoji: '🎨',
   accentIcon: PaletteIcon,
   name: 'UI/UX Design',
   description: 'User interface design',
   timeline: '1-2 weeks'
 }, {
   id: 'cloud',
-  emoji: '☁️',
   accentIcon: CloudIcon,
   name: 'Cloud Solutions',
   description: 'Cloud infrastructure',
@@ -94,28 +89,24 @@ const services = [{
 }];
 const timelines = [{
   id: 'urgent',
-  emoji: '⚡',
   accentIcon: Zap,
   label: 'Urgent',
   description: '< 1 week',
   multiplier: 1.5
 }, {
   id: 'fast',
-  emoji: '🚀',
   accentIcon: Sparkles,
   label: 'Fast',
   description: '1-2 weeks',
   multiplier: 1.25
 }, {
   id: 'standard',
-  emoji: '⏰',
   accentIcon: Clock,
   label: 'Standard',
   description: '2-3 weeks',
   multiplier: 1
 }, {
   id: 'flexible',
-  emoji: '🌿',
   accentIcon: CloudIcon,
   label: 'Flexible',
   description: '4+ weeks',
@@ -391,7 +382,7 @@ const GetQuote = () => {
                             whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
                             transition={{ duration: 0.3 }}
                           >
-                            <span className="text-3xl">{service.emoji}</span>
+                            <service.accentIcon className="w-7 h-7" />
                             {isSelected && (
                               <motion.div
                                 className="absolute inset-0 rounded-xl bg-primary/30"
@@ -441,11 +432,11 @@ const GetQuote = () => {
               opacity: 1
             }}>
                   <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                    <span className="text-2xl">📅</span> Timeline & Budget
+                    Timeline & Budget
                   </h2>
                   <div className="mb-8">
                     <h3 className="font-medium mb-4 flex items-center gap-2">
-                      <span className="text-lg">⏱️</span> Project Timeline
+                      Project Timeline
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       {timelines.map((t, index) => {
@@ -504,7 +495,7 @@ const GetQuote = () => {
                               whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
                               transition={{ duration: 0.3 }}
                             >
-                              <span className="text-3xl">{t.emoji}</span>
+                              <t.accentIcon className="w-7 h-7" />
                               {isSelected && (
                                 <motion.div
                                   className="absolute inset-0 rounded-full bg-primary/20"
@@ -558,8 +549,7 @@ const GetQuote = () => {
                     <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[60px] opacity-50" />
                     
                     <h3 className="font-medium mb-4 flex items-center gap-2">
-                      <span className="text-2xl">💰</span> 
-                      <span>Budget Range:</span>
+                                            <span>Budget Range:</span>
                       <span className="text-primary font-bold">₹{budget.toLocaleString()}</span>
                     </h3>
                     <input 
@@ -572,8 +562,8 @@ const GetQuote = () => {
                       className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
                     />
                     <div className="flex justify-between text-sm text-muted-foreground mt-3">
-                      <span className="flex items-center gap-1">💵 ₹30,000</span>
-                      <span className="flex items-center gap-1">💎 ₹5,00,000+</span>
+                      <span>₹30,000</span>
+                      <span>₹5,00,000+</span>
                     </div>
                   </motion.div>
                 </motion.div>}
@@ -585,7 +575,7 @@ const GetQuote = () => {
               opacity: 1
             }}>
                   <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                    <span className="text-2xl">📋</span> Contact Details
+                    Contact Details
                   </h2>
                   <div className="grid gap-4">
                     {/* Personal Info Section */}
@@ -603,7 +593,7 @@ const GetQuote = () => {
                       <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[50px] opacity-50" />
                       
                       <h3 className="font-medium mb-4 flex items-center gap-2 text-sm text-muted-foreground">
-                        <span className="text-lg">👤</span> Personal Information
+                        Personal Information
                       </h3>
                       <div className="grid md:grid-cols-2 gap-4">
                         <motion.div
@@ -655,7 +645,7 @@ const GetQuote = () => {
                       <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-accent/10 to-transparent rounded-bl-[50px] opacity-50" />
                       
                       <h3 className="font-medium mb-4 flex items-center gap-2 text-sm text-muted-foreground">
-                        <span className="text-lg">📧</span> Contact Information
+                        Contact Information
                       </h3>
                       <div className="grid md:grid-cols-2 gap-4">
                         <motion.div
@@ -707,7 +697,7 @@ const GetQuote = () => {
                       <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[50px] opacity-50" />
                       
                       <h3 className="font-medium mb-4 flex items-center gap-2 text-sm text-muted-foreground">
-                        <span className="text-lg">💬</span> Project Details
+                        Project Details
                       </h3>
                       <motion.div
                         whileHover={{ scale: 1.005 }}
