@@ -44,7 +44,7 @@ export const ProductSection = () => {
               whileHover={{ y: -6 }}
               className="rounded-lg border border-border bg-card p-6 shadow-soft"
             >
-              <item.icon className="w-8 h-8 text-primary mb-4" />
+              <span className="inline-flex w-12 h-12 items-center justify-center rounded-xl bg-logo-gradient mb-4"><item.icon className="w-6 h-6" /></span>
               <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
             </motion.div>
@@ -58,7 +58,7 @@ export const ProductSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex justify-center"
         >
-          <Button asChild variant="hero" size="xl">
+          <Button asChild size="xl" className="bg-logo-gradient hover:opacity-90 border-0">
             <a
               href={PRODUCT_URL}
               target="_blank"
