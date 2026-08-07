@@ -5,34 +5,14 @@ import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// Hero Section Images - SET 1
-import heroWebDev1 from '@/assets/hero-web-dev-1.jpg';
-import heroWebDev2 from '@/assets/hero-web-dev-2.jpg';
-import heroAppDev1 from '@/assets/hero-app-dev-1.jpg';
-import heroAppDev2 from '@/assets/hero-app-dev-2.jpg';
-import heroMetaAds1 from '@/assets/hero-meta-ads-1.jpg';
-import heroMetaAds2 from '@/assets/hero-meta-ads-2.jpg';
+// Hero Section Background
+import heroBrandBg from '@/assets/hero-brand-bg.png.asset.json';
 
-// All 6 hero images - optimized for both mobile (9:16) and desktop
 const backgroundImages = [{
-  src: heroWebDev1,
-  alt: 'Web development workspace with multiple monitors'
-}, {
-  src: heroWebDev2,
-  alt: 'Developer coding with syntax highlighting'
-}, {
-  src: heroAppDev1,
-  alt: 'Mobile app development with device testing'
-}, {
-  src: heroAppDev2,
-  alt: 'Cross-platform app development workflow'
-}, {
-  src: heroMetaAds1,
-  alt: 'Analytics dashboard with marketing metrics'
-}, {
-  src: heroMetaAds2,
-  alt: 'Digital marketing analytics and campaigns'
+  src: heroBrandBg.url,
+  alt: 'DevHorizon Technologies brand mark with circuit artwork'
 }];
+
 const serviceIcons = [{
   label: 'Web Development'
 }, {
@@ -175,9 +155,9 @@ export const HeroSection = () => {
 
         </AnimatePresence>
         {/* Carousel indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+        {backgroundImages.length > 1 && <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
           {backgroundImages.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'bg-primary w-8' : 'bg-foreground/30 hover:bg-foreground/50'}`} aria-label={`Go to slide ${index + 1}`} />)}
-        </div>
+        </div>}
         {/* Lighter overlay for better image visibility */}
         <div className="absolute inset-0 bg-background/20" />
       </div>

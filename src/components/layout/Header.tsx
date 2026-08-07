@@ -94,7 +94,7 @@ export const Header = () => {
             whileHover={{ rotate: [0, -5, 5, 0] }}
             transition={{ duration: 0.4 }}
           />
-          <span className="font-poppins font-bold text-2xl tracking-tight group-hover:text-primary transition-colors duration-200">DevHorizon</span>
+          <span className="font-poppins font-bold text-2xl tracking-tight text-logo-gradient transition-opacity duration-200 group-hover:opacity-80">DevHorizon</span>
         </Link>
 
         {/* Desktop Navigation */}
