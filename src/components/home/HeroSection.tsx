@@ -233,23 +233,8 @@ export const HeroSection = () => {
     }}>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           <motion.div className="max-w-2xl" variants={containerVariants} initial="hidden" animate="visible">
-            {/* Badge */}
-            <motion.div variants={itemVariants} className="flex flex-col items-start gap-1 mb-6">
-              <span className="text-xl md:text-2xl font-bold text-foreground drop-shadow-[0_2px_10px_rgba(255,255,255,0.9)]">
-                DevHorizon Technologies Private Limited
-              </span>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-sm font-medium text-primary-foreground">
-                •Est. 2025
-                <motion.span className="w-2 h-2 bg-primary rounded-full" animate={{
-                scale: [1, 1.5, 1],
-                opacity: [1, 0.7, 1]
-              }} transition={{
-                duration: 1.5,
-                repeat: Infinity
-              }} />
-                Bengaluru, India
-              </div>
-            </motion.div>
+
+
 
             {/* Headline with smooth fade animation */}
             <motion.h1
