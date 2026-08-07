@@ -5,34 +5,14 @@ import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// Hero Section Images - SET 1
-import heroWebDev1 from '@/assets/hero-web-dev-1.jpg';
-import heroWebDev2 from '@/assets/hero-web-dev-2.jpg';
-import heroAppDev1 from '@/assets/hero-app-dev-1.jpg';
-import heroAppDev2 from '@/assets/hero-app-dev-2.jpg';
-import heroMetaAds1 from '@/assets/hero-meta-ads-1.jpg';
-import heroMetaAds2 from '@/assets/hero-meta-ads-2.jpg';
+// Hero Section Background
+import heroBrandBg from '@/assets/hero-brand-bg.png.asset.json';
 
-// All 6 hero images - optimized for both mobile (9:16) and desktop
 const backgroundImages = [{
-  src: heroWebDev1,
-  alt: 'Web development workspace with multiple monitors'
-}, {
-  src: heroWebDev2,
-  alt: 'Developer coding with syntax highlighting'
-}, {
-  src: heroAppDev1,
-  alt: 'Mobile app development with device testing'
-}, {
-  src: heroAppDev2,
-  alt: 'Cross-platform app development workflow'
-}, {
-  src: heroMetaAds1,
-  alt: 'Analytics dashboard with marketing metrics'
-}, {
-  src: heroMetaAds2,
-  alt: 'Digital marketing analytics and campaigns'
+  src: heroBrandBg.url,
+  alt: 'DevHorizon Technologies brand mark with circuit artwork'
 }];
+
 const serviceIcons = [{
   label: 'Web Development'
 }, {
