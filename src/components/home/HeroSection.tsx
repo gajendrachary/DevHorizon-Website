@@ -155,9 +155,9 @@ export const HeroSection = () => {
 
         </AnimatePresence>
         {/* Carousel indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+        {backgroundImages.length > 1 && <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
           {backgroundImages.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'bg-primary w-8' : 'bg-foreground/30 hover:bg-foreground/50'}`} aria-label={`Go to slide ${index + 1}`} />)}
-        </div>
+        </div>}
         {/* Lighter overlay for better image visibility */}
         <div className="absolute inset-0 bg-background/20" />
       </div>
