@@ -181,33 +181,6 @@ export const ServiceCard = ({
           {timeline}
         </motion.div>
 
-        {/* Floating Accent Icon */}
-        <motion.div
-          className="absolute top-16 right-4 text-primary/10"
-          animate={{
-            y: [0, -8, 0],
-            rotate: [0, 10, -10, 0],
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <AccentIcon className="w-8 h-8" />
-        </motion.div>
-
-        {/* Emoji Icon */}
-        <motion.div
-          className={`relative w-16 h-16 ${color} flex items-center justify-center mb-6 rounded-xl`}
-          whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-          transition={{ duration: 0.4 }}
-          style={{ transformStyle: 'preserve-3d', translateZ: 20 }}
-        >
-          <AccentIcon className="w-8 h-8 text-primary" />
-          <motion.div
-            className="absolute inset-0 rounded-xl bg-primary/20"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={isHovered ? { scale: 1.5, opacity: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          />
-        </motion.div>
 
         {/* Content */}
         <motion.h3 

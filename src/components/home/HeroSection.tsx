@@ -162,7 +162,7 @@ export const HeroSection = () => {
             scale: 1.1
           }}
           animate={{
-            opacity: 0.75,
+            opacity: 1,
             scale: 1
           }}
           exit={{
@@ -179,7 +179,7 @@ export const HeroSection = () => {
           {backgroundImages.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'bg-primary w-8' : 'bg-foreground/30 hover:bg-foreground/50'}`} aria-label={`Go to slide ${index + 1}`} />)}
         </div>
         {/* Lighter overlay for better image visibility */}
-        <div className="absolute inset-0 bg-secondary/60" />
+        <div className="absolute inset-0 bg-background/20" />
       </div>
 
       {/* Floating Particles */}
@@ -235,7 +235,7 @@ export const HeroSection = () => {
           <motion.div className="max-w-2xl" variants={containerVariants} initial="hidden" animate="visible">
             {/* Badge */}
             <motion.div variants={itemVariants} className="flex flex-col items-start gap-1 mb-6">
-              <span className="text-xl md:text-2xl font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+              <span className="text-xl md:text-2xl font-bold text-foreground drop-shadow-[0_2px_10px_rgba(255,255,255,0.9)]">
                 DevHorizon Technologies Private Limited
               </span>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-sm font-medium text-primary-foreground">
@@ -254,7 +254,7 @@ export const HeroSection = () => {
             {/* Headline with smooth fade animation */}
             <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-mono text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-mono text-foreground drop-shadow-[0_2px_10px_rgba(255,255,255,0.9)]">
 
               <motion.span
               className="tracking-tight inline-block"
@@ -265,7 +265,7 @@ export const HeroSection = () => {
                 {fullText}
               </motion.span>
               <motion.span
-              className="inline-block tracking-tight text-white"
+              className="inline-block tracking-tight text-foreground"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}>
@@ -275,12 +275,12 @@ export const HeroSection = () => {
             </motion.h1>
 
             {/* Subheading */}
-            <motion.p variants={itemVariants} className="text-lg mb-4 font-medium text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
+            <motion.p variants={itemVariants} className="text-lg mb-4 font-medium text-foreground drop-shadow-[0_2px_8px_rgba(255,255,255,0.9)]">
               Custom Websites • Mobile Apps • Meta Ads Management • Strategic Growth Solutions
             </motion.p>
 
             {/* Description */}
-            <motion.p variants={itemVariants} className="mb-8 leading-relaxed text-white/90 drop-shadow-[0_0_6px_rgba(255,255,255,0.3)]">
+            <motion.p variants={itemVariants} className="mb-8 leading-relaxed text-foreground/90 drop-shadow-[0_2px_6px_rgba(255,255,255,0.9)]">
               DevHorizon Technologies Private Limited is a full-service digital company specializing in crafting exceptional digital experiences. We help businesses establish a powerful online presence and drive measurable growth through innovative technology solutions.
             
 
@@ -361,7 +361,7 @@ export const HeroSection = () => {
             }} whileTap={{
               scale: 1.1,
               y: -4
-            }} className="flex items-center gap-2 text-sm text-white cursor-pointer" style={{
+            }} className="flex items-center gap-2 text-sm text-foreground cursor-pointer" style={{
               perspective: '1000px',
               transformStyle: 'preserve-3d'
             }}>
