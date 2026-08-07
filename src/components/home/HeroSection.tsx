@@ -126,14 +126,14 @@ export const HeroSection = () => {
   return <section ref={sectionRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Background Image Carousel with Crossfade */}
       <div className="absolute inset-0 z-0 overflow-hidden" style={{
-      backgroundColor: "#1a1a1a"
+      backgroundColor: "#fbfbfe"
     }}>
         <AnimatePresence mode="sync">
           <motion.img
           key={safeImageIndex}
           src={currentImage.src}
           alt={currentImage.alt}
-          className="absolute inset-0 w-full h-full object-cover object-top sm:object-center"
+          className="absolute inset-0 w-full h-full object-contain object-top sm:object-cover sm:object-center"
           loading={safeImageIndex === 0 ? "eager" : "lazy"}
           decoding="async"
           {...({ fetchpriority: safeImageIndex === 0 ? "high" : "low" } as any)}
