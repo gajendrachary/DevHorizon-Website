@@ -282,7 +282,7 @@ export const ServiceCarousel = () => {
             <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:hidden" />
             
             {services.map((service, index) => (
-              <div key={service.title} data-card>
+              <div key={service.title} data-card className="flex-shrink-0">
                 <ServiceCard
                   accentIcon={service.accentIcon}
                   title={service.title}
