@@ -18,7 +18,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Careers from "./pages/Careers";
 import CareersAdmin from "./pages/CareersAdmin";
 import CareersAbout from "./pages/careers/About";
-import CareersOpenings from "./pages/careers/Openings";
+
 import CareersWhyJoin from "./pages/careers/WhyJoinPage";
 import CareersProcess from "./pages/careers/ProcessPage";
 import CareersResumeTips from "./pages/careers/ResumeTipsPage";
