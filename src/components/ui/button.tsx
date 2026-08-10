@@ -16,13 +16,13 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         // Hero button variants
-        hero: "bg-primary text-primary-foreground border-0 hover:bg-primary/90 hover:scale-[1.02] font-bold",
+        hero: "bg-logo-gradient text-primary-foreground border-0 hover:bg-primary/90 hover:scale-[1.02] font-bold",
         heroOutline: "bg-transparent text-foreground border border-border hover:border-primary hover:text-primary",
         // CTA buttons
-        cta: "bg-primary text-primary-foreground border-0 hover:bg-primary/90 hover:scale-[1.02]",
+        cta: "bg-logo-gradient text-primary-foreground border-0 hover:bg-primary/90 hover:scale-[1.02]",
         ctaOutline: "border border-foreground/25 bg-transparent text-foreground hover:border-primary hover:text-primary",
         // Dark section buttons
-        dark: "bg-primary text-primary-foreground border-0 hover:bg-primary/90",
+        dark: "bg-logo-gradient text-primary-foreground border-0 hover:bg-primary/90",
         darkOutline: "border border-foreground/25 bg-transparent text-foreground/90 hover:border-primary hover:text-primary",
       },
       size: {
