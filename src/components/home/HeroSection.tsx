@@ -104,7 +104,23 @@ export const HeroSection = () => {
               ))}
             </motion.div>
           </div>
+
+          {/* Brand mark — desktop only */}
+          <motion.div
+            variants={itemVariants}
+            className="hidden lg:flex items-center justify-center"
+            aria-hidden="true"
+          >
+            <img
+              src={devhorizonLogo.url}
+              alt=""
+              width={420}
+              height={420}
+              className="h-[22rem] w-[22rem] object-contain drop-shadow-[0_0_60px_hsl(var(--primary)/0.35)] xl:h-[26rem] xl:w-[26rem]"
+            />
+          </motion.div>
         </motion.div>
+
       </div>
     </section>
   );
