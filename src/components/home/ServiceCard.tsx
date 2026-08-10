@@ -85,7 +85,7 @@ export const ServiceCard = ({
 
   return (
     <motion.div
-      className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[400px] snap-center"
+      className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[400px] xl:w-[420px] snap-center"
       initial={{ 
         x: '100vw', 
         opacity: 0,
@@ -198,7 +198,7 @@ export const ServiceCard = ({
         </motion.p>
 
         {/* Features */}
-        <ul className="space-y-2.5">
+        <motion.ul className="relative z-10 space-y-2.5" style={{ transformStyle: 'preserve-3d', translateZ: 10 }}>
           {features.map((feature, featureIndex) => (
             <motion.li
               key={feature}
@@ -210,14 +210,15 @@ export const ServiceCard = ({
               <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-primary" />
               </div>
-              <span className="text-muted-foreground">{feature}</span>
+              <span className="text-foreground/90">{feature}</span>
             </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
         {/* Click Hint */}
         <motion.div
-          className="mt-6 text-xs text-primary font-medium"
+          className="relative z-10 mt-6 text-xs text-primary font-medium"
+          style={{ transformStyle: 'preserve-3d', translateZ: 10 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: isHovered || isTapped ? 1 : 0.6 }}
         >

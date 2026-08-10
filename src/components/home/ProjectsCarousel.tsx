@@ -396,7 +396,7 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
             onMouseLeave={handleMouseLeave}
             onTouchStart={autoTouchStart}
             onTouchEnd={autoTouchEnd}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 touch-pan-x"
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 lg:mx-0 lg:px-0 lg:justify-start touch-pan-x"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
@@ -404,10 +404,10 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
             }}
           >
             {/* Left spacer for centering first card */}
-            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
+            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:hidden" />
 
             {projects.map((project, index) => (
-              <div key={project.title} data-project-card>
+              <div key={project.title} data-project-card className="flex-shrink-0">
                 <ProjectCard
                   title={project.title}
                   category={project.category}
@@ -432,7 +432,7 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
 
 
             {/* Right spacer for centering last card */}
-            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
+            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:hidden" />
           </div>
 
           {/* Carousel Indicators with Direction */}
