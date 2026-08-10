@@ -51,10 +51,11 @@ export const HeroSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid gap-14"
+          className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_auto]"
         >
           {/* Copy */}
           <div className="max-w-2xl">
+
             <motion.span variants={itemVariants} className="eyebrow">
               Transforming Ideas
             </motion.span>
