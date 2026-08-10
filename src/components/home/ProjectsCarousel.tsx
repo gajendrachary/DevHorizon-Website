@@ -496,12 +496,7 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
             <Button asChild variant="outline" size="lg">
               <Link to="/projects" className="flex items-center gap-2">
                 View All Projects
-                <motion.span
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight className="w-4 h-4" />
-                </motion.span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
           </motion.div>
