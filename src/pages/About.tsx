@@ -559,7 +559,7 @@ const About = () => {
         </div>
 
         {/* Carousel Indicators */}
-        <div className="flex justify-center gap-2 mt-6">
+        <div className="flex lg:hidden justify-center gap-2 mt-6">
           {techStack.map((_, index) => (
             <button
               key={index}
@@ -654,7 +654,7 @@ const About = () => {
         </div>
 
         {/* Carousel Indicators */}
-        <div className="flex justify-center gap-2 mt-6">
+        <div className="flex lg:hidden justify-center gap-2 mt-6">
           {values.map((_, index) => (
             <button
               key={index}

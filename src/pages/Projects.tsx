@@ -700,7 +700,7 @@ const ProjectCarousel = ({
           </div>
 
           {/* Carousel Indicators with Direction */}
-          <div className="flex justify-center items-center gap-3 mt-6">
+          <div className="flex lg:hidden justify-center items-center gap-3 mt-6">
             <motion.button
               onClick={scrollPrev}
               disabled={activeIndex === 0}
