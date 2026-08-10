@@ -85,7 +85,7 @@ export const ServiceCard = ({
 
   return (
     <motion.div
-      className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[400px] snap-center"
+      className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[calc((100%-3rem)/3)] lg:min-w-0 lg:flex-1 snap-center"
       initial={{ 
         x: '100vw', 
         opacity: 0,
@@ -210,7 +210,7 @@ export const ServiceCard = ({
               <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Check className="w-3 h-3 text-primary" />
               </div>
-              <span className="text-muted-foreground">{feature}</span>
+              <span className="text-foreground/90">{feature}</span>
             </motion.li>
           ))}
         </ul>
