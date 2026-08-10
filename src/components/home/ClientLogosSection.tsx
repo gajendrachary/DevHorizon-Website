@@ -40,36 +40,35 @@ export const ClientLogosSection = () => {
   });
 
   return (
-    <section 
-      ref={ref} 
-      className="py-6 md:py-8 overflow-hidden"
-      style={{ backgroundColor: '#f5f5f5', borderTop: '1px solid #e0e0e0', borderBottom: '1px solid #e0e0e0' }}
+    <section
+      ref={ref}
+      className="py-10 md:py-14 overflow-hidden border-y border-border bg-secondary/40"
     >
       <div className="container-swiss">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center text-sm text-muted-foreground mb-8"
+          className="text-center eyebrow justify-center mb-8"
         >
-          Trusted by businesses across industries
+          [ Trusted by businesses across industries ]
         </motion.p>
       </div>
-      
+
       {/* Infinite Scroll Container */}
       <div className="relative group">
         {/* Left fade gradient */}
-        <div 
+        <div
           className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 lg:w-32 z-10 pointer-events-none"
-          style={{ background: 'linear-gradient(to right, #f5f5f5, transparent)' }}
+          style={{ background: 'linear-gradient(to right, hsl(var(--background)), transparent)' }}
         />
-        
+
         {/* Right fade gradient */}
-        <div 
+        <div
           className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 lg:w-32 z-10 pointer-events-none"
-          style={{ background: 'linear-gradient(to left, #f5f5f5, transparent)' }}
+          style={{ background: 'linear-gradient(to left, hsl(var(--background)), transparent)' }}
         />
-        
+
         <div 
           className="flex items-center animate-scroll-left hover:[animation-play-state:paused]"
           style={{ gap: '40px', width: 'max-content' }}
@@ -80,11 +79,12 @@ export const ClientLogosSection = () => {
               className="shrink-0 cursor-pointer transition-transform duration-300 hover:scale-110"
             >
               <div 
-                className="flex items-center justify-center overflow-hidden rounded-full bg-white shadow-md hover:shadow-xl transition-all duration-300
+                className="flex items-center justify-center overflow-hidden rounded-full border border-border bg-card transition-all duration-300
                   h-[60px] w-[60px]
                   sm:h-[80px] sm:w-[80px]
                   lg:h-[100px] lg:w-[100px]"
               >
+
                 <img 
                   src={client.logo} 
                   alt={client.name}

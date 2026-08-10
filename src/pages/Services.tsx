@@ -298,8 +298,9 @@ const Services = () => {
             transition={{ duration: 0.5 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-medium mb-6">
-              Our Services
+            <span className="eyebrow justify-center mb-6">
+              [ Our Services ]
+
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
               Solutions That Drive <span className="text-primary">Results</span>

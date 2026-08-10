@@ -839,12 +839,12 @@ const Projects = () => {
             className="text-center max-w-3xl mx-auto"
           >
             <motion.span
-              className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
+              className="eyebrow mb-4"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={headerInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Our Portfolio
+              [ Our Portfolio ]
             </motion.span>
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"

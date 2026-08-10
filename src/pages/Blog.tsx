@@ -285,8 +285,8 @@ const Blog = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              DevHorizon Technologies Private Limited Blog
+            <span className="eyebrow mb-4">
+              [ DevHorizon Technologies Private Limited Blog ]
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Insights & Updates

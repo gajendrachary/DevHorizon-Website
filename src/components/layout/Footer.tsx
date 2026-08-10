@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Github, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Linkedin, Github, Twitter, Instagram, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Button } from "@/components/ui/button";
 import devhubLogo from "@/assets/devhub-logo.png";
 
 const quickLinks = [
@@ -34,49 +35,64 @@ export const Footer = () => {
   });
 
   return (
-    <footer ref={ref} className="footer-dark">
+    <footer ref={ref} className="footer-dark lg:rounded-b-[2rem]">
       <div className="container-swiss section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+        {/* Top CTA strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="surface-card mb-16 flex flex-col gap-6 p-8 md:flex-row md:items-center md:justify-between md:p-10"
+        >
+          <div>
+            <span className="eyebrow">[ Let's Build ]</span>
+            <h2 className="mt-3 text-2xl md:text-3xl font-bold text-foreground">
+              Have a project in mind? Let's talk.
+            </h2>
+          </div>
+          <Button asChild variant="hero" size="lg" className="pl-7 pr-2 self-start md:self-auto">
+            <Link to="/get-quote" className="flex items-center gap-3">
+              Get a Quote
+              <span className="arrow-badge">
+                <ArrowUpRight className="w-4 h-4" />
+              </span>
+            </Link>
+          </Button>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand Column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-1"
           >
             <Link to="/" className="flex items-center gap-3 group mb-6">
-              <motion.img
+              <img
                 src={devhubLogo}
-                alt="DevHub Logo"
-                className="h-10 w-auto transition-all duration-300 group-hover:scale-110"
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                alt="DevHorizon Technologies logo"
+                className="h-10 w-auto transition-transform duration-300 group-hover:scale-105"
               />
-              <span className="font-poppins font-bold text-xl text-primary-foreground tracking-tight group-hover:text-primary transition-colors duration-200">
+              <span className="font-poppins font-bold text-lg text-foreground tracking-tight group-hover:text-primary transition-colors duration-200">
                 DevHorizon Technologies Private Limited
               </span>
             </Link>
-            <p className="text-sm leading-relaxed opacity-80 mb-6">
+            <p className="text-sm leading-relaxed text-muted-foreground mb-6">
               Transforming ideas into digital excellence. We build custom websites, mobile apps, and manage Meta ads to
               help businesses grow in the digital age.
             </p>
             <div className="flex gap-3">
-              {socialLinks.map((social, index) => (
-                <motion.a
+              {socialLinks.map((social) => (
+                <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-                  whileHover={{ scale: 1.15, rotate: 5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 border border-primary-foreground/20 flex items-center justify-center transition-all duration-200 hover:bg-primary hover:border-primary"
+                  className="w-10 h-10 rounded-full border border-border text-foreground/80 flex items-center justify-center transition-colors duration-200 hover:bg-primary hover:text-primary-foreground hover:border-primary"
                   aria-label={social.label}
                 >
                   <social.icon className="w-4 h-4" />
-                </motion.a>
+                </a>
               ))}
             </div>
           </motion.div>
@@ -87,25 +103,17 @@ export const Footer = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="font-semibold text-primary-foreground mb-6">Quick Links</h3>
+            <h3 className="eyebrow mb-6">[ Quick Links ]</h3>
             <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
-                <motion.li
-                  key={link.name}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
-                >
+              {quickLinks.map((link) => (
+                <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="text-sm opacity-80 transition-all duration-200 hover:opacity-100 hover:text-primary hover:translate-x-2 inline-block group"
+                    className="text-sm text-muted-foreground transition-colors duration-200 hover:text-primary"
                   >
-                    <span className="relative">
-                      {link.name}
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                    </span>
+                    {link.name}
                   </Link>
-                </motion.li>
+                </li>
               ))}
             </ul>
           </motion.div>
@@ -116,25 +124,17 @@ export const Footer = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="font-semibold text-primary-foreground mb-6">Services</h3>
+            <h3 className="eyebrow mb-6">[ Services ]</h3>
             <ul className="space-y-3">
-              {services.map((service, index) => (
-                <motion.li
-                  key={service.name}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-                >
+              {services.map((service) => (
+                <li key={service.name}>
                   <Link
                     to={service.path}
-                    className="text-sm opacity-80 transition-all duration-200 hover:opacity-100 hover:text-primary hover:translate-x-2 inline-block group"
+                    className="text-sm text-muted-foreground transition-colors duration-200 hover:text-primary"
                   >
-                    <span className="relative">
-                      {service.name}
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                    </span>
+                    {service.name}
                   </Link>
-                </motion.li>
+                </li>
               ))}
             </ul>
           </motion.div>
@@ -145,63 +145,52 @@ export const Footer = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h3 className="font-semibold text-primary-foreground mb-6">Contact</h3>
+            <h3 className="eyebrow mb-6">[ Contact ]</h3>
             <ul className="space-y-4">
-              <motion.li className="flex items-start gap-3" whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+              <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-0.5 text-primary shrink-0" />
-                <span className="text-sm opacity-80">
+                <span className="text-sm text-muted-foreground">
                   Vidyaranyapura, Bengaluru,
                   <br />
                   Karnataka, India
                 </span>
-              </motion.li>
-              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+              </li>
+              <li>
                 <a
                   href="mailto:info@devhorizontech.com"
-                  className="flex items-center gap-3 text-sm opacity-80 transition-all duration-200 hover:opacity-100 hover:text-primary"
+                  className="flex items-center gap-3 text-sm text-muted-foreground transition-colors duration-200 hover:text-primary"
                 >
                   <Mail className="w-5 h-5 text-primary shrink-0" />
                   info@devhorizontech.com
                 </a>
-              </motion.li>
-              <motion.li whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+              </li>
+              <li>
                 <a
                   href="tel:+918688097373"
-                  className="flex items-center gap-3 text-sm opacity-80 transition-all duration-200 hover:opacity-100 hover:text-primary"
+                  className="flex items-center gap-3 text-sm text-muted-foreground transition-colors duration-200 hover:text-primary"
                 >
                   <Phone className="w-5 h-5 text-primary shrink-0" />
                   +91 8688097373
                 </a>
-              </motion.li>
+              </li>
             </ul>
           </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-16 pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4"
-        >
-          <p className="text-sm opacity-60 text-center md:text-left">
+        <div className="mt-14 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground text-center md:text-left">
             © 2026 DevHorizon Technologies Private Limited. All rights reserved. We build your business
           </p>
           <div className="flex items-center gap-6">
-            <Link
-              to="/privacy"
-              className="text-sm opacity-60 transition-opacity duration-200 hover:opacity-100 hover:text-primary"
-            >
+            <Link to="/privacy" className="text-sm text-muted-foreground transition-colors duration-200 hover:text-primary">
               Privacy Policy
             </Link>
-            <Link
-              to="/privacy"
-              className="text-sm opacity-60 transition-opacity duration-200 hover:opacity-100 hover:text-primary"
-            >
+            <Link to="/privacy" className="text-sm text-muted-foreground transition-colors duration-200 hover:text-primary">
               Terms of Service
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

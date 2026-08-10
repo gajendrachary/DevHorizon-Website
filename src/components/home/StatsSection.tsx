@@ -84,12 +84,12 @@ export const StatsSection = () => {
           className="text-center max-w-2xl mx-auto mb-6"
         >
           <motion.span
-            className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
+            className="eyebrow mb-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            Why Choose DevHorizon Technologies
+            [ Why Choose DevHorizon Technologies ]
           </motion.span>
           <motion.h2
             className="text-3xl md:text-4xl font-bold"

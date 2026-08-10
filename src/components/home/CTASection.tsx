@@ -55,15 +55,16 @@ export const CTASection = () => {
             loading="lazy"
             decoding="async"
             initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 0.8, scale: 1 }}
+            animate={{ opacity: 0.45, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
           />
         </AnimatePresence>
       </div>
-      
-      {/* Light overlay for text readability */}
-      <div className="absolute inset-0 bg-black/40 z-[1]" />
+
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-background/70 z-[1]" />
+
 
       {/* Animated background elements */}
       <motion.div 
@@ -90,16 +91,17 @@ export const CTASection = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <motion.h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white drop-shadow-lg"
+          <span className="eyebrow justify-center mb-4">[ Get Started ]</span>
+          <motion.h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 mt-3 text-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             Ready to Transform Your Digital Presence?
           </motion.h2>
-          <motion.p 
-            className="text-lg text-white/90 mb-6 leading-relaxed drop-shadow-md"
+          <motion.p
+            className="text-lg text-muted-foreground mb-8 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -107,6 +109,7 @@ export const CTASection = () => {
             Let's discuss how we can help you achieve your digital goals. 
             Schedule a free consultation or get started with a custom quote today.
           </motion.p>
+
 
           <motion.div 
             className="flex flex-col sm:flex-row items-center justify-center gap-4"

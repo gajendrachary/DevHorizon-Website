@@ -257,8 +257,8 @@ const About = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              About DevHorizon Technologies Private Limited
+            <span className="eyebrow mb-4">
+              [ About DevHorizon Technologies Private Limited ]
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Crafting Digital Excellence Since 2025</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -342,8 +342,8 @@ const About = () => {
             transition={{ duration: 0.5 }}
             className="text-center max-w-2xl mx-auto mb-8"
           >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              Meet the Team
+            <span className="eyebrow mb-4">
+              [ Meet the Team ]
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               The People Behind DevHorizon Technologies Private Limited
@@ -475,8 +475,8 @@ const About = () => {
             transition={{ duration: 0.5 }}
             className="text-center max-w-2xl mx-auto mb-8"
           >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              Our Expertise
+            <span className="eyebrow mb-4">
+              [ Our Expertise ]
             </span>
             <h2 className="text-3xl md:text-4xl font-bold">Technical Excellence</h2>
           </motion.div>
@@ -581,8 +581,8 @@ const About = () => {
             transition={{ duration: 0.5 }}
             className="text-center max-w-2xl mx-auto mb-8"
           >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-              What We Stand For
+            <span className="eyebrow mb-4">
+              [ What We Stand For ]
             </span>
             <h2 className="text-3xl md:text-4xl font-bold">Our Core Values</h2>
           </motion.div>

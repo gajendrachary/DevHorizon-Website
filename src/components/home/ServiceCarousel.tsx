@@ -209,12 +209,12 @@ export const ServiceCarousel = () => {
           className="text-center max-w-2xl mx-auto mb-8 md:mb-10"
         >
           <motion.span
-            className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
+            className="eyebrow mb-4"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Our Services
+            [ Our Services ]
           </motion.span>
           <motion.h2
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"

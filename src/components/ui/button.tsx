@@ -5,25 +5,25 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold ring-offset-background transition-all duration-200 ease-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98] rounded-lg",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold ring-offset-background transition-all duration-200 ease-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98] rounded-full",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] shadow-soft hover:shadow-medium",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02]",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:scale-[1.02]",
-        outline: "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground hover:scale-[1.02]",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:scale-[1.02]",
+        outline: "border border-border bg-transparent text-foreground hover:border-primary hover:text-primary",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         // Hero button variants
-        hero: "bg-logo-gradient text-white border-0 hover:opacity-90 hover:scale-[1.03] shadow-soft hover:shadow-medium font-bold",
-        heroOutline: "bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground hover:scale-[1.02]",
+        hero: "bg-primary text-primary-foreground border-0 hover:bg-primary/90 hover:scale-[1.02] font-bold",
+        heroOutline: "bg-transparent text-foreground border border-border hover:border-primary hover:text-primary",
         // CTA buttons
-        cta: "bg-logo-gradient text-white border-0 hover:opacity-90 hover:scale-[1.03] pulse-glow",
-        ctaOutline: "border-2 border-primary-foreground bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary hover:scale-[1.02]",
-        // Dark theme buttons (for footer/dark sections)
-        dark: "bg-logo-gradient text-white border-0 hover:opacity-90 hover:scale-[1.02]",
-        darkOutline: "border border-primary-foreground/30 bg-transparent text-primary-foreground/90 hover:border-primary-foreground hover:text-primary-foreground hover:scale-[1.02]",
+        cta: "bg-primary text-primary-foreground border-0 hover:bg-primary/90 hover:scale-[1.02]",
+        ctaOutline: "border border-foreground/25 bg-transparent text-foreground hover:border-primary hover:text-primary",
+        // Dark section buttons
+        dark: "bg-primary text-primary-foreground border-0 hover:bg-primary/90",
+        darkOutline: "border border-foreground/25 bg-transparent text-foreground/90 hover:border-primary hover:text-primary",
       },
       size: {
         default: "h-11 px-6 py-2",
@@ -39,6 +39,7 @@ const buttonVariants = cva(
     },
   }
 );
+
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,

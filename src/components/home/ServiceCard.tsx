@@ -153,9 +153,10 @@ export const ServiceCard = ({
               alt="" 
               loading="lazy"
               decoding="async"
-              className="absolute right-0 top-0 h-full w-3/5 object-cover object-left opacity-70"
+              className="absolute right-0 top-0 h-full w-3/5 object-cover object-left opacity-25"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-card via-card/80 to-card/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-card via-card/95 to-card/70" />
+
           </div>
         )}
 
