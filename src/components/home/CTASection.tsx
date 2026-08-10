@@ -55,15 +55,16 @@ export const CTASection = () => {
             loading="lazy"
             decoding="async"
             initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 0.8, scale: 1 }}
+            animate={{ opacity: 0.45, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
           />
         </AnimatePresence>
       </div>
-      
-      {/* Light overlay for text readability */}
-      <div className="absolute inset-0 bg-black/40 z-[1]" />
+
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-background/70 z-[1]" />
+
 
       {/* Animated background elements */}
       <motion.div 
