@@ -1,14 +1,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
-
-const stats = [
-  { value: '20+', label: 'Websites Delivered' },
-  { value: '5+', label: 'Mobile Apps' },
-  { value: '95%', label: 'Client Satisfaction' },
-];
 
 const capabilities = ['Web Development', 'Mobile Apps', 'Meta Ads'];
 
@@ -57,7 +51,7 @@ export const HeroSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-center"
+          className="grid gap-14"
         >
           {/* Copy */}
           <div className="max-w-2xl">
@@ -109,24 +103,6 @@ export const HeroSection = () => {
               ))}
             </motion.div>
           </div>
-
-          {/* Stat panel */}
-          <motion.div variants={itemVariants} className="surface-card p-7 md:p-9">
-            <span className="eyebrow">
-              <Sparkles className="h-3.5 w-3.5" />
-              [ By the numbers ]
-            </span>
-            <div className="mt-7 space-y-7">
-              {stats.map((stat) => (
-                <div key={stat.label} className="border-b border-border pb-6 last:border-0 last:pb-0">
-                  <p className="text-4xl font-bold tracking-tight text-primary md:text-5xl">
-                    {stat.value}
-                  </p>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
