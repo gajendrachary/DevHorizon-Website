@@ -67,7 +67,7 @@ const Careers = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {SECTIONS
               .filter((s) => (s.hiringOnly ? HIRING_OPEN : true))
-              .filter((s) => s.to !== '/careers/openings' || hasOpenings)
+              
               .map((s) => (
                 <Link
                   key={s.to}
