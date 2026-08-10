@@ -109,24 +109,6 @@ export const HeroSection = () => {
               ))}
             </motion.div>
           </div>
-
-          {/* Stat panel */}
-          <motion.div variants={itemVariants} className="surface-card p-7 md:p-9">
-            <span className="eyebrow">
-              <Sparkles className="h-3.5 w-3.5" />
-              [ By the numbers ]
-            </span>
-            <div className="mt-7 space-y-7">
-              {stats.map((stat) => (
-                <div key={stat.label} className="border-b border-border pb-6 last:border-0 last:pb-0">
-                  <p className="text-4xl font-bold tracking-tight text-primary md:text-5xl">
-                    {stat.value}
-                  </p>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
