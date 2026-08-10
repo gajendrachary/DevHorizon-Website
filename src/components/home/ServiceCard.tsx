@@ -85,7 +85,7 @@ export const ServiceCard = ({
 
   return (
     <motion.div
-      className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[calc((100%-3rem)/3)] snap-center"
+      className="flex-shrink-0 w-[85vw] sm:w-[400px] md:w-[420px] lg:w-[calc((100%_-_3rem)_/_3)] snap-center"
       initial={{ 
         x: '100vw', 
         opacity: 0,
