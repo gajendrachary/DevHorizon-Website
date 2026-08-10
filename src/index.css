@@ -154,8 +154,30 @@
 
   /* Section spacing */
   .section-padding {
-    @apply py-6 md:py-10 lg:py-14;
+    @apply py-14 md:py-20 lg:py-24;
   }
+
+  /* Inset page shell (Tekmino style) */
+  .shell-inset {
+    @apply bg-background;
+    @apply lg:rounded-[2rem];
+  }
+
+  /* Bracketed section eyebrow */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-primary;
+  }
+
+  /* Surface card */
+  .surface-card {
+    @apply bg-card border border-border rounded-3xl;
+  }
+
+  /* Lime arrow badge inside pill buttons */
+  .arrow-badge {
+    @apply inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary-foreground/15;
+  }
+
 
   /* Card hover effects */
   .card-hover {
