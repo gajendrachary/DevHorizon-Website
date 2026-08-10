@@ -47,7 +47,7 @@ export const FAQSection = () => {
             transition={{ duration: 0.6 }}
           >
             <motion.span 
-              className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block"
+              className="eyebrow mb-4"
               initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.1 }}

@@ -166,7 +166,7 @@ const Reviews = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+            <span className="eyebrow mb-4">
               Client Testimonials
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">What Our Clients Say</h1>
