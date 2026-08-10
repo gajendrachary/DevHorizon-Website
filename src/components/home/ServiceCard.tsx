@@ -198,7 +198,7 @@ export const ServiceCard = ({
         </motion.p>
 
         {/* Features */}
-        <ul className="relative z-10 space-y-2.5">
+        <motion.ul className="relative z-10 space-y-2.5" style={{ transformStyle: 'preserve-3d', translateZ: 10 }}>
           {features.map((feature, featureIndex) => (
             <motion.li
               key={feature}
@@ -213,11 +213,12 @@ export const ServiceCard = ({
               <span className="text-foreground/90">{feature}</span>
             </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
         {/* Click Hint */}
         <motion.div
           className="relative z-10 mt-6 text-xs text-primary font-medium"
+          style={{ transformStyle: 'preserve-3d', translateZ: 10 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: isHovered || isTapped ? 1 : 0.6 }}
         >
