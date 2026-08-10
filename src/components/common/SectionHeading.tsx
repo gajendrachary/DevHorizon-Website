@@ -26,7 +26,7 @@ export const SectionHeading = ({
     >
       {eyebrow && (
         <span className={cn('eyebrow mb-4', align === 'center' && 'justify-center')}>
-          [ {eyebrow} ]
+          {eyebrow}
         </span>
       )}
       <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mt-3">

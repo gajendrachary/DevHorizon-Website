@@ -45,7 +45,7 @@ export const Footer = () => {
           className="surface-card mb-16 flex flex-col gap-6 p-8 md:flex-row md:items-center md:justify-between md:p-10"
         >
           <div>
-            <span className="eyebrow">[ Let's Build ]</span>
+            <span className="eyebrow">Let's Build</span>
             <h2 className="mt-3 text-2xl md:text-3xl font-bold text-foreground">
               Have a project in mind? Let's talk.
             </h2>
@@ -103,7 +103,7 @@ export const Footer = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="eyebrow mb-6">[ Quick Links ]</h3>
+            <h3 className="eyebrow mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -124,7 +124,7 @@ export const Footer = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="eyebrow mb-6">[ Services ]</h3>
+            <h3 className="eyebrow mb-6">Services</h3>
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service.name}>
@@ -145,7 +145,7 @@ export const Footer = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h3 className="eyebrow mb-6">[ Contact ]</h3>
+            <h3 className="eyebrow mb-6">Contact</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-0.5 text-primary shrink-0" />

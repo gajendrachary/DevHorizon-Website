@@ -56,7 +56,7 @@ export const HeroSection = () => {
           {/* Copy */}
           <div className="max-w-2xl">
             <motion.span variants={itemVariants} className="eyebrow">
-              [ Transforming Ideas ]
+              Transforming Ideas
             </motion.span>
 
             <motion.h1

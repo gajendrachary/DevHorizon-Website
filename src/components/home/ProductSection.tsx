@@ -22,7 +22,7 @@ export const ProductSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <span className="eyebrow justify-center">[ Our Product ]</span>
+          <span className="eyebrow justify-center">Our Product</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3 mb-4 text-foreground">
             Horizon<span className="text-primary">Hire</span>
           </h2>
