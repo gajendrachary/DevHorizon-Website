@@ -13,8 +13,7 @@ const FOCUS = ['Web Development', 'SaaS Platforms', 'Automation', 'AI / ML', 'Da
 type Section = { to: string; title: string; desc: string; hiringOnly?: boolean };
 const SECTIONS: Section[] = [
   { to: '/careers/about', title: 'About', desc: 'Who we are and what we build.' },
-  { to: '/careers/openings', title: 'Open roles', desc: 'Live positions across engineering, AI/ML, and design.', hiringOnly: true },
-  { to: '/careers/why-join', title: 'Why join', desc: 'Real impact, senior mentorship, modern stack.' },
+  { to: '/careers/why-join', title: 'Why Join Us', desc: 'Real impact, senior mentorship, modern stack.' },
   { to: '/careers/process', title: 'Hiring process', desc: 'A clear 5-step path from application to offer.' },
   { to: '/careers/resume-tips', title: 'Resume tips', desc: 'Help your application stand out.' },
   { to: '/careers/faq', title: 'FAQ', desc: 'Answers to common questions.' },
@@ -68,7 +67,7 @@ const Careers = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {SECTIONS
               .filter((s) => (s.hiringOnly ? HIRING_OPEN : true))
-              .filter((s) => s.to !== '/careers/openings' || hasOpenings)
+              
               .map((s) => (
                 <Link
                   key={s.to}
