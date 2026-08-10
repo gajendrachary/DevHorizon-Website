@@ -844,7 +844,7 @@ const Projects = () => {
               animate={headerInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Our Portfolio
+              [ Our Portfolio ]
             </motion.span>
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
