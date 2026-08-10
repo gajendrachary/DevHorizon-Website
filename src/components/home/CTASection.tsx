@@ -123,20 +123,9 @@ export const CTASection = () => {
             >
               <Button asChild variant="cta" size="xl" className="group">
                 <Link to="/get-quote" className="flex items-center gap-2">
-                  <motion.span
-                    animate={{ rotate: [0, 15, -15, 0] }}
-                    transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
-                  >
-                    <Zap className="w-5 h-5" />
-                  </motion.span>
+                  <Zap className="w-5 h-5" />
                   Get Started
-                  <motion.span
-                    className="inline-block"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                  >
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
             </motion.div>
