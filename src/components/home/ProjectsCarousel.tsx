@@ -407,7 +407,7 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
             <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:hidden" />
 
             {projects.map((project, index) => (
-              <div key={project.title} data-project-card>
+              <div key={project.title} data-project-card className="flex-shrink-0">
                 <ProjectCard
                   title={project.title}
                   category={project.category}
