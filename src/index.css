@@ -569,11 +569,18 @@ iframe[src*="recaptcha/enterprise/bframe"] { display: none !important; }
 
 /* Tekmino-style hero aurora backdrop */
 .hero-aurora {
-  background:
-    radial-gradient(55% 60% at 78% 40%, hsl(74 87% 57% / 0.12) 0%, transparent 62%),
-    radial-gradient(45% 55% at 12% 85%, hsl(74 87% 57% / 0.05) 0%, transparent 70%),
-    linear-gradient(180deg, hsl(0 0% 6%) 0%, hsl(0 0% 4%) 100%);
+  background: linear-gradient(180deg, hsl(0 0% 6%) 0%, hsl(0 0% 4%) 100%);
 }
+
+@media (min-width: 1024px) {
+  .hero-aurora {
+    background:
+      radial-gradient(55% 60% at 78% 40%, hsl(74 87% 57% / 0.13) 0%, transparent 62%),
+      radial-gradient(45% 55% at 12% 85%, hsl(74 87% 57% / 0.05) 0%, transparent 70%),
+      linear-gradient(180deg, hsl(0 0% 6%) 0%, hsl(0 0% 4%) 100%);
+  }
+}
+
 
 
 .hero-lines {
