@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
+import devhorizonLogo from '@/assets/devhorizon-logo.png.asset.json';
+
 
 const capabilities = ['Web Development', 'Mobile Apps', 'Meta Ads'];
 
