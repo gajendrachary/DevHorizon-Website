@@ -4,8 +4,7 @@ import { HIRING_OPEN } from '@/lib/careersConfig';
 
 const SECTIONS = [
   { to: '/careers/about', label: 'About' },
-  { to: '/careers/openings', label: 'Openings', hiringOnly: true },
-  { to: '/careers/why-join', label: 'Why join' },
+  { to: '/careers/why-join', label: 'Why Join Us' },
   { to: '/careers/process', label: 'Process' },
   { to: '/careers/resume-tips', label: 'Resume tips' },
   { to: '/careers/faq', label: 'FAQ' },

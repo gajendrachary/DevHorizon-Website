@@ -37,7 +37,7 @@ export const CareersHero = ({ hasOpenings }: { hasOpenings: boolean }) => {
                   Apply now <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
                 {hasOpenings && (
-                  <Button size="lg" variant="outline" onClick={() => navigate('/careers/openings')}>
+                  <Button size="lg" variant="outline" onClick={() => navigate('/careers/apply#openings')}>
                     <Briefcase className="mr-2 h-4 w-4" /> View open roles
                   </Button>
                 )}

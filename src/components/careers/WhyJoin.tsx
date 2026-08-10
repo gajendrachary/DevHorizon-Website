@@ -13,7 +13,7 @@ export const WhyJoin = () => (
   <section id="why-join" className="py-14 md:py-20">
     <div className="container-swiss">
       <div className="mb-10 max-w-2xl">
-        <span className="text-xs uppercase tracking-widest text-muted-foreground">Why join</span>
+        <span className="text-xs uppercase tracking-widest text-muted-foreground">Why Join Us</span>
         <h2 className="text-3xl md:text-4xl font-bold mt-2">Why work at DevHorizon</h2>
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
