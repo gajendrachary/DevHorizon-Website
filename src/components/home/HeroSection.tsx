@@ -1,14 +1,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
-
-const stats = [
-  { value: '20+', label: 'Websites Delivered' },
-  { value: '5+', label: 'Mobile Apps' },
-  { value: '95%', label: 'Client Satisfaction' },
-];
 
 const capabilities = ['Web Development', 'Mobile Apps', 'Meta Ads'];
 
@@ -57,7 +51,7 @@ export const HeroSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-center"
+          className="grid gap-14"
         >
           {/* Copy */}
           <div className="max-w-2xl">
