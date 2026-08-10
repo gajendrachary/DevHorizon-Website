@@ -1,47 +1,46 @@
-## Close hiring across the careers experience
+# Tekmino-style Redesign
 
-Goal: stop accepting new applications, hide open roles, and show a professional "hiring closed" message everywhere candidates land.
+Rebuild the site's visual language to match the Tekmino IT-solutions template: dark canvas, lime-green accent, floating pill navbar, bracketed section labels, and generous non-overlapping spacing.
 
-### Frontend changes
+## Look and feel
 
-1. **Global "Hiring closed" banner/state**
-   - Add a shared `HIRING_OPEN = false` flag (e.g. `src/lib/careersConfig.ts`) so we can flip it back on later in one place.
-   - When closed, show a polished notice card with copy like:
-     > "We're not actively hiring right now. Thank you for your interest in DevHorizon Technologies — please check back soon, or reach us at info@devhorizontech.com for future opportunities."
+- Dark base (near-black `#0a0a0a` surfaces, slightly lighter `#141414` cards) as the default theme across all pages.
+- Lime-green accent (`#c8f031`-family) for buttons, links, eyebrows, icon chips, and active nav states. Black text sits on lime buttons.
+- Bracketed uppercase eyebrows above every section heading, e.g. `[ TRANSFORMING IDEAS ]`.
+- Large rounded corners on cards, buttons, and the page container; subtle hairline borders instead of shadows.
+- Circular arrow badge inside primary buttons, matching Tekmino's "Get Started" pill.
 
-2. **`src/pages/Careers.tsx` (hub)**
-   - Hide the "Apply" and "Open roles" cards from the section grid.
-   - Pass `hasOpenings={false}` and render the hiring-closed notice under the hero.
+## Site shell
 
-3. **`src/components/careers/CareersHero.tsx`**
-   - Replace "Apply now" / "View open roles" buttons with a single muted "Hiring paused" badge and a "Contact us" button to `mailto:info@devhorizontech.com`.
+- Thin top utility bar: tagline with an inline link on the left; working hours, Support, and language on the right.
+- Floating pill navbar below it: logo left, centered nav with dropdowns, search icon and a lime CTA pill on the right.
+- Rounded inset page container with visible dark margins on the outer edges.
+- Footer restyled dark with lime accents and the same bracketed labels.
 
-4. **`src/components/careers/CareersSubNav.tsx`**
-   - Remove the "Apply" and "Open roles" links while hiring is closed.
+## No overlapping
 
-5. **`src/pages/careers/Openings.tsx`**
-   - Always render the closed-state message (ignore DB results on the public page) with the professional copy above.
+- Every section becomes a normal stacked block with its own vertical padding; no negative margins, no absolutely positioned elements crossing section boundaries.
+- The floating header reserves real space above the content so nothing slides under it.
+- Hero content sits in a padded grid, not layered over other sections.
+- Checked at desktop, tablet, and mobile widths after the build.
 
-6. **`src/pages/careers/ApplyPage.tsx`**
-   - Replace `<ApplyForm />` with the closed-state notice + "Back to Careers" link. Form code stays in the repo for when hiring reopens.
+## Pages covered
 
-7. **`src/components/home/HeroSection.tsx`** and any other CTA pointing to `/careers/apply`
-   - Keep the Careers button pointing to `/careers` (already correct); no apply links should remain on the public site.
+Homepage, Services (and the three service detail pages), Projects, Blog + article, Reviews, About, Get Quote, Careers and its subpages, Auth, and the 404 page.
 
-### Backend changes
+Homepage section order is preserved: Hero → Client Logos → CTA → Services → HorizonHire product → Stats → Projects → FAQ.
 
-8. **Hide all open roles from the public site**
-   - Run a data update to set every `job_openings` row with `status = 'open'` to `status = 'closed'`. Admin can still see/manage them in `/admin` → Openings Manager.
+## What stays the same
 
-9. **Block new application submissions at the database**
-   - Migration: drop the existing INSERT policy on `public.job_applications` and replace it with a policy that blocks all inserts (or only allows `service_role`). Existing rows and admin read access stay intact so the Applications admin page keeps working.
-   - This is a defense-in-depth step so the form can't be re-enabled accidentally or hit via the API.
+- All content, copy, routes, forms, backend logic, and admin screens are untouched.
+- HorizonHire product section keeps its content, restyled to the new dark/lime system.
+- Existing animation performance rules (transform/opacity only) still apply.
 
-### Not changing
+## Technical notes
 
-- Admin pages (`/admin` → Openings, Applications) keep full functionality so you can review past applicants and re-open roles later.
-- SEO/sitemap entries for `/careers/apply` and `/careers/openings` stay (pages still resolve, just show the closed message).
-
-### Re-opening later
-
-Flip `HIRING_OPEN` to `true`, set the desired `job_openings` rows back to `open`, and re-run a small migration to restore the insert policy on `job_applications`.
+- Rewrite the color tokens in `src/index.css` to a dark-first palette with lime primary; the brand cyan→violet gradient is retired as the primary accent and kept only on the logo mark.
+- Update `tailwind.config.ts` with the new accent and radius scale.
+- Rework `Header.tsx` (top bar + pill nav) and `Layout.tsx` (inset container, correct top offset), and `Footer.tsx`.
+- Add a shared `SectionHeading` component for the bracketed eyebrow + heading pattern, and reuse it across sections.
+- Restyle card components (`ServiceCard`, `ProjectCard`, blog cards, stats, FAQ) against the new tokens; no hardcoded color utilities.
+- Sweep remaining pages for light-theme hardcoded classes (`bg-white`, `text-black`, etc.) and replace with semantic tokens.
