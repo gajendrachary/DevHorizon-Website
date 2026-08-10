@@ -271,7 +271,7 @@ export const ServiceCarousel = () => {
             onMouseLeave={handleMouseLeave}
             onTouchStart={autoTouchStart}
             onTouchEnd={autoTouchEnd}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 lg:mx-0 lg:px-0 lg:justify-start touch-pan-x"
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 lg:mx-0 lg:px-0 lg:justify-center touch-pan-x"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
