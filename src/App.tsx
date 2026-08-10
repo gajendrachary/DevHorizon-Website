@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import { AuthProvider } from "./hooks/useAuth";
 import Index from "./pages/Index";
@@ -18,7 +18,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Careers from "./pages/Careers";
 import CareersAdmin from "./pages/CareersAdmin";
 import CareersAbout from "./pages/careers/About";
-import CareersOpenings from "./pages/careers/Openings";
+
 import CareersWhyJoin from "./pages/careers/WhyJoinPage";
 import CareersProcess from "./pages/careers/ProcessPage";
 import CareersResumeTips from "./pages/careers/ResumeTipsPage";
