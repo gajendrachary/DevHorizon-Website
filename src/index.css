@@ -268,10 +268,11 @@
 
   /* Gradient animated background */
   .gradient-animated {
-    background: linear-gradient(-45deg, hsl(187 92% 55%), hsl(215 90% 55%), hsl(266 85% 58%), hsl(200 95% 55%));
+    background: linear-gradient(-45deg, hsl(74 87% 57%), hsl(84 80% 50%), hsl(66 85% 55%), hsl(74 87% 57%));
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
   }
+
 
   /* Underline animation for links */
   .link-underline {
