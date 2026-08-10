@@ -91,7 +91,7 @@ export const CTASection = () => {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <span className="eyebrow justify-center mb-4">[ Get Started ]</span>
+          <span className="eyebrow justify-center mb-4">Get Started</span>
           <motion.h2
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 mt-3 text-foreground"
             initial={{ opacity: 0, y: 20 }}

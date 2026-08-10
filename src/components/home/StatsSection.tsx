@@ -89,7 +89,7 @@ export const StatsSection = () => {
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            [ Why Choose DevHorizon Technologies ]
+            Why Choose DevHorizon Technologies
           </motion.span>
           <motion.h2
             className="text-3xl md:text-4xl font-bold"

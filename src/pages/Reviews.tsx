@@ -167,7 +167,7 @@ const Reviews = () => {
             className="max-w-3xl"
           >
             <span className="eyebrow mb-4">
-              [ Client Testimonials ]
+              Client Testimonials
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">What Our Clients Say</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">

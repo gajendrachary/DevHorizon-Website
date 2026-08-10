@@ -51,7 +51,7 @@ export const ClientLogosSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center eyebrow justify-center mb-8"
         >
-          [ Trusted by businesses across industries ]
+          Trusted by businesses across industries
         </motion.p>
       </div>
 

@@ -299,7 +299,7 @@ const Services = () => {
             className="text-center max-w-3xl mx-auto"
           >
             <span className="eyebrow justify-center mb-6">
-              [ Our Services ]
+              Our Services
 
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">

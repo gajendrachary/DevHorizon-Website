@@ -339,7 +339,7 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            [ Our Work ]
+            Our Work
           </motion.span>
           <motion.h2
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
