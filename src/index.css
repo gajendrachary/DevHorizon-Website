@@ -227,8 +227,10 @@
   /* Footer dark theme */
   .footer-dark {
     background: var(--gradient-dark);
-    color: hsl(0 0% 85%);
+    color: hsl(var(--muted-foreground));
+    @apply border-t border-border;
   }
+
 
   /* Counter animation */
   .counter-animate {
