@@ -48,7 +48,7 @@ export const HeroSection = () => {
       {/* Soft lime glow */}
       <motion.div
         style={{ y: glowY }}
-        className="pointer-events-none absolute -right-24 top-1/4 h-[28rem] w-[28rem] rounded-full bg-primary/15 blur-[120px]"
+        className="pointer-events-none absolute -right-24 top-1/4 hidden h-[28rem] w-[28rem] rounded-full bg-primary/12 blur-[130px] lg:block"
         aria-hidden="true"
       />
 
