@@ -26,7 +26,7 @@ const navLinks = [
     path: '/careers',
     dropdown: [
       { name: 'About', path: '/careers/about' },
-      { name: 'Why Join Us', path: '/careers/why-join' },
+      
       { name: 'Process', path: '/careers/process' },
       { name: 'Resume Tips', path: '/careers/resume-tips' },
       { name: 'FAQ', path: '/careers/faq' },

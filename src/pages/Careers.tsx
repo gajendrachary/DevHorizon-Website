@@ -13,7 +13,7 @@ const FOCUS = ['Web Development', 'SaaS Platforms', 'Automation', 'AI / ML', 'Da
 type Section = { to: string; title: string; desc: string; hiringOnly?: boolean };
 const SECTIONS: Section[] = [
   { to: '/careers/about', title: 'About', desc: 'Who we are and what we build.' },
-  { to: '/careers/why-join', title: 'Why Join Us', desc: 'Real impact, senior mentorship, modern stack.' },
+  { to: '/careers/apply#why-join', title: 'Why Join Us', desc: 'Real impact, senior mentorship, modern stack.' },
   { to: '/careers/process', title: 'Hiring process', desc: 'A clear 5-step path from application to offer.' },
   { to: '/careers/resume-tips', title: 'Resume tips', desc: 'Help your application stand out.' },
   { to: '/careers/faq', title: 'FAQ', desc: 'Answers to common questions.' },

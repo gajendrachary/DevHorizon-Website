@@ -4,6 +4,7 @@ import { Mail } from 'lucide-react';
 import { SEO } from '@/components/common/SEO';
 import { CareersLayout } from '@/components/careers/CareersLayout';
 import { ApplyForm } from '@/components/careers/ApplyForm';
+import { WhyJoin } from '@/components/careers/WhyJoin';
 import { Button } from '@/components/ui/button';
 import {
   HIRING_OPEN,
@@ -36,6 +37,7 @@ const ApplyPage = () => {
         description="Apply to open roles at DevHorizon Technologies. We review every application within ~5 business days."
         canonical="https://www.devhorizontech.com/careers/apply"
       />
+      <WhyJoin />
       <section className="py-14 md:py-20">
         <div className="container-swiss max-w-3xl">
           <div className="mb-8">

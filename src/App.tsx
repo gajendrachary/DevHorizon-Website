@@ -19,7 +19,7 @@ import Careers from "./pages/Careers";
 import CareersAdmin from "./pages/CareersAdmin";
 import CareersAbout from "./pages/careers/About";
 
-import CareersWhyJoin from "./pages/careers/WhyJoinPage";
+
 import CareersProcess from "./pages/careers/ProcessPage";
 import CareersResumeTips from "./pages/careers/ResumeTipsPage";
 import CareersFAQ from "./pages/careers/FAQPage";
@@ -50,7 +50,7 @@ const App = () => (
             <Route path="/careers" element={<Careers />} />
             <Route path="/careers/about" element={<CareersAbout />} />
             <Route path="/careers/openings" element={<Navigate to="/careers/apply" replace />} />
-            <Route path="/careers/why-join" element={<CareersWhyJoin />} />
+            <Route path="/careers/why-join" element={<Navigate to="/careers/apply" replace />} />
             <Route path="/careers/process" element={<CareersProcess />} />
             <Route path="/careers/resume-tips" element={<CareersResumeTips />} />
             <Route path="/careers/faq" element={<CareersFAQ />} />
