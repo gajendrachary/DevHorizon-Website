@@ -176,6 +176,7 @@ export const Header = () => {
         </div>
 
         {/* Mobile Menu - slide in from left */}
+        {createPortal(
         <AnimatePresence>
           {isMobileMenuOpen && (
             <>
