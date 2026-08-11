@@ -4,6 +4,7 @@ import { Mail } from 'lucide-react';
 import { SEO } from '@/components/common/SEO';
 import { CareersLayout } from '@/components/careers/CareersLayout';
 import { ApplyForm } from '@/components/careers/ApplyForm';
+import { WhyJoin } from '@/components/careers/WhyJoin';
 import { Button } from '@/components/ui/button';
 import {
   HIRING_OPEN,
