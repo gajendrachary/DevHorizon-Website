@@ -133,6 +133,36 @@ const GetQuote = () => {
     company: '',
     message: ''
   });
+
+  const budgetAnimRef = useRef<number | null>(null);
+  const TIMELINE_BUDGETS: Record<string, number> = {
+    urgent: 50000,
+    fast: 35000,
+    standard: 30000,
+    flexible: 30000
+  };
+
+  const animateBudgetTo = (target: number) => {
+    if (budgetAnimRef.current) cancelAnimationFrame(budgetAnimRef.current);
+    const start = budget;
+    if (start === target) return;
+    const duration = 600;
+    let startTime: number | null = null;
+    const tick = (now: number) => {
+      if (startTime === null) startTime = now;
+      const p = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const value = Math.round((start + (target - start) * eased) / 1000) * 1000;
+      setBudget(p === 1 ? target : value);
+      if (p < 1) budgetAnimRef.current = requestAnimationFrame(tick);
+    };
+    budgetAnimRef.current = requestAnimationFrame(tick);
+  };
+
+  const handleTimelineSelect = (id: 'urgent' | 'fast' | 'standard' | 'flexible') => {
+    setTimeline(id);
+    animateBudgetTo(TIMELINE_BUDGETS[id]);
+  };
   const { toast } = useToast();
   const { executeRecaptcha, verifyToken, isReady: recaptchaReady } = useRecaptcha();
   const toggleService = (id: string) => {
@@ -446,7 +476,7 @@ const GetQuote = () => {
                         return (
                           <motion.button
                             key={t.id}
-                            onClick={() => setTimeline(t.id as 'urgent' | 'fast' | 'standard' | 'flexible')}
+                            onClick={() => handleTimelineSelect(t.id as 'urgent' | 'fast' | 'standard' | 'flexible')}
                             className={`relative p-5 border text-center transition-all rounded-xl overflow-hidden ${
                               isSelected 
                                 ? 'border-primary bg-primary/5' 
@@ -550,7 +580,15 @@ const GetQuote = () => {
                     
                     <h3 className="font-medium mb-4 flex items-center gap-2">
                                             <span>Budget Range:</span>
-                      <span className="text-primary font-bold">₹{budget.toLocaleString()}</span>
+                      <motion.span
+                        key={timeline}
+                        className="text-primary font-bold"
+                        initial={{ scale: 0.9, opacity: 0.6 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+                      >
+                        ₹{budget.toLocaleString()}
+                      </motion.span>
                     </h3>
                     <input 
                       type="range" 
