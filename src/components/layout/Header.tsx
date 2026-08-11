@@ -175,18 +175,37 @@ export const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - slide in from left */}
         <AnimatePresence>
           {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden overflow-hidden"
-            >
-              <nav className="container-swiss pb-4">
-                <div className="rounded-3xl border border-border bg-card p-4 space-y-1">
+            <>
+              <motion.div
+                key="overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="lg:hidden fixed inset-0 z-40 bg-background/80 backdrop-blur-sm"
+              />
+              <motion.div
+                key="drawer"
+                initial={{ x: '-100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '-100%' }}
+                transition={{ type: 'tween', ease: [0.22, 1, 0.36, 1], duration: 0.4 }}
+                className="lg:hidden fixed top-0 left-0 bottom-0 z-50 w-[85%] max-w-xs bg-card border-r border-border overflow-y-auto"
+              >
+                <div className="flex items-center justify-end p-4">
+                  <button
+                    aria-label="Close menu"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-2 rounded-lg border border-border text-foreground"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                <nav className="px-5 pb-8 space-y-1">
                   {navLinks.map((link) => (
                     <div key={link.name}>
                       {link.dropdown ? (
@@ -246,9 +265,9 @@ export const Header = () => {
                       <Link to="/get-quote">Get Started</Link>
                     </Button>
                   </div>
-                </div>
-              </nav>
-            </motion.div>
+                </nav>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>

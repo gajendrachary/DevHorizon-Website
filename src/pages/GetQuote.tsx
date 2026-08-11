@@ -159,6 +159,8 @@ const GetQuote = () => {
     budgetAnimRef.current = requestAnimationFrame(tick);
   };
 
+  const minBudget = TIMELINE_BUDGETS[timeline] ?? 30000;
+
   const handleTimelineSelect = (id: 'urgent' | 'fast' | 'standard' | 'flexible') => {
     setTimeline(id);
     animateBudgetTo(TIMELINE_BUDGETS[id]);
@@ -592,15 +594,15 @@ const GetQuote = () => {
                     </h3>
                     <input 
                       type="range" 
-                      min="30000" 
+                      min={minBudget}
                       max="500000" 
                       step="5000" 
                       value={budget} 
-                      onChange={e => setBudget(Number(e.target.value))} 
+                      onChange={e => setBudget(Math.max(minBudget, Number(e.target.value)))} 
                       className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
                     />
                     <div className="flex justify-between text-sm text-muted-foreground mt-3">
-                      <span>₹30,000</span>
+                      <span>₹{minBudget.toLocaleString()}</span>
                       <span>₹5,00,000+</span>
                     </div>
                   </motion.div>
