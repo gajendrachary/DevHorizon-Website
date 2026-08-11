@@ -592,11 +592,11 @@ const GetQuote = () => {
                     </h3>
                     <input 
                       type="range" 
-                      min="30000" 
+                      min={minBudget}
                       max="500000" 
                       step="5000" 
                       value={budget} 
-                      onChange={e => setBudget(Number(e.target.value))} 
+                      onChange={e => setBudget(Math.max(minBudget, Number(e.target.value)))} 
                       className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
                     />
                     <div className="flex justify-between text-sm text-muted-foreground mt-3">
