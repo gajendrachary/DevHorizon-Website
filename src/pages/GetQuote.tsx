@@ -133,6 +133,36 @@ const GetQuote = () => {
     company: '',
     message: ''
   });
+
+  const budgetAnimRef = useRef<number | null>(null);
+  const TIMELINE_BUDGETS: Record<string, number> = {
+    urgent: 50000,
+    fast: 35000,
+    standard: 30000,
+    flexible: 30000
+  };
+
+  const animateBudgetTo = (target: number) => {
+    if (budgetAnimRef.current) cancelAnimationFrame(budgetAnimRef.current);
+    const start = budget;
+    if (start === target) return;
+    const duration = 600;
+    let startTime: number | null = null;
+    const tick = (now: number) => {
+      if (startTime === null) startTime = now;
+      const p = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const value = Math.round((start + (target - start) * eased) / 1000) * 1000;
+      setBudget(p === 1 ? target : value);
+      if (p < 1) budgetAnimRef.current = requestAnimationFrame(tick);
+    };
+    budgetAnimRef.current = requestAnimationFrame(tick);
+  };
+
+  const handleTimelineSelect = (id: 'urgent' | 'fast' | 'standard' | 'flexible') => {
+    setTimeline(id);
+    animateBudgetTo(TIMELINE_BUDGETS[id]);
+  };
   const { toast } = useToast();
   const { executeRecaptcha, verifyToken, isReady: recaptchaReady } = useRecaptcha();
   const toggleService = (id: string) => {
