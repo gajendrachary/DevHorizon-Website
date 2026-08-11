@@ -602,7 +602,7 @@ const GetQuote = () => {
                       className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
                     />
                     <div className="flex justify-between text-sm text-muted-foreground mt-3">
-                      <span>₹30,000</span>
+                      <span>₹{minBudget.toLocaleString()}</span>
                       <span>₹5,00,000+</span>
                     </div>
                   </motion.div>
