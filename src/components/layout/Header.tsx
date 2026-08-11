@@ -46,6 +46,13 @@ export const Header = () => {
     setActiveDropdown(null);
   }, [location]);
 
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <div className="relative z-50">
       {/* Top utility bar */}
