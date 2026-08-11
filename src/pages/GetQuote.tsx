@@ -476,7 +476,7 @@ const GetQuote = () => {
                         return (
                           <motion.button
                             key={t.id}
-                            onClick={() => setTimeline(t.id as 'urgent' | 'fast' | 'standard' | 'flexible')}
+                            onClick={() => handleTimelineSelect(t.id as 'urgent' | 'fast' | 'standard' | 'flexible')}
                             className={`relative p-5 border text-center transition-all rounded-xl overflow-hidden ${
                               isSelected 
                                 ? 'border-primary bg-primary/5' 
