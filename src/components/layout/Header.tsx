@@ -270,7 +270,8 @@ export const Header = () => {
               </motion.div>
             </>
           )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body)}
       </div>
     </div>
   );
