@@ -195,40 +195,31 @@ export const Header = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.25 }}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="lg:hidden fixed inset-0 z-40 bg-background/80 backdrop-blur-sm"
+                className="lg:hidden fixed inset-0 z-40 bg-background/40 backdrop-blur-[2px]"
               />
               <motion.div
                 key="drawer"
-                initial={{ x: '-100%' }}
-                animate={{ x: 0 }}
-                exit={{ x: '-100%' }}
-                transition={{ type: 'tween', ease: [0.22, 1, 0.36, 1], duration: 0.4 }}
-                className="lg:hidden fixed top-0 left-0 bottom-0 z-50 w-[85%] max-w-xs bg-card border-r border-border overflow-y-auto"
+                initial={{ opacity: 0, x: -24, scale: 0.96 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -24, scale: 0.96 }}
+                transition={{ type: 'tween', ease: [0.22, 1, 0.36, 1], duration: 0.35 }}
+                className="lg:hidden fixed top-20 left-4 z-50 w-auto max-w-[80vw] max-h-[75vh] overflow-y-auto rounded-3xl border border-foreground/15 bg-foreground/5 backdrop-blur-2xl shadow-[0_20px_60px_-20px_hsl(var(--foreground)/0.35)] p-3"
               >
-                <div className="flex items-center justify-end p-4">
-                  <button
-                    aria-label="Close menu"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-lg border border-border text-foreground"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-                <nav className="px-5 pb-8 space-y-1">
+                <nav className="flex flex-col gap-2 min-w-[13rem]">
                   {navLinks.map((link) => (
-                    <div key={link.name}>
+                    <div key={link.name} className="flex flex-col gap-2">
                       {link.dropdown ? (
-                        <div>
+                        <>
                           <button
                             onClick={() =>
                               setActiveDropdown(activeDropdown === link.name ? null : link.name)
                             }
-                            className="w-full flex items-center justify-between py-3 text-base font-medium text-foreground"
+                            className="w-full flex items-center justify-between gap-6 rounded-2xl border border-foreground/10 bg-foreground/10 px-4 py-3 text-sm font-medium text-foreground backdrop-blur-xl transition-colors active:scale-[0.98]"
                           >
                             {link.name}
                             <ChevronDown
                               className={cn(
-                                "w-5 h-5 transition-transform duration-200",
+                                "w-4 h-4 transition-transform duration-200",
                                 activeDropdown === link.name && "rotate-180"
                               )}
                             />
@@ -239,28 +230,30 @@ export const Header = () => {
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}
-                                className="overflow-hidden pl-4 border-l-2 border-primary ml-1"
+                                className="overflow-hidden"
                               >
-                                {link.dropdown.map((item) => (
-                                  <Link
-                                    key={item.name}
-                                    to={item.path}
-                                    className="block py-2 text-sm text-muted-foreground hover:text-primary"
-                                  >
-                                    {item.name}
-                                  </Link>
-                                ))}
+                                <div className="flex flex-col gap-1.5 pl-3">
+                                  {link.dropdown.map((item) => (
+                                    <Link
+                                      key={item.name}
+                                      to={item.path}
+                                      className="rounded-xl border border-foreground/10 bg-foreground/5 px-3.5 py-2 text-xs text-muted-foreground backdrop-blur-xl hover:text-primary"
+                                    >
+                                      {item.name}
+                                    </Link>
+                                  ))}
+                                </div>
                               </motion.div>
                             )}
                           </AnimatePresence>
-                        </div>
+                        </>
                       ) : (
                         <Link
                           to={link.path}
                           className={cn(
-                            "block py-3 text-base font-medium transition-colors",
+                            "rounded-2xl border border-foreground/10 bg-foreground/10 px-4 py-3 text-sm font-medium backdrop-blur-xl transition-colors active:scale-[0.98]",
                             location.pathname === link.path
-                              ? "text-primary"
+                              ? "text-primary border-primary/40"
                               : "text-foreground hover:text-primary"
                           )}
                         >
@@ -269,11 +262,9 @@ export const Header = () => {
                       )}
                     </div>
                   ))}
-                  <div className="pt-3">
-                    <Button asChild variant="hero" size="lg" className="w-full">
-                      <Link to="/get-quote">Get Started</Link>
-                    </Button>
-                  </div>
+                  <Button asChild variant="hero" size="lg" className="w-full mt-1">
+                    <Link to="/get-quote">Get Started</Link>
+                  </Button>
                 </nav>
               </motion.div>
             </>
