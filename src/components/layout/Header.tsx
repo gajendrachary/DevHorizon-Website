@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -44,6 +45,13 @@ export const Header = () => {
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
   }, [location]);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <div className="relative z-50">
@@ -176,6 +184,7 @@ export const Header = () => {
         </div>
 
         {/* Mobile Menu - slide in from left */}
+        {createPortal(
         <AnimatePresence>
           {isMobileMenuOpen && (
             <>
@@ -269,7 +278,8 @@ export const Header = () => {
               </motion.div>
             </>
           )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body)}
       </div>
     </div>
   );
