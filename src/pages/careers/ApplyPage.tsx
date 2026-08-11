@@ -38,6 +38,8 @@ const ApplyPage = () => {
         canonical="https://www.devhorizontech.com/careers/apply"
       />
       <section className="py-14 md:py-20">
+      <WhyJoin />
+      <section className="py-14 md:py-20">
         <div className="container-swiss max-w-3xl">
           <div className="mb-8">
             <span className="text-xs uppercase tracking-widest text-muted-foreground">Apply</span>
