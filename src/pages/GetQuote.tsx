@@ -159,6 +159,8 @@ const GetQuote = () => {
     budgetAnimRef.current = requestAnimationFrame(tick);
   };
 
+  const minBudget = TIMELINE_BUDGETS[timeline] ?? 30000;
+
   const handleTimelineSelect = (id: 'urgent' | 'fast' | 'standard' | 'flexible') => {
     setTimeline(id);
     animateBudgetTo(TIMELINE_BUDGETS[id]);
