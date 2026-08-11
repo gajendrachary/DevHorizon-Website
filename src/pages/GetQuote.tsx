@@ -580,7 +580,15 @@ const GetQuote = () => {
                     
                     <h3 className="font-medium mb-4 flex items-center gap-2">
                                             <span>Budget Range:</span>
-                      <span className="text-primary font-bold">₹{budget.toLocaleString()}</span>
+                      <motion.span
+                        key={timeline}
+                        className="text-primary font-bold"
+                        initial={{ scale: 0.9, opacity: 0.6 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+                      >
+                        ₹{budget.toLocaleString()}
+                      </motion.span>
                     </h3>
                     <input 
                       type="range" 
