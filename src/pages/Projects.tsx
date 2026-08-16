@@ -807,17 +807,8 @@ const Projects = () => {
         description="View DevHorizon's portfolio of 20+ successful projects including Jaggery Tea Point, Haven Salad, BLR360 taxi app, and more. See how we've helped businesses grow with custom web and mobile solutions."
         schema={{ "@context": "https://schema.org", "@graph": [projectsSchema, breadcrumbSchema] }}
       />
-      {/* Dynamic Background Layer */}
-      <div
-        className="fixed inset-0 pointer-events-none z-0 transition-colors duration-300 ease-out"
-        style={{
-          backgroundColor: websitesBgColor !== "transparent" ? websitesBgColor : mobileAppsBgColor,
-          opacity: websitesBgColor !== "transparent" || mobileAppsBgColor !== "transparent" ? 0.15 : 0,
-        }}
-      />
-
       {/* Hero Section */}
-      <section className="section-padding bg-secondary/30 relative overflow-hidden">
+      <section className="section-padding bg-background relative overflow-hidden">
         {/* Decorative Background */}
         <div className="absolute inset-0 pointer-events-none">
           <motion.div
