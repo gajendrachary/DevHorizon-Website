@@ -266,7 +266,7 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
         <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[100px] opacity-50 pointer-events-none" />
 
         {/* Project Preview */}
-        <div className={`${project.color} h-48 flex items-center justify-center relative overflow-hidden`}>
+        <div className="bg-secondary h-48 flex items-center justify-center relative overflow-hidden">
           {project.image ? (
             <motion.img
               src={project.image}
@@ -660,7 +660,7 @@ const ProjectCarousel = ({
             onMouseLeave={handleMouseLeave}
             onTouchStart={autoTouchStart}
             onTouchEnd={autoTouchEnd}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 touch-pan-x"
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 lg:mx-0 lg:px-0 lg:justify-start touch-pan-x"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
@@ -668,7 +668,7 @@ const ProjectCarousel = ({
             }}
           >
             {/* Left spacer for centering first card */}
-            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
+            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:hidden" />
 
             {projects.map((project, index) => (
               <div key={project.title} data-card>
@@ -687,7 +687,7 @@ const ProjectCarousel = ({
 
 
             {/* Right spacer for centering last card */}
-            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
+            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:hidden" />
           </div>
 
           {/* Carousel Indicators with Direction */}
