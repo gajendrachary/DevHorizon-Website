@@ -884,21 +884,17 @@ const Projects = () => {
           title="Custom"
           subtitle="Websites"
           icon={<Globe className="w-6 h-6" />}
-          onActiveColorChange={setWebsitesBgColor}
-          defaultBgColor="transparent"
         />
       </div>
 
       {/* Mobile Apps Carousel */}
-      <div className="bg-secondary/30 relative z-10">
+      <div className="bg-background relative z-10">
         <ProjectCarousel
           projects={mobileApps}
           type="app"
           title="Mobile"
           subtitle="Applications"
           icon={<Smartphone className="w-6 h-6" />}
-          onActiveColorChange={setMobileAppsBgColor}
-          defaultBgColor="transparent"
         />
       </div>
     </Layout>
