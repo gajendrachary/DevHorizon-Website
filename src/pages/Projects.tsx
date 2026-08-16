@@ -769,8 +769,6 @@ const Projects = () => {
     triggerOnce: true,
   });
 
-  const [websitesBgColor, setWebsitesBgColor] = useState("transparent");
-  const [mobileAppsBgColor, setMobileAppsBgColor] = useState("transparent");
 
   const projectsSchema = {
     "@context": "https://schema.org",
