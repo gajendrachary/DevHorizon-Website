@@ -266,7 +266,7 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
         <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[100px] opacity-50 pointer-events-none" />
 
         {/* Project Preview */}
-        <div className={`${project.color} h-48 flex items-center justify-center relative overflow-hidden`}>
+        <div className="bg-secondary h-48 flex items-center justify-center relative overflow-hidden">
           {project.image ? (
             <motion.img
               src={project.image}
@@ -620,16 +620,7 @@ const ProjectCarousel = ({
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            {title}{" "}
-            <span className="text-foreground relative">
-              {subtitle}
-              <motion.span
-                className="absolute -bottom-2 left-0 w-full h-1 bg-primary/30 rounded-full"
-                initial={{ scaleX: 0 }}
-                animate={inView ? { scaleX: 1 } : {}}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              />
-            </span>
+            {title} <span className="text-primary">{subtitle}</span>
           </motion.h2>
           <motion.p
             className="text-muted-foreground text-lg"
@@ -669,7 +660,7 @@ const ProjectCarousel = ({
             onMouseLeave={handleMouseLeave}
             onTouchStart={autoTouchStart}
             onTouchEnd={autoTouchEnd}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 touch-pan-x"
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-4 -mx-4 md:px-8 md:-mx-8 lg:mx-0 lg:px-0 lg:justify-start touch-pan-x"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
@@ -677,7 +668,7 @@ const ProjectCarousel = ({
             }}
           >
             {/* Left spacer for centering first card */}
-            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
+            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:hidden" />
 
             {projects.map((project, index) => (
               <div key={project.title} data-card>
@@ -696,7 +687,7 @@ const ProjectCarousel = ({
 
 
             {/* Right spacer for centering last card */}
-            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:w-[calc((100vw-400px-4rem)/2)]" />
+            <div className="flex-shrink-0 w-[calc((100vw-85vw)/2)] sm:w-[calc((100vw-400px)/2)] md:w-[calc((100vw-420px)/2)] lg:hidden" />
           </div>
 
           {/* Carousel Indicators with Direction */}
@@ -769,8 +760,6 @@ const Projects = () => {
     triggerOnce: true,
   });
 
-  const [websitesBgColor, setWebsitesBgColor] = useState("transparent");
-  const [mobileAppsBgColor, setMobileAppsBgColor] = useState("transparent");
 
   const projectsSchema = {
     "@context": "https://schema.org",
@@ -807,17 +796,8 @@ const Projects = () => {
         description="View DevHorizon's portfolio of 20+ successful projects including Jaggery Tea Point, Haven Salad, BLR360 taxi app, and more. See how we've helped businesses grow with custom web and mobile solutions."
         schema={{ "@context": "https://schema.org", "@graph": [projectsSchema, breadcrumbSchema] }}
       />
-      {/* Dynamic Background Layer */}
-      <div
-        className="fixed inset-0 pointer-events-none z-0 transition-colors duration-300 ease-out"
-        style={{
-          backgroundColor: websitesBgColor !== "transparent" ? websitesBgColor : mobileAppsBgColor,
-          opacity: websitesBgColor !== "transparent" || mobileAppsBgColor !== "transparent" ? 0.15 : 0,
-        }}
-      />
-
       {/* Hero Section */}
-      <section className="section-padding bg-secondary/30 relative overflow-hidden">
+      <section className="section-padding bg-background relative overflow-hidden">
         {/* Decorative Background */}
         <div className="absolute inset-0 pointer-events-none">
           <motion.div
@@ -853,15 +833,7 @@ const Projects = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               Projects That Define{" "}
-              <span className="text-foreground relative">
-                Excellence
-                <motion.span
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-primary/30 rounded-full"
-                  initial={{ scaleX: 0 }}
-                  animate={headerInView ? { scaleX: 1 } : {}}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                />
-              </span>
+              <span className="text-primary">Excellence</span>
             </motion.h1>
             <motion.p
               className="text-lg text-muted-foreground leading-relaxed"
@@ -884,21 +856,17 @@ const Projects = () => {
           title="Custom"
           subtitle="Websites"
           icon={<Globe className="w-6 h-6" />}
-          onActiveColorChange={setWebsitesBgColor}
-          defaultBgColor="transparent"
         />
       </div>
 
       {/* Mobile Apps Carousel */}
-      <div className="bg-secondary/30 relative z-10">
+      <div className="bg-background relative z-10">
         <ProjectCarousel
           projects={mobileApps}
           type="app"
           title="Mobile"
           subtitle="Applications"
           icon={<Smartphone className="w-6 h-6" />}
-          onActiveColorChange={setMobileAppsBgColor}
-          defaultBgColor="transparent"
         />
       </div>
     </Layout>
