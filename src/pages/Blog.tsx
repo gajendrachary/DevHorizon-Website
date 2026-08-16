@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 import { useAutoScrollCarousel } from '@/hooks/useAutoScrollCarousel';
 import { toast } from 'sonner';
-import jzThumb from '@/assets/jz-launch-thumbnail.jpg.asset.json';
+import jzThumb from '@/assets/jz-launch-event-featured.png.asset.json';
 
 // ============= Auto-scroll Configuration =============
 const AUTO_SCROLL_CONFIG = {
