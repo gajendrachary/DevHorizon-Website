@@ -842,15 +842,7 @@ const Projects = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               Projects That Define{" "}
-              <span className="text-foreground relative">
-                Excellence
-                <motion.span
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-primary/30 rounded-full"
-                  initial={{ scaleX: 0 }}
-                  animate={headerInView ? { scaleX: 1 } : {}}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                />
-              </span>
+              <span className="text-primary">Excellence</span>
             </motion.h1>
             <motion.p
               className="text-lg text-muted-foreground leading-relaxed"
