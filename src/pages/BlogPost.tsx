@@ -6,7 +6,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { SEO, getBreadcrumbSchema } from '@/components/common/SEO';
 import { toast } from 'sonner';
-import jzThumb from '@/assets/jz-launch-thumbnail.jpg.asset.json';
+import jzThumb from '@/assets/jz-launch-event-featured.png.asset.json';
 import jzArticle from '@/assets/jz-launch-article.jpg.asset.json';
 
 interface Post {
