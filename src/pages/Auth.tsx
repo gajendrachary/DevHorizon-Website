@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -34,9 +34,18 @@ const Auth = () => {
   const { toast } = useToast();
   const { signIn, signUp, user, isAdmin, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // Only allow same-origin relative paths as a post-login redirect target.
+  const rawNext = searchParams.get('next');
+  const nextPath = rawNext && /^\/(?!\/)/.test(rawNext) ? rawNext : null;
 
   useEffect(() => {
     if (!authLoading && user) {
+      if (nextPath) {
+        window.location.href = nextPath;
+        return;
+      }
       // Redirect admins to admin dashboard, others to home
       if (isAdmin) {
         navigate('/admin');
@@ -44,7 +53,7 @@ const Auth = () => {
         navigate('/');
       }
     }
-  }, [user, isAdmin, authLoading, navigate]);
+  }, [user, isAdmin, authLoading, navigate, nextPath]);
 
   const validateForm = () => {
     try {

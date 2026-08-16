@@ -24,6 +24,7 @@ import CareersProcess from "./pages/careers/ProcessPage";
 import CareersResumeTips from "./pages/careers/ResumeTipsPage";
 import CareersFAQ from "./pages/careers/FAQPage";
 import CareersApply from "./pages/careers/ApplyPage";
+import OAuthConsent from "./pages/OAuthConsent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/get-quote" element={<GetQuote />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/careers/about" element={<CareersAbout />} />
