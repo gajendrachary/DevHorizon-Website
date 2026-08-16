@@ -620,16 +620,7 @@ const ProjectCarousel = ({
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            {title}{" "}
-            <span className="text-foreground relative">
-              {subtitle}
-              <motion.span
-                className="absolute -bottom-2 left-0 w-full h-1 bg-primary/30 rounded-full"
-                initial={{ scaleX: 0 }}
-                animate={inView ? { scaleX: 1 } : {}}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              />
-            </span>
+            {title} <span className="text-primary">{subtitle}</span>
           </motion.h2>
           <motion.p
             className="text-muted-foreground text-lg"
