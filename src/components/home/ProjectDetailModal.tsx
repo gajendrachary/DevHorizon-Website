@@ -163,6 +163,7 @@ export const ProjectDetailModal = ({
                 ))}
               </ul>
             </section>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
