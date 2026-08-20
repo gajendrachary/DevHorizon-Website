@@ -25,7 +25,6 @@ export const PROJECT_ANIMATION_CONFIG = {
 interface ProjectCardProps {
   title: string;
   category: string;
-  url: string;
   description: string;
   color: string;
   technologies: string[];
@@ -41,7 +40,6 @@ interface ProjectCardProps {
 export const ProjectCard = ({
   title,
   category,
-  url,
   description,
   color,
   technologies,

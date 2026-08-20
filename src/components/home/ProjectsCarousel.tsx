@@ -411,7 +411,6 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
                 <ProjectCard
                   title={project.title}
                   category={project.category}
-                  url={project.url}
                   description={project.description}
                   color={project.color}
                   technologies={project.technologies}
