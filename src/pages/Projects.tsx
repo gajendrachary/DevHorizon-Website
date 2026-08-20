@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Layout } from "@/components/layout/Layout";
-import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from "lucide-react";
+import { Smartphone, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 import { useAutoScrollCarousel } from "@/hooks/useAutoScrollCarousel";
@@ -227,8 +227,6 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
           setIsTapped(false);
           if (project.screenshots && onOpenDetails) {
             onOpenDetails();
-          } else if (type === "web" && project.url) {
-            window.open(project.url, '_blank', 'noopener,noreferrer');
           }
         }}
         onTapCancel={() => setIsTapped(false)}
@@ -304,24 +302,21 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
             transition={{ duration: 0.5, ease: "easeInOut" }}
           />
 
-          {type === "web" && (
-            <motion.a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute top-4 right-4 w-10 h-10 bg-background flex items-center justify-center rounded-lg"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{
-                opacity: isHovered ? 1 : 0,
-                y: isHovered ? 0 : 10,
-              }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ExternalLink className="w-5 h-5 text-primary" />
-            </motion.a>
-          )}
           {type === "app" && (
+            <div className="absolute top-4 right-4 flex gap-2">
+              {project.platforms.map((platform: string) => (
+                <motion.span
+                  key={platform}
+                  className="bg-background/90 backdrop-blur-sm px-3 py-1 text-xs font-medium rounded-full"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ delay: entranceDelay + 0.4 }}
+                >
+                  {platform}
+                </motion.span>
+              ))}
+            </div>
+          )}
             <div className="absolute top-4 right-4 flex gap-2">
               {project.platforms.map((platform: string) => (
                 <motion.span
@@ -772,7 +767,6 @@ const Projects = () => {
         position: i + 1,
         name: p.title,
         description: p.description,
-        url: p.url,
       })),
       ...mobileApps.map((p, i) => ({
         "@type": "SoftwareApplication",
