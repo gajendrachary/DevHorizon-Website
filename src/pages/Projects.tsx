@@ -725,7 +725,6 @@ const ProjectCarousel = ({
           category={projects[activeDetailIndex].category}
           icon={projects[activeDetailIndex].image}
           platforms={projects[activeDetailIndex].platforms}
-          url={projects[activeDetailIndex].url}
           screenshots={projects[activeDetailIndex].screenshots}
           details={projects[activeDetailIndex].details}
         />
