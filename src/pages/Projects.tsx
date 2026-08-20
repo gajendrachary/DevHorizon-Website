@@ -344,14 +344,17 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
             {project.description}
           </motion.p>
 
-          {/* Click Hint */}
-          <motion.div
-            className="mt-6 text-xs text-primary font-medium"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHovered || isTapped ? 1 : 0.6 }}
-          >
-            {type === "web" ? "Visit website →" : "View details →"}
-          </motion.div>
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 mt-auto">
+            {project.tech.map((technology: string) => (
+              <span
+                key={technology}
+                className="px-2.5 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full"
+              >
+                {technology}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Bottom Border Animation */}
