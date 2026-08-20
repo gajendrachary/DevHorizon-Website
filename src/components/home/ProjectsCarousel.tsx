@@ -411,7 +411,6 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
                 <ProjectCard
                   title={project.title}
                   category={project.category}
-                  url={project.url}
                   description={project.description}
                   color={project.color}
                   technologies={project.technologies}
@@ -511,7 +510,6 @@ export const ProjectsCarousel = ({ onActiveColorChange }: ProjectsCarouselProps)
           category={projects[activeDetailIndex].category}
           icon={projects[activeDetailIndex].image as string}
           platforms={(projects[activeDetailIndex] as any).platforms}
-          url={projects[activeDetailIndex].url}
           screenshots={(projects[activeDetailIndex] as any).screenshots}
           details={(projects[activeDetailIndex] as any).details}
         />

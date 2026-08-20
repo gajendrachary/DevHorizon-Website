@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, LucideIcon } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 
 // Animation config - matches ServiceCard
@@ -25,7 +25,6 @@ export const PROJECT_ANIMATION_CONFIG = {
 interface ProjectCardProps {
   title: string;
   category: string;
-  url: string;
   description: string;
   color: string;
   technologies: string[];
@@ -41,7 +40,6 @@ interface ProjectCardProps {
 export const ProjectCard = ({
   title,
   category,
-  url,
   description,
   color,
   technologies,
@@ -65,17 +63,13 @@ export const ProjectCard = ({
   const parallaxTranslateY = Math.abs(parallaxOffset) * 10;
 
   const useButton = !!onClick;
-  const RootTag: any = useButton ? motion.button : motion.a;
+  const RootTag: any = useButton ? motion.button : motion.div;
   const rootProps: any = useButton
     ? {
         type: 'button',
         onClick,
       }
-    : {
-        href: url,
-        target: '_blank',
-        rel: 'noopener noreferrer',
-      };
+    : {};
 
   return (
     <RootTag
@@ -197,19 +191,6 @@ export const ProjectCard = ({
             transition={{ duration: 0.5, ease: 'easeInOut' }}
           />
 
-          {/* External Link Indicator */}
-          <motion.div
-            className="absolute top-4 right-4 w-10 h-10 bg-background flex items-center justify-center rounded-lg"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{
-              opacity: isHovered ? 1 : 0,
-              y: isHovered ? 0 : 10,
-            }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-          >
-            <ExternalLink className="w-5 h-5 text-primary" />
-          </motion.div>
-
           {/* Category Badge */}
           <motion.div
             className="absolute bottom-4 left-4 px-3 py-1 bg-background/90 backdrop-blur-sm rounded-full text-xs font-medium text-primary"
@@ -236,14 +217,17 @@ export const ProjectCard = ({
             {description}
           </motion.p>
 
-          {/* Click Hint */}
-          <motion.div
-            className="mt-6 text-xs text-primary font-medium"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHovered || isTapped ? 1 : 0.6 }}
-          >
-            Visit website →
-          </motion.div>
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 mt-auto">
+            {technologies.map((tech) => (
+              <span
+                key={tech}
+                className="px-2.5 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Bottom Border Animation */}

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronLeft, ChevronRight, ExternalLink, Check } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 
 export interface ProjectDetails {
@@ -17,7 +17,6 @@ export interface ProjectDetailModalProps {
   category: string;
   icon: string;
   platforms?: string[];
-  url?: string;
   screenshots: string[];
   details: ProjectDetails;
 }
@@ -29,7 +28,6 @@ export const ProjectDetailModal = ({
   category,
   icon,
   platforms,
-  url,
   screenshots,
   details,
 }: ProjectDetailModalProps) => {
@@ -81,17 +79,6 @@ export const ProjectDetailModal = ({
                 </div>
               )}
             </div>
-            {url && (
-              <Button
-                asChild
-                size="sm"
-                className="hidden sm:inline-flex rounded-full font-semibold"
-              >
-                <a href={url} target="_blank" rel="noopener noreferrer">
-                  Visit <ExternalLink className="ml-1.5 w-3.5 h-3.5" />
-                </a>
-              </Button>
-            )}
           </div>
         </DialogHeader>
 
@@ -177,15 +164,6 @@ export const ProjectDetailModal = ({
               </ul>
             </section>
           </div>
-
-
-          {url && (
-            <Button asChild size="lg" className="w-full sm:hidden rounded-full font-semibold">
-              <a href={url} target="_blank" rel="noopener noreferrer">
-                Visit website <ExternalLink className="ml-1.5 w-4 h-4" />
-              </a>
-            </Button>
-          )}
         </div>
       </DialogContent>
     </Dialog>

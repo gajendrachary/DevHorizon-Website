@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Layout } from "@/components/layout/Layout";
-import { ExternalLink, Smartphone, Globe, ChevronLeft, ChevronRight } from "lucide-react";
+import { Smartphone, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { SEO, getBreadcrumbSchema } from "@/components/common/SEO";
 import { useAutoScrollCarousel } from "@/hooks/useAutoScrollCarousel";
@@ -227,8 +227,6 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
           setIsTapped(false);
           if (project.screenshots && onOpenDetails) {
             onOpenDetails();
-          } else if (type === "web" && project.url) {
-            window.open(project.url, '_blank', 'noopener,noreferrer');
           }
         }}
         onTapCancel={() => setIsTapped(false)}
@@ -304,23 +302,6 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
             transition={{ duration: 0.5, ease: "easeInOut" }}
           />
 
-          {type === "web" && (
-            <motion.a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute top-4 right-4 w-10 h-10 bg-background flex items-center justify-center rounded-lg"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{
-                opacity: isHovered ? 1 : 0,
-                y: isHovered ? 0 : 10,
-              }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ExternalLink className="w-5 h-5 text-primary" />
-            </motion.a>
-          )}
           {type === "app" && (
             <div className="absolute top-4 right-4 flex gap-2">
               {project.platforms.map((platform: string) => (
@@ -363,14 +344,17 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
             {project.description}
           </motion.p>
 
-          {/* Click Hint */}
-          <motion.div
-            className="mt-6 text-xs text-primary font-medium"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHovered || isTapped ? 1 : 0.6 }}
-          >
-            {type === "web" ? "Visit website →" : "View details →"}
-          </motion.div>
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 mt-auto">
+            {project.tech.map((technology: string) => (
+              <span
+                key={technology}
+                className="px-2.5 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full"
+              >
+                {technology}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Bottom Border Animation */}
@@ -744,7 +728,6 @@ const ProjectCarousel = ({
           category={projects[activeDetailIndex].category}
           icon={projects[activeDetailIndex].image}
           platforms={projects[activeDetailIndex].platforms}
-          url={projects[activeDetailIndex].url}
           screenshots={projects[activeDetailIndex].screenshots}
           details={projects[activeDetailIndex].details}
         />
@@ -772,7 +755,6 @@ const Projects = () => {
         position: i + 1,
         name: p.title,
         description: p.description,
-        url: p.url,
       })),
       ...mobileApps.map((p, i) => ({
         "@type": "SoftwareApplication",
