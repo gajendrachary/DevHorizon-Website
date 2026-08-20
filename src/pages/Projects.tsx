@@ -317,20 +317,6 @@ const ProjectCard = ({ project, index, type, isInView, parallaxOffset = 0, onOpe
               ))}
             </div>
           )}
-            <div className="absolute top-4 right-4 flex gap-2">
-              {project.platforms.map((platform: string) => (
-                <motion.span
-                  key={platform}
-                  className="bg-background/90 backdrop-blur-sm px-3 py-1 text-xs font-medium rounded-full"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ delay: entranceDelay + 0.4 }}
-                >
-                  {platform}
-                </motion.span>
-              ))}
-            </div>
-          )}
 
           {/* Category Badge */}
           <motion.div
