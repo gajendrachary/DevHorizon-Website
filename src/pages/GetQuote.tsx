@@ -42,7 +42,7 @@ const quoteFormSchema = z.object({
     .optional()
     .or(z.literal('')),
   services: z.array(z.string()).min(1, 'Please select at least one service'),
-  budget: z.number().min(30000).max(500000),
+  budget: z.number().min(55000).max(500000),
   timeline: z.enum(['urgent', 'fast', 'standard', 'flexible']),
 });
 const ANIMATION_CONFIG = {
@@ -121,7 +121,7 @@ const GetQuote = () => {
   const [step, setStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [timeline, setTimeline] = useState<'urgent' | 'fast' | 'standard' | 'flexible'>('standard');
-  const [budget, setBudget] = useState(50000);
+  const [budget, setBudget] = useState(55000);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [canSubmit, setCanSubmit] = useState(true);
@@ -136,10 +136,10 @@ const GetQuote = () => {
 
   const budgetAnimRef = useRef<number | null>(null);
   const TIMELINE_BUDGETS: Record<string, number> = {
-    urgent: 50000,
-    fast: 35000,
-    standard: 30000,
-    flexible: 30000
+    urgent: 75000,
+    fast: 60000,
+    standard: 55000,
+    flexible: 55000
   };
 
   const animateBudgetTo = (target: number) => {
@@ -159,7 +159,7 @@ const GetQuote = () => {
     budgetAnimRef.current = requestAnimationFrame(tick);
   };
 
-  const minBudget = TIMELINE_BUDGETS[timeline] ?? 30000;
+  const minBudget = TIMELINE_BUDGETS[timeline] ?? 55000;
 
   const handleTimelineSelect = (id: 'urgent' | 'fast' | 'standard' | 'flexible') => {
     setTimeline(id);
