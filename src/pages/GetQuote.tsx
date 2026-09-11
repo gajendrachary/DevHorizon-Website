@@ -43,7 +43,7 @@ const quoteFormSchema = z.object({
     .or(z.literal('')),
   services: z.array(z.string()).min(1, 'Please select at least one service'),
   budget: z.number({ invalid_type_error: 'Please enter your budget' })
-    .min(55000, 'Minimum budget is ₹55,000')
+    .min(55000, 'Please enter a valid budget for this project')
     .max(100000000, 'Please enter a realistic budget'),
   timeline: z.enum(['urgent', 'fast', 'standard', 'flexible']),
 });
@@ -570,7 +570,7 @@ const GetQuote = () => {
                       <span className="text-primary">*</span>
                     </h3>
                     <p className="text-sm text-muted-foreground mb-3">
-                      Enter your budget (minimum ₹{minBudget.toLocaleString()}).
+                      Enter your budget.
                     </p>
                     <div className="relative">
                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">₹</span>
@@ -579,7 +579,7 @@ const GetQuote = () => {
                         inputMode="numeric"
                         required
                         aria-label="Your budget in rupees"
-                        placeholder={minBudget.toLocaleString('en-IN')}
+                        placeholder="Enter amount"
                         value={budgetInput}
                         onChange={e => {
                           const digits = e.target.value.replace(/[^\d]/g, '').slice(0, 9);
