@@ -258,6 +258,7 @@ const GetQuote = () => {
       });
       setStep(1);
       setSelectedServices([]);
+      setBudgetInput('');
       setFormData({
         name: '',
         email: '',
