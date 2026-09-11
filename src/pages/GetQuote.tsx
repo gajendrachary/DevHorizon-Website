@@ -564,31 +564,33 @@ const GetQuote = () => {
                     {/* Accent Corner */}
                     <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[60px] opacity-50" />
                     
-                    <h3 className="font-medium mb-4 flex items-center gap-2">
-                                            <span>Budget Range:</span>
-                      <motion.span
-                        key={timeline}
-                        className="text-primary font-bold"
-                        initial={{ scale: 0.9, opacity: 0.6 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-                      >
-                        ₹{budget.toLocaleString()}
-                      </motion.span>
+                    <h3 className="font-medium mb-2 flex items-center gap-2">
+                      <span>Your Budget</span>
+                      <span className="text-primary">*</span>
                     </h3>
-                    <input 
-                      type="range" 
-                      min={minBudget}
-                      max="500000" 
-                      step="5000" 
-                      value={budget} 
-                      onChange={e => setBudget(Math.max(minBudget, Number(e.target.value)))} 
-                      className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
-                    />
-                    <div className="flex justify-between text-sm text-muted-foreground mt-3">
-                      <span>₹{minBudget.toLocaleString()}</span>
-                      <span>₹5,00,000+</span>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Enter the amount you plan to invest (minimum ₹{minBudget.toLocaleString()}).
+                    </p>
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">₹</span>
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        required
+                        aria-label="Your budget in rupees"
+                        placeholder={minBudget.toLocaleString('en-IN')}
+                        value={budgetInput}
+                        onChange={e => {
+                          const digits = e.target.value.replace(/[^\d]/g, '').slice(0, 9);
+                          setBudgetInput(digits === '' ? '' : Number(digits).toLocaleString('en-IN'));
+                        }}
+                        className="w-full h-12 pl-9 pr-4 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      />
                     </div>
+                    {formErrors.budget && (
+                      <p className="text-sm text-destructive mt-2">{formErrors.budget}</p>
+                    )}
+
                   </motion.div>
                 </motion.div>}
 
