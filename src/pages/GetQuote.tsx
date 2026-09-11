@@ -206,7 +206,7 @@ const GetQuote = () => {
     const validationResult = quoteFormSchema.safeParse({
       ...sanitizedFormData,
       services: selectedServices,
-      budget,
+      budget: budgetValue,
       timeline,
     });
 
