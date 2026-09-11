@@ -42,7 +42,9 @@ const quoteFormSchema = z.object({
     .optional()
     .or(z.literal('')),
   services: z.array(z.string()).min(1, 'Please select at least one service'),
-  budget: z.number().min(55000).max(500000),
+  budget: z.number({ invalid_type_error: 'Please enter your budget' })
+    .min(55000, 'Minimum budget is ₹55,000')
+    .max(100000000, 'Please enter a realistic budget'),
   timeline: z.enum(['urgent', 'fast', 'standard', 'flexible']),
 });
 const ANIMATION_CONFIG = {
