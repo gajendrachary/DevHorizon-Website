@@ -570,7 +570,7 @@ const GetQuote = () => {
                       <span className="text-primary">*</span>
                     </h3>
                     <p className="text-sm text-muted-foreground mb-3">
-                      Enter the amount you plan to invest (minimum ₹{minBudget.toLocaleString()}).
+                      Enter your budget (minimum ₹{minBudget.toLocaleString()}).
                     </p>
                     <div className="relative">
                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">₹</span>
