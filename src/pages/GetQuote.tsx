@@ -123,7 +123,7 @@ const GetQuote = () => {
   const [step, setStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [timeline, setTimeline] = useState<'urgent' | 'fast' | 'standard' | 'flexible'>('standard');
-  const [budget, setBudget] = useState(55000);
+  const [budgetInput, setBudgetInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [canSubmit, setCanSubmit] = useState(true);
