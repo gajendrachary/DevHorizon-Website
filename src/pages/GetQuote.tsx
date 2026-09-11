@@ -42,7 +42,9 @@ const quoteFormSchema = z.object({
     .optional()
     .or(z.literal('')),
   services: z.array(z.string()).min(1, 'Please select at least one service'),
-  budget: z.number().min(55000).max(500000),
+  budget: z.number({ invalid_type_error: 'Please enter your budget' })
+    .min(55000, 'Minimum budget is ₹55,000')
+    .max(100000000, 'Please enter a realistic budget'),
   timeline: z.enum(['urgent', 'fast', 'standard', 'flexible']),
 });
 const ANIMATION_CONFIG = {
@@ -121,7 +123,7 @@ const GetQuote = () => {
   const [step, setStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [timeline, setTimeline] = useState<'urgent' | 'fast' | 'standard' | 'flexible'>('standard');
-  const [budget, setBudget] = useState(55000);
+  const [budgetInput, setBudgetInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [canSubmit, setCanSubmit] = useState(true);
@@ -134,7 +136,6 @@ const GetQuote = () => {
     message: ''
   });
 
-  const budgetAnimRef = useRef<number | null>(null);
   const TIMELINE_BUDGETS: Record<string, number> = {
     urgent: 75000,
     fast: 60000,
@@ -142,28 +143,11 @@ const GetQuote = () => {
     flexible: 55000
   };
 
-  const animateBudgetTo = (target: number) => {
-    if (budgetAnimRef.current) cancelAnimationFrame(budgetAnimRef.current);
-    const start = budget;
-    if (start === target) return;
-    const duration = 600;
-    let startTime: number | null = null;
-    const tick = (now: number) => {
-      if (startTime === null) startTime = now;
-      const p = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const value = Math.round((start + (target - start) * eased) / 1000) * 1000;
-      setBudget(p === 1 ? target : value);
-      if (p < 1) budgetAnimRef.current = requestAnimationFrame(tick);
-    };
-    budgetAnimRef.current = requestAnimationFrame(tick);
-  };
-
   const minBudget = TIMELINE_BUDGETS[timeline] ?? 55000;
+  const budgetValue = budgetInput.replace(/[^\d]/g, '') === '' ? NaN : Number(budgetInput.replace(/[^\d]/g, ''));
 
   const handleTimelineSelect = (id: 'urgent' | 'fast' | 'standard' | 'flexible') => {
     setTimeline(id);
-    animateBudgetTo(TIMELINE_BUDGETS[id]);
   };
   const { toast } = useToast();
   const { executeRecaptcha, verifyToken, isReady: recaptchaReady } = useRecaptcha();
@@ -222,7 +206,7 @@ const GetQuote = () => {
     const validationResult = quoteFormSchema.safeParse({
       ...sanitizedFormData,
       services: selectedServices,
-      budget,
+      budget: budgetValue,
       timeline,
     });
 
@@ -274,6 +258,7 @@ const GetQuote = () => {
       });
       setStep(1);
       setSelectedServices([]);
+      setBudgetInput('');
       setFormData({
         name: '',
         email: '',
@@ -580,31 +565,33 @@ const GetQuote = () => {
                     {/* Accent Corner */}
                     <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[60px] opacity-50" />
                     
-                    <h3 className="font-medium mb-4 flex items-center gap-2">
-                                            <span>Budget Range:</span>
-                      <motion.span
-                        key={timeline}
-                        className="text-primary font-bold"
-                        initial={{ scale: 0.9, opacity: 0.6 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-                      >
-                        ₹{budget.toLocaleString()}
-                      </motion.span>
+                    <h3 className="font-medium mb-2 flex items-center gap-2">
+                      <span>Your Budget</span>
+                      <span className="text-primary">*</span>
                     </h3>
-                    <input 
-                      type="range" 
-                      min={minBudget}
-                      max="500000" 
-                      step="5000" 
-                      value={budget} 
-                      onChange={e => setBudget(Math.max(minBudget, Number(e.target.value)))} 
-                      className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
-                    />
-                    <div className="flex justify-between text-sm text-muted-foreground mt-3">
-                      <span>₹{minBudget.toLocaleString()}</span>
-                      <span>₹5,00,000+</span>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Enter the amount you plan to invest (minimum ₹{minBudget.toLocaleString()}).
+                    </p>
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">₹</span>
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        required
+                        aria-label="Your budget in rupees"
+                        placeholder={minBudget.toLocaleString('en-IN')}
+                        value={budgetInput}
+                        onChange={e => {
+                          const digits = e.target.value.replace(/[^\d]/g, '').slice(0, 9);
+                          setBudgetInput(digits === '' ? '' : Number(digits).toLocaleString('en-IN'));
+                        }}
+                        className="w-full h-12 pl-9 pr-4 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      />
                     </div>
+                    {formErrors.budget && (
+                      <p className="text-sm text-destructive mt-2">{formErrors.budget}</p>
+                    )}
+
                   </motion.div>
                 </motion.div>}
 
@@ -773,9 +760,9 @@ const GetQuote = () => {
                       <ArrowLeft className="w-4 h-4 mr-2" /> Back
                     </Button> : <div />}
                   
-                  {step < 3 ? <Button onClick={() => setStep(step + 1)} disabled={step === 1 && selectedServices.length === 0}>
+                  {step < 3 ? <Button onClick={() => setStep(step + 1)} disabled={(step === 1 && selectedServices.length === 0) || (step === 2 && (isNaN(budgetValue) || budgetValue < minBudget))}>
                       Next <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button> : <Button variant="hero" onClick={handleSubmit} disabled={!formData.name || !formData.email || isSubmitting || !canSubmit}>
+                    </Button> : <Button variant="hero" onClick={handleSubmit} disabled={!formData.name || !formData.email || isNaN(budgetValue) || isSubmitting || !canSubmit}>
                       {isSubmitting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
                       {isSubmitting ? 'Submitting...' : !canSubmit ? 'Please wait...' : 'Submit Quote Request'}
                     </Button>}
