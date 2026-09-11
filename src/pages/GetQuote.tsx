@@ -760,9 +760,9 @@ const GetQuote = () => {
                       <ArrowLeft className="w-4 h-4 mr-2" /> Back
                     </Button> : <div />}
                   
-                  {step < 3 ? <Button onClick={() => setStep(step + 1)} disabled={step === 1 && selectedServices.length === 0}>
+                  {step < 3 ? <Button onClick={() => setStep(step + 1)} disabled={(step === 1 && selectedServices.length === 0) || (step === 2 && (isNaN(budgetValue) || budgetValue < minBudget))}>
                       Next <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button> : <Button variant="hero" onClick={handleSubmit} disabled={!formData.name || !formData.email || isSubmitting || !canSubmit}>
+                    </Button> : <Button variant="hero" onClick={handleSubmit} disabled={!formData.name || !formData.email || isNaN(budgetValue) || isSubmitting || !canSubmit}>
                       {isSubmitting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
                       {isSubmitting ? 'Submitting...' : !canSubmit ? 'Please wait...' : 'Submit Quote Request'}
                     </Button>}
