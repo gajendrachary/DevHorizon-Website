@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import esquireVenturesLogo from '@/assets/esquire-ventures-logo.png.asset.json';
+import nationalMarketReportsLogo from '@/assets/national-market-reports-logo.png.asset.json';
 import { useInView } from 'react-intersection-observer';
 import logoSkandaCloudKitchen from '@/assets/logo-skanda-cloud-kitchen.png';
 import logoLikithaHandcrafts from '@/assets/logo-likitha-handcrafts.png';
@@ -28,6 +29,7 @@ const clientLogos = [
   { name: 'NRI Connecting People', logo: logoNriConnectingPeople },
   { name: 'Anand Transports', logo: logoAnandTransports },
   { name: 'Esquire Ventures', logo: esquireVenturesLogo.url },
+  { name: 'National Market Reports', logo: nationalMarketReportsLogo.url },
 ];
 
 // Duplicate logos for seamless infinite scroll
