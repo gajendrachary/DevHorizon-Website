@@ -1,7 +1,7 @@
 // Master switch for the public Careers experience.
 // Flip to `true` to re-open hiring (also re-open roles in the admin
 // and restore the INSERT policy on job_applications).
-export const HIRING_OPEN = false;
+export const HIRING_OPEN = true;
 
 export const HIRING_CLOSED_TITLE = "We're not hiring right now";
 export const HIRING_CLOSED_MESSAGE =

@@ -7,6 +7,7 @@ import { ClientLogosSection } from "@/components/home/ClientLogosSection";
 import { FAQSection } from "@/components/home/FAQSection";
 import { CTASection } from "@/components/home/CTASection";
 import { ProductSection } from "@/components/home/ProductSection";
+import { InternshipSection } from "@/components/home/InternshipSection";
 import { SEO, getOrganizationSchema, getLocalBusinessSchema, getFAQSchema } from "@/components/common/SEO";
 
 const homepageFaqs = [
@@ -55,6 +56,7 @@ const Index = () => {
       <ClientLogosSection />
       <div className="cv-auto"><CTASection /></div>
       <div className="cv-auto"><ServicesSection /></div>
+      <div className="cv-auto"><InternshipSection /></div>
       <div className="cv-auto"><ProductSection /></div>
       <div className="cv-auto"><StatsSection /></div>
       <div className="cv-auto"><ProjectsPreviewSection /></div>
