@@ -3,7 +3,17 @@ import { motion } from "framer-motion";
 import { GraduationCap, MapPin, Briefcase, Clock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { ApplyForm } from "@/components/careers/ApplyForm";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import type { JobOpening } from "@/components/careers/JobCard";
+
 
 export const InternshipSection = () => {
   const [jobs, setJobs] = useState<JobOpening[]>([]);
