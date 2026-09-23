@@ -87,17 +87,30 @@ export const InternshipSection = () => {
           </div>
         )}
 
-        <div className="mt-12 surface-card p-6 md:p-10 max-w-3xl">
-          <h3 className="text-2xl font-bold text-foreground mb-2">Internship application form</h3>
-          <p className="text-sm text-muted-foreground mb-8">
-            Fill in your details and upload your resume. Our team reviews every application within
-            ~5 business days.
-          </p>
-          <ApplyForm
-            openRoles={roles.map((j) => ({ title: j.title, job_type: j.job_type }))}
-            prefillType="Internship"
-          />
+        <div className="mt-10">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="hero" size="xl">
+                <GraduationCap className="w-5 h-5 mr-2" />
+                Internship application form
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>Internship application form</DialogTitle>
+                <DialogDescription>
+                  Fill in your details and upload your resume. Our team reviews every application
+                  within ~5 business days.
+                </DialogDescription>
+              </DialogHeader>
+              <ApplyForm
+                openRoles={roles.map((j) => ({ title: j.title, job_type: j.job_type }))}
+                prefillType="Internship"
+              />
+            </DialogContent>
+          </Dialog>
         </div>
+
       </div>
     </section>
   );
