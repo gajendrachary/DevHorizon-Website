@@ -63,13 +63,7 @@ publishDir = "dist-hugo"
     weight = 6
 
   [[menu.main]]
-    identifier = "dls"
-    name = "DLS System"
-    url = "/dls/"
-    weight = 7
-
-  [[menu.main]]
     identifier = "contact"
     name = "Get in Touch"
     url = "/get-quote/"
-    weight = 8
+    weight = 7
