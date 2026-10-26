@@ -42,25 +42,13 @@
         </div>
       </div>
 
-      <!-- Right Column: Visual Facade Image with 3D Chrome Emblem -->
-      <div style="position: relative;">
-        <div style="position: relative; border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 25px 60px -15px rgba(0,0,0,0.9);">
-          <img src="/assets/hero-building-facade.jpg" alt="DevHorizon High-Tech Architecture" style="width: 100%; height: auto; object-fit: cover; aspect-ratio: 4/3;">
-          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(17,19,21,0.2) 0%, rgba(17,19,21,0.7) 100%);"></div>
+      <!-- Right Column: Official 3D Chrome Metallic Emblem Showcase -->
+      <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+        <div style="position: relative; width: 100%; border-radius: 1.5rem; overflow: hidden; background: radial-gradient(ellipse at center, #1E2228 0%, #111315 100%); border: 1px solid rgba(232, 234, 237, 0.16); box-shadow: 0 25px 60px -15px rgba(0,0,0,0.9), 0 0 50px rgba(0, 102, 255, 0.12); padding: 3.5rem 2.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px;">
+          <!-- Ambient Radial Lighting Glow -->
+          <div style="position: absolute; width: 280px; height: 280px; background: radial-gradient(circle, rgba(0, 132, 255, 0.22) 0%, rgba(232, 234, 237, 0.08) 50%, transparent 70%); filter: blur(35px); pointer-events: none;"></div>
           
-          <!-- Floating Badge -->
-          <div style="position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem; background: rgba(17, 19, 21, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); border-radius: 1rem; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-              <img src="/assets/devhorizon-logo-metallic.png" alt="DevHorizon Emblem" style="height: 2.25rem; width: auto;">
-              <div>
-                <div style="font-size: 0.8125rem; font-weight: 700; color: #FFFFFF;">Enterprise Tier-1 Engineering</div>
-                <div style="font-size: 0.6875rem; color: var(--dls-platinum);">ISO 27001 & SOC-2 Architectural Standards</div>
-              </div>
-            </div>
-            <span class="dls-badge dls-badge-success dls-badge-sm">
-              <span class="dls-dot"></span>ACTIVE
-            </span>
-          </div>
+          <img src="/assets/devhorizon-hero-emblem.png" alt="DevHorizon - Build Beyond Today" style="position: relative; width: 100%; max-width: 480px; height: auto; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.85)) drop-shadow(0 0 25px rgba(0,132,255,0.35)); transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
         </div>
       </div>
     </div>
@@ -218,14 +206,14 @@
       </a>
     </div>
 
-    <!-- 3 Projects Grid -->
+    <!-- 3 Projects Grid with Parallax Effect -->
     <div class="dls-grid-3">
-      <!-- Project 1 -->
+      <!-- Project 1: Skanda Cloud Kitchen -->
       <div class="dls-card-project">
-        <div style="height: 13rem; width: 100%; overflow: hidden; background: #1A1C1F; position: relative;">
-          <img src="/assets/project-skanda-mockup.jpg" alt="Skanda Cloud Kitchen" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
-          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(36,39,43,0.9) 100%);"></div>
-          <span style="position: absolute; top: 0.75rem; left: 0.75rem; font-size: 0.625rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; padding: 0.25rem 0.6rem; border-radius: 9999px; background: rgba(17,19,21,0.8); backdrop-filter: blur(8px); color: #E8EAED; border: 1px solid rgba(255,255,255,0.1);">
+        <div class="project-media-wrapper">
+          <img src="/assets/skanda-billing/skanda-billing-1.jpg" alt="Skanda Cloud Kitchen" style="object-position: top center;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(17,19,21,0.85) 100%);"></div>
+          <span style="position: absolute; top: 0.85rem; left: 0.85rem; font-size: 0.625rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; padding: 0.25rem 0.65rem; border-radius: 9999px; background: rgba(17,19,21,0.85); backdrop-filter: blur(8px); color: #E8EAED; border: 1px solid rgba(255,255,255,0.15);">
             PWA • POS SYSTEM
           </span>
         </div>
@@ -233,12 +221,12 @@
           <div>
             <h3 style="font-size: 1.1875rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.5rem; letter-spacing: -0.02em;">Skanda Cloud Kitchen</h3>
             <p style="font-size: 0.8125rem; color: var(--dls-text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
-              Cloud-native restaurant billing, kitchen display system (KDS), and inventory analytics built for high-throughput venues.
+              Multi-terminal cloud billing suite, kitchen display system (KDS), and inventory analytics built for high-throughput culinary venues.
             </p>
             <div style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.5rem;">
-              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">POS System</span>
+              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">React POS</span>
               <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">WebSockets</span>
-              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Offline-First</span>
+              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Cloud Billing</span>
             </div>
           </div>
           <a href="/projects/" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; color: var(--dls-silver); padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.08);">
@@ -248,25 +236,25 @@
         </div>
       </div>
 
-      <!-- Project 2 -->
+      <!-- Project 2: Haven Salad -->
       <div class="dls-card-project">
-        <div style="height: 13rem; width: 100%; overflow: hidden; background: #1A1C1F; position: relative;">
-          <img src="/assets/project-pantry-mockup.jpg" alt="Pantry Haven" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
-          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(36,39,43,0.9) 100%);"></div>
-          <span style="position: absolute; top: 0.75rem; left: 0.75rem; font-size: 0.625rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; padding: 0.25rem 0.6rem; border-radius: 9999px; background: rgba(17,19,21,0.8); backdrop-filter: blur(8px); color: #E8EAED; border: 1px solid rgba(255,255,255,0.1);">
-            E-COMMERCE • LOGISTICS
+        <div class="project-media-wrapper">
+          <img src="/assets/project-haven-salad.jpg" alt="Haven Salad" style="object-position: center;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(17,19,21,0.85) 100%);"></div>
+          <span style="position: absolute; top: 0.85rem; left: 0.85rem; font-size: 0.625rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; padding: 0.25rem 0.65rem; border-radius: 9999px; background: rgba(17,19,21,0.85); backdrop-filter: blur(8px); color: #E8EAED; border: 1px solid rgba(255,255,255,0.15);">
+            E-COMMERCE • SUBSCRIPTION
           </span>
         </div>
         <div style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
-            <h3 style="font-size: 1.1875rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.5rem; letter-spacing: -0.02em;">Pantry Haven</h3>
+            <h3 style="font-size: 1.1875rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.5rem; letter-spacing: -0.02em;">Haven Salad & Bowls</h3>
             <p style="font-size: 0.8125rem; color: var(--dls-text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
-              Direct-to-consumer organic meal subscription platform with automated dispatch management and delivery routing.
+              Direct-to-consumer organic meal subscription platform with automated dispatch management, customized diets, and payment gateway.
             </p>
             <div style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.5rem;">
-              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">E-commerce</span>
-              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Stripe Payments</span>
-              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Route Optimization</span>
+              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Subscriptions</span>
+              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Payments</span>
+              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Logistics</span>
             </div>
           </div>
           <a href="/projects/" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; color: var(--dls-silver); padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.08);">
@@ -276,25 +264,25 @@
         </div>
       </div>
 
-      <!-- Project 3 -->
+      <!-- Project 3: Jaggery Tea Point -->
       <div class="dls-card-project">
-        <div style="height: 13rem; width: 100%; overflow: hidden; background: #1A1C1F; position: relative;">
-          <img src="/assets/project-residency-mockup.jpg" alt="Hotel Residency" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
-          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(36,39,43,0.9) 100%);"></div>
-          <span style="position: absolute; top: 0.75rem; left: 0.75rem; font-size: 0.625rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; padding: 0.25rem 0.6rem; border-radius: 9999px; background: rgba(17,19,21,0.8); backdrop-filter: blur(8px); color: #E8EAED; border: 1px solid rgba(255,255,255,0.1);">
-            MOBILE APP • HOSPITALITY
+        <div class="project-media-wrapper">
+          <img src="/assets/project-jaggery-tea-point.jpg" alt="Jaggery Tea Point" style="object-position: center;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(17,19,21,0.85) 100%);"></div>
+          <span style="position: absolute; top: 0.85rem; left: 0.85rem; font-size: 0.625rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; padding: 0.25rem 0.65rem; border-radius: 9999px; background: rgba(17,19,21,0.85); backdrop-filter: blur(8px); color: #E8EAED; border: 1px solid rgba(255,255,255,0.15);">
+            RETAIL • FRANCHISE EXPANSION
           </span>
         </div>
         <div style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
-            <h3 style="font-size: 1.1875rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.5rem; letter-spacing: -0.02em;">Hotel Residency</h3>
+            <h3 style="font-size: 1.1875rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.5rem; letter-spacing: -0.02em;">Jaggery Tea Point</h3>
             <p style="font-size: 0.8125rem; color: var(--dls-text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
-              Full-suite hospitality mobile application featuring room reservations, live concierge chat, and automated guest check-in.
+              Multi-outlet franchise opportunity portal with interactive store locator, franchisee onboarding, and supplier management.
             </p>
             <div style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.5rem;">
-              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">React Native</span>
-              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Guest Check-in</span>
-              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Concierge Chat</span>
+              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Store Locator</span>
+              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Franchise Portal</span>
+              <span style="font-size: 0.6875rem; font-family: var(--font-mono); padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: rgba(255,255,255,0.05); color: var(--dls-text-muted); border: 1px solid rgba(255,255,255,0.05);">Vue.js</span>
             </div>
           </div>
           <a href="/projects/" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; color: var(--dls-silver); padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.08);">
@@ -306,6 +294,29 @@
     </div>
   </div>
 </section>
+
+<!-- Parallax Scroll Script for Projects -->
+<script>
+(function() {
+  function applyProjectParallax() {
+    var cards = document.querySelectorAll('.dls-card-project .project-media-wrapper img');
+    if (!cards.length) return;
+    var windowH = window.innerHeight;
+    cards.forEach(function(img) {
+      var rect = img.parentElement.getBoundingClientRect();
+      if (rect.top < windowH && rect.bottom > 0) {
+        var progress = (windowH - rect.top) / (windowH + rect.height);
+        var translateY = (progress - 0.5) * -32; // Smooth parallax translation
+        img.style.transform = 'translateY(' + translateY.toFixed(1) + 'px)';
+      }
+    });
+  }
+  window.addEventListener('scroll', applyProjectParallax, { passive: true });
+  window.addEventListener('resize', applyProjectParallax, { passive: true });
+  document.addEventListener('DOMContentLoaded', applyProjectParallax);
+  setTimeout(applyProjectParallax, 100);
+})();
+</script>
 
 <!-- 5. About Us & Process Section -->
 <section class="dls-section" style="border-top: 1px solid rgba(255, 255, 255, 0.08);">
@@ -325,7 +336,7 @@
       </div>
 
       <div style="border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
-        <img src="/assets/office-interior.jpg" alt="DevHorizon Technology Office" style="width: 100%; height: auto; object-fit: cover; aspect-ratio: 16/10;">
+        <img src="/assets/team-brainstorming.jpg" alt="DevHorizon Technology Office" style="width: 100%; height: auto; object-fit: cover; aspect-ratio: 16/10;">
       </div>
     </div>
 
