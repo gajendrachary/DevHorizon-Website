@@ -1,4 +1,4 @@
-baseURL = "https://devhorizontechnologies.com/"
+baseURL = "https://devhorizontech.com/"
 locale = "en-us"
 title = "DevHorizon Technologies | Build Beyond Today"
 publishDir = "dist-hugo"

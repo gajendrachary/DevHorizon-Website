@@ -27,4 +27,4 @@ At DevHorizon, we build high-impact platforms for clients across the globe. We c
 ---
 
 ### How to Apply
-Send your resume and portfolio / GitHub link to **[careers@devhorizontechnologies.com](mailto:careers@devhorizontechnologies.com)**.
+Send your resume and portfolio / GitHub link to **[careers@devhorizontech.com](mailto:careers@devhorizontech.com)**.
