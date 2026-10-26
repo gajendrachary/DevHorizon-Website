@@ -1,65 +1,65 @@
+# DevHorizon Technologies — Official Website
 
-## Project info
+High-performance static website for **DevHorizon Technologies**, built with **Hugo Extended** and powered by the **DevHorizon Design Language System (@devhorizon/dls)**.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Architecture
 
-## How can I edit this code?
+- **Static Site Generator**: [Hugo Extended](https://gohugo.io/) (v0.145+)
+- **Design System**: Decoupled `@devhorizon/dls` (Tokens, atomic components, obsidian & silver palette)
+- **Deployment Target**: GitHub Pages with automatic GitHub Actions CI/CD
+- **Performance**: Sub-150ms static compilation, zero external runtime database dependencies, instant global edge delivery
 
+## Getting Started
 
+### Prerequisites
 
+- [Hugo Extended](https://gohugo.io/installation/) (`brew install hugo`)
+- Git
 
+### Development
 
-**Use your preferred IDE**
+```bash
+# Clone the repository with submodules
+git clone --recurse-submodules https://github.com/gajendrachary/DevHorizon-Website.git
+cd DevHorizon-Website
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the Hugo development server with live reload
 npm run dev
+# or: hugo server -D -p 1313
 ```
 
-**Edit a file directly in GitHub**
+Visit `http://localhost:1313/` in your browser.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Building for Production
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+# or: hugo --minify
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+The optimized static production files are output to `dist-hugo/`.
 
-## What technologies are used for this project?
+### Standalone DLS Development
 
-This project is built with:
+To run the interactive Design Language System component workbench independently:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+npm run dls:dev
+# Starts Vite playground on http://localhost:5175
+```
 
+## Structure
 
+```
+.
+├── assets/          # Global DLS stylesheets and Hugo asset pipeline resources
+├── content/         # Markdown content and page sections
+├── layouts/         # Hugo HTML templates and DLS reusable partials
+├── packages/dls/    # Standalone @devhorizon/dls design system submodule
+├── static/          # Static assets (images, logos, favicon, robots.txt)
+└── hugo.toml        # Hugo site configuration and metadata
+```
 
+## License
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Copyright © 2026 DevHorizon Technologies Pvt Ltd. All rights reserved.

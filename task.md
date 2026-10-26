@@ -77,12 +77,12 @@ Transforming DevHorizon into an elite, tier-1 tech agency web presence (inspired
 - [x] **Task 5.2**: Launch dev server and visually inspect output in browser to verify pixel-perfection matching the design.
 - [x] **Task 5.3**: Deliver final review and exportable DLS guidelines.
 
-### Phase 6: Migration to Hugo (SSG) & Removal of Lovable & Supabase
+### Phase 6: Migration to Hugo (SSG) & Purging Legacy Dependencies
 - [x] **Task 6.1**: Setup Hugo configuration (`hugo.toml`) and directory structure (`content/`, `layouts/`, `assets/`, `static/`).
 - [x] **Task 6.2**: Port DLS design tokens and styles (`dls.css`, metallic shine, Manrope/Inter typography, luxury obsidian/silver palette) into Hugo asset pipeline.
 - [x] **Task 6.3**: Build Hugo-native DLS component partials (`button.html`, `badge.html`, `card.html`, `stat.html`, `timeline.html`, `logo.html`, `header.html`, `footer.html`).
 - [x] **Task 6.4**: Build Hugo templates and content for all pages (Homepage, Services, Projects, About, Careers, Contact/Get Quote, DLS Showcase).
-- [x] **Task 6.5**: Completely purge all Lovable and Supabase dependencies, packages, and configuration files.
+- [x] **Task 6.5**: Completely purge all legacy third-party dependencies, packages, and configuration files.
 - [x] **Task 6.6**: Configure Hugo build/dev scripts and verify with `hugo server` and `hugo --minify`.
 
 ### Phase 7: Standalone DLS Repository Published to GitHub
