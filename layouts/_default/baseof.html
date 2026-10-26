@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ or .Site.Language.Locale "en-us" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | DevHorizon Technologies{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/devhorizon-logo-metallic.png">
+
+  <!-- DLS Stylesheet via Hugo Pipes -->
+  {{ $css := resources.Get "css/dls.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+</head>
+<body>
+  {{ partial "header.html" . }}
+
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>

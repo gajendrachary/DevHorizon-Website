@@ -1,0 +1,23 @@
+{{ define "main" }}
+<section class="dls-section">
+  <div class="container-dls" style="max-width: 860px;">
+    <div style="margin-bottom: 3rem;">
+      {{ with .Params.eyebrow }}
+        <span class="dls-badge dls-badge-silver" style="margin-bottom: 1rem;">{{ . }}</span>
+      {{ end }}
+      <h1 class="dls-display-title" style="font-size: clamp(2rem, 4vw, 3.25rem); margin-bottom: 1rem;">
+        {{ .Title }}
+      </h1>
+      {{ with .Description }}
+        <p style="font-size: 1.125rem; color: var(--dls-text-muted); line-height: 1.7;">
+          {{ . }}
+        </p>
+      {{ end }}
+    </div>
+
+    <div class="dls-card-dark" style="padding: 2.5rem; line-height: 1.8; color: var(--dls-text-light);">
+      {{ .Content }}
+    </div>
+  </div>
+</section>
+{{ end }}

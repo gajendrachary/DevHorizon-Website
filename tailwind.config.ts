@@ -14,11 +14,26 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'Manrope', 'system-ui', 'sans-serif'],
+        manrope: ['Manrope', 'sans-serif'],
         logo: ['Orbitron', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
+        dls: {
+          bg: "#111315",
+          surface: "#24272B",
+          "surface-hover": "#2B2F35",
+          "surface-elevated": "#1A1C1F",
+          text: "#D4D8DE",
+          "text-muted": "#8E95A0",
+          "text-subtle": "#626873",
+          silver: "#E8EAED",
+          platinum: "#C0C5CC",
+          white: "#FFFFFF",
+          "border-dark": "rgba(255, 255, 255, 0.08)",
+          "border-silver": "rgba(232, 234, 237, 0.25)",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -1,0 +1,41 @@
+{{/*
+  DLS Card Partial
+  Usage: {{ partial "dls/card.html" (dict "type" "dark" "title" "Cloud Architecture" "description" "Scalable Kubernetes." "linkText" "Learn More" "url" "/services/") }}
+*/}}
+{{ $type := .type | default "dark" }}
+
+{{ if eq $type "white" }}
+  <div class="dls-card-white">
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <div style="width: 3rem; height: 3rem; border-radius: 0.75rem; background: #F4F5F7; display: flex; align-items: center; justify-content: center; color: #111315;">
+          {{ with .icon }}{{ . | safeHTML }}{{ else }}
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          {{ end }}
+        </div>
+        {{ with .badge }}
+          <span style="font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(0,0,0,0.05); padding: 0.2rem 0.6rem; border-radius: 9999px; color: #5F6672;">{{ . }}</span>
+        {{ end }}
+      </div>
+      <h3 style="font-size: 1.1875rem; font-weight: 800; color: #0E1012; margin-bottom: 0.5rem; letter-spacing: -0.02em;">{{ .title }}</h3>
+      <p style="font-size: 0.875rem; color: #5F6672; line-height: 1.6; margin-bottom: 1.5rem;">{{ .description }}</p>
+    </div>
+    {{ with .url }}
+      <a href="{{ . }}" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; font-weight: 700; color: #0E1012; padding-top: 0.75rem; border-top: 1px solid rgba(0,0,0,0.06);">
+        <span>{{ $.linkText | default "Learn More" }}</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    {{ end }}
+  </div>
+{{ else }}
+  <div class="dls-card-dark">
+    <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.5rem; letter-spacing: -0.02em;">{{ .title }}</h3>
+    <p style="font-size: 0.875rem; color: var(--dls-text-muted); line-height: 1.6; margin-bottom: 1.5rem;">{{ .description }}</p>
+    {{ with .url }}
+      <a href="{{ . }}" class="dls-btn dls-btn-silver dls-btn-sm">
+        <span>{{ $.linkText | default "Learn More" }}</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    {{ end }}
+  </div>
+{{ end }}

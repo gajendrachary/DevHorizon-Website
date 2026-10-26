@@ -1,0 +1,17 @@
+{{/*
+  DLS Stat Item Partial
+  Usage: {{ partial "dls/stat.html" (dict "number" "21+" "label" "Team Members" "subtext" "Driven by expertise" "metallic" true) }}
+*/}}
+<div class="dls-stat-item">
+  <div class="dls-stat-number{{ if .metallic }} dls-text-metallic{{ end }}">
+    {{ .number }}
+  </div>
+  <div class="dls-stat-label">
+    {{ .label }}
+  </div>
+  {{ with .subtext }}
+    <div class="dls-stat-subtext">
+      {{ . }}
+    </div>
+  {{ end }}
+</div>

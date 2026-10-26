@@ -1,0 +1,38 @@
+{{/*
+  DLS Button Partial
+  Usage: {{ partial "dls/button.html" (dict "text" "Explore Services" "url" "/services/" "variant" "primary" "size" "lg" "arrow" true) }}
+*/}}
+{{ $variant := .variant | default "primary" }}
+{{ $size := .size | default "md" }}
+{{ $class := "dls-btn" }}
+
+{{ if eq $variant "primary" }}
+  {{ $class = printf "%s dls-btn-silver" $class }}
+{{ else if eq $variant "secondary" }}
+  {{ $class = printf "%s dls-btn-secondary" $class }}
+{{ else if eq $variant "inverted" }}
+  {{ $class = printf "%s dls-btn-inverted" $class }}
+{{ else if eq $variant "ghost" }}
+  {{ $class = printf "%s dls-btn-ghost" $class }}
+{{ end }}
+
+{{ if eq $size "lg" }}
+  {{ $class = printf "%s dls-btn-lg" $class }}
+{{ else if eq $size "sm" }}
+  {{ $class = printf "%s dls-btn-sm" $class }}
+{{ end }}
+
+{{ if eq .shape "rounded" }}
+  {{ $class = printf "%s dls-btn-rounded" $class }}
+{{ end }}
+
+{{ if .class }}
+  {{ $class = printf "%s %s" $class .class }}
+{{ end }}
+
+<a href="{{ .url | default "#" }}" class="{{ $class }}">
+  <span>{{ .text }}</span>
+  {{ if .arrow }}
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  {{ end }}
+</a>

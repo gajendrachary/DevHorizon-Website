@@ -1,0 +1,22 @@
+{{/*
+  DLS Process Timeline Step Partial
+  Usage: {{ partial "dls/timeline.html" (dict "number" "01" "title" "Discover" "description" "Understand requirements." "duration" "Week 1" "status" "completed") }}
+*/}}
+<div class="dls-step-card">
+  <div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+      <span style="font-size: 0.75rem; font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.1em; color: var(--dls-platinum); padding: 0.25rem 0.6rem; border-radius: 0.25rem; background: #2A2E33; border: 1px solid rgba(255,255,255,0.05);">{{ .number }}</span>
+      {{ with .duration }}
+        {{ $badgeVar := "silver" }}
+        {{ if eq $.status "completed" }}{{ $badgeVar = "success" }}{{ end }}
+        {{ if eq $.status "upcoming" }}{{ $badgeVar = "dark" }}{{ end }}
+        <span class="dls-badge dls-badge-{{ $badgeVar }} dls-badge-sm">{{ . }}</span>
+      {{ end }}
+    </div>
+    <h4 style="font-size: 1.0625rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">{{ .title }}</h4>
+    <p style="font-size: 0.8125rem; color: var(--dls-text-muted); line-height: 1.5;">{{ .description }}</p>
+  </div>
+  <div style="padding-top: 1rem; margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; color: var(--dls-text-muted); letter-spacing: 0.1em;">
+    Phase {{ .number }}
+  </div>
+</div>

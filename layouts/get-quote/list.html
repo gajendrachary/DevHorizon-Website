@@ -1,0 +1,111 @@
+{{ define "main" }}
+<div class="dls-page-wrapper">
+  <!-- Get Quote Hero -->
+  <section class="dls-section" style="padding-top: 5rem; padding-bottom: 3.5rem;">
+    <div class="container-dls">
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <span class="dls-badge dls-badge-silver" style="margin-bottom: 1.25rem;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: #E8EAED; display: inline-block;"></span>
+          START A PROJECT
+        </span>
+        <h1 class="dls-display-title" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; line-height: 1.15;">
+          Let's Build Beyond Today.
+        </h1>
+        <p style="font-size: clamp(1rem, 2vw, 1.25rem); color: var(--dls-text-muted); line-height: 1.7; max-width: 620px; margin: 0 auto;">
+          Tell us about your product vision, timeline, and goals. Our engineering architects will review your requirements and respond within 24 hours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Form Container -->
+  <section class="dls-section" style="padding-top: 0; padding-bottom: 6rem;">
+    <div class="container-dls">
+      <div style="max-width: 820px; margin: 0 auto; background: #16191D; border: 1px solid rgba(192, 197, 204, 0.15); border-radius: 20px; padding: clamp(2rem, 5vw, 3.5rem); box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+        <form action="https://api.web3forms.com/submit" method="POST" id="quote-form" style="display: flex; flex-direction: column; gap: 2.25rem;">
+          <!-- Web3Forms Access Key (placeholder / fallback) -->
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+          <input type="hidden" name="subject" value="New Project Inquiry - DevHorizon Website" />
+          <input type="hidden" name="from_name" value="DevHorizon Inquiry Portal" />
+
+          <!-- Step 1: Services -->
+          <div>
+            <label style="display: block; font-size: 0.875rem; font-weight: 700; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">
+              1. What services do you need?
+            </label>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
+              <label class="dls-checkbox-card" style="display: flex; items-center; gap: 0.75rem; padding: 1rem; border-radius: 10px; background: #24272B; border: 1px solid rgba(192, 197, 204, 0.1); cursor: pointer;">
+                <input type="checkbox" name="services[]" value="Web Development" style="accent-color: #E8EAED;" />
+                <span style="font-size: 0.875rem; color: #D4D8DE; font-weight: 600;">Web Development</span>
+              </label>
+              <label class="dls-checkbox-card" style="display: flex; items-center; gap: 0.75rem; padding: 1rem; border-radius: 10px; background: #24272B; border: 1px solid rgba(192, 197, 204, 0.1); cursor: pointer;">
+                <input type="checkbox" name="services[]" value="Mobile App" style="accent-color: #E8EAED;" />
+                <span style="font-size: 0.875rem; color: #D4D8DE; font-weight: 600;">Mobile App</span>
+              </label>
+              <label class="dls-checkbox-card" style="display: flex; items-center; gap: 0.75rem; padding: 1rem; border-radius: 10px; background: #24272B; border: 1px solid rgba(192, 197, 204, 0.1); cursor: pointer;">
+                <input type="checkbox" name="services[]" value="AI & Machine Learning" style="accent-color: #E8EAED;" />
+                <span style="font-size: 0.875rem; color: #D4D8DE; font-weight: 600;">AI & Automation</span>
+              </label>
+              <label class="dls-checkbox-card" style="display: flex; items-center; gap: 0.75rem; padding: 1rem; border-radius: 10px; background: #24272B; border: 1px solid rgba(192, 197, 204, 0.1); cursor: pointer;">
+                <input type="checkbox" name="services[]" value="Cloud Infrastructure" style="accent-color: #E8EAED;" />
+                <span style="font-size: 0.875rem; color: #D4D8DE; font-weight: 600;">Cloud & DevOps</span>
+              </label>
+              <label class="dls-checkbox-card" style="display: flex; items-center; gap: 0.75rem; padding: 1rem; border-radius: 10px; background: #24272B; border: 1px solid rgba(192, 197, 204, 0.1); cursor: pointer;">
+                <input type="checkbox" name="services[]" value="UI/UX & DLS Design" style="accent-color: #E8EAED;" />
+                <span style="font-size: 0.875rem; color: #D4D8DE; font-weight: 600;">UI/UX & Design</span>
+              </label>
+              <label class="dls-checkbox-card" style="display: flex; items-center; gap: 0.75rem; padding: 1rem; border-radius: 10px; background: #24272B; border: 1px solid rgba(192, 197, 204, 0.1); cursor: pointer;">
+                <input type="checkbox" name="services[]" value="24/7 SLA Support" style="accent-color: #E8EAED;" />
+                <span style="font-size: 0.875rem; color: #D4D8DE; font-weight: 600;">24/7 SLA Support</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 2: Contact Info -->
+          <div>
+            <label style="display: block; font-size: 0.875rem; font-weight: 700; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">
+              2. Your Contact Information
+            </label>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+              <div>
+                <label style="display: block; font-size: 0.75rem; color: #8E95A0; margin-bottom: 0.4rem;">Full Name *</label>
+                <input type="text" name="name" required placeholder="John Doe" style="width: 100%; padding: 0.75rem 1rem; border-radius: 8px; background: #24272B; border: 1px solid rgba(192,197,204,0.15); color: #FFFFFF; font-size: 0.9375rem; outline: none;" />
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.75rem; color: #8E95A0; margin-bottom: 0.4rem;">Business Email *</label>
+                <input type="email" name="email" required placeholder="john@company.com" style="width: 100%; padding: 0.75rem 1rem; border-radius: 8px; background: #24272B; border: 1px solid rgba(192,197,204,0.15); color: #FFFFFF; font-size: 0.9375rem; outline: none;" />
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.75rem; color: #8E95A0; margin-bottom: 0.4rem;">Phone / WhatsApp</label>
+                <input type="tel" name="phone" placeholder="+1 (555) 000-0000" style="width: 100%; padding: 0.75rem 1rem; border-radius: 8px; background: #24272B; border: 1px solid rgba(192,197,204,0.15); color: #FFFFFF; font-size: 0.9375rem; outline: none;" />
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.75rem; color: #8E95A0; margin-bottom: 0.4rem;">Company / Organization</label>
+                <input type="text" name="company" placeholder="Acme Technologies" style="width: 100%; padding: 0.75rem 1rem; border-radius: 8px; background: #24272B; border: 1px solid rgba(192,197,204,0.15); color: #FFFFFF; font-size: 0.9375rem; outline: none;" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Project Scope & Notes -->
+          <div>
+            <label style="display: block; font-size: 0.875rem; font-weight: 700; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem;">
+              3. Project Details & Goals
+            </label>
+            <textarea name="message" rows="4" required placeholder="Describe your product vision, target audience, core technical requirements, and any existing tech stack..." style="width: 100%; padding: 0.875rem 1rem; border-radius: 8px; background: #24272B; border: 1px solid rgba(192,197,204,0.15); color: #FFFFFF; font-size: 0.9375rem; outline: none; line-height: 1.6; resize: vertical;"></textarea>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <button type="submit" class="dls-btn dls-btn-silver dls-btn-lg" style="width: 100%; justify-content: center; cursor: pointer;">
+              <span>Submit Project Inquiry</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <div style="text-align: center; font-size: 0.8125rem; color: #8E95A0;">
+              Or email our architects directly at <a href="mailto:info@devhorizontech.com" style="color: #E8EAED; font-weight: 600;">info@devhorizontech.com</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}

@@ -1,0 +1,194 @@
+{{ define "main" }}
+<div class="dls-page-wrapper">
+  <!-- Services Hero -->
+  <section class="dls-section" style="padding-top: 5rem; padding-bottom: 4rem;">
+    <div class="container-dls">
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <span class="dls-badge dls-badge-silver" style="margin-bottom: 1.25rem;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: #E8EAED; display: inline-block;"></span>
+          FULL-LIFECYCLE ENGINEERING
+        </span>
+        <h1 class="dls-display-title" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; line-height: 1.15;">
+          End-to-End Technology Solutions
+        </h1>
+        <p style="font-size: clamp(1rem, 2vw, 1.25rem); color: var(--dls-text-muted); line-height: 1.7; max-width: 680px; margin: 0 auto 2.5rem;">
+          From rapid architectural prototyping to scalable distributed enterprise infrastructure, we build digital platforms engineered for stability, performance, and revenue growth.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+          {{ partial "dls/button.html" (dict "text" "Request a Custom Quote" "url" "/get-quote/" "variant" "primary" "size" "lg" "arrow" true) }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architectural White Services Grid -->
+  <section class="dls-section-white">
+    <div class="container-dls">
+      <div style="margin-bottom: 3.5rem; max-width: 650px;">
+        <span class="dls-badge" style="background: rgba(14, 16, 18, 0.08); color: #0E1012; border: 1px solid rgba(14, 16, 18, 0.12); margin-bottom: 1rem;">
+          CORE CAPABILITIES
+        </span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; color: #0E1012; letter-spacing: -0.02em; margin-bottom: 1rem;">
+          Specialized Engineering Disciplines
+        </h2>
+        <p style="font-size: 1.0625rem; color: #555A63; line-height: 1.6;">
+          Each service is delivered by dedicated domain specialists using modern standards, automated testing, and transparent sprint cycles.
+        </p>
+      </div>
+
+      <div class="dls-grid-3">
+        <!-- 1. Web Development -->
+        <div class="dls-card-white">
+          <div>
+            <div class="dls-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            </div>
+            <div class="dls-card-timeline">2-4 WEEKS TIMELINE</div>
+            <h3 class="dls-card-title">Custom Web Development</h3>
+            <p class="dls-card-desc">
+              Ultra-fast responsive web applications with server-side rendering, sub-second load times, and dynamic interactive interfaces.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; font-size: 0.875rem; color: #555A63; display: flex; flex-direction: column; gap: 0.5rem;">
+              <li>✓ SEO-optimized architecture</li>
+              <li>✓ React, Next.js, and TypeScript</li>
+              <li>✓ Responsive cross-device compatibility</li>
+            </ul>
+          </div>
+          <a href="/get-quote/?service=web" class="dls-card-link">
+            <span>Start Web Project</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- 2. Mobile App Development -->
+        <div class="dls-card-white">
+          <div>
+            <div class="dls-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+            </div>
+            <div class="dls-card-timeline">4-8 WEEKS TIMELINE</div>
+            <h3 class="dls-card-title">Mobile App Development</h3>
+            <p class="dls-card-desc">
+              Native iOS (Swift), Android (Kotlin), and cross-platform React Native apps with offline support and fluid gestures.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; font-size: 0.875rem; color: #555A63; display: flex; flex-direction: column; gap: 0.5rem;">
+              <li>✓ App Store & Play Store publishing</li>
+              <li>✓ Biometric security & push notifications</li>
+              <li>✓ Offline cache synchronization</li>
+            </ul>
+          </div>
+          <a href="/get-quote/?service=mobile" class="dls-card-link">
+            <span>Start Mobile Project</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- 3. AI & Automation -->
+        <div class="dls-card-white">
+          <div>
+            <div class="dls-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            </div>
+            <div class="dls-card-timeline">2-6 WEEKS TIMELINE</div>
+            <h3 class="dls-card-title">AI Automation & ML</h3>
+            <p class="dls-card-desc">
+              Integrate custom LLMs, RAG knowledge bases, cognitive workflow bots, and computer vision models directly into existing platforms.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; font-size: 0.875rem; color: #555A63; display: flex; flex-direction: column; gap: 0.5rem;">
+              <li>✓ Custom fine-tuned models & vector search</li>
+              <li>✓ Intelligent document parsing & extraction</li>
+              <li>✓ Autonomous agent workflow pipelines</li>
+            </ul>
+          </div>
+          <a href="/get-quote/?service=ai" class="dls-card-link">
+            <span>Explore AI Systems</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- 4. Cloud Infrastructure -->
+        <div class="dls-card-white">
+          <div>
+            <div class="dls-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+            </div>
+            <div class="dls-card-timeline">1-3 WEEKS TIMELINE</div>
+            <h3 class="dls-card-title">Cloud & DevOps Infrastructure</h3>
+            <p class="dls-card-desc">
+              Scalable AWS, GCP, and Kubernetes cloud foundations with automated CI/CD deployment pipelines, zero-downtime failover, and DDoS mitigation.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; font-size: 0.875rem; color: #555A63; display: flex; flex-direction: column; gap: 0.5rem;">
+              <li>✓ Infrastructure as Code (Terraform)</li>
+              <li>✓ Auto-scaling container clusters</li>
+              <li>✓ Automated disaster recovery protocols</li>
+            </ul>
+          </div>
+          <a href="/get-quote/?service=cloud" class="dls-card-link">
+            <span>Modernize Cloud</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- 5. Product Strategy -->
+        <div class="dls-card-white">
+          <div>
+            <div class="dls-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/></svg>
+            </div>
+            <div class="dls-card-timeline">1-3 WEEKS TIMELINE</div>
+            <h3 class="dls-card-title">UI/UX & Product Strategy</h3>
+            <p class="dls-card-desc">
+              Design language systems, interactive Figma wireframes, rapid customer feedback loops, and conversion rate optimization audits.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; font-size: 0.875rem; color: #555A63; display: flex; flex-direction: column; gap: 0.5rem;">
+              <li>✓ Custom Design Language Systems (DLS)</li>
+              <li>✓ High-fidelity clickable prototypes</li>
+              <li>✓ Usability heuristic auditing</li>
+            </ul>
+          </div>
+          <a href="/get-quote/?service=design" class="dls-card-link">
+            <span>Design Product</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- 6. Ongoing Support -->
+        <div class="dls-card-white">
+          <div>
+            <div class="dls-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="dls-card-timeline">24/7 ENTERPRISE SLA</div>
+            <h3 class="dls-card-title">24/7 SLA & Platform Support</h3>
+            <p class="dls-card-desc">
+              Continuous system monitoring, emergency bug remediation, dependency vulnerability patching, and performance optimization.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; font-size: 0.875rem; color: #555A63; display: flex; flex-direction: column; gap: 0.5rem;">
+              <li>✓ 15-minute response time guarantee</li>
+              <li>✓ Proactive security audits & patching</li>
+              <li>✓ Monthly feature release sprints</li>
+            </ul>
+          </div>
+          <a href="/get-quote/?service=sla" class="dls-card-link">
+            <span>Inquire About SLA</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="dls-section" style="background: #111315; text-align: center;">
+    <div class="container-dls" style="max-width: 700px;">
+      <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: #FFFFFF; margin-bottom: 1rem;">
+        Ready to Build Your Platform?
+      </h2>
+      <p style="color: var(--dls-text-muted); font-size: 1.125rem; line-height: 1.7; margin-bottom: 2.5rem;">
+        Speak directly with our senior engineering team to evaluate feasibility, architecture, and timeline estimates.
+      </p>
+      {{ partial "dls/button.html" (dict "text" "Get in Touch Today" "url" "/get-quote/" "variant" "primary" "size" "lg" "arrow" true) }}
+    </div>
+  </section>
+</div>
+{{ end }}

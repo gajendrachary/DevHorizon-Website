@@ -1,0 +1,21 @@
+{{/*
+  DLS Badge Partial
+  Usage: {{ partial "dls/badge.html" (dict "text" "OUR SERVICES" "variant" "silver" "dot" true) }}
+*/}}
+{{ $variant := .variant | default "silver" }}
+{{ $class := printf "dls-badge dls-badge-%s" $variant }}
+
+{{ if eq .size "sm" }}
+  {{ $class = printf "%s dls-badge-sm" $class }}
+{{ end }}
+
+{{ if .class }}
+  {{ $class = printf "%s %s" $class .class }}
+{{ end }}
+
+<span class="{{ $class }}">
+  {{ if .dot }}
+    <span class="dls-dot"></span>
+  {{ end }}
+  <span>{{ .text }}</span>
+</span>

@@ -1,0 +1,71 @@
+<footer class="dls-footer">
+  <div class="container-dls">
+    <!-- Top CTA Banner -->
+    <div style="background-color: var(--dls-surface-card); border: 1px solid rgba(255,255,255,0.08); border-radius: 1.25rem; padding: 2.5rem; margin-bottom: 4rem; display: flex; flex-direction: column; gap: 1.5rem; justify-content: space-between; align-items: flex-start;">
+      <div>
+        <span class="dls-badge dls-badge-silver dls-badge-sm" style="margin-bottom: 0.75rem;">LET'S BUILD</span>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em;">
+          Have a project in mind? Let's talk.
+        </h2>
+      </div>
+      {{ partial "dls/button.html" (dict "text" "Get a Quote" "url" "/get-quote/" "variant" "primary" "size" "lg" "arrow" true) }}
+    </div>
+
+    <!-- 4-Column Footer Links Grid -->
+    <div class="dls-grid-4" style="padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+      <!-- Col 1: Brand Info -->
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+          <img src="{{ .Site.Params.logo }}" alt="DevHorizon" style="height: 2rem; width: auto;">
+          <span style="font-weight: 800; font-size: 1rem; color: #FFFFFF;">DEVHORIZON</span>
+        </div>
+        <p style="font-size: 0.8125rem; color: var(--dls-text-muted); line-height: 1.6; max-width: 280px;">
+          Premier technology and digital engineering firm delivering reliable, high-performance web, mobile, and cloud platforms.
+        </p>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div>
+        <h4 style="font-size: 0.8125rem; font-weight: 700; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Navigation</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.8125rem; color: var(--dls-text-muted);">
+          <li><a href="/" style="transition: color 0.2s;" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='var(--dls-text-muted)'">Home</a></li>
+          <li><a href="/services/" style="transition: color 0.2s;" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='var(--dls-text-muted)'">Services</a></li>
+          <li><a href="/projects/" style="transition: color 0.2s;" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='var(--dls-text-muted)'">Projects</a></li>
+          <li><a href="/about/" style="transition: color 0.2s;" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='var(--dls-text-muted)'">About Us</a></li>
+          <li><a href="/dls/" style="transition: color 0.2s;" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='var(--dls-text-muted)'">DLS Guidelines</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Services -->
+      <div>
+        <h4 style="font-size: 0.8125rem; font-weight: 700; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Core Solutions</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.8125rem; color: var(--dls-text-muted);">
+          <li>Custom Software Development</li>
+          <li>Web & Mobile Applications</li>
+          <li>AI & Process Automation</li>
+          <li>Cloud & DevOps Architecture</li>
+          <li>UI/UX Product Engineering</li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Corporate Office -->
+      <div>
+        <h4 style="font-size: 0.8125rem; font-weight: 700; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Get in Touch</h4>
+        <p style="font-size: 0.8125rem; color: var(--dls-text-muted); line-height: 1.6;">
+          Bengaluru, Karnataka, India<br>
+          <a href="mailto:info@devhorizontech.com" style="color: var(--dls-platinum); text-decoration: underline;">info@devhorizontech.com</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div style="padding-top: 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.75rem; color: var(--dls-text-subtle);">
+      <span>&copy; {{ now.Format "2006" }} DevHorizon Technologies Pvt Ltd. All rights reserved.</span>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="/dls/">Design Language System</a>
+        <a href="https://github.com/devhorizontechnologiespvtltd" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/company/devhorizon-technologies-pvt-ltd/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>

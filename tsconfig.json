@@ -7,6 +7,12 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@devhorizon/dls": [
+        "./packages/dls/src/index.ts"
+      ],
+      "@devhorizon/dls/*": [
+        "./packages/dls/src/*"
       ]
     },
     "skipLibCheck": true,

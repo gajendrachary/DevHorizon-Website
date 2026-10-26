@@ -1,0 +1,33 @@
+<header class="dls-header">
+  <div class="container-dls dls-nav-container">
+    <!-- Brand Logo -->
+    <a href="/" class="dls-logo-lockup" style="display: flex; align-items: center; gap: 0.75rem;">
+      <img src="{{ .Site.Params.logo }}" alt="DevHorizon Logo" style="height: 2.5rem; width: auto; object-fit: contain; filter: drop-shadow(0 2px 10px rgba(232,234,237,0.25));">
+      <div style="display: flex; flex-direction: column; justify-content: center; line-height: 1;">
+        <span style="font-weight: 800; font-size: 1.125rem; letter-spacing: -0.02em; color: #FFFFFF;">DEVHORIZON</span>
+        <span style="font-size: 0.55rem; font-weight: 700; letter-spacing: 0.2em; color: var(--dls-platinum); text-transform: uppercase; margin-top: 2px;">{{ .Site.Params.tagline }}</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav>
+      <ul class="dls-nav-links">
+        {{ $currentPage := . }}
+        {{ range .Site.Menus.main }}
+          {{ if ne .Identifier "contact" }}
+            <li>
+              <a href="{{ .URL }}" class="dls-nav-link{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}">
+                {{ .Name }}
+              </a>
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </nav>
+
+    <!-- Header Action Button -->
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      {{ partial "dls/button.html" (dict "text" "Get in Touch" "url" "/get-quote/" "variant" "primary" "size" "sm" "arrow" true) }}
+    </div>
+  </div>
+</header>

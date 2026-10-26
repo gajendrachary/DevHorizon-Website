@@ -1,0 +1,149 @@
+{{ define "main" }}
+<div class="dls-page-wrapper">
+  <!-- Reviews Hero -->
+  <section class="dls-section" style="padding-top: 5rem; padding-bottom: 4rem;">
+    <div class="container-dls">
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <span class="dls-badge dls-badge-silver" style="margin-bottom: 1.25rem;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: #E8EAED; display: inline-block;"></span>
+          CLIENT TESTIMONIALS
+        </span>
+        <h1 class="dls-display-title" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; line-height: 1.15;">
+          What Our Partners Say
+        </h1>
+        <p style="font-size: clamp(1rem, 2vw, 1.25rem); color: var(--dls-text-muted); line-height: 1.7; max-width: 680px; margin: 0 auto 2.5rem;">
+          We take immense pride in building lasting relationships with our clients through dependable delivery, transparent communication, and engineering rigor.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Bar -->
+  <section style="border-top: 1px solid rgba(192, 197, 204, 0.12); border-bottom: 1px solid rgba(192, 197, 204, 0.12); background: #16191D; padding: 2.5rem 0;">
+    <div class="container-dls">
+      <div class="dls-grid-4" style="text-align: center;">
+        {{ partial "dls/stat.html" (dict "number" "5.0 / 5" "label" "Average Client Rating" "metallic" true) }}
+        {{ partial "dls/stat.html" (dict "number" "50+" "label" "Successful Deliveries" "metallic" true) }}
+        {{ partial "dls/stat.html" (dict "number" "95%" "label" "Repeat Client Ratio" "metallic" true) }}
+        {{ partial "dls/stat.html" (dict "number" "100%" "label" "On-Time Milestones" "metallic" true) }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Grid -->
+  <section class="dls-section">
+    <div class="container-dls">
+      <div class="dls-grid-3">
+        <!-- Review 1 -->
+        <div class="dls-card-dark" style="padding: 2.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; gap: 0.25rem; color: #E8EAED; margin-bottom: 1.25rem;">
+              ★★★★★
+            </div>
+            <p style="font-size: 0.9375rem; color: var(--dls-text-light); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic;">
+              "DevHorizon transformed our tea franchise's online presence completely. The platform captures our brand essence perfectly, and we've seen a measurable surge in franchisee leads since launch."
+            </p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 197, 204, 0.1); pt: 1rem; padding-top: 1rem;">
+            <div style="font-weight: 700; color: #FFFFFF; font-size: 0.9375rem;">Rajesh Kumar</div>
+            <div style="font-size: 0.8125rem; color: var(--dls-text-muted);">Founder, Jaggery Tea Point</div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="dls-card-dark" style="padding: 2.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; gap: 0.25rem; color: #E8EAED; margin-bottom: 1.25rem;">
+              ★★★★★
+            </div>
+            <p style="font-size: 0.9375rem; color: var(--dls-text-light); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic;">
+              "Working with DevHorizon was an absolute pleasure. They understood our handmade craft business and created a beautiful e-commerce platform with seamless payment settlement."
+            </p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 197, 204, 0.1); padding-top: 1rem;">
+            <div style="font-weight: 700; color: #FFFFFF; font-size: 0.9375rem;">Priya Sharma</div>
+            <div style="font-size: 0.8125rem; color: var(--dls-text-muted);">Managing Director, Likitha Handcrafts</div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="dls-card-dark" style="padding: 2.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; gap: 0.25rem; color: #E8EAED; margin-bottom: 1.25rem;">
+              ★★★★★
+            </div>
+            <p style="font-size: 0.9375rem; color: var(--dls-text-light); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic;">
+              "The mobile application DevHorizon developed for our fleet dispatch service is exceptional. Real-time telemetry, zero crash rates, and our booking efficiency rose 40%."
+            </p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 197, 204, 0.1); padding-top: 1rem;">
+            <div style="font-weight: 700; color: #FFFFFF; font-size: 0.9375rem;">Mohammed Ali</div>
+            <div style="font-size: 0.8125rem; color: var(--dls-text-muted);">Head of Operations, BLR360</div>
+          </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="dls-card-dark" style="padding: 2.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; gap: 0.25rem; color: #E8EAED; margin-bottom: 1.25rem;">
+              ★★★★★
+            </div>
+            <p style="font-size: 0.9375rem; color: var(--dls-text-light); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic;">
+              "DevHorizon delivered beyond our expectations. The custom subscription engine they built for our meal delivery service has been rock-solid through rapid scale."
+            </p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 197, 204, 0.1); padding-top: 1rem;">
+            <div style="font-weight: 700; color: #FFFFFF; font-size: 0.9375rem;">Anitha Reddy</div>
+            <div style="font-size: 0.8125rem; color: var(--dls-text-muted);">Co-Founder, Haven Salad</div>
+          </div>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="dls-card-dark" style="padding: 2.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; gap: 0.25rem; color: #E8EAED; margin-bottom: 1.25rem;">
+              ★★★★★
+            </div>
+            <p style="font-size: 0.9375rem; color: var(--dls-text-light); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic;">
+              "Professional, responsive, and technically superior. DevHorizon created a comprehensive digital catalog that has expanded our wholesale distribution across South India."
+            </p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 197, 204, 0.1); padding-top: 1rem;">
+            <div style="font-weight: 700; color: #FFFFFF; font-size: 0.9375rem;">Venkat Rao</div>
+            <div style="font-size: 0.8125rem; color: var(--dls-text-muted);">Executive Partner, Sri Kenchamba Ceramics</div>
+          </div>
+        </div>
+
+        <!-- Review 6 -->
+        <div class="dls-card-dark" style="padding: 2.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; gap: 0.25rem; color: #E8EAED; margin-bottom: 1.25rem;">
+              ★★★★★
+            </div>
+            <p style="font-size: 0.9375rem; color: var(--dls-text-light); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic;">
+              "As an international client, I was thoroughly impressed by DevHorizon's technical clarity, speed, and reliability. They delivered our web application on time and within budget."
+            </p>
+          </div>
+          <div style="border-top: 1px solid rgba(192, 197, 204, 0.1); padding-top: 1rem;">
+            <div style="font-weight: 700; color: #FFFFFF; font-size: 0.9375rem;">Sarah Mitchell</div>
+            <div style="font-size: 0.8125rem; color: var(--dls-text-muted);">VP of Engineering, TechStart UAE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="dls-section" style="background: #111315; text-align: center; border-top: 1px solid rgba(192, 197, 204, 0.12);">
+    <div class="container-dls" style="max-width: 650px;">
+      <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; color: #FFFFFF; margin-bottom: 1rem;">
+        Experience the Difference
+      </h2>
+      <p style="color: var(--dls-text-muted); font-size: 1.0625rem; line-height: 1.6; margin-bottom: 2rem;">
+        Join ambitious founders and forward-thinking enterprises scaling with DevHorizon.
+      </p>
+      {{ partial "dls/button.html" (dict "text" "Start Your Project" "url" "/get-quote/" "variant" "primary" "size" "lg" "arrow" true) }}
+    </div>
+  </section>
+</div>
+{{ end }}

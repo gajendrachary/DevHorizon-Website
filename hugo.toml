@@ -1,0 +1,75 @@
+baseURL = "https://devhorizontechnologies.com/"
+locale = "en-us"
+title = "DevHorizon Technologies | Build Beyond Today"
+publishDir = "dist-hugo"
+
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "packages/dls/dist"
+    target = "assets/dls"
+  [[module.mounts]]
+    source = "packages/dls/src"
+    target = "assets/dls-src"
+
+[params]
+  description = "DevHorizon Technologies builds scalable, reliable, and high-performance digital platforms across Web, Mobile, AI Automation, and Cloud Infrastructure."
+  author = "DevHorizon Technologies Pvt Ltd"
+  tagline = "BUILD BEYOND TODAY"
+  logo = "/assets/devhorizon-logo-metallic.png"
+  primaryBg = "#111315"
+  surfaceCard = "#24272B"
+  textLight = "#D4D8DE"
+  shiningSilver = "#E8EAED"
+  secondaryPlatinum = "#C0C5CC"
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "services"
+    name = "Services"
+    url = "/services/"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    url = "/projects/"
+    weight = 3
+
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/blog/"
+    weight = 4
+
+  [[menu.main]]
+    identifier = "reviews"
+    name = "Reviews"
+    url = "/reviews/"
+    weight = 5
+
+  [[menu.main]]
+    identifier = "careers"
+    name = "Careers"
+    url = "/careers/"
+    weight = 6
+
+  [[menu.main]]
+    identifier = "dls"
+    name = "DLS System"
+    url = "/dls/"
+    weight = 7
+
+  [[menu.main]]
+    identifier = "contact"
+    name = "Get in Touch"
+    url = "/get-quote/"
+    weight = 8

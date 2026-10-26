@@ -1,0 +1,315 @@
+{{ define "main" }}
+<div class="dls-page-wrapper">
+  <!-- Hero Section -->
+  <section class="dls-section" style="padding-top: 5rem; padding-bottom: 4rem;">
+    <div class="container-dls">
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <div style="margin-bottom: 1.25rem;">
+          {{ partial "dls/badge.html" (dict "text" "ABOUT DEVHORIZON" "variant" "silver" "dot" true) }}
+        </div>
+        <h1 class="dls-display-title" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; line-height: 1.15;">
+          Engineering What's Next.
+        </h1>
+        <p style="font-size: clamp(1rem, 2vw, 1.25rem); color: var(--dls-text-muted); line-height: 1.7; max-width: 680px; margin: 0 auto 2.5rem;">
+          We are a modern technology firm partnering with visionary founders, enterprises, and innovators to build robust, scalable, and high-impact digital products.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          {{ partial "dls/button.html" (dict "text" "Work With Us" "url" "/get-quote/" "variant" "primary" "size" "lg" "arrow" true) }}
+          {{ partial "dls/button.html" (dict "text" "View Our Work" "url" "/projects/" "variant" "secondary" "size" "lg") }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Bar -->
+  <section style="border-top: 1px solid rgba(192, 197, 204, 0.12); border-bottom: 1px solid rgba(192, 197, 204, 0.12); background: #16191D; padding: 3rem 0;">
+    <div class="container-dls">
+      <div class="dls-grid-4" style="text-align: center;">
+        {{ partial "dls/stat.html" (dict "number" "21+" "label" "Core Team Members" "metallic" true) }}
+        {{ partial "dls/stat.html" (dict "number" "50+" "label" "Projects Delivered" "metallic" true) }}
+        {{ partial "dls/stat.html" (dict "number" "10+" "label" "Global Clients" "metallic" true) }}
+        {{ partial "dls/stat.html" (dict "number" "99.9%" "label" "Client Satisfaction" "metallic" true) }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section class="dls-section">
+    <div class="container-dls">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto 3.5rem;">
+        <span class="dls-badge dls-badge-dark" style="margin-bottom: 1rem;">OUR PILLARS</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em; margin-bottom: 1rem;">
+          Driven by Principles
+        </h2>
+        <p style="color: var(--dls-text-muted); font-size: 1rem; line-height: 1.6;">
+          Everything we design and deploy is grounded in uncompromising quality, radical transparency, and customer obsession.
+        </p>
+      </div>
+
+      <div class="dls-grid-3">
+        <div class="dls-card-dark" style="padding: 2.25rem;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(232, 234, 237, 0.08); border: 1px solid rgba(192, 197, 204, 0.2); display: flex; items-center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EAED" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Innovation</h3>
+          <p style="font-size: 0.9375rem; color: var(--dls-text-muted); line-height: 1.6;">
+            Pushing boundaries with AI automation, modern microservices, and cutting-edge web frameworks.
+          </p>
+        </div>
+
+        <div class="dls-card-dark" style="padding: 2.25rem;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(232, 234, 237, 0.08); border: 1px solid rgba(192, 197, 204, 0.2); display: flex; items-center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EAED" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34c0-.75.4-1.44 1.04-1.81l2.96-1.7V4H6v6.15l2.96 1.7c.64.37 1.04 1.06 1.04 1.81Z"/></svg>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Excellence</h3>
+          <p style="font-size: 0.9375rem; color: var(--dls-text-muted); line-height: 1.6;">
+            Delivering zero-downtime, high-concurrency architectures with zero compromise on code craft.
+          </p>
+        </div>
+
+        <div class="dls-card-dark" style="padding: 2.25rem;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(232, 234, 237, 0.08); border: 1px solid rgba(192, 197, 204, 0.2); display: flex; items-center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EAED" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Integrity</h3>
+          <p style="font-size: 0.9375rem; color: var(--dls-text-muted); line-height: 1.6;">
+            Clear sprint roadmaps, transparent pricing, and direct communication at every step of development.
+          </p>
+        </div>
+
+        <div class="dls-card-dark" style="padding: 2.25rem;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(232, 234, 237, 0.08); border: 1px solid rgba(192, 197, 204, 0.2); display: flex; items-center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EAED" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Reliability</h3>
+          <p style="font-size: 0.9375rem; color: var(--dls-text-muted); line-height: 1.6;">
+            Dependable technology partnerships built to evolve and support your company across multi-year scale.
+          </p>
+        </div>
+
+        <div class="dls-card-dark" style="padding: 2.25rem;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(232, 234, 237, 0.08); border: 1px solid rgba(192, 197, 204, 0.2); display: flex; items-center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EAED" stroke-width="2"><path d="m11 17 2 2a1 1 0 0 0 1.4 0l6.6-6.6a1 1 0 0 0 0-1.4l-2-2a1 1 0 0 0-1.4 0L11 15.6l-2-2a1 1 0 0 0-1.4 0l-2 2a1 1 0 0 0 0 1.4l5.4 5.4a1 1 0 0 0 1.4 0l.6-.6Z"/></svg>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Collaboration</h3>
+          <p style="font-size: 0.9375rem; color: var(--dls-text-muted); line-height: 1.6;">
+            We integrate seamlessly with your internal teams as co-architects invested in your bottom-line growth.
+          </p>
+        </div>
+
+        <div class="dls-card-dark" style="padding: 2.25rem;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(232, 234, 237, 0.08); border: 1px solid rgba(192, 197, 204, 0.2); display: flex; items-center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EAED" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.5rem;">Sustainability</h3>
+          <p style="font-size: 0.9375rem; color: var(--dls-text-muted); line-height: 1.6;">
+            Writing clean, maintainable, self-documenting software designed for low compute overhead and long-term vitality.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership & Core Team -->
+  <section class="dls-section" style="background: #16191D; border-top: 1px solid rgba(192, 197, 204, 0.12); border-bottom: 1px solid rgba(192, 197, 204, 0.12);">
+    <div class="container-dls">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto 3.5rem;">
+        <span class="dls-badge dls-badge-silver" style="margin-bottom: 1rem;">PEOPLE BEHIND THE CODE</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em; margin-bottom: 1rem;">
+          Leadership & Engineering
+        </h2>
+        <p style="color: var(--dls-text-muted); font-size: 1rem; line-height: 1.6;">
+          Our leadership combines deep hands-on full-stack engineering with executive discipline to deliver results.
+        </p>
+      </div>
+
+      <div class="dls-grid-3">
+        <!-- Gajendrachary -->
+        <div class="dls-card-dark" style="padding: 2rem; text-align: center;">
+          <div style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 1.5rem; overflow: hidden; border: 2px solid rgba(232, 234, 237, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+            <img src="/assets/team-gajendrachary.jpg" alt="Gajendrachary" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='/assets/developer-presenting.jpg'" />
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.25rem;">Gajendrachary</h3>
+          <div style="font-size: 0.8125rem; font-weight: 600; color: var(--dls-shining-silver); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">
+            Founder & Managing Director
+          </div>
+          <p style="font-size: 0.875rem; color: var(--dls-text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+            Leading vision, client engineering strategy, and core distributed systems architecture across global projects.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 0.75rem;">
+            <a href="https://www.linkedin.com/in/gajendrachary/" target="_blank" rel="noreferrer" class="dls-btn dls-btn-dark dls-btn-sm" style="padding: 0.4rem 0.75rem;">
+              LinkedIn
+            </a>
+            <a href="https://github.com/gajendrachary" target="_blank" rel="noreferrer" class="dls-btn dls-btn-dark dls-btn-sm" style="padding: 0.4rem 0.75rem;">
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- A Eswari -->
+        <div class="dls-card-dark" style="padding: 2rem; text-align: center;">
+          <div style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 1.5rem; overflow: hidden; border: 2px solid rgba(232, 234, 237, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+            <img src="/assets/team-eswari.jpg" alt="A Eswari" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='/assets/developer-client-meeting.jpg'" />
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.25rem;">A Eswari</h3>
+          <div style="font-size: 0.8125rem; font-weight: 600; color: var(--dls-shining-silver); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">
+            Director
+          </div>
+          <p style="font-size: 0.875rem; color: var(--dls-text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+            Overseeing corporate governance, operational excellence, client partnerships, and strategic company expansion.
+          </p>
+        </div>
+
+        <!-- Devanath -->
+        <div class="dls-card-dark" style="padding: 2rem; text-align: center;">
+          <div style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 1.5rem; overflow: hidden; border: 2px solid rgba(232, 234, 237, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+            <img src="/assets/team-brainstorming.jpg" alt="Devanath" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.25rem;">Devanath</h3>
+          <div style="font-size: 0.8125rem; font-weight: 600; color: var(--dls-shining-silver); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">
+            QA Automation Engineer
+          </div>
+          <p style="font-size: 0.875rem; color: var(--dls-text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+            Automated test harnesses, security vulnerability validation, and continuous quality assurance pipelines.
+          </p>
+        </div>
+
+        <!-- Rohith -->
+        <div class="dls-card-dark" style="padding: 2rem; text-align: center;">
+          <div style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 1.5rem; overflow: hidden; border: 2px solid rgba(232, 234, 237, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+            <img src="/assets/code-review.jpg" alt="Rohith" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.25rem;">Rohith</h3>
+          <div style="font-size: 0.8125rem; font-weight: 600; color: var(--dls-shining-silver); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">
+            AI & ML Engineer
+          </div>
+          <p style="font-size: 0.875rem; color: var(--dls-text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+            Architecting intelligent enterprise workflows, neural model fine-tuning, and automated cognitive pipelines.
+          </p>
+        </div>
+
+        <!-- Dharshini -->
+        <div class="dls-card-dark" style="padding: 2rem; text-align: center;">
+          <div style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 1.5rem; overflow: hidden; border: 2px solid rgba(232, 234, 237, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+            <img src="/assets/developer-presenting.jpg" alt="Dharshini" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.25rem;">Dharshini</h3>
+          <div style="font-size: 0.8125rem; font-weight: 600; color: var(--dls-shining-silver); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;">
+            Software Engineer
+          </div>
+          <p style="font-size: 0.875rem; color: var(--dls-text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+            Full-stack application development, modern reactive UI engineering, and API integration.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Grid -->
+  <section class="dls-section">
+    <div class="container-dls">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto 3.5rem;">
+        <span class="dls-badge dls-badge-dark" style="margin-bottom: 1rem;">MODERN CAPABILITIES</span>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em; margin-bottom: 1rem;">
+          Our Technology Stack
+        </h2>
+        <p style="color: var(--dls-text-muted); font-size: 1rem; line-height: 1.6;">
+          Engineered using modern, battle-tested programming languages and battle-proven cloud platforms.
+        </p>
+      </div>
+
+      <div class="dls-grid-4">
+        <div class="dls-card-dark" style="padding: 2rem;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; color: #FFFFFF; margin-bottom: 1rem;">Frontend</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="dls-badge dls-badge-outline">React.js</span>
+            <span class="dls-badge dls-badge-outline">Next.js</span>
+            <span class="dls-badge dls-badge-outline">TypeScript</span>
+            <span class="dls-badge dls-badge-outline">Tailwind CSS</span>
+            <span class="dls-badge dls-badge-outline">Vue.js</span>
+          </div>
+        </div>
+
+        <div class="dls-card-dark" style="padding: 2rem;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; color: #FFFFFF; margin-bottom: 1rem;">Mobile</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="dls-badge dls-badge-outline">iOS (Swift)</span>
+            <span class="dls-badge dls-badge-outline">Android (Kotlin)</span>
+            <span class="dls-badge dls-badge-outline">React Native</span>
+            <span class="dls-badge dls-badge-outline">Flutter</span>
+          </div>
+        </div>
+
+        <div class="dls-card-dark" style="padding: 2rem;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; color: #FFFFFF; margin-bottom: 1rem;">Backend & Cloud</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="dls-badge dls-badge-outline">Node.js</span>
+            <span class="dls-badge dls-badge-outline">Go</span>
+            <span class="dls-badge dls-badge-outline">Python</span>
+            <span class="dls-badge dls-badge-outline">AWS</span>
+            <span class="dls-badge dls-badge-outline">Docker</span>
+          </div>
+        </div>
+
+        <div class="dls-card-dark" style="padding: 2rem;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; color: #FFFFFF; margin-bottom: 1rem;">AI & Data</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="dls-badge dls-badge-outline">LLM Pipelines</span>
+            <span class="dls-badge dls-badge-outline">PyTorch</span>
+            <span class="dls-badge dls-badge-outline">PostgreSQL</span>
+            <span class="dls-badge dls-badge-outline">Redis</span>
+            <span class="dls-badge dls-badge-outline">Vector DBs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Office & Contact Section -->
+  <section class="dls-section" style="background: #16191D; border-top: 1px solid rgba(192, 197, 204, 0.12);">
+    <div class="container-dls">
+      <div style="max-width: 900px; margin: 0 auto; background: #FFFFFF; border-radius: 20px; padding: clamp(2rem, 5vw, 4rem); color: #0E1012; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; align-items: center;">
+          <div>
+            <span class="dls-badge dls-badge-dark" style="margin-bottom: 1rem; color: #FFFFFF; background: #111315;">OFFICE & HEADQUARTERS</span>
+            <h2 style="font-size: 2.25rem; font-weight: 800; color: #0E1012; letter-spacing: -0.02em; margin-bottom: 1rem;">
+              Visit Our Tech Hub
+            </h2>
+            <p style="font-size: 1rem; color: #555A63; line-height: 1.6; margin-bottom: 1.5rem;">
+              <strong>DevHorizon Technologies Pvt Ltd</strong><br />
+              AB Complex, Hesaraghatta Rd, Vidyaranyapura,<br />
+              Bengaluru, Karnataka 560097, India
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E1012" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <a href="mailto:info@devhorizontech.com" style="color: #0E1012; font-weight: 600; text-decoration: none;">info@devhorizontech.com</a>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E1012" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <a href="tel:+918688097373" style="color: #0E1012; font-weight: 600; text-decoration: none;">+91 8688097373</a>
+              </div>
+            </div>
+            <a href="/get-quote/" class="dls-btn dls-btn-silver dls-btn-lg" style="background: #111315; color: #FFFFFF; border: none;">
+              <span>Schedule a Meeting</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <div style="border-radius: 14px; overflow: hidden; border: 1px solid rgba(0,0,0,0.1); height: 260px;">
+            <iframe
+              src="https://maps.google.com/maps?q=DevHorizon+Technologies+Pvt+Ltd,+AB+Complex,+Hesaraghatta+Rd,+Vidyaranyapura,+Bengaluru,+Karnataka+560097&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="100%"
+              style="border: 0;"
+              allowfullscreen=""
+              loading="lazy"
+              title="DevHorizon Bangalore Office"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}

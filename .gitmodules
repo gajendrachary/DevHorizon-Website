@@ -1,0 +1,3 @@
+[submodule "packages/dls"]
+	path = packages/dls
+	url = https://github.com/devhorizontechnologiespvtltd/DLS.git

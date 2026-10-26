@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div class="dls-page-wrapper" style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 4rem 1.5rem;">
+  <div style="max-width: 550px;">
+    <div style="margin-bottom: 1.5rem;">
+      {{ partial "dls/badge.html" (dict "text" "404 ERROR" "variant" "silver") }}
+    </div>
+    <h1 class="dls-display-title" style="font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 1rem;">
+      Page Not Found
+    </h1>
+    <p style="color: var(--dls-text-muted); font-size: 1.125rem; line-height: 1.7; margin-bottom: 2.5rem;">
+      The page you are looking for doesn't exist, has been migrated to our new static architecture, or has moved.
+    </p>
+    <div style="display: flex; justify-content: center; gap: 1rem;">
+      {{ partial "dls/button.html" (dict "text" "Back to Homepage" "url" "/" "variant" "primary" "size" "lg" "arrow" true) }}
+    </div>
+  </div>
+</div>
+{{ end }}

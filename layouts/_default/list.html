@@ -1,0 +1,36 @@
+{{ define "main" }}
+<section class="dls-section">
+  <div class="container-dls">
+    <div style="margin-bottom: 3.5rem;">
+      {{ with .Params.eyebrow }}
+        <span class="dls-badge dls-badge-silver" style="margin-bottom: 1rem;">{{ . }}</span>
+      {{ end }}
+      <h1 class="dls-display-title" style="font-size: clamp(2rem, 4vw, 3.25rem); margin-bottom: 1rem;">
+        {{ .Title }}
+      </h1>
+      {{ with .Description }}
+        <p style="font-size: 1.125rem; color: var(--dls-text-muted); line-height: 1.7; max-width: 600px;">
+          {{ . }}
+        </p>
+      {{ end }}
+    </div>
+
+    <div class="dls-grid-3">
+      {{ range .Pages }}
+        <div class="dls-card-dark">
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 0.5rem;">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h3>
+          <p style="font-size: 0.875rem; color: var(--dls-text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+            {{ .Summary }}
+          </p>
+          <a href="{{ .RelPermalink }}" class="dls-btn dls-btn-silver dls-btn-sm">
+            <span>Read More</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
